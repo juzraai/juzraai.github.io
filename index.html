@@ -1,103 +1,120 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="juzraai&#39;s developer page : /* burying myself into coding */" />
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta http-equiv="Cache-control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="-1">
+    <meta name="author" content="Zsolt Jurányi">
+    <meta name="description" content="Hi, I'm a developer and this is my website. Currently it's just a simple landing page but I'm working on an awesome site.">
+    <title>Zsolt Jurányi (juzraai) - Developer page</title>
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css" />
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&subset=latin,latin-ext" />
+    <style type="text/css">
+        body {
+            background-color: #25292A;
+            color: #979797;
+            font-family: 'Inconsolata', Menlo, Monaco, Consolas, "Courier New", monospace;
+            font-size: 20px;
+            text-shadow: 0px 0px 2px rgba(0, 0, 0, 1);
+        }
+        
+        a {
+            color: #C4C4C4;
+            text-decoration: none;
+            -webkit-transition: color 150ms ease;
+            -moz-transition: color 150ms ease;
+            -ms-transition: color 150ms ease;
+            -o-transition: color 150ms ease;
+            transition: color 150ms ease;
+        }
+        
+        a:hover {
+            color: white;
+        }
+        
+        h1 {
+            color: #C4C4C4;
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+        
+        h2 {
+            font-size: 36px;
+            margin-top: 20px;
+        }
+        
+        .cell {
+            display: table-cell;
+            text-align: center;
+            vertical-align: middle;
+            width: 100%;
+        }
+        
+        .table {
+            display: table;
+            height: 100%;
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: 100%;
+        }
+        
+        .links-container {
+            display: inline-block;
+        }
+        
+        .links {
+            list-style-type: none;
+            margin: 0px;
+            padding: 0px;
+            width: auto;
+        }
+        
+        .links li {
+            padding: 10px 0px;
+            text-align: left;
+        }
+        
+        .sublinks {
+            list-style-type: none;
+            margin: 10px 0px 0px 30px;
+            padding: 0px;
+        }
+        
+        .sublinks li {
+            display: inline-block;
+            margin: 0px 0px 5px 0px;
+            padding: 0px;
+        }
+    </style>
+    <base target="_blank">
+</head>
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>juzraai&#39;s developer page</title>
-  </head>
-
-  <body>
-
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/juzraai">View on GitHub</a>
-
-          <h1 id="project_title">juzraai&#39;s developer page</h1>
-          <h2 id="project_tagline">/* burying myself into coding */</h2>
-
-        </header>
+<body>
+    <div class="table">
+        <div class="cell">
+            <h1>Hi, I'm Zsolt</h1>
+            <h2>I develop crawlers... and stuff :)</h2>
+            <p>I'm working on a more awesome site, but here are some links till then:</p>
+            <div class="links-container">
+                <ul class="links">
+                    <li>&raquo; <a href="https://github.com/juzraai">GitHub</a>
+                        <ul class="sublinks">
+                            <li><a href="https://github.com/juzraai/author-tagger">author-tagger</a></li>
+                            <li><a href="https://github.com/juzraai/PubSearch">pubsearch</a></li>
+                            <li><a href="https://github.com/juzraai/toolbox">toolbox</a></li>
+                        </ul>
+                    </li>
+                    <li>&raquo; <a href="https://juzraai.blogspot.com">Blog (hu)</a></li>
+                    <li>&raquo; <a href="https://juzraai-en.blogspot.com">Blog (en)</a></li>
+                </ul>
+            </div>
+        </div>
     </div>
+</body>
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h1>
-<a name="hi" class="anchor" href="#hi"><span class="octicon octicon-link"></span></a>Hi,</h1>
-
-<p>I'm <em>Zsolt Jurányi</em> from Hungary, I store and share my open-source projects here. I'm programming in Java, this language became my favourite as we first met in university. I develop mostly crawler applications, see my publication database crawler <strong>PubSearch</strong> and my current project <strong>ObjectMapper</strong>.</p>
-
-<p>Check out my <a href="https://github.com/juzraai?tab=repositories">repos</a>, and also my <a href="http://juzraai-en.blogspot.com/">blog</a>!</p>
-
-<h2>
-<a name="my-projects" class="anchor" href="#my-projects"><span class="octicon octicon-link"></span></a>My projects</h2>
-
-<h3>
-<a name="cordis-projects-crawler-development-paused" class="anchor" href="#cordis-projects-crawler-development-paused"><span class="octicon octicon-link"></span></a>
-<a href="http://juzraai.github.io/Cordis-Projects-Crawler/">CORDIS Projects Crawler</a> (development paused)</h3>
-
-<p>This app/API can fetch information of all <a href="http://cordis.europa.eu/projects/">CORDIS projects</a>. There's a CLI for users, and there are handy methods for developers! :) It can download project pages and publication list JSON strings, extract information them, export data to CSV, ... and see the <a href="https://github.com/juzraai/Cordis-Projects-Crawler">feature list</a>! :D</p>
-
-<h3>
-<a name="crawljax-plugins-development-paused" class="anchor" href="#crawljax-plugins-development-paused"><span class="octicon octicon-link"></span></a>
-<a href="http://juzraai.github.io/Crawljax-Plugins/">Crawljax Plugins</a> (development paused)</h3>
-
-<p>My useful Crawljax Plugins. Currently there's only one: SaveHTML which helps you to save every DOM state to file. Filename and directory name will be created just as they are in the URL, so you can create a site mirror with Crawljax and my SaveHTML plugin.</p>
-
-<p>Check out my URL2File class too, it can be useful in other cases too.</p>
-
-<h3>
-<a name="heritrixremote-development-paused" class="anchor" href="#heritrixremote-development-paused"><span class="octicon octicon-link"></span></a>
-<a href="http://juzraai.github.io/HeritrixRemote/">HeritrixRemote</a> (development paused)</h3>
-
-<p>This application was needed at work. The aim is to simplify controlling Heritrix 3.x crawler from the command line especially when you've got a lot of crawling jobs to manage.</p>
-
-<h3>
-<a name="objectmapper-currently-developing" class="anchor" href="#objectmapper-currently-developing"><span class="octicon octicon-link"></span></a>
-<a href="juzraai.github.io/ObjectMapper/">ObjectMapper</a> (currently developing)</h3>
-
-<p><em>ObjectMapper</em> <strong>helps you</strong> simplify the handling of nested beans, by providing
-getter and setter methods which <strong>work with property names</strong>. So it is basically
-a lightweight alternative to <a href="http://docs.spring.io/spring/docs/4.0.5.RELEASE/spring-framework-reference/htmlsingle/#beans-beans">Spring's BeanWrapper</a>.
-<em>ObjectMapper</em> has much less functions, but it's <strong>small</strong> and <strong>fast</strong>. :-)</p>
-
-<h3>
-<a name="pubsearch-abandoned-after-11" class="anchor" href="#pubsearch-abandoned-after-11"><span class="octicon octicon-link"></span></a>PubSearch (abandoned after 1.1)</h3>
-
-<p>This was my thesis at university. It crawls websites of publication databases, fetches publications of the given author and stores them in a database. I stopped development at version 1.1 because it's not flexible enough to crawl any kinds of sites, so I moved on to PubSearch 2.</p>
-
-<h3>
-<a name="pubsearch-2-development-paused" class="anchor" href="#pubsearch-2-development-paused"><span class="octicon octicon-link"></span></a>PubSearch 2 (development paused)</h3>
-
-<p>The crawling engines are now outside of the application, in 3rd party libraries, and PubSearch 2 will communicate with them thru an interface. PubSearch 1.1 crawler engine will be transformed to use that interface and bundled with PubSearch 2, so old crawler definition files for PubSearch 1.1 will remain useable.</p>
-
-<p>The project was planned, started, but my time and motivation flew away somehow :S ... but maybe I'll continue it someday.</p>
-      </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
-              <script type="text/javascript">
-            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-          </script>
-          <script type="text/javascript">
-            try {
-              var pageTracker = _gat._getTracker("UA-41050675-1");
-            pageTracker._trackPageview();
-            } catch(err) {}
-          </script>
-
-
-  </body>
 </html>
