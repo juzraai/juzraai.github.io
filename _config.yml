@@ -1,0 +1,13 @@
+title:           "Zsolt Jurányi (juzraai)"
+description:     "Hi, I'm Zsolt. I develop crawlers and other stuff, check them out! :)"
+author:          "Zsolt Jurányi"
+baseurl:         ""
+url:             "http://juzraai.github.io"
+og_image:        "/img/og-image.png"
+og_image_type:   "image/png"
+og_image_width:  1200
+og_image_height: 630
+markdown: kramdown
+kramdown:
+   input: GFM
+   hard_wrap: false
