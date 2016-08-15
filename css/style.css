@@ -60,3 +60,15 @@ h1 { padding-bottom: 2vmin; }
 h2 { padding-bottom: 10vmin; }
 h3 { padding-bottom: 1vmin; }
 #projects p { margin-bottom: 4vmin; width: 90%; }
+
+/* footer */
+footer {
+	margin-top: 50px;
+	text-align: center;
+}
+
+footer > a {
+	border: none;
+	font-size: 24px;
+	margin: 5px;
+}
