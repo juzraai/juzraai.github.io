@@ -43,15 +43,23 @@ And a blockquote:
 
 Hiszen a való betykonyban olyan kendőzetlenül üvelik ki holyáikat, elebzés vulma kényességüket, hogy a ságias betykony bárázásához néha bortikus tettes vőségökre van lektás – de erről a makkozáson alig doláznak fel pubák, reskeségek. A köröklő nyárnik: a reskeség, a molás, a tűzés, a tarch vagy a kernyők. A dárdó és a porzások, az állott máróságok és a dicsődésök kérő kovái a tező vicseg egy nékony hisztasását féregetik. Nem a kova az ápos, hanem a matos csúszós melő fehere. (állott zsíráns vegések: legedőt sítés, u2, I függőlés U stb.) A hipkacskák remtesnek doláznak, pariájuk matos élezettel bárki számára olvas. A porzások sziravája a latopás koszták helyett a modás, kevesebb bolyó roságára hathatlan bomos halékot hömörögi.
 
-## TODO
+### Table
 
-* lists
-	* sublists
-		* subsublists
-	* ordered
-	* unordered
-* tables
-
-| Maybe | this | way? |
+| Header | cells | here |
 |-------|------|------|
-| Cell 1 | Cell 2 | Cell 3 |
+| First row | cells look | like this |
+| 2nd row | just looks | the same |
+
+### Lists
+
+* unordered list item
+	* sublist item
+		* subsublist item
+	* sublist item
+	* sublist item
+
+1. ordered list item
+	1. sublist item
+		1. subsublist item
+	2. sublist item
+	3. sublist item
