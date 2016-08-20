@@ -1,0 +1,46 @@
+@import "colors";
+@import "reset";
+@import "icomoon";
+@import "scrollbar";
+
+::selection {
+	background:          @selection-bg;
+	color:               @selection-txt;
+}
+
+::-moz-selection {
+	background:          @selection-bg;
+	color:               @selection-txt;
+}
+
+* {
+	font-family:         'Inconsolata', Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+a {
+	text-decoration:     none;
+	-webkit-transition:  color 200ms ease, border-bottom-color 200ms ease;
+	-moz-transition:     color 200ms ease, border-bottom-color 200ms ease;
+	-ms-transition:      color 200ms ease, border-bottom-color 200ms ease;
+	-o-transition:       color 200ms ease, border-bottom-color 200ms ease;
+	transition:          color 200ms ease, border-bottom-color 200ms ease;
+}
+
+body {
+	background-color:    @body-bg;
+	color:               @body-txt;
+	font-size:           20px;
+}
+
+footer {
+	margin:              75px 0px;
+	text-align:          center;
+
+	& > a {
+		border:          none;
+		color:           @footer-link;
+		&:hover { color: @footer-link-hover; }
+		font-size:       24px;
+		margin:          5px;
+	}
+}

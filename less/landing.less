@@ -1,0 +1,55 @@
+@import "inc/global-style";
+
+body {
+	margin:                      10vmin;
+}
+
+h1#nick { color:                 @landing-nick; }
+h1#hi   { color:                 @landing-hi; }
+h2      { color:                 @landing-lead; }
+
+#projects {
+	a {
+		border-bottom:           2px dotted @projects-link-border;
+		color:                   @projects-link;
+		&:hover {
+			border-bottom-color: @projects-link-hover;
+			color:               @projects-link-hover;
+		}
+	}
+
+	h3 { color:                  @projects-link; }
+
+	.owl-page span {
+		background:              @projects-carousel;
+	}
+}
+
+/* sizes */
+/* old one, ~same width:
+#nick { font-size: 16.00vmin; }
+#hi   { font-size:  8.50vmin; }
+h2    { font-size:  3.25vmin; }
+*/
+#nick { font-size: 16.0vmin; }
+#hi   { font-size: 11.0vmin; }
+h2    { font-size:  5.0vmin; }
+h3    { font-size:  2.5vmin; }
+p     { font-size:  2.2vmin; }
+
+@media screen and (max-width: 700px), screen and (max-height: 700px) {
+	h3    { font-size: 18px; }
+	p     { font-size: 16px; }
+}
+
+@media screen and (max-width: 400px), screen and (max-height: 400px) {
+	#nick { font-size: 50px; }
+	#hi   { font-size: 26px; }
+	h2    { font-size: 20px; }
+}
+
+/* spaces */
+h1 { padding-bottom: 2vmin; }
+h2 { padding-bottom: 10vmin; }
+h3 { padding-bottom: 1vmin; }
+#projects p { margin-bottom: 4vmin; width: 90%; }

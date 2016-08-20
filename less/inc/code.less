@@ -1,0 +1,28 @@
+.highlight {
+	background-color:          @code-bg;
+	border-radius:             5px;
+	color:                     @code-txt;
+	margin:                    30px auto;
+	overflow-x:                auto;
+	width:                     75%;
+	box-shadow:                0px 0px 4px 0px rgba(0,0,0,.5);
+	-webkit-box-shadow:        0px 0px 4px 0px rgba(0,0,0,.5);
+	-moz-box-shadow:           0px 0px 4px 0px rgba(0,0,0,.5);
+	-o-box-shadow:             0px 0px 4px 0px rgba(0,0,0,.5);
+
+	.gutter {
+		background-color:      @code-gutter-bg;
+		color:                 @code-gutter-txt;
+		padding:               10px;
+	}
+
+	code, .code {
+		padding:               10px;
+
+		.kc, .kd, .kt { color: @code-keywords; font-weight: bold; }
+		.n, .nc, .nf  { color: @code-names;    }
+		.o            { color: @code-symbols;  }
+		.mf, .mi, .s  { color: @code-literals; }
+		.c1, .cm      { color: @code-comments; font-style: italic; }
+	}
+}
