@@ -13,16 +13,17 @@
 	.gutter {
 		background-color:      @code-gutter-bg;
 		color:                 @code-gutter-txt;
-		padding:               10px;
 	}
 
 	code, .code {
-		padding:               10px;
+		.k, .kc, .kd, .kt      { color: @code-keywords; font-weight: bold; }
+		.n, .nb, .nc, .nf      { color: @code-names;    }
+		.o, .p, .si            { color: @code-symbols;  }
+		.mf, .mi, .s, .s1, .s2 { color: @code-literals; }
+		.c1, .cm               { color: @code-comments; font-style: italic; }
+	}
 
-		.kc, .kd, .kt { color: @code-keywords; font-weight: bold; }
-		.n, .nc, .nf  { color: @code-names;    }
-		.o            { color: @code-symbols;  }
-		.mf, .mi, .s  { color: @code-literals; }
-		.c1, .cm      { color: @code-comments; font-style: italic; }
+	pre { // td.gutter pre, td.code pre, figure.highlight pre
+		padding:               10px;
 	}
 }

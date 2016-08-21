@@ -25,6 +25,19 @@ article {
 		p { width:                     100%; }
 	}
 
+	footer {
+		display: table;
+		time, .author {
+			display: table-cell;
+			font-style: italic;
+		}
+
+		time { text-align: left; }
+		.author { text-align: right; }
+
+		width: 100%;
+	}
+
 	h1, h2         { color:            #E3E3E3; }
 	h3, h4, h5, h6 { color:            #C4C4C4; }
 
@@ -45,8 +58,8 @@ article {
 			color:                 #B0B0B0;
 		}
 
-		> a:before { content: "["; color: #6A6C6D; }
-		> a:after  { content: "]"; color: #6A6C6D; }
+		a:before { content: "["; color: #6A6C6D; }
+		a:after  { content: "]"; color: #6A6C6D; }
 
 		code, kbd {
 			background-color:      @lightest-bg;
@@ -58,7 +71,7 @@ article {
 		}
 	}
 
-	> table { // '>' because highlighted code block is also a table
+	.article-body > table { // '>' because highlighted code block is also a table
 		background-color:          @table-bg;
 		border-collapse:           collapse;
 		border-radius:             @table-border-radius;
@@ -99,13 +112,14 @@ article {
 		width: 100%;
 	}
 
-	> ol, > ul {
+	.article-body > ol, .article-body > ul {
 		margin: 8px auto;
 		width: 80%;
 	}
 
 	ol { list-style-type: decimal; }
 	ul { list-style-type: disc; }
+	li { margin: 5px; }
 }
 
 nav {
@@ -120,11 +134,15 @@ nav {
 	-moz-box-shadow:     0px 0px 20px 0px #000000;
 	-o-box-shadow:       0px 0px 20px 0px #000000;
 
-	.brand a {
+	.brand a, .links a {
 		border:          none;
 		color:           @nav-brand;
 		&:hover { color: @nav-brand-hover; }
 		font-weight:     bold;
+	}
+
+	.links {
+		float:           right;
 	}
 
 	.title {

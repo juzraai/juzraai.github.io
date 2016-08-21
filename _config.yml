@@ -1,29 +1,61 @@
-title:           "Zsolt Jurányi (juzraai)"
-description:     "Hi, I'm Zsolt. I develop crawlers and other stuff, check them out! :)"
-author:          "Zsolt Jurányi"
-baseurl:         ""
-url:             "https://juzraai.github.io"
-lang:            "en"
+title:                  "Zsolt Jurányi (juzraai)"
+description:            "Hi, I'm Zsolt. I develop crawlers and other stuff, check them out! :)"
+author:                 "Zsolt Jurányi"
+baseurl:                ""
+url:                    "https://juzraai.github.io"
+lang:                   "en"
 
-og_image:        "/img/og-image.png"
-og_image_type:   "image/png"
-og_image_width:  1200
-og_image_height: 630
+og_image:               "/img/og-image.png"
+og_image_type:          "image/png"
+og_image_width:         1200
+og_image_height:        630
 
 social:
-  - url:   "https://github.com/juzraai"
-    title: "Check out my GitHub profile!"
-    icon:  "icon-gh"
-  - url:   "https://facebook.com/juzraai"
-    title: "Follow me on Facebook!"
-    icon:  "icon-fb"
+  - url:                "https://github.com/juzraai"
+    title:              "Check out my GitHub profile!"
+    icon:               "icon-gh"
+  - url:                "https://facebook.com/juzraai"
+    title:              "Follow me on Facebook!"
+    icon:               "icon-fb"
 
-markdown: kramdown
+defaults:
+  -
+    scope:
+      path:             ""
+      type:             "posts"
+    values:
+      author:           "Zsolt Jurányi"
+      layout:           "page"
+      permalink:        "/blog/:categories/:title/"
+  -
+    scope:
+      path:             "_posts/en"
+      type:             "posts"
+    values:
+      categories:       "en"
+      lang:             "en"
+      links:
+        -
+          path:         "/blog/en/"
+          text:         "Posts"
+  -
+    scope:
+      path:             "_posts/hu"
+      type:             "posts"
+    values:
+      categories:       "hu"
+      lang:             "hu"
+      links:
+        -
+          path:         "/blog/hu/"
+          text:         "Bejegyzések"
+
+markdown:               "kramdown"
 kramdown:
-  input: GFM
-  hard_wrap: false
-  syntax_highlighter: rouge
+  input:                "GFM"
+  hard_wrap:            false
+  syntax_highlighter:   "rouge"
   syntax_highlighter_opts:
     block:
-      line_numbers: true
-      start_line: 1
+      line_numbers:     true
+      start_line:       1

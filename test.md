@@ -1,5 +1,6 @@
 ---
 layout:  page
+lang:    en
 title:   Theme tester page
 excerpt: This page shows the most used HTML components to test my brand new site theme.
 ---
