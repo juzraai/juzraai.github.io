@@ -2,6 +2,7 @@
 @import "inc/code";
 @import "inc/container";
 @import "inc/heading-numbers";
+@import "inc/icomoon";
 
 body {
 	margin-top:                    150px;
@@ -23,6 +24,15 @@ article {
 		width:                         85%;
 
 		p { width:                     100%; }
+	}
+
+	code, kbd {
+		background-color:      @lightest-bg;
+		border-radius:         @code-border-radius;
+		color:                 @lighter-txt;
+		font-size:             90%;
+		font-weight:           bold;
+		padding:               4px;
 	}
 
 	footer {
@@ -48,6 +58,12 @@ article {
 	h5 { font-size: 23px; margin:  16px auto; width: 90%; }
 	h6 { font-size: 20px; margin:  10px auto; width: 90%; }
 
+	img {
+		margin: auto;
+		max-width: 50%;
+		max-height: 300px;
+	}
+
 	p {
 		margin:                    30px auto;
 		line-height:               1.25;
@@ -60,15 +76,6 @@ article {
 
 		a:before { content: "["; color: #6A6C6D; }
 		a:after  { content: "]"; color: #6A6C6D; }
-
-		code, kbd {
-			background-color:      @lightest-bg;
-			border-radius:         @code-border-radius;
-			color:                 @lighter-txt;
-			font-size:             90%;
-			font-weight:           bold;
-			padding:               4px;
-		}
 	}
 
 	.article-body > table { // '>' because highlighted code block is also a table
@@ -120,6 +127,19 @@ article {
 	ol { list-style-type: decimal; }
 	ul { list-style-type: disc; }
 	li { margin: 5px; }
+}
+
+footer {
+	margin:              75px 0px;
+	text-align:          center;
+
+	& > a {
+		border:          none;
+		color:           @footer-link;
+		&:hover { color: @footer-link-hover; }
+		font-size:       24px;
+		margin:          5px;
+	}
 }
 
 nav {

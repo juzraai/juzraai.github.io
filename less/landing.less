@@ -1,55 +1,60 @@
 @import "inc/global-style";
 
-body {
-	margin:                      10vmin;
+// constant formatting
+
+header {
+	margin: 150px 0px;
+	text-align: center;
 }
 
-h1#nick { color:                 @landing-nick; }
-h1#hi   { color:                 @landing-hi; }
-h2      { color:                 @landing-lead; }
+h1#nick { color: @landing-nick; }
+h1#hi   { color: @landing-hi; }
+h2      { color: @landing-lead; }
 
-#projects {
-	a {
-		border-bottom:           2px dotted @projects-link-border;
-		color:                   @projects-link;
-		&:hover {
-			border-bottom-color: @projects-link-hover;
-			color:               @projects-link-hover;
-		}
-	}
+h1, h2 { text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.10); }
 
-	h3 { color:                  @projects-link; }
+nav {
+	color: @landing-nav-txt;
+	font-weight: bold;
 
-	.owl-page span {
-		background:              @projects-carousel;
-	}
+	a            { color: @landing-nav-link; }
+	span:hover a { color: @landing-nav-link-dark; }
+	a:hover      { color: @landing-nav-link-hover !important; }
 }
 
-/* sizes */
-/* old one, ~same width:
-#nick { font-size: 16.00vmin; }
-#hi   { font-size:  8.50vmin; }
-h2    { font-size:  3.25vmin; }
-*/
-#nick { font-size: 16.0vmin; }
-#hi   { font-size: 11.0vmin; }
-h2    { font-size:  5.0vmin; }
-h3    { font-size:  2.5vmin; }
-p     { font-size:  2.2vmin; }
+// media query based formatting
 
-@media screen and (max-width: 700px), screen and (max-height: 700px) {
-	h3    { font-size: 18px; }
-	p     { font-size: 16px; }
+body { min-width: 320px; }
+
+// 1/2
+	#nick { font-size:  80px; }
+	#hi   { font-size:  42px; }
+	h2    { font-size:  16px; }
+	nav   { font-size:  14px; }
+
+	header { margin: 75px 0px; }
+	h1 { padding-bottom: 10px; }
+	h2 { padding-bottom: 50px; }
+
+// 3/4
+@media screen and (min-width: 480px) {
+	#nick { font-size: 120px; }
+	#hi   { font-size:  63px; }
+	h2    { font-size:  24px; }
+	nav   { font-size:  21px; }
+
+	header { margin: 110px 0px; }
+	h1 { padding-bottom: 15px; }
+	h2 { padding-bottom: 75px; }
 }
 
-@media screen and (max-width: 400px), screen and (max-height: 400px) {
-	#nick { font-size: 50px; }
-	#hi   { font-size: 26px; }
-	h2    { font-size: 20px; }
-}
+@media screen and (min-width: 768px) {
+	#nick { font-size: 160px; }
+	#hi   { font-size:  84px; }
+	h2    { font-size:  32px; }
+	nav   { font-size:  28px; }
 
-/* spaces */
-h1 { padding-bottom: 2vmin; }
-h2 { padding-bottom: 10vmin; }
-h3 { padding-bottom: 1vmin; }
-#projects p { margin-bottom: 4vmin; width: 90%; }
+	header { margin: 150px 0px; }
+	h1 { padding-bottom: 20px; }
+	h2 { padding-bottom: 100px; }
+}

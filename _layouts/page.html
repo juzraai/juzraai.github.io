@@ -40,3 +40,9 @@ css:
 		</footer>
 	</article>
 </section>
+
+<footer>
+	{% for link in site.social %}
+		<a href="{{ link.url }}" title="{{ link.title }}"><i class="{{ link.icon }}"></i></a>
+	{% endfor %}
+</footer>
