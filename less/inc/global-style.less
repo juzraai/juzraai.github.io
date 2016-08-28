@@ -30,3 +30,25 @@ body {
 	color:               @body-txt;
 	font-size:           20px;
 }
+
+@media print {
+	* {
+		color:               #000000 !important;
+		box-shadow:          none !important;
+		-webkit-box-shadow:  none !important;
+		-moz-box-shadow:     none !important;
+		-o-box-shadow:       none !important;
+	}
+
+	a:before { content: "" !important; }
+	a:after {
+		color: blue !important;
+		content: " (" attr(href) ")" !important;
+	}
+
+	body {
+		background-color: #FFFFFF;
+		font-size: 12pt;
+		margin: 0px;
+	}
+}

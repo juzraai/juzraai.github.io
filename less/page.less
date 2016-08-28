@@ -1,8 +1,10 @@
 @import "inc/global-style";
 @import "inc/code";
 @import "inc/container";
+@import "inc/footer";
 @import "inc/heading-numbers";
 @import "inc/icomoon";
+@import "inc/nav";
 
 body {
 	margin-top:                    150px;
@@ -129,71 +131,8 @@ article {
 	li { margin: 5px; }
 }
 
-footer {
-	margin:              75px 0px;
-	text-align:          center;
-
-	& > a {
-		border:          none;
-		color:           @footer-link;
-		&:hover { color: @footer-link-hover; }
-		font-size:       24px;
-		margin:          5px;
-	}
-}
-
-nav {
-	background-color:    @nav-bg;
-	left:                0;
-	padding:             10px;
-	position:            fixed;
-	top:                 0;
-	width:               100%;
-	box-shadow:          0px 0px 20px 0px #000000;
-	-webkit-box-shadow:  0px 0px 20px 0px #000000;
-	-moz-box-shadow:     0px 0px 20px 0px #000000;
-	-o-box-shadow:       0px 0px 20px 0px #000000;
-
-	.brand a, .links a {
-		border:          none;
-		color:           @nav-brand;
-		&:hover { color: @nav-brand-hover; }
-		font-weight:     bold;
-	}
-
-	.links {
-		float:           right;
-	}
-
-	.title {
-		color:           @nav-txt;
-	}
-}
-
-
 @media print {
-	* {
-		color:               #000000 !important;
-		box-shadow:          none !important;
-		-webkit-box-shadow:  none !important;
-		-moz-box-shadow:     none !important;
-		-o-box-shadow:       none !important;
-	}
-
-	body {
-		background-color: #FFFFFF;
-		font-size: 12pt;
-		margin: 0px;
-	}
-
 	article {
-
-		a:before { content: "" !important; }
-		a:after {
-			color: blue !important;
-			content: " (" attr(href) ")" !important;
-		}
-
 		blockquote { border-left-color: black; }
 
 		h1, h2, h3, h4, h5, h6 { color: #000000; }
@@ -207,17 +146,10 @@ nav {
 
 		p { width: 100%; }
 
-		> table {
+		.article-body > table {
 			border: 1px solid black;
 			border-spacing: 1px;
 			th, td { border: 1px dotted black; }
 		}
 	}
-
-	.highlight {
-		width: 100%;
-		.gutter { display: none; }
-	}
-
-	nav { display: none; }
 }
