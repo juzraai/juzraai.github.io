@@ -1,0 +1,796 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="hu_HU"><generator uri="https://jekyllrb.com/" version="3.8.2">Jekyll</generator><link href="https://juzraai.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://juzraai.github.io/" rel="alternate" type="text/html" hreflang="hu_HU" /><updated>2018-06-10T12:15:52+02:00</updated><id>https://juzraai.github.io/</id><title type="html">Zsolt Jurányi (juzraai)</title><subtitle>Zsolt vagyok, full-stack fejlesztő. Crawlereket, webalkalmazásokat, statikus honlapokat és interaktív vizualizációkat készítek.</subtitle><author><name>Zsolt Jurányi</name></author><entry xml:lang="hu_HU"><title type="html">Kontakt form ingyen, Basin-nel</title><link href="https://juzraai.github.io/blog/2018/kontakt-form-basin-nel/" rel="alternate" type="text/html" title="Kontakt form ingyen, Basin-nel" /><published>2018-06-03T00:00:00+02:00</published><updated>2018-06-04T22:19:21+02:00</updated><id>https://juzraai.github.io/blog/2018/kontakt-form-basin-nel</id><content type="html" xml:base="https://juzraai.github.io/blog/2018/kontakt-form-basin-nel/">&lt;p&gt;A &lt;a href=&quot;/blog/2018/kontakt-form-ingyen&quot;&gt;minap írtam&lt;/a&gt; arról, milyen ingyenes lehetőségek vannak arra, hogy egy statikus honlapra kontakt formot illesszünk, amely emailt küld. Kipróbáltam a &lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt;-t, aminek látatlanban aranyérmet osztottam. Íme a tapasztalataim. 🙂&lt;/p&gt;
+
+&lt;h2 id=&quot;első-lépések&quot;&gt;Első lépések&lt;/h2&gt;
+
+&lt;p&gt;A sign up oldal lényegretörő, csak az email címemet kéri és persze a leendő jelszavamat. Az email címet persze meg kell erősíteni, utána enged csak bejelentkezni.&lt;/p&gt;
+
+&lt;p&gt;Bejelentkezés után bejön az üres dashboard. Mielőtt létrehoztam az űrlapomat, megnéztem az &lt;em&gt;Account settings&lt;/em&gt; menüpontot. Az email címen és a jelszón kívül ott sincs semmi extra, csak egy lehetőség a maradéktalan törlésre.&lt;/p&gt;
+
+&lt;p&gt;Amikor létrehozunk egy új formot, először 2 dolgot kér be: a form nevét (amit a dashboard-on látunk majd), illetve a &lt;strong&gt;redirect URL-t,&lt;/strong&gt; ahová a látogatókat küldi majd a rendszer a form elküldése után. Ha ezutóbbit üresen hagyjuk, a Basin a saját oldalára visz alapértelmezésként.&lt;/p&gt;
+
+&lt;p&gt;Amint létrehoztuk a formot, az megnyílik a felületen, egyből az üres &lt;em&gt;Submissions&lt;/em&gt; panelt kapjuk meg. Az már látszik, hogy a beérkezett üzeneteket &lt;strong&gt;lehet szűrni, törölni, illetve spam-nek jelölni.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;A &lt;em&gt;Setup&lt;/em&gt; fülön &lt;strong&gt;konkrét HTML kódokat mutat,&lt;/strong&gt; amivel tényleg csak copy-paste módon be lehet illeszteni a honlapba az űrlapot. Van snippet a kattintós Google captcha-hoz, és a láthatatlan verzióhoz is.&lt;/p&gt;
+
+&lt;p&gt;Az &lt;em&gt;Edit&lt;/em&gt; fülön további beállításokat találunk az űrlaphoz:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;meg lehet adni &lt;strong&gt;több whitelisted domaint&lt;/strong&gt;, ahonnan engedélyezzük a form küldést&lt;/li&gt;
+  &lt;li&gt;be lehet kapcsolni a valid captcha válasz megkövetelését&lt;/li&gt;
+  &lt;li&gt;illetve van lehetőség GDPR kompatibilis &lt;strong&gt;nyugtát visszaküldeni az adatok fogadásáról&lt;/strong&gt; a küldőnek&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Az &lt;em&gt;Email&lt;/em&gt; fülön átállíthatjuk a cél email címet, ahová az űrlapadatokat kérjük küldeni. Ez alapértelmezésként a regisztrációkor megadott email cím. Továbbá megadhatunk &lt;strong&gt;CC-t, egyéni küldö nevet&lt;/strong&gt; (&lt;em&gt;“Basin”&lt;/em&gt; helyett) és a &lt;strong&gt;tárgy is szerkeszthető.&lt;/strong&gt; A tárgy alapértelmezésként a form neve + &lt;em&gt;“You’ve received a submission&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;tesztelés&quot;&gt;Tesztelés&lt;/h2&gt;
+
+&lt;p&gt;Bekapcsoltam a captcha-t és a receipt-et, és összeraktam a formot a láthatatlan captcha-val. Zseniális, hogy &lt;strong&gt;tesztelhető localhost-ról is.&lt;/strong&gt; Elküldtem a formot, és a megadott URL-re irányított a rendszer. A levél pár másodperc múlva megérkezett arra email címemre, amivel a &lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt;-be regisztráltam. Szépen formázva mutat minden fontos információt:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/basin/basin-submission-email.png&quot;&gt;&lt;img src=&quot;/assets/basin/basin-submission-email.png&quot; alt=&quot;Basin submission email&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;A reply-to is korrektül be van állítva, egy kattintással tudok válaszolni a formon megadott email címre.&lt;/p&gt;
+
+&lt;p&gt;A formon beírt email címre is jött egy levél, ami &lt;strong&gt;nyugtázza, hogy milyen adatokat küldtem és hova,&lt;/strong&gt; és még ezzel kapcsolatos kérelmekhez is biztosít lehetőséget:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/basin/basin-receipt-email.png&quot;&gt;&lt;img src=&quot;/assets/basin/basin-receipt-email.png&quot; alt=&quot;Basin receipt email&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;A &lt;em&gt;Submissions&lt;/em&gt; panelen is megjelentek ezek az információk természetesen. Tovább nézve a funkciókat, az &lt;em&gt;Export&lt;/em&gt; panelen a beküldött form adatok &lt;strong&gt;letölthetőek CSV-ben, illetve JSON-ban is&lt;/strong&gt; egy API key segítségével. Az &lt;em&gt;Integrations&lt;/em&gt; fülön lehet &lt;a href=&quot;https://zapier.com/&quot;&gt;Zapier&lt;/a&gt;-hez kapcsolódni, de ezt most nem teszem meg, a célt elértük.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Az aranyérem jogos volt! A &lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt; professzionális, könnyen kezelhető, felhasználóbarát, GDPR-ready, ingyenes szolgáltatás.&lt;/strong&gt; 🏆&lt;/p&gt;
+
+&lt;p&gt;Pontosan erre volt szükségem.&lt;/p&gt;
+
+&lt;h2 id=&quot;kiegészítés&quot;&gt;Kiegészítés&lt;/h2&gt;
+
+&lt;p&gt;Egy apró kiegészítésre szükség van, a &lt;a href=&quot;https://developers.google.com/recaptcha/&quot;&gt;Google reCAPTCHA&lt;/a&gt; helyes működéséhez. A &lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt; által adott code snippet úgy működik, hogy a küldés gomb kattintás eseményét a reCAPTCHA kezeli le, és &lt;strong&gt;egyből elküldi&lt;/strong&gt; az űrlapot. Ez akkor okoz problémát, &lt;strong&gt;ha szeretnénk validálni a formot,&lt;/strong&gt; akár natívan, akár saját JS kóddal. A &lt;strong&gt;megoldást&lt;/strong&gt; &lt;a href=&quot;https://stackoverflow.com/a/41694352/2418224&quot;&gt;ez a válasz&lt;/a&gt; adja meg, bemutatom:&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;form&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;invisible-recaptcha-form&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;accept-charset=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;UTF-8&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;action=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://usebasin.com/f/...&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;method=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;POST&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+
+	&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- input elemek --&amp;gt;&lt;/span&gt;
+
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;g-recaptcha&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;data-sitekey=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;...&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;data-callback=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;onSubmit&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;data-badge=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;inline&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;data-size=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;invisible&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;button&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;btn btn-primary&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Küldés&lt;span class=&quot;nt&quot;&gt;&amp;lt;/button&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/form&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://www.google.com/recaptcha/api.js&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;defer&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;script&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;invisible-recaptcha-form&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;addEventListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;submit&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+		&lt;span class=&quot;nx&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;preventDefault&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+		&lt;span class=&quot;nx&quot;&gt;grecaptcha&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;reset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+		&lt;span class=&quot;nx&quot;&gt;grecaptcha&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;execute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;onSubmit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;token&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;invisible-recaptcha-form&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;submit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Mit csináltam a &lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt; kódjához képest:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;A &lt;code class=&quot;highlighter-rouge&quot;&gt;g-recaptcha&lt;/code&gt; class-t levettem a küldés gombról, és egy új &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;div&amp;gt;&lt;/code&gt;-re raktam rá.&lt;/li&gt;
+  &lt;li&gt;Ebbe a &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;div&amp;gt;&lt;/code&gt; elembe átvittem a &lt;code class=&quot;highlighter-rouge&quot;&gt;data-*&lt;/code&gt; attribútumokat, illetve hozzá is adtam egyet: &lt;code class=&quot;highlighter-rouge&quot;&gt;data-size=&quot;invisible&quot;&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;A szkripthez hozzáadtam egy eseménykezelőt, ami a form elküldésekor fut le, és meghívja a captcha-t.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Így a küldés gombra kattintáskor a következő fog történni:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Először a böngésző natív validálási mechanizmusa fut le.&lt;/li&gt;
+  &lt;li&gt;Aztán az eseménykezelő inicializálja a captcha-t.&lt;/li&gt;
+  &lt;li&gt;A captcha elhelyezi a választ a formban, majd meghívja a callback-et, ami elküldi a form-ot.&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Zsolt Jurányi</name></author><category term="basin" /><category term="email" /><category term="form" /><category term="serverless" /><category term="weboldal" /><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /></entry><entry xml:lang="en_US"><title type="html">Free contact form using Basin</title><link href="https://juzraai.github.io/blog/2018/contact-form-using-basin/" rel="alternate" type="text/html" title="Free contact form using Basin" /><published>2018-06-03T00:00:00+02:00</published><updated>2018-06-04T22:28:56+02:00</updated><id>https://juzraai.github.io/blog/2018/contact-form-using-basin</id><content type="html" xml:base="https://juzraai.github.io/blog/2018/contact-form-using-basin/">&lt;p&gt;My &lt;a href=&quot;/blog/2018/contact-form-for-free&quot;&gt;previous post&lt;/a&gt; was about free contact form solutions that can send email. I tried out &lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt; which was before my gold medal winner based on its website only. Here are my experiences. 🙂&lt;/p&gt;
+
+&lt;h2 id=&quot;first-steps&quot;&gt;First steps&lt;/h2&gt;
+
+&lt;p&gt;The sign up page is minimal, it only asks for my email address and my new password. Of course, email address needs to be confirmed before I can login.&lt;/p&gt;
+
+&lt;p&gt;After logging in, the dashboard is displayed. Before I created my form, I checked what’s inside &lt;em&gt;Account settings&lt;/em&gt;. Besides the email address and password change, there’s only a button for complete removal.&lt;/p&gt;
+
+&lt;p&gt;At form creation, it asks 2 things: the name of the form (displayed on the dashboard), and the &lt;strong&gt;redirect URL&lt;/strong&gt; where visitors will be sent after filling out the form. If we leave it blank, Basin will show its own page as a default.&lt;/p&gt;
+
+&lt;p&gt;After I created my form, it was opened in the interface with an empty &lt;em&gt;Submissions&lt;/em&gt; panel. There I already saw that incoming submissions can be &lt;strong&gt;filtered, deleted and marked as spam.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Setup&lt;/em&gt; tabs &lt;strong&gt;shows HTML code snippets&lt;/strong&gt; which helps to implement the form on a website just by copy-pasting. There are snippets for both the clickable and the invisible Google captcha.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Edit&lt;/em&gt; tab provides additional settings of the form:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;multiple whitelisted domains&lt;/strong&gt; can be specified, from where form submissions are allowed&lt;/li&gt;
+  &lt;li&gt;required captcha can be turned on&lt;/li&gt;
+  &lt;li&gt;and also there’s an opportunity to send GDPR compliant &lt;strong&gt;data receipt to the sender&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;On the &lt;em&gt;Email&lt;/em&gt; tab, the target email address can be modified, where form data should be sent. It’s the registered email address by default. Also, there are options to specify &lt;strong&gt;CC and custom sender name&lt;/strong&gt; (instead of &lt;em&gt;“Basin”&lt;/em&gt;), and &lt;strong&gt;subject is editable too.&lt;/strong&gt; Subject is the form’s name + &lt;em&gt;“You’ve received a submission”&lt;/em&gt; by default.&lt;/p&gt;
+
+&lt;h2 id=&quot;testing&quot;&gt;Testing&lt;/h2&gt;
+
+&lt;p&gt;I turned on captcha and receipt sending and implemented the form with the invisible captcha. It’s super cool that I can &lt;strong&gt;test it from localhost.&lt;/strong&gt; I submitted the form and it correctly redirected to my URL. The email arrived a few seconds later to my address. The email is formatted nicely and contains every important detail:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/basin/basin-submission-email.png&quot;&gt;&lt;img src=&quot;/assets/basin/basin-submission-email.png&quot; alt=&quot;Basin submission email&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Reply-to is working properly too, I can answer to the email address typed in the form with a single click.&lt;/p&gt;
+
+&lt;p&gt;An email arrived also to the address I typed in the form. It &lt;strong&gt;tells what data I sent to where,&lt;/strong&gt; and it provides a button where a data removal request can be filed:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/basin/basin-receipt-email.png&quot;&gt;&lt;img src=&quot;/assets/basin/basin-receipt-email.png&quot; alt=&quot;Basin receipt email&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Sumitted information appeared also on the &lt;em&gt;Submissions&lt;/em&gt; tab as expected. Looking further, there’s the &lt;em&gt;Export&lt;/em&gt; tab where I can &lt;strong&gt;download form submissions in CSV or JSON&lt;/strong&gt; using an API key. Finally, &lt;a href=&quot;https://zapier.com/&quot;&gt;Zapier&lt;/a&gt; connection can be set up on the &lt;em&gt;Integrations&lt;/em&gt; tab, but I didn’t do this, I reached my goal.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt; deserves my gold prize. It’s a professional, easy-to-use, user friendly, GDPR-ready, free service.&lt;/strong&gt; 🏆&lt;/p&gt;
+
+&lt;p&gt;This is what I was looking for.&lt;/p&gt;
+
+&lt;h2 id=&quot;addition&quot;&gt;Addition&lt;/h2&gt;
+
+&lt;p&gt;A little addition is needed for &lt;a href=&quot;https://developers.google.com/recaptcha/&quot;&gt;Google reCAPTCHA&lt;/a&gt; to work properly. Code snippet provided by &lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt; works in a way that submit button’s click event is handled by reCAPTCHA and it &lt;strong&gt;submits the form immediately.&lt;/strong&gt; This is a problem when you need &lt;strong&gt;form validation&lt;/strong&gt;, either natively or via a JS library. I found a &lt;a href=&quot;https://stackoverflow.com/a/41694352/2418224&quot;&gt;solution here&lt;/a&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;form&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;invisible-recaptcha-form&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;accept-charset=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;UTF-8&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;action=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://usebasin.com/f/...&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;method=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;POST&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+
+	&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- input fields --&amp;gt;&lt;/span&gt;
+
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;g-recaptcha&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;data-sitekey=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;...&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;data-callback=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;onSubmit&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;data-badge=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;inline&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;data-size=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;invisible&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;button&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;btn btn-primary&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Submit&lt;span class=&quot;nt&quot;&gt;&amp;lt;/button&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/form&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://www.google.com/recaptcha/api.js&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;defer&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;script&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;invisible-recaptcha-form&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;addEventListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;submit&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+		&lt;span class=&quot;nx&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;preventDefault&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+		&lt;span class=&quot;nx&quot;&gt;grecaptcha&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;reset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+		&lt;span class=&quot;nx&quot;&gt;grecaptcha&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;execute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;onSubmit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;token&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;invisible-recaptcha-form&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;submit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;What did I do to &lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt;’s snippet:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Removed &lt;code class=&quot;highlighter-rouge&quot;&gt;g-recaptcha&lt;/code&gt; class from submit button, and placed it on a new &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;div&amp;gt;&lt;/code&gt; element.&lt;/li&gt;
+  &lt;li&gt;Moved &lt;code class=&quot;highlighter-rouge&quot;&gt;data-*&lt;/code&gt; attributes too from the button to the new element, and added a new one: &lt;code class=&quot;highlighter-rouge&quot;&gt;data-size=&quot;invisible&quot;&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;I added an event handler to the script, which is triggered on form submit and calls the captcha.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;When the user hits the submit button:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The browser’s native validation will run first.&lt;/li&gt;
+  &lt;li&gt;Then the event handler initializes the captcha.&lt;/li&gt;
+  &lt;li&gt;Captcha inserts response in the form, and calls the callback, which submits the form.&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Zsolt Jurányi</name></author><category term="basin" /><category term="email" /><category term="form" /><category term="serverless" /><category term="website" /><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /></entry><entry xml:lang="hu_HU"><title type="html">Kontakt form ingyen - körbenézés</title><link href="https://juzraai.github.io/blog/2018/kontakt-form-ingyen/" rel="alternate" type="text/html" title="Kontakt form ingyen - körbenézés" /><published>2018-06-02T00:00:00+02:00</published><updated>2018-06-05T22:40:22+02:00</updated><id>https://juzraai.github.io/blog/2018/kontakt-form-ingyen</id><content type="html" xml:base="https://juzraai.github.io/blog/2018/kontakt-form-ingyen/">&lt;h2 id=&quot;a-probléma&quot;&gt;A probléma&lt;/h2&gt;
+
+&lt;p&gt;A blogom és egyben fejlesztői bemutatkozó oldalam egy &lt;strong&gt;statikus honlap,&lt;/strong&gt; amit a &lt;a href=&quot;https://pages.github.com/&quot;&gt;GitHub Pages&lt;/a&gt;-en hosztolok. Elérhetőségként feltüntetem a Facebook és LinkedIn profilom, de az email címemet nem szeretném, mert a &lt;strong&gt;spam nem hiányzik.&lt;/strong&gt; Kitennék viszont &lt;strong&gt;kapcsolati űrlapot&lt;/strong&gt;, ami lehetőséget biztosítana az oldalamra tévedőknek, hogy mindenféle bejelentkezés és továbbkattintás nélkül el tudjanak engem érni.&lt;/p&gt;
+
+&lt;p&gt;Mivel azonban a honlap statikus, &lt;strong&gt;szerveroldali szkript nélkül&lt;/strong&gt; kell megoldani a form feldolgozását, és a kapott adatok kiküldését az email címemre. Muszáj tehát erre a feladatra egy &lt;strong&gt;külső szolgáltatást&lt;/strong&gt; keresni. És persze, ha már eddig is spóroltam, akkor itt is tartsuk a &lt;strong&gt;költségeket zérón.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;lehetőségek&quot;&gt;Lehetőségek&lt;/h2&gt;
+
+&lt;p&gt;Egy napot töltöttem azzal, hogy körbenézzek, mik a lehetőségek. Csak olyan szolgáltatásokat kerestem, amelyek általam kreált &lt;strong&gt;saját HTML form&lt;/strong&gt; adatait is tudják fogadni és email-ben kiküldeni. Ábécé sorrendben listázom, amiket találtam.&lt;/p&gt;
+
+&lt;p&gt;Megjegyzés: &lt;em&gt;“AJAX”&lt;/em&gt; alatt a továbbiakban azt a funkciót értem, hogy az endpoint AJAX-al hívható és szöveges választ ad, szemben a hagyományos form küldéssel, ami jellemzően egy teljes lapot ad vissza, vagy átirányít.&lt;/p&gt;
+
+&lt;p&gt;A &lt;a href=&quot;https://www.99inbound.com/&quot;&gt;99inbound&lt;/a&gt; &lt;strong&gt;korlátlan&lt;/strong&gt; form küldést kínál, van benne &lt;strong&gt;spam filter, illetve Slack integráció.&lt;/strong&gt; Ráadásként form builder is van hozzá, akinek kell. Friss, GDPR-os adatkezelési tájékoztatójuk van.&lt;/p&gt;
+
+&lt;p&gt;A &lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt; szintén &lt;strong&gt;korlátlan&lt;/strong&gt; form küldést biztosít már az ingyenes csomagban is, emellett rengeteg funkciója van: &lt;strong&gt;spam filter, redirect, fájl feltöltés, AJAX, export, analitika, valamint Zapier integráció&lt;/strong&gt; néhány népszerű alkalmazásba (pl. Slack, Trello, Asana, Google Sheets). A &lt;a href=&quot;https://zapier.com/&quot;&gt;Zapier&lt;/a&gt;-ben pedig a 2-lépcsős (trigger+action) folyamatok ingyenesek. Professzionális és felkészült cuccnak tűnik, korrekt GDPR notice is van a honlapjukon. A &lt;a href=&quot;https://www.producthunt.com/posts/basin&quot;&gt;ProductHunt&lt;/a&gt;-on pozitívak az értékelések és aktívak a fejlesztők.&lt;/p&gt;
+
+&lt;p&gt;A &lt;a href=&quot;https://www.briskforms.com/&quot;&gt;BriskForms&lt;/a&gt; nem ír limitekről, kihangsúlyozottan ingyenes szolgáltatás, emellett nyílt forráskódú is. Biztosít &lt;strong&gt;redirectet&lt;/strong&gt;, és/de úgy tűnik nem tárolja az űrlapadatokat.&lt;/p&gt;
+
+&lt;p&gt;Az &lt;a href=&quot;https://www.elformo.com/&quot;&gt;elFormo&lt;/a&gt; &lt;strong&gt;1500 emailt ad havonta&lt;/strong&gt; és van benne &lt;strong&gt;honeypot és redirect&lt;/strong&gt; lehetőség, bár átirányítás előtt felvillantja a logójukat. A beérkezett űrlapadatok böngészhetők és &lt;strong&gt;exportálhatók.&lt;/strong&gt; Noha a honlapjuk stílusos és megnyerő, nem sok review-t találni hozzá, és minden médiumon 2015-ben szólaltak meg utoljára.&lt;/p&gt;
+
+&lt;p&gt;Az &lt;a href=&quot;http://www.enformed.io/&quot;&gt;enformed.io&lt;/a&gt; &lt;strong&gt;100 emailt ad havonta&lt;/strong&gt;. Funkciók: &lt;strong&gt;egyéni levél tárgy, CC, BCC, honeypot, redirect, AJAX.&lt;/strong&gt; Viszont adatkezelési tájékoztatójuk nincs, a regisztrációs űrlapjuk meg konkrétan halott.&lt;/p&gt;
+
+&lt;p&gt;A &lt;a href=&quot;https://formspree.io/&quot;&gt;formspree.io&lt;/a&gt;-val évekkel ezelőtt is találkoztam már, egy ingyenes honlap sablon is ezt a szolgáltatást ajánlotta a kontakt formhoz. Az ingyenes rész limitje &lt;strong&gt;1000 email/hó&lt;/strong&gt;, van &lt;strong&gt;egyéni levél tárgy, CC, redirect, captcha,&lt;/strong&gt; viszont a &lt;strong&gt;form URL-ben szerepel a cél email cím.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;A kapcsolati űrlaphoz használható akár egy &lt;a href=&quot;https://github.com/toperkin/staticFormEmails&quot;&gt;Google Form&lt;/a&gt; is backend-ként. A limitre mindenhol más értéket találok, de &lt;strong&gt;50-100 email/napot&lt;/strong&gt; írnak a legtöbb helyen. Viszont ha nem küldi ki az email-t, akkor sincs gond, mert az űrlap adatait beteszi egy &lt;strong&gt;spreadsheet&lt;/strong&gt;-be.&lt;/p&gt;
+
+&lt;p&gt;Hasonlóan az előzőhöz, &lt;a href=&quot;https://github.com/dwyl/learn-to-send-email-via-google-script-html-no-server&quot;&gt;Google Apps Script&lt;/a&gt;-el is megoldható, hogy spreadsheet-be kerüljenek az adatok előbb, és aztán legyenek kiküldve email-ben. A kvóta &lt;strong&gt;100 email/nap&lt;/strong&gt; és van &lt;strong&gt;AJAX küldés.&lt;/strong&gt; A szkript nyilván kiegészíthető honeypot-tal és captcha-val is.&lt;/p&gt;
+
+&lt;p&gt;A &lt;a href=&quot;https://mailthis.to/&quot;&gt;mailthis.to&lt;/a&gt;-nál picit más az üzleti koncepció, a használat szerint kell fizetni. Nem havi limitek vannak, hanem regisztrációkor kapsz &lt;strong&gt;1000 ingyen emailt&lt;/strong&gt;, és további 1000 emailt vehetsz néhány dolcsiért. Van &lt;strong&gt;egyéni levél tárgy, honeypot, redirect, fájl feltöltés, AJAX és captcha.&lt;/strong&gt; &lt;a href=&quot;https://medium.com/@jamesfuthey/running-a-free-email-api-for-2-years-a39188e19985&quot;&gt;E cikk&lt;/a&gt; alapján is szimpatikus ez a cucc, viszont itt sem találok privacy policy-t.&lt;/p&gt;
+
+&lt;p&gt;A &lt;a href=&quot;https://pageclip.co/&quot;&gt;Pageclip&lt;/a&gt; &lt;strong&gt;havi 1000 küldést&lt;/strong&gt; enged, van &lt;strong&gt;egyéni levél tárgy és AJAX lehetőség, tárolja az adatokat&lt;/strong&gt; JSON formában. Van kliens és szerveroldali JavaScript könyvtár is hozzá. A főoldalon hirdetik a Slack integrációt, de a doksiban erről nincs infó. Elég részletes viszont az adatkezelési tájékoztatójuk.&lt;/p&gt;
+
+&lt;p&gt;A &lt;a href=&quot;https://getsimpleform.com/&quot;&gt;SimpleForm&lt;/a&gt; honlapja elég szűkszavú. Nincs szó limitekről, de azt megtudjuk, hogy &lt;strong&gt;fogad fájlokat&lt;/strong&gt; és az űrlapadatok lekérhetőek &lt;strong&gt;API-n&lt;/strong&gt; át. A copyright 2012-es, a blogjuk 2014-ben frissült utoljára, habár a site-on a verziószám 2018-as.&lt;/p&gt;
+
+&lt;p&gt;Lássuk mindezt táblázatban:&lt;/p&gt;
+
+&lt;table class=&quot;table table-sm table-responsive-md&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Szolgáltatás&lt;/th&gt;
+      &lt;th&gt;Limit&lt;/th&gt;
+      &lt;th&gt;Spam&lt;/th&gt;
+      &lt;th&gt;Redirect&lt;/th&gt;
+      &lt;th&gt;Tárol?&lt;/th&gt;
+      &lt;th&gt;Extra&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://www.99inbound.com/&quot;&gt;99inbound&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;filter&lt;/td&gt;
+      &lt;td&gt;?&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;Slack&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;filter&lt;/td&gt;
+      &lt;td&gt;van&lt;/td&gt;
+      &lt;td&gt;igen&lt;/td&gt;
+      &lt;td&gt;fájl, captcha, Zapier&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://www.briskforms.com/&quot;&gt;BriskForms&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;van&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;open-source&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://www.elformo.com/&quot;&gt;elFormo&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;1500/hó&lt;/td&gt;
+      &lt;td&gt;honeypot&lt;/td&gt;
+      &lt;td&gt;van&lt;/td&gt;
+      &lt;td&gt;igen&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;http://www.enformed.io/&quot;&gt;enformed.io&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;100/hó&lt;/td&gt;
+      &lt;td&gt;honeypot&lt;/td&gt;
+      &lt;td&gt;van&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;tárgy, CC, BCC, AJAX&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://formspree.io/&quot;&gt;formspree.io&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;1000/hó&lt;/td&gt;
+      &lt;td&gt;honeypot&lt;/td&gt;
+      &lt;td&gt;van&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;tárgy, CC, captcha&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://github.com/dwyl/learn-to-send-email-via-google-script-html-no-server&quot;&gt;G. Apps Script&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;100/nap&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;igen&lt;/td&gt;
+      &lt;td&gt;tárgy, AJAX, …&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://github.com/toperkin/staticFormEmails&quot;&gt;G. Forms&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;~ 50/nap&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;igen&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://mailthis.to/&quot;&gt;mailthis.to&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;1000&lt;/td&gt;
+      &lt;td&gt;honeypot&lt;/td&gt;
+      &lt;td&gt;van&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;tárgy, fájl, AJAX, captcha&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://pageclip.co/&quot;&gt;Pageclip&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;1000/hó&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;igen&lt;/td&gt;
+      &lt;td&gt;tárgy, AJAX, API&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://getsimpleform.com/&quot;&gt;SimpleForm&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;igen&lt;/td&gt;
+      &lt;td&gt;fájl&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;összegzés&quot;&gt;Összegzés&lt;/h2&gt;
+
+&lt;p&gt;A fenti listát a következőképp szűkítem:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;A 2 Google megoldást kicsit macerásabb összerakni, illetve nem érzem igazán elegáns megoldásnak erre a feladatra, pláne látva a többi versenyzőt.&lt;/li&gt;
+  &lt;li&gt;A &lt;a href=&quot;https://formspree.io/&quot;&gt;formspree.io&lt;/a&gt; nem rejti az email címemet.&lt;/li&gt;
+  &lt;li&gt;Az &lt;a href=&quot;http://www.enformed.io/&quot;&gt;enformed.io&lt;/a&gt; több sebből vérzik.&lt;/li&gt;
+  &lt;li&gt;A &lt;a href=&quot;https://mailthis.to/&quot;&gt;mailthis.to&lt;/a&gt; szimpatikus lenne, de csak egyszeri 1000 emailt ad, ami az összes többinél korlátoltabb.&lt;/li&gt;
+  &lt;li&gt;A &lt;a href=&quot;https://getsimpleform.com/&quot;&gt;SimpleForm&lt;/a&gt; nem informatív, puritán és réginek tűnik.&lt;/li&gt;
+  &lt;li&gt;Az &lt;a href=&quot;https://www.elformo.com/&quot;&gt;elFormo&lt;/a&gt; is szimpatikusnak tűnt, de ez is porosodik már, és vannak jobbak a mezőnyben.&lt;/li&gt;
+  &lt;li&gt;A &lt;a href=&quot;https://pageclip.co/&quot;&gt;Pageclip&lt;/a&gt;-en kívül az összes játékban maradt versenyző korlátlan küldést biztosít.&lt;/li&gt;
+  &lt;li&gt;🥉 A dobogó 3. fokán a &lt;a href=&quot;https://www.briskforms.com/&quot;&gt;BriskForms&lt;/a&gt; áll meg, spam elkerülési mechanizmus hiányában.&lt;/li&gt;
+  &lt;li&gt;🥈 Az ezüstérmet a &lt;a href=&quot;https://www.99inbound.com/&quot;&gt;99inbound&lt;/a&gt;-nak osztom, mert&lt;/li&gt;
+  &lt;li&gt;🥇 a &lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt; egy fokkal profibbnak és flexibilisebbnek tűnik.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;A fenti dolgokat persze &lt;strong&gt;kipróbálás nélkül&lt;/strong&gt; írtam. A &lt;a href=&quot;/blog/2018/kontakt-form-basin-nel&quot;&gt;következő posztban&lt;/a&gt; leírom a tapasztalataimat a &lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt;-nel, ugyanis az aranyérem jó helyre került. 🤓&lt;/p&gt;</content><author><name>Zsolt Jurányi</name></author><category term="email" /><category term="form" /><category term="serverless" /><category term="weboldal" /><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /></entry><entry xml:lang="en_US"><title type="html">Contact form for free - looking around</title><link href="https://juzraai.github.io/blog/2018/contact-form-for-free/" rel="alternate" type="text/html" title="Contact form for free - looking around" /><published>2018-06-02T00:00:00+02:00</published><updated>2018-06-04T22:05:02+02:00</updated><id>https://juzraai.github.io/blog/2018/contact-form-for-free</id><content type="html" xml:base="https://juzraai.github.io/blog/2018/contact-form-for-free/">&lt;h2 id=&quot;problem&quot;&gt;Problem&lt;/h2&gt;
+
+&lt;p&gt;My blog and developer portfolio is a &lt;strong&gt;static website&lt;/strong&gt;, which I host on &lt;a href=&quot;https://pages.github.com/&quot;&gt;GitHub&lt;/a&gt;. As contact information, I link my Facebook and LinkedIn profiles, but I don’t want to publish my email address, because &lt;strong&gt;I don’t need spam.&lt;/strong&gt; Instead I’d place there a &lt;strong&gt;contact form&lt;/strong&gt; which would help those who arrive at my website to reach me without logging in or navigating anywhere else.&lt;/p&gt;
+
+&lt;p&gt;Because of the site is static, processing of the form and sending data to my email address has to be done &lt;strong&gt;without server-side script.&lt;/strong&gt; So I have to find a &lt;strong&gt;third-party service&lt;/strong&gt; for this task. And since I’ve been saving money, I’d like to &lt;strong&gt;keep the costs of this at zero too.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;possible-solutions&quot;&gt;Possible solutions&lt;/h2&gt;
+
+&lt;p&gt;I spent a day to search for potential solutions. I looked for services which can process a &lt;strong&gt;custom HTML form&lt;/strong&gt; and can send me an email with the form data. I list them alphabetized.&lt;/p&gt;
+
+&lt;p&gt;Note: below when I write &lt;em&gt;AJAX&lt;/em&gt;, it means a function which provides an endpoint that can be called via AJAX and responds with a text message, unlike the usual form sending methods that return with a page or a redirect.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.99inbound.com/&quot;&gt;99inbound&lt;/a&gt; gives &lt;strong&gt;unlimited&lt;/strong&gt; form submissions, &lt;strong&gt;spam filter, and Slack integration.&lt;/strong&gt; As a bonus it can build you HTML forms too if you need it. Their privacy policy looks fresh and GDPR-ready.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt; also gives &lt;strong&gt;unlimited&lt;/strong&gt; submission in the free tier, and it has a lot of features: &lt;strong&gt;spam filter, redirect, file upload, AJAX, export, analytics, and Zapier integration&lt;/strong&gt; to some popular apps (e.g. Slack, Trello, Asana, Google Sheets). &lt;a href=&quot;https://zapier.com/&quot;&gt;Zapier&lt;/a&gt; is also free if you use only 2-step (trigger+action) workflows. Basin looks professional and prepared, their GDPR notice is clear. They got positive reviews on &lt;a href=&quot;https://www.producthunt.com/posts/basin&quot;&gt;ProductHunt&lt;/a&gt;, and their developers are actively responding there too.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.briskforms.com/&quot;&gt;BriskForms&lt;/a&gt; emphasizes that it’s a free service, there’s no word about any limit and it’s open-source too. Provides &lt;strong&gt;redirect&lt;/strong&gt; and/but doesn’t store form data.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.elformo.com/&quot;&gt;elFormo&lt;/a&gt; gives &lt;strong&gt;1500 emails/month, honeypot and redirect,&lt;/strong&gt; though they flash their logo to the users. Form data is stored and can be &lt;strong&gt;exported.&lt;/strong&gt; Their website has style and is appealing, but it’s hard to find a review and their last tweet is from 2015.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.enformed.io/&quot;&gt;enformed.io&lt;/a&gt; gives &lt;strong&gt;100 emails/month, custom subject, CC, BCC, honeypot, redirect, AJAX.&lt;/strong&gt; But they don’t have any privacy policy and their sign up form is actually dead.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://formspree.io/&quot;&gt;formspree.io&lt;/a&gt; looks familiar to me, I saw some website templates that recommended this service for the contact form. It gives &lt;strong&gt;1000 emails/month, custom subject, CC, redirect, captcha,&lt;/strong&gt; but &lt;strong&gt;target email address is public in the form code.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;A &lt;a href=&quot;https://github.com/toperkin/staticFormEmails&quot;&gt;Google Form&lt;/a&gt; can also be used as a contact form backend. I found different limits for this, but most of them says &lt;strong&gt;50-100 emails/day&lt;/strong&gt;. Form data is also inserted into a &lt;strong&gt;spreadsheet&lt;/strong&gt; so there’s no problem if email sending fails due to the limits.&lt;/p&gt;
+
+&lt;p&gt;This spreadsheet + email sending mechanism can also be achieved via a &lt;a href=&quot;https://github.com/dwyl/learn-to-send-email-via-google-script-html-no-server&quot;&gt;Google Apps Script&lt;/a&gt;. The quota is &lt;strong&gt;100 emails/day&lt;/strong&gt; and it can be used via &lt;strong&gt;AJAX&lt;/strong&gt; too. The script can be surely extended with honeypot and captcha.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://mailthis.to/&quot;&gt;mailthis.to&lt;/a&gt; pricing is based on the usage. Initially you get &lt;strong&gt;1000 emails for free&lt;/strong&gt;, then you can pay a few dollars for additional 1000 emails. They provide &lt;strong&gt;custom subject, honeypot, redirect, file upload, AJAX and captcha.&lt;/strong&gt; They &lt;a href=&quot;https://medium.com/@jamesfuthey/running-a-free-email-api-for-2-years-a39188e19985&quot;&gt;seem to be nice&lt;/a&gt; for me, but they also lack the privacy policy.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://pageclip.co/&quot;&gt;Pageclip&lt;/a&gt; gives &lt;strong&gt;1000 submissions/month, custom subject, AJAX and data export&lt;/strong&gt; in JSON. They have both client and server-side JavaScript library. They highlight Slack integration on their front page, but the documentation doesn’t mention it. They have a detailed privacy policy.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://getsimpleform.com/&quot;&gt;SimpleForm&lt;/a&gt;’s site is very minimal. Does not mention limits, but it says it has &lt;strong&gt;file upload&lt;/strong&gt; and &lt;strong&gt;API&lt;/strong&gt; for downloading submission data. Though version number starts with 2018, copyright says 2012 and their blog is updated in 2014.&lt;/p&gt;
+
+&lt;p&gt;Let’s see them in a nice table:&lt;/p&gt;
+
+&lt;table class=&quot;table table-sm table-responsive-md&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Service&lt;/th&gt;
+      &lt;th&gt;Limit&lt;/th&gt;
+      &lt;th&gt;Spam&lt;/th&gt;
+      &lt;th&gt;Redirect&lt;/th&gt;
+      &lt;th&gt;Stores?&lt;/th&gt;
+      &lt;th&gt;Extra&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://www.99inbound.com/&quot;&gt;99inbound&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;filter&lt;/td&gt;
+      &lt;td&gt;?&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;Slack&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;filter&lt;/td&gt;
+      &lt;td&gt;yes&lt;/td&gt;
+      &lt;td&gt;yes&lt;/td&gt;
+      &lt;td&gt;file, captcha, Zapier&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://www.briskforms.com/&quot;&gt;BriskForms&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;yes&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;open-source&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://www.elformo.com/&quot;&gt;elFormo&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;1500/month&lt;/td&gt;
+      &lt;td&gt;honeypot&lt;/td&gt;
+      &lt;td&gt;yes&lt;/td&gt;
+      &lt;td&gt;yes&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;http://www.enformed.io/&quot;&gt;enformed.io&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;100/month&lt;/td&gt;
+      &lt;td&gt;honeypot&lt;/td&gt;
+      &lt;td&gt;yes&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;subject, CC, BCC, AJAX&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://formspree.io/&quot;&gt;formspree.io&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;1000/month&lt;/td&gt;
+      &lt;td&gt;honeypot&lt;/td&gt;
+      &lt;td&gt;yes&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;subject, CC, captcha&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://github.com/dwyl/learn-to-send-email-via-google-script-html-no-server&quot;&gt;G. Apps Script&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;100/day&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;yes&lt;/td&gt;
+      &lt;td&gt;subject, AJAX, …&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://github.com/toperkin/staticFormEmails&quot;&gt;G. Forms&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;~ 50/day&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;yes&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://mailthis.to/&quot;&gt;mailthis.to&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;1000&lt;/td&gt;
+      &lt;td&gt;honeypot&lt;/td&gt;
+      &lt;td&gt;yes&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;subject, file, AJAX, captcha&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://pageclip.co/&quot;&gt;Pageclip&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;1000/month&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;yes&lt;/td&gt;
+      &lt;td&gt;subject, AJAX, API&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://getsimpleform.com/&quot;&gt;SimpleForm&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;yes&lt;/td&gt;
+      &lt;td&gt;file&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;summary&quot;&gt;Summary&lt;/h2&gt;
+
+&lt;p&gt;I narrow down the above list in the following way:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The 2 approach using Google services seems a bit hacky and not elegant, especially if we look at the other competitors.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://formspree.io/&quot;&gt;formspree.io&lt;/a&gt; does not hide my email address.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.enformed.io/&quot;&gt;enformed.io&lt;/a&gt; has more than one issue.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://mailthis.to/&quot;&gt;mailthis.to&lt;/a&gt; seems nice, but the one-time 1000 email limit is worse than the rest where at least the quota is renewed every month.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://getsimpleform.com/&quot;&gt;SimpleForm&lt;/a&gt; is not so informative and it seems to be old.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.elformo.com/&quot;&gt;elFormo&lt;/a&gt; seems nice too, but there are better choices in the list.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://pageclip.co/&quot;&gt;Pageclip&lt;/a&gt; is the only one left which doesn’t provide unlimited submissions.&lt;/li&gt;
+  &lt;li&gt;🥉 &lt;a href=&quot;https://www.briskforms.com/&quot;&gt;BriskForms&lt;/a&gt; stops at the 3rd place, because it doesn’t have methods to avoid spam.&lt;/li&gt;
+  &lt;li&gt;🥈 &lt;a href=&quot;https://www.99inbound.com/&quot;&gt;99inbound&lt;/a&gt; gets the silver, because&lt;/li&gt;
+  &lt;li&gt;🥇 &lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt; seems more professional and flexible.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I found out all of the above &lt;strong&gt;without trying out&lt;/strong&gt; the services. In my &lt;a href=&quot;/blog/2018/contact-form-using-basin&quot;&gt;next post&lt;/a&gt; I share my experiences with &lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt; which seems to deserve my gold medal. 🤓&lt;/p&gt;</content><author><name>Zsolt Jurányi</name></author><category term="email" /><category term="form" /><category term="serverless" /><category term="website" /><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /></entry><entry xml:lang="hu_HU"><title type="html">Rapid webapp fejlesztés II.</title><link href="https://juzraai.github.io/blog/2018/rapid-webapp-fejlesztes-ii/" rel="alternate" type="text/html" title="Rapid webapp fejlesztés II." /><published>2018-05-18T00:00:00+02:00</published><updated>2018-06-03T12:19:44+02:00</updated><id>https://juzraai.github.io/blog/2018/rapid-webapp-fejlesztes-ii</id><content type="html" xml:base="https://juzraai.github.io/blog/2018/rapid-webapp-fejlesztes-ii/">&lt;h2 id=&quot;elöljáróban&quot;&gt;Elöljáróban&lt;/h2&gt;
+
+&lt;p&gt;Gyakorlatilag az egyetemi éveim óta Java vonalon mozgok. Munkám során is ebben írtam mindent, ami szerveroldali és nem mini szkript, ami Bash-al megoldható. Az elmúlt 1-1.5 évben léptem tovább &lt;a href=&quot;https://kotlinlang.org&quot;&gt;Kotlin&lt;/a&gt;-ra, ami szintén JVM vonal ugye, de felgyorsítja és kényelmesebbé teszi a fejlesztést.&lt;/p&gt;
+
+&lt;p&gt;Leginkább crawlereket fejlesztek, de emellett gyakran webalkalmazásokat is készítenem kell. Ezeket eddig Spring Boot-ra építettem, és különféle template engine-ekkel dolgoztam: kezdetben &lt;a href=&quot;https://freemarker.apache.org/&quot;&gt;Freemarker&lt;/a&gt;-rel, majd utána még 3-4-et kipróbáltam a projektek során.&lt;/p&gt;
+
+&lt;p&gt;A webapp fejlesztéshez persze párosult frontend tákolás is. Sok tapasztalatot gyűjtöttem CSS-ben és JS-ben, előbbinél a Bootstrap valamint a LESS/SASS, utóbbinál a &lt;a href=&quot;http://knockoutjs.com/&quot;&gt;KnockoutJS&lt;/a&gt; megismerése és használatba vétele volt mérföldkő.&lt;/p&gt;
+
+&lt;p&gt;Mindezekről egyszer &lt;a href=&quot;/blog/2015/rapid-webapp-fejlesztes&quot;&gt;már írtam&lt;/a&gt; pár éve.&lt;/p&gt;
+
+&lt;p&gt;Viszont miközben jól elvoltam &lt;a href=&quot;https://projects.spring.io/spring-boot/&quot;&gt;Spring Boot&lt;/a&gt;-tal, Kotlin-nal és Knockout-tal, elrohantak mellettem a frontend technológiák, ES6, TypeScript, Node JS, React, Angular, Grunt, Gulp és társaik… ezekkel sajnos le vagyok maradva.&lt;/p&gt;
+
+&lt;p&gt;De már nem is annyira! 😀&lt;/p&gt;
+
+&lt;h2 id=&quot;vue&quot;&gt;Vue&lt;/h2&gt;
+
+&lt;p&gt;A minap kaptam egy olyan feladatot, hogy tákoljak össze egy kísérleti admin felületet egy kis adatbázishoz. Nem kell jól kinéznie, az a cél, hogy interaktívan elő tudják szűrni a sorokat és azok bizonyos kombinációit. Kéne bele CRUD, meg minimális értékelési lehetőség is (+/-).&lt;/p&gt;
+
+&lt;p&gt;Azt elég hamar eldöntöttem, hogy nem akarok template engine-ekkel időt vesztegetni, egy egyszerű REST API-t csinálok, és a kliensoldal sima HTML+JS lesz, AJAX hívásokkal.&lt;/p&gt;
+
+&lt;p&gt;A frontend megvalósításához a &lt;a href=&quot;https://vuejs.org/&quot;&gt;Vue&lt;/a&gt;-t hívtam segítségül, amit pár hónapja ismertem meg. Egyből beleszerettem, sokkal kényelmesebb a Knockout-nál, nem kell observable izékkel szórakozni, a view model is szépen strukturált, a HTML attribútumok barátságosak. Egy baja van szegénynek, hogy régebbi böngészőkön nem megy, ellentétben a Knockout-tal.&lt;/p&gt;
+
+&lt;h2 id=&quot;node&quot;&gt;Node&lt;/h2&gt;
+
+&lt;p&gt;Már nem is tudom hogyan, de a backend kapcsán bevillant egy gondolat: &lt;em&gt;“Mi lenne, ha megpróbálnám Node-dal?”&lt;/em&gt;. Ami meglepő, mert sosem használtam még ezelőtt. Legutóbb pár hónapja merült fel egy adatvizualizációs klubban, hogy majd összepattintanak egy API-t Node-ban egy adatbázis elé - ez ragadhatott meg bennem.&lt;/p&gt;
+
+&lt;p&gt;Felkerekedtem és elég hamar ráakadtam erre a tutorial-ra: &lt;a href=&quot;https://medium.com/@avanthikameenakshi/building-restful-api-with-nodejs-and-mysql-in-10-min-ff740043d4be&quot;&gt;Building REST API in the blink of an eye&lt;/a&gt;. Végigolvastam, elképedtem, majd újra átnéztem. Gyakorlatilag 30 sorból épít egy mini webappot, ami lekérdez egy adatbázisból.&lt;/p&gt;
+
+&lt;p&gt;Elkezdtem reprodukálni a dolgot, hogy lássan működés közben, és így megismertem a technológiákat. A webapp keretét az &lt;a href=&quot;https://expressjs.com/&quot;&gt;ExpressJS&lt;/a&gt; adja, és gyakorlatilag a request-eket feldolgozó láncba tudunk betoldani saját dolgokat. Van hozzá parancssoros projekt generátor is, de nekem nem kellettek view engine-ek, egyszerűbb appot kreáltam &lt;a href=&quot;https://stackoverflow.com/a/19415943/2418224&quot;&gt;e válasz&lt;/a&gt; alapján.&lt;/p&gt;
+
+&lt;p&gt;Az adatbázissal való kommunikációért a &lt;a href=&quot;https://github.com/mysqljs/mysql&quot;&gt;mysqljs&lt;/a&gt; csomag felel, a lekérdezések eredményeit gyönyörű JS objektumokban adja vissza.&lt;/p&gt;
+
+&lt;p&gt;Mielőtt nekiültem ennek a dolognak, elindítottam a &lt;a href=&quot;https://toggl.com/&quot;&gt;Toggl&lt;/a&gt; stoppert, és amikor eljutottam odáig, hogy van egy kis API-m, ami visszaad egy szimpla lekérdezést, elkerekedett a szemem: kb. 1 óránál járt a számláló. Annyi idő volt összerakni a cuccot nulla Node tapasztalattal, guglizással, mint több év tapasztalattal bekonfigolni egy Maven + Kotlin + Spring Boot + MySQL projektet IDE-ben.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Szóval úgy érzem, új dimenziók nyílnak :) és komolyan elfilózom most, hogy ebbe az irányba haladok tovább, elfordulva a JVM világtól.&lt;/strong&gt; Legalábbis a webappok területén… de talán akkor már a crawlerekkel is. 😎&lt;/p&gt;
+
+&lt;h2 id=&quot;kiegészítők&quot;&gt;Kiegészítők&lt;/h2&gt;
+
+&lt;p&gt;A projekt lényegi részét azóta összekalapáltam, a fentebb vázolt stack-hez (MySQL + Node + Vue) kellett még pár lib, hogy megfelelően működjön a dolog és elegáns is legyen a megvalósítás.&lt;/p&gt;
+
+&lt;p&gt;Az első ilyen a &lt;a href=&quot;https://github.com/motdotla/dotenv&quot;&gt;dotenv&lt;/a&gt;, ami annyit csinál, hogy a program könyvtárából beolvassa a &lt;code class=&quot;highlighter-rouge&quot;&gt;.env&lt;/code&gt; fájl tartalmát és betölti a &lt;code class=&quot;highlighter-rouge&quot;&gt;process.env&lt;/code&gt; objektumba, a környezeti változókhoz. A konfigfájlt érdemes kihagyni verziókövetésből, és minden egyes környezetben külön definiálni az értékeket. (Analógia: &lt;code class=&quot;highlighter-rouge&quot;&gt;application.yml&lt;/code&gt; a Spring Boot háza táján.)&lt;/p&gt;
+
+&lt;p&gt;Keresgéltem megoldásokat a Node JS appom biztonságosabbá tételére, az egyik csomag a &lt;a href=&quot;https://github.com/helmetjs/helmet&quot;&gt;helmet&lt;/a&gt; volt, ami szembe jött. Fontos HTTP header-öket injektál a válaszokba, pl. frameguard, nosniff, vagy opcionálisan kikapcsolja a kliensoldali cache-elést is.&lt;/p&gt;
+
+&lt;p&gt;Aztán rátaláltam a &lt;a href=&quot;http://www.passportjs.org/&quot;&gt;Passport&lt;/a&gt;-ra, és igazából ezt kerestem. Mindenféle authentikációt be lehet kötni az Express alkalmazásba, a fentiekben megszokott módon, pár sorban. Tud pl. HTTP Basic-et is, amit sokkal gyorsabb itt beállítani, mint &lt;code class=&quot;highlighter-rouge&quot;&gt;.htaccess&lt;/code&gt;-el és &lt;code class=&quot;highlighter-rouge&quot;&gt;.htpasswd&lt;/code&gt;-vel szórakozva Apache-ban.&lt;/p&gt;
+
+&lt;p&gt;Nagyon hasznos még a &lt;a href=&quot;https://db-migrate.readthedocs.io/en/latest/&quot;&gt;db-migrate&lt;/a&gt;, melynek segítségével az adatbázis séma felépítésének lépéseit egy kötött formában rögzíthetjük, hogy aztán később konzisztensen reprodukálni tudjuk egy másik környezetben. (Ld. &lt;a href=&quot;https://www.liquibase.org/&quot;&gt;Liquibase&lt;/a&gt; a Java világban.)&lt;/p&gt;
+
+&lt;p&gt;Utolsóként a &lt;a href=&quot;http://pm2.keymetrics.io/&quot;&gt;PM2&lt;/a&gt; nevű zseniális toolt említeném meg. Ez egy process manager, leginkább a &lt;code class=&quot;highlighter-rouge&quot;&gt;systemd&lt;/code&gt; féle &lt;code class=&quot;highlighter-rouge&quot;&gt;service&lt;/code&gt; &lt;a href=&quot;https://www.commandlinux.com/man-page/man5/systemd.service.5.html&quot;&gt;parancshoz&lt;/a&gt; hasonlítanám, de sokkal barátságosabb annál és (laikus szemmel nézve) többet is tud. Tud processzeket nyilvántartani, indítani, leállítani, újraindítani, státuszt és logot listázni. Szkriptek (nem csak Node) futtatására van kitalálva, képes arra is, hogy újraindítson egy appot, ha annak fájljai frissülnek (&lt;code class=&quot;highlighter-rouge&quot;&gt;--watch&lt;/code&gt;).&lt;/p&gt;
+
+&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+
+&lt;p&gt;Ez a poszt elég hosszúra sikeredett, összefoglalom:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Eddig Java/Kotlin + Spring + Knockout vonalon mozogtam webalkalmazás fejlesztés terén.&lt;/li&gt;
+  &lt;li&gt;Az utóbbi időben a Knockout-ot Vue-ra cseréltem, sokkal barátságosabb.&lt;/li&gt;
+  &lt;li&gt;A minap kaptam egy mini webalkalmazás megrendelést és úgy döntöttem, megpróbálom Node-dal megvalósítani.&lt;/li&gt;
+  &lt;li&gt;Keresgéltem tutorialokat és technológiákat, és elképedve tapasztaltam, hogy nagyon gyorsan tudok vele haladni.&lt;/li&gt;
+  &lt;li&gt;Megismertem az ExpressJS-t, a Passport-ot, a db-migrate-et és a PM2-t.&lt;/li&gt;
+  &lt;li&gt;Komolyan fontolgatom az irányváltást a JVM világtól a Node felé.&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Zsolt Jurányi</name></author><category term="nodejs" /><category term="vuejs" /><category term="webalkalmazás" /><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /></entry><entry xml:lang="en_US"><title type="html">How to clean all Maven projects</title><link href="https://juzraai.github.io/blog/2017/how-to-clean-all-maven-projects/" rel="alternate" type="text/html" title="How to clean all Maven projects" /><published>2017-06-16T00:00:00+02:00</published><updated>2018-06-03T12:19:44+02:00</updated><id>https://juzraai.github.io/blog/2017/how-to-clean-all-maven-projects</id><content type="html" xml:base="https://juzraai.github.io/blog/2017/how-to-clean-all-maven-projects/">&lt;p&gt;My “dev” folder usually contains dozens of current projects and I don’t clean them regularly. But when I backup my directory, it’s needless to archive the &lt;code class=&quot;highlighter-rouge&quot;&gt;target&lt;/code&gt; folders because they can be regenerated at any time. So &lt;code class=&quot;highlighter-rouge&quot;&gt;mvn clean&lt;/code&gt; needs to be called on every project, this is how I automatize it with &lt;em&gt;Bash&lt;/em&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;find &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-name&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;target&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-type&lt;/span&gt; d &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  | &lt;span class=&quot;nb&quot;&gt;sed &lt;/span&gt;s/target/pom.xml/ &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  | &lt;span class=&quot;nb&quot;&gt;tee&lt;/span&gt; /dev/stderr &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  | xargs &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt; mvn &lt;span class=&quot;nt&quot;&gt;-q&lt;/span&gt; clean &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;find&lt;/code&gt; lists all &lt;code class=&quot;highlighter-rouge&quot;&gt;target&lt;/code&gt; folders,&lt;/li&gt;
+  &lt;li&gt;with &lt;code class=&quot;highlighter-rouge&quot;&gt;sed&lt;/code&gt; I transform the path to the POM’s path,&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;tee&lt;/code&gt; just prints out the path to inform me about which project is being cleaned,&lt;/li&gt;
+  &lt;li&gt;and finally &lt;code class=&quot;highlighter-rouge&quot;&gt;xargs&lt;/code&gt; passes the path as argument to the Maven command.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Since &lt;code class=&quot;highlighter-rouge&quot;&gt;find&lt;/code&gt; walks the directory tree recursively, I can call the above script from the root of my “dev” folder or even from the root of my drive, and all of my projects will be cleaned. 😎&lt;/p&gt;
+
+&lt;p&gt;(Developing on Windows? &lt;a href=&quot;https://git-for-windows.github.io/&quot;&gt;Git for Windows&lt;/a&gt; contains a &lt;em&gt;Bash&lt;/em&gt; terminal or you can use the &lt;a href=&quot;https://msdn.microsoft.com/en-us/commandline/wsl/about&quot;&gt;Linux subsystem&lt;/a&gt;)&lt;/p&gt;</content><author><name>Zsolt Jurányi</name></author><category term="bash" /><category term="maven" /><summary type="html">My “dev” folder usually contains dozens of current projects and I don’t clean them regularly. But when I backup my directory, it’s needless to archive the target folders because they can be regenerated at any time. So mvn clean needs to be called on every project, this is how I automatize it with Bash:</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /></entry><entry xml:lang="hu_HU"><title type="html">Hogyan tisztítsuk meg az összes Maven projektet</title><link href="https://juzraai.github.io/blog/2017/hogyan-tisztitsuk-meg-az-osszes-maven-projektet/" rel="alternate" type="text/html" title="Hogyan tisztítsuk meg az összes Maven projektet" /><published>2017-06-16T00:00:00+02:00</published><updated>2018-06-04T22:05:02+02:00</updated><id>https://juzraai.github.io/blog/2017/hogyan-tisztitsuk-meg-az-osszes-maven-projektet</id><content type="html" xml:base="https://juzraai.github.io/blog/2017/hogyan-tisztitsuk-meg-az-osszes-maven-projektet/">&lt;p&gt;A “dev” mappámban rendszerint több tucat aktuális projektet tartok, és nemigen szoktam kézzel hívogatni a &lt;code class=&quot;highlighter-rouge&quot;&gt;mvn clean&lt;/code&gt;-t. Viszont amikor például backup-olnám a mappámat, totál fölösleges a &lt;code class=&quot;highlighter-rouge&quot;&gt;target&lt;/code&gt; mappákat is eltenni, ha azok legenerálhatóak bármikor. Tehát meg kell hívni az &lt;code class=&quot;highlighter-rouge&quot;&gt;mvn clean&lt;/code&gt;-t minden projektre, amit így automatizáltam &lt;em&gt;Bash&lt;/em&gt; segítségével:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;find &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-name&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;target&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-type&lt;/span&gt; d &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  | &lt;span class=&quot;nb&quot;&gt;sed &lt;/span&gt;s/target/pom.xml/ &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  | &lt;span class=&quot;nb&quot;&gt;tee&lt;/span&gt; /dev/stderr &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  | xargs &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt; mvn &lt;span class=&quot;nt&quot;&gt;-q&lt;/span&gt; clean &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;A &lt;code class=&quot;highlighter-rouge&quot;&gt;find&lt;/code&gt;-al leszűröm az összes &lt;code class=&quot;highlighter-rouge&quot;&gt;target&lt;/code&gt; mappát,&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;sed&lt;/code&gt;-el a mappa elérési útját az adott projekt &lt;code class=&quot;highlighter-rouge&quot;&gt;pom.xml&lt;/code&gt;-jének útvonalára cserélem,&lt;/li&gt;
+  &lt;li&gt;a &lt;code class=&quot;highlighter-rouge&quot;&gt;tee&lt;/code&gt;-vel csak kiíratom az elérési utat, hogy tudjam, melyik projekt tisztul épp,&lt;/li&gt;
+  &lt;li&gt;végül az &lt;code class=&quot;highlighter-rouge&quot;&gt;xargs&lt;/code&gt; segít átadni az értéket a Maven parancsának.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Mivel a &lt;code class=&quot;highlighter-rouge&quot;&gt;find&lt;/code&gt; rekurzívan lemászik mindenhová, a szkriptet a “dev” mappám gyökeréből, vagy akár a vinyó gyökeréből hívva minden egyes projektem megtisztul. 😎&lt;/p&gt;
+
+&lt;p&gt;(Windows-on fejlesztesz? Pl. a &lt;a href=&quot;https://git-for-windows.github.io/&quot;&gt;Git for Windows&lt;/a&gt; pakkban van &lt;em&gt;Bash&lt;/em&gt; terminál is, vagy használhatod a &lt;a href=&quot;https://msdn.microsoft.com/en-us/commandline/wsl/about&quot;&gt;Linux alrendszert&lt;/a&gt;)&lt;/p&gt;</content><author><name>Zsolt Jurányi</name></author><category term="bash" /><category term="maven" /><summary type="html">A “dev” mappámban rendszerint több tucat aktuális projektet tartok, és nemigen szoktam kézzel hívogatni a mvn clean-t. Viszont amikor például backup-olnám a mappámat, totál fölösleges a target mappákat is eltenni, ha azok legenerálhatóak bármikor. Tehát meg kell hívni az mvn clean-t minden projektre, amit így automatizáltam Bash segítségével:</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /></entry><entry xml:lang="hu_HU"><title type="html">Rapid webapp fejlesztés</title><link href="https://juzraai.github.io/blog/2015/rapid-webapp-fejlesztes/" rel="alternate" type="text/html" title="Rapid webapp fejlesztés" /><published>2015-01-10T00:00:00+01:00</published><updated>2018-06-03T12:19:44+02:00</updated><id>https://juzraai.github.io/blog/2015/rapid-webapp-fejlesztes</id><content type="html" xml:base="https://juzraai.github.io/blog/2015/rapid-webapp-fejlesztes/">&lt;p&gt;A tavalyi év utolsó hónapjában több új dolgot is megismertem, ezek közül az első csokor a technológiák, mégpedig olyanok, amelyek webalkalmazások gyors előállítását hivatottak nagyban segíteni.&lt;/p&gt;
+
+&lt;p&gt;Melóhelyen felmerült, hogy kéne egy kis webes tool egy pici adatbázis manage-eléséhez, amit én először PHP-vel gondoltam megoldani, mert abban van (egy kevés) tapasztalatom. A Java eszembe sem jutott, mert noha próbálkoztam már webappokat összerakni, valahogy döcögve ment, meg hamar feladtam, aztán időm sem volt rá. Főnökkel megdumáltuk, hogy azért megpróbálok összerakni Spring-el egy pilotot, hogy lássuk, megy-e ez nekem Java-val.&lt;/p&gt;
+
+&lt;p&gt;Hát megy. 🙂&lt;/p&gt;
+
+&lt;h2 id=&quot;spring-boot&quot;&gt;Spring Boot&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.mkyong.com/tutorials/spring-tutorials/&quot;&gt;Mkyong mester tutorial cikkeivel&lt;/a&gt; indítottam, de már az alapoknál valami nem akart összejönni. Addig kérdezgettem Google bácsit, míg végül rátaláltam erre a fantasztikus cuccra: &lt;a href=&quot;http://projects.spring.io/spring-boot/&quot;&gt;Spring Boot&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Ez egy olyan &lt;strong&gt;library + Maven plugin,&lt;/strong&gt; ami percek alatt eljuttat arra a pontra, hogy mindenféle konfigolás nélkül van egy működő webappod. Betölti a legfrissebb, kompatibilis Maven dependency-ket, &lt;strong&gt;beállít mindent,&lt;/strong&gt; és még egy &lt;strong&gt;embedded Tomcat&lt;/strong&gt;-et is beüzemel, tehát egy standalone JAR fájlt generálhatsz, amit elindítva máris használható a webalkalmazásod. Van hozzá pár tök jó tutorial is a hivatalos oldalon.&lt;/p&gt;
+
+&lt;p&gt;Mivel én csak ezzel a Spring Boot-tal tákoltam, nem igazán látom még át, mi pontosan az, amit ez ad hozzá a Spring-hez, és mi az, ami már eleve megvan Spring-ben.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Egy biztos:&lt;/em&gt; ennek segítségével tényleg néhány tucat kódsorral és néhány óra alatt összeraktam a tool teljes szerveroldali részét.&lt;/p&gt;
+
+&lt;p&gt;A kliensoldalt én nem ezekkel a template-es módszerekkel (JSP, Thymeleaf, Velocity, etc.) raktam össze a tool-hoz, hanem független HTML lapokat csináltam, melyek AJAX-al beszélgetnek a szerverrel és persze &lt;a href=&quot;http://jquery.com/&quot;&gt;jQuery&lt;/a&gt;-vel támogattam meg magam. Kezdetben egy &lt;a href=&quot;http://jqueryui.com/&quot;&gt;jQuery UI&lt;/a&gt;-os felületet dobtam össze, a rekordtáblázat sorait meg ciklussal és &lt;code class=&quot;highlighter-rouge&quot;&gt;.append()&lt;/code&gt;-el generáltam.&lt;/p&gt;
+
+&lt;h2 id=&quot;knockoutjs&quot;&gt;KnockoutJS&lt;/h2&gt;
+
+&lt;p&gt;Ez tök szépen működött, viszont elég hosszúra nyúlt a JS fájlom és nem is volt szép. Ezt igazán csak akkor láttam, miután megismerkedtem a &lt;a href=&quot;http://knockoutjs.com/&quot;&gt;KnockoutJS&lt;/a&gt;-el és azzal újraírtam az egész kliensoldalt.&lt;/p&gt;
+
+&lt;p&gt;A KnockoutJS egy újabb nagyon hasznos eszköz egy webfejlesztő svájci bicskájában. Nekem ebben a projektben segített szétválasztani a JS és HTML kódot azáltal, hogy ő &lt;strong&gt;megcsinálja a HTML elemek és JS objektumok/változók összekötését.&lt;/strong&gt; Ilyen formán a táblázat kódja egyetlen sor definiálásával bekerülhetett a HTML fájlomba, mintegy template-ként, a KnockoutJS pedig futáskor szépen feltölti a tömböm alapján. Amibe ugye AJAX-on át jönnek a rekordok a szerverről. Mi több, az összes control-t is (lapozás, szűrő, stb.) ezzel kötöttem be, így végül a szkriptem sokkal rövidebb és átláthatóbb lett, és a jQuery-t is csak itt-ott használom.&lt;/p&gt;
+
+&lt;p&gt;A HTML kódban az összekötendő tag-nek egy &lt;code class=&quot;highlighter-rouge&quot;&gt;data-bind&lt;/code&gt; attribútumot kell adni, abban pedig egy JSON-t gyakorlatilag, ez lesz a Knockout “konfig” arra az elemre. Érdemes végignézni a hivatalos oldalon a tutorialokat, varázslatos cucc. Amire figyelni kell: azokat a JS változókat, amiket KnockoutJS-en keresztül kötözni szeretnél, &lt;code class=&quot;highlighter-rouge&quot;&gt;ko.observable()&lt;/code&gt;-ként kell megadni, ezzel lesz teljes értékű a mágia.&lt;/p&gt;
+
+&lt;p&gt;A jQuery kódjaim jelentős csökkentésében nagy szerepet játszott még egy nagyon híres framework, a &lt;a href=&quot;https://getbootstrap.com/&quot;&gt;Bootstrap&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;bootstrap&quot;&gt;Bootstrap&lt;/h2&gt;
+
+&lt;p&gt;Valamilyen Knockout-os fiddle-ben találtam rá, amikor egy jQuery UI-s bind-olást próbáltam összehozni. A példában a checkbox/toggle button-t 2 sima Bootstrap button-nel oldották meg.&lt;/p&gt;
+
+&lt;p&gt;Ihletet kaptam, mert megtetszett az egyszerű dizájn is, így utánanéztem és kipróbáltam. Egyből beleszerettem :D, ez a jós(z)ág &lt;strong&gt;mindent megformáz&lt;/strong&gt; ízlésesen, így gyakorlatilag a teljes CSS kódomat kikukáztam. Ezen felül a &lt;strong&gt;grid rendszerével reszponzívvá&lt;/strong&gt; is tudtam alakítani az oldal felépítését. A CSS kódon kívül JS része is van, amely plusz funkciókat ad: reszponzív navbar, &lt;strong&gt;dialog, tooltip, button,&lt;/strong&gt; és még egy csomó mindent. Ezen a ponton a jQueryUI-t is lecseréltem.&lt;/p&gt;
+
+&lt;p&gt;A &lt;a href=&quot;https://bootswatch.com/&quot;&gt;Bootswatch&lt;/a&gt; oldalon különböző theme-ek is elérhetőek hozzá.&lt;/p&gt;
+
+&lt;p&gt;Szóval tudom ajánlani mindenkinek a fenti cuccokat, nagyon hasznosak. 🙂&lt;/p&gt;</content><author><name>Zsolt Jurányi</name></author><category term="bootstrap" /><category term="knockoutjs" /><category term="springboot" /><category term="webalkalmazás" /><summary type="html">A tavalyi év utolsó hónapjában több új dolgot is megismertem, ezek közül az első csokor a technológiák, mégpedig olyanok, amelyek webalkalmazások gyors előállítását hivatottak nagyban segíteni.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /></entry><entry xml:lang="hu_HU"><title type="html">HVG Big Data a marketingben</title><link href="https://juzraai.github.io/blog/2014/hvg-big-data-a-marketingben/" rel="alternate" type="text/html" title="HVG Big Data a marketingben" /><published>2014-10-30T00:00:00+01:00</published><updated>2018-06-03T12:19:44+02:00</updated><id>https://juzraai.github.io/blog/2014/hvg-big-data-a-marketingben</id><content type="html" xml:base="https://juzraai.github.io/blog/2014/hvg-big-data-a-marketingben/">&lt;p&gt;Tegnap volt szerencsém részt venni a HVG rendezvényén, a &lt;a href=&quot;http://konferencia.hvg.hu/big-data-a-marketingben.html&quot;&gt;Big Data a marketingben&lt;/a&gt; című konferencián. Noha nem vagyok marketinges, hanem - crawler programok fejlesztése révén - inkább adatgyűjtő, a konferencia hasznos és érdekes volt számomra is. 🙂 A sok előadáson és az azt követő kerekasztal beszélgetésen elhangzott rengeteg gondolatot megpróbáltam összefoglalni, ezt osztom meg most itt.&lt;/p&gt;
+
+&lt;p&gt;Az előadások a big data marketingbeli hasznosítására fókuszáltak, de így érintettük a feldolgozási módszereket is. Magát a big datát sokféleképp értelmezik: flancos szó, lehetőség, fejlődés, vagy rombolás. Az adat az anyag, az &lt;strong&gt;adat megértéséből előállított információ&lt;/strong&gt; pedig az anyagban rejlő lehetőség, amit nagyon jól fel lehet használni a marketingben. A big datával való foglalkozás elkezdésekor már jogi tanácsadást érdemes kérni. A big data-hoz jól értő emberek szakmája a &lt;em&gt;“data scientist”&lt;/em&gt;, ami üzleti gondolkodást, adatelemző készséget és programozási tudást foglal magában - ilyen ember gyakorlatilag nincs. Érdemes tehát különválasztani: &lt;strong&gt;adatgyűjtő és adatelemző emberekre.&lt;/strong&gt; Érdemes minél több ilyen embert bevonzani, és minél több céget akik big dataval foglalkoznak, pl. adatcsere szempontjából. Minél több adat, minél sokrétűbb adat, minél frissebb adat előny. Minden adatot hasznosítani kell a jó eredmény érdekében.&lt;/p&gt;
+
+&lt;p&gt;Marketingben a cél az ember, a &lt;strong&gt;minél személyesebb kapcsolat&lt;/strong&gt; kialakítása, így a lojalitás megteremtése, fenntartása. A kéretlen leveleket, irreleváns tartalmakat fel kell számolni, a személyes érdeklődési körnek megfelelő tartalmat kell kitenni a webre, üzenetekbe. Így &lt;strong&gt;annak reklámozunk, akit érdekel,&lt;/strong&gt; a kevesebb több. Ehhez kell az adatgyűjtés és elemzés, szegmentálás, profilozás. Adatforrás lehet a Facebook kedvelések, vagy hogy mire kattint a hírlevélben, vagy akár a pozíció.&lt;/p&gt;
+
+&lt;p&gt;Big data-s módszereket használhatunk a &lt;strong&gt;vélemények begyűjtésére&lt;/strong&gt; is, ezáltal képet kaphatunk a saját vagy akár konkurens szolgáltatásról alkotott fogyasztói képről, és ez alapján kitalálhatjuk, mit kell változtatnunk.&lt;/p&gt;</content><author><name>Zsolt Jurányi</name></author><category term="bigdata" /><category term="konferencia" /><category term="marketing" /><summary type="html">Tegnap volt szerencsém részt venni a HVG rendezvényén, a Big Data a marketingben című konferencián. Noha nem vagyok marketinges, hanem - crawler programok fejlesztése révén - inkább adatgyűjtő, a konferencia hasznos és érdekes volt számomra is. 🙂 A sok előadáson és az azt követő kerekasztal beszélgetésen elhangzott rengeteg gondolatot megpróbáltam összefoglalni, ezt osztom meg most itt.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /></entry><entry xml:lang="hu_HU"><title type="html">Heritrix 3 konfig receptkönyv</title><link href="https://juzraai.github.io/blog/2013/heritrix-3-konfig-receptkonyv/" rel="alternate" type="text/html" title="Heritrix 3 konfig receptkönyv" /><published>2013-10-04T00:00:00+02:00</published><updated>2018-06-03T12:19:44+02:00</updated><id>https://juzraai.github.io/blog/2013/heritrix-3-konfig-receptkonyv</id><content type="html" xml:base="https://juzraai.github.io/blog/2013/heritrix-3-konfig-receptkonyv/">&lt;p&gt;Gondoltam megosztom a tapasztalatokat, hátha akad olyan “elvetemült”, aki szintén &lt;a href=&quot;https://webarchive.jira.com/wiki/spaces/Heritrix/overview&quot;&gt;Heritrix&lt;/a&gt;-szel akar nekiállni site-okat archiválni. 🤪 Az alábbiakban leírom azokat a beállítási lehetőségeket, amelyek munkám során előjöttek, fontosak voltak.&lt;/p&gt;
+
+&lt;p&gt;A konfigurációt Heritrix-ben job-onként lehet elvégezni, a &lt;code class=&quot;highlighter-rouge&quot;&gt;crawler-beans.cxml&lt;/code&gt; fájl módosításával.&lt;/p&gt;
+
+&lt;h2 id=&quot;1-kezdő-lépések&quot;&gt;1. Kezdő lépések&lt;/h2&gt;
+
+&lt;h3 id=&quot;11-url-ek-hozzáadása&quot;&gt;1.1. URL-ek hozzáadása&lt;/h3&gt;
+
+&lt;p&gt;A legfontosabb dolog egy job-nál a forrás URL-ek hozzáadása, vagyis: honnan induljon a letöltés? A CXML-ben keressük meg ezt a részt:&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;longerOverrides&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.springframework.beans.factory.config.PropertyOverrideConfigurer&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;properties&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;props&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;prop&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;seeds.textSource.value&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+
+        # URLS HERE
+
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;/prop&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/props&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Itt az URL-eket soronként írhatjuk be.&lt;/p&gt;
+
+&lt;h3 id=&quot;12-operátor-kontakt-címe&quot;&gt;1.2. Operátor kontakt címe&lt;/h3&gt;
+
+&lt;p&gt;A Heritrix &lt;strong&gt;megköveteli, hogy beírjunk egy URL-t,&lt;/strong&gt; ami a letöltést végző egyén/szervezet honlapjára mutat. Ez az URL hozzá lesz adva a &lt;code class=&quot;highlighter-rouge&quot;&gt;User-agent&lt;/code&gt; paraméterhez. (Lesz még szó róla a 2.6.-os bekezdésben.) Nyilván ez a felelősség miatt kell, hogy ha leterheljük valakinek a szerverét egy izmos crawl futammal, és az nemtetszést vált ki, akkor vissza lehessen keresni minket.&lt;/p&gt;
+
+&lt;p&gt;Keressünk rá az alábbira, hogy megtaláljuk, hova kell írni ezt a címet:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;metadata.operatorContactUrl=
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;2-testreszabás&quot;&gt;2. Testreszabás&lt;/h2&gt;
+
+&lt;h3 id=&quot;21-tárolási-mód&quot;&gt;2.1. Tárolási mód&lt;/h3&gt;
+
+&lt;p&gt;A Heritrix 3 alapesetben &lt;a href=&quot;https://en.wikipedia.org/wiki/Web_ARChive&quot;&gt;WARC&lt;/a&gt; fájlokba írja a letöltött adatokat. Előfordulhatnak esetek, amikor nekünk nem erre van szükségünk, hanem esetleg konkrétan a fájlokra, vagy esetleg WARC helyett &lt;a href=&quot;https://en.wikipedia.org/wiki/ARC_(file_format)&quot;&gt;ARC&lt;/a&gt; fájlokra.&lt;/p&gt;
+
+&lt;p&gt;Ehhez a &lt;code class=&quot;highlighter-rouge&quot;&gt;warcWriter&lt;/code&gt; bean class paraméterét kell megfelelően beállítanunk:&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;warcWriter&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.archive.modules.writer.WARCWriterProcessor&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Lehetőségek (a package ugyanaz):&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;WARCWriterProcessor&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ARCWriterProcessor&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;MirrorWriterProcessor&lt;/code&gt; - ez tükrözi a mappaszerkezetet&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;22-domain-en-belül-maradás&quot;&gt;2.2. Domain-en belül maradás&lt;/h3&gt;
+
+&lt;p&gt;Ha egy site-ot archiválunk, általában nem akarjuk követni az összes linket a végtelenségig rekurzívan, mert végtelen időnk és tárkapacitásunk nincs. Az lenne a cél, hogy a rekurzív bejárás az adott &lt;strong&gt;kiinduális domain-re szorítkozzon, ne lépjen ki onnan.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Ezt egy Heritrix 3 job esetén úgy tehetjük meg, hogy az alábbi bean-t konkrétan kitöröljük/kikommentezzük a config CXML-ből:&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!--
+  &amp;lt;bean class=&quot;org.archive.modules.deciderules.TransclusionDecideRule&quot;&amp;gt;
+    ...
+  &amp;lt;/bean&amp;gt;
+--&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;23-bizonyos-url-minták-tiltása&quot;&gt;2.3. Bizonyos URL minták tiltása&lt;/h3&gt;
+
+&lt;p&gt;Azon túl, hogy domain-en maradunk, site-on belül is lehetnek olyan részek, amik minket nem érdekelnek, esetleg fájltípusok, vagy akár &lt;strong&gt;crawler csapdák&lt;/strong&gt; (pl. egy végtelen calendar, ami ráadásul minden aloldalról elérhető különböző URL-en).&lt;/p&gt;
+
+&lt;p&gt;Ezeket &lt;strong&gt;reguláris kifejezések&lt;/strong&gt; formájában mondhatjuk meg a Heritrix-nek, hogy kerülje el:&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;scope&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.archive.modules.deciderules.DecideRuleSequence&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  ...
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;rules&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;list&amp;gt;&lt;/span&gt;
+
+      ...
+
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.archive.modules.deciderules.MatchesListRegexDecideRule&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;decision&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;REJECT&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;regexList&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+          &lt;span class=&quot;nt&quot;&gt;&amp;lt;list&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;value&amp;gt;&lt;/span&gt;regexp1&lt;span class=&quot;nt&quot;&gt;&amp;lt;/value&amp;gt;&lt;/span&gt;
+              ...
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;value&amp;gt;&lt;/span&gt;regexpN&lt;span class=&quot;nt&quot;&gt;&amp;lt;/value&amp;gt;&lt;/span&gt;
+          &lt;span class=&quot;nt&quot;&gt;&amp;lt;/list&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/list&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;24-gyorsítás&quot;&gt;2.4. Gyorsítás&lt;/h3&gt;
+
+&lt;p&gt;A Heritrix alapból nagyon komótosan tölt, akár másodperceket is vár URL-enként. A konfigban én 2 helyet találtam, ahol fel lehet turbózni a dolgot:&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;disposition&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.archive.crawler.postprocessor.DispositionProcessor&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;delayFactor&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1.0&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;minDelayMs&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;100&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;respectCrawlDelayUpToSeconds&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;maxDelayMs&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;100&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Illetve:&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'veryPolite'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'org.archive.spring.Sheet'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'map'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;map&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;entry&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'disposition.delayFactor'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'1'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;entry&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'disposition.minDelayMs'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'100'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;entry&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'disposition.maxDelayMs'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'1000'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;entry&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'disposition.respectCrawlDelayUpToSeconds'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'1'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/map&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Az egyes property-k értékeinek magyarázatához lásd a &lt;a href=&quot;https://webarchive.jira.com/wiki/spaces/Heritrix/pages/5407381/Heritrix+3.0+and+3.1+User+Guide&quot;&gt;doksit&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;25-robotstxt-figyelmen-kívül-hagyása&quot;&gt;2.5. robots.txt figyelmen kívül hagyása&lt;/h3&gt;
+
+&lt;p&gt;A &lt;a href=&quot;https://support.google.com/webmasters/answer/6062608?hl=hu&quot;&gt;robots.txt&lt;/a&gt;-ben a webszerverek bizonyos robotokat, böngészőket (vagy akár mindenféle programot) tilthatnak el bizonyos mappáktól, illetve crawl delay-t is megszabhatnak. Persze ezek &lt;strong&gt;csak információk, ajánlások a programoknak,&lt;/strong&gt; az már egy másik kérdés, hogy be is akarják-e ezt tartani. A Heritrix persze alapvetően illedelmes robot, betartja, amit e szabályzatban megszabnak neki, de szerencsére tartalmaz konfigurálási lehetőséget a &lt;code class=&quot;highlighter-rouge&quot;&gt;robots.txt&lt;/code&gt; ignorálására.&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;metadata&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.archive.modules.CrawlMetadata&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;autowire=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;byName&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  ...
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;robotsPolicyName&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ignore&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+  ...
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;26-saját-user-agent-megadása&quot;&gt;2.6. Saját User-agent megadása&lt;/h3&gt;
+
+&lt;p&gt;Vannak olyan site-ok, ahol akár &lt;code class=&quot;highlighter-rouge&quot;&gt;robots.txt&lt;/code&gt; szabályokkal, akár egy szerveroldali szkript segítségével szűrik, hogy milyen böngészővel lehet őket meglátogatni. A &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/User-Agent&quot;&gt;User-agent&lt;/a&gt; HTTP paraméter szolgál arra, hogy megnevezze a HTTP kérést küldő programot és annak verzióját, illetve esetleg a platformot, amin fut. Az ilyen szűréseket nagyon egyszerű kikerülni: beállítjuk ennek a paraméternek az értékét mondjuk egy népszerű böngészőére.&lt;/p&gt;
+
+&lt;p&gt;Heritrix-ben is beállítható ez természetesen, viszont annyi megkötés van, hogy &lt;strong&gt;a Heritrix verziószámának és az operátor URL-nek (lásd 1.2) szerepelnie kell benne.&lt;/strong&gt; A konfigfájlban egy template string-et kell megadni, amiben szerepel egyrészt a &lt;code class=&quot;highlighter-rouge&quot;&gt;@VERSION@&lt;/code&gt;, másrészt a &lt;code class=&quot;highlighter-rouge&quot;&gt;+@OPERATOR_CONTACT_URL@&lt;/code&gt; karakterlánc. Felhívom a figyelmet, hogy a &lt;code class=&quot;highlighter-rouge&quot;&gt;+&lt;/code&gt; jel is kell, különben hibát jelez a Heritrix a job build-elésekor.&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;metadata&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.archive.modules.CrawlMetadata&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;autowire=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;byName&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  ...
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;userAgentTemplate&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Mozilla/5.0 (compatible; heritrix/@VERSION@ +@OPERATOR_CONTACT_URL@)&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+  ...
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;27-auto-pause-kikapcsolása&quot;&gt;2.7. Auto pause kikapcsolása&lt;/h3&gt;
+
+&lt;p&gt;A Heritrix-nek van egy olyan érdekessége, hogy alapértelmezésben ha egy job-ot elindítasz, rögtön lepauzálja. Külön rá kell menned az unpause gombra, hogy ténylegesen meginduljon a letöltés. (Érdekes dolog, én még nem jöttem rá mire jó ez… ha elindítok egy job-ot, akkor azért indítom el, hogy töltsön, nem? 😃) De ezt is ki lehet kapcsolni, itt:&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;crawlController&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.archive.crawler.framework.CrawlController&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;pauseAtStart&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;false&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;3-megfigyelések&quot;&gt;3. Megfigyelések&lt;/h2&gt;
+
+&lt;h3 id=&quot;31-memóriaigény&quot;&gt;3.1. Memóriaigény&lt;/h3&gt;
+
+&lt;p&gt;A doksi azt írja, hogy az alapértelmezett 256MB heap memória több száz oldal letöltéséhez jó. Tapasztalatom szerint 8-10 &lt;strong&gt;párhuzamosan futó job&lt;/strong&gt;-tól konkrétan meghal az egész &lt;code class=&quot;highlighter-rouge&quot;&gt;OutOfMemoryException&lt;/code&gt;-nel, szóval az &lt;code class=&quot;highlighter-rouge&quot;&gt;Xmx&lt;/code&gt; paramétert érdemes megadni, és &lt;strong&gt;GB-okban kell gondolkodni.&lt;/strong&gt; Én speciel 3GB-ot adok neki, ez elég arra, hogy 10 job fusson párhuzamosan.&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;export HERITRIX_HOME=/path/to/heritrix-3.1.1
+export JAVA_HOME=/path/to/jre
+export JAVA_OPTS=-Xmx3G
+$HERITRIX_HOME/bin/heritrix -a admin:admin
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Amit még érdemes megtenni: az épp nem futó &lt;strong&gt;job-okat teardown-olni&lt;/strong&gt;, ha sok van.&lt;/p&gt;
+
+&lt;h3 id=&quot;32-url-problémák&quot;&gt;3.2. URL problémák&lt;/h3&gt;
+
+&lt;p&gt;A &lt;code class=&quot;highlighter-rouge&quot;&gt;MirrorWriter&lt;/code&gt;-rel az a tapasztalat, hogy érdekes dolgokat produkál. &lt;strong&gt;Bizonyos URL-ekből én azt látom, hogy nem képes (valid) fájlnevet generálni,&lt;/strong&gt; tehát az a letöltött bájthalmaz elveszik az éterben. Konkrétan én ezt &lt;code class=&quot;highlighter-rouge&quot;&gt;/?a=b/c&lt;/code&gt; alakú relatív linkeknél tapasztaltam.&lt;/p&gt;
+
+&lt;p&gt;Ami nagy probléma, hogy a parszere elég érdekes felfogás mentén lett implementálva. A Heritrix &lt;strong&gt;mindenhonnan ki akar parszolni URL-t,&lt;/strong&gt; onnan is, ahol nincs. Kutat a CSS-ekben, JS-ben, és gazdagon kapok olyan fájlokat, amelyek neve egy stíluslapon használt szelektor, vagy egy szkriptben használt feltétel egyik fele. 😃&lt;/p&gt;
+
+&lt;p&gt;A forráskódban azt láttam, hogy ilyen &lt;em&gt;“likely-URL”&lt;/em&gt;-eket keres, tehát ami &lt;em&gt;“olyasmi, mint egy URL”&lt;/em&gt;… Találkoztam olyan mappanévvel is, ami egy komplett &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;iframe&amp;gt;&lt;/code&gt; tag volt.&lt;/p&gt;
+
+&lt;p&gt;Itt nyilván felmerül az emberben, hogy esetleg nem ez a “smart crawler” a hibás, hanem az adott oldal forráskódja… de egyrészt ezt nem egy oldalnál csinálja, másrészt pedig ezeket az adott oldalakat a &lt;a href=&quot;https://www.gnu.org/software/wget/&quot;&gt;WGET&lt;/a&gt; hibamentesen leszedte.&lt;/p&gt;
+
+&lt;p&gt;Azt olvastam, hogy érdemes kikapcsolni a job konfigban az &lt;code class=&quot;highlighter-rouge&quot;&gt;ExtractorJS&lt;/code&gt; és &lt;code class=&quot;highlighter-rouge&quot;&gt;ExtractorCSS&lt;/code&gt; modulokat, mert így megszabadulok ezektől a felesleges fájloktól (amelyek egyébként növelik az idő- és tárigényt, valamint redundáns adatot tartalmaznak!) - de még nem próbáltam ki. 🙂&lt;/p&gt;
+
+&lt;p&gt;További észrevétel a közelmúltból: Drupal-os oldalt nem tud jól kezelni, kaptam egy ilyen URL-t a crawl log-ban:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;http://***/calendar/month/2013-06/field/theme/sites/all/modules/ctools/css/sites/all/modules/ctools/css/modules/user/user.css
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;…amiben én egy ciklust vélek felfedezni. Természetesen a letöltött fájl sem egy stíluslap lett, hanem egy HTML, valószínűleg a Drupal rendszer olyan jószívű, hogy 404 hibalap helyett visszadobja a leghosszabb valid prefix-hez tartozó lapot. Bár talán pont azzal jártunk volna jobban, ha hibát ad vissza, mert akkor nem keletkezik redundáns adat… no mindegy. 🙂&lt;/p&gt;</content><author><name>Zsolt Jurányi</name></author><category term="crawling" /><category term="heritrix" /><summary type="html">Gondoltam megosztom a tapasztalatokat, hátha akad olyan “elvetemült”, aki szintén Heritrix-szel akar nekiállni site-okat archiválni. 🤪 Az alábbiakban leírom azokat a beállítási lehetőségeket, amelyek munkám során előjöttek, fontosak voltak.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /></entry></feed>
