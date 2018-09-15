@@ -1,84 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="hu_HU"><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="https://juzraai.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://juzraai.github.io/" rel="alternate" type="text/html" hreflang="hu_HU" /><updated>2018-06-24T12:49:11+02:00</updated><id>https://juzraai.github.io/</id><title type="html">Zsolt Jurányi (juzraai)</title><subtitle>Zsolt vagyok, full-stack fejlesztő. Crawlereket, webalkalmazásokat, statikus honlapokat és interaktív vizualizációkat készítek.</subtitle><author><name>Zsolt Jurányi</name></author><entry xml:lang="hu_HU"><title type="html">Kontakt form ingyen, Basin-nel</title><link href="https://juzraai.github.io/blog/2018/kontakt-form-basin-nel/" rel="alternate" type="text/html" title="Kontakt form ingyen, Basin-nel" /><published>2018-06-03T00:00:00+02:00</published><updated>2018-06-24T12:44:37+02:00</updated><id>https://juzraai.github.io/blog/2018/kontakt-form-basin-nel</id><content type="html" xml:base="https://juzraai.github.io/blog/2018/kontakt-form-basin-nel/">&lt;p&gt;A &lt;a href=&quot;/blog/2018/kontakt-form-ingyen&quot;&gt;minap írtam&lt;/a&gt; arról, milyen ingyenes lehetőségek vannak arra, hogy egy statikus honlapra kontakt formot illesszünk, amely emailt küld. Kipróbáltam a &lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt;-t, aminek látatlanban aranyérmet osztottam. Íme a tapasztalataim. 🙂&lt;/p&gt;
-
-&lt;h2 id=&quot;első-lépések&quot;&gt;Első lépések&lt;/h2&gt;
-
-&lt;p&gt;A sign up oldal lényegretörő, csak az email címemet kéri és persze a leendő jelszavamat. Az email címet persze meg kell erősíteni, utána enged csak bejelentkezni.&lt;/p&gt;
-
-&lt;p&gt;Bejelentkezés után bejön az üres dashboard. Mielőtt létrehoztam az űrlapomat, megnéztem az &lt;em&gt;Account settings&lt;/em&gt; menüpontot. Az email címen és a jelszón kívül ott sincs semmi extra, csak egy lehetőség a maradéktalan törlésre.&lt;/p&gt;
-
-&lt;p&gt;Amikor létrehozunk egy új formot, először 2 dolgot kér be: a form nevét (amit a dashboard-on látunk majd), illetve a &lt;strong&gt;redirect URL-t,&lt;/strong&gt; ahová a látogatókat küldi majd a rendszer a form elküldése után. Ha ezutóbbit üresen hagyjuk, a Basin a saját oldalára visz alapértelmezésként.&lt;/p&gt;
-
-&lt;p&gt;Amint létrehoztuk a formot, az megnyílik a felületen, egyből az üres &lt;em&gt;Submissions&lt;/em&gt; panelt kapjuk meg. Az már látszik, hogy a beérkezett üzeneteket &lt;strong&gt;lehet szűrni, törölni, illetve spam-nek jelölni.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;A &lt;em&gt;Setup&lt;/em&gt; fülön &lt;strong&gt;konkrét HTML kódokat mutat,&lt;/strong&gt; amivel tényleg csak copy-paste módon be lehet illeszteni a honlapba az űrlapot. Van snippet a kattintós Google captcha-hoz, és a láthatatlan verzióhoz is.&lt;/p&gt;
-
-&lt;p&gt;Az &lt;em&gt;Edit&lt;/em&gt; fülön további beállításokat találunk az űrlaphoz:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;meg lehet adni &lt;strong&gt;több whitelisted domaint&lt;/strong&gt;, ahonnan engedélyezzük a form küldést&lt;/li&gt;
-  &lt;li&gt;be lehet kapcsolni a valid captcha válasz megkövetelését&lt;/li&gt;
-  &lt;li&gt;illetve van lehetőség GDPR kompatibilis &lt;strong&gt;nyugtát visszaküldeni az adatok fogadásáról&lt;/strong&gt; a küldőnek&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Az &lt;em&gt;Email&lt;/em&gt; fülön átállíthatjuk a cél email címet, ahová az űrlapadatokat kérjük küldeni. Ez alapértelmezésként a regisztrációkor megadott email cím. Továbbá megadhatunk &lt;strong&gt;CC-t, egyéni küldö nevet&lt;/strong&gt; (&lt;em&gt;“Basin”&lt;/em&gt; helyett) és a &lt;strong&gt;tárgy is szerkeszthető.&lt;/strong&gt; A tárgy alapértelmezésként a form neve + &lt;em&gt;“You’ve received a submission&lt;/em&gt;.&lt;/p&gt;
-
-&lt;h2 id=&quot;tesztelés&quot;&gt;Tesztelés&lt;/h2&gt;
-
-&lt;p&gt;Bekapcsoltam a captcha-t és a receipt-et, és összeraktam a formot a láthatatlan captcha-val. Zseniális, hogy &lt;strong&gt;tesztelhető localhost-ról is.&lt;/strong&gt; Elküldtem a formot, és a megadott URL-re irányított a rendszer. A levél pár másodperc múlva megérkezett arra email címemre, amivel a &lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt;-be regisztráltam. Szépen formázva mutat minden fontos információt:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/assets/basin/basin-submission-email.png&quot;&gt;&lt;img src=&quot;/assets/basin/basin-submission-email.png&quot; alt=&quot;Basin submission email&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;A reply-to is korrektül be van állítva, egy kattintással tudok válaszolni a formon megadott email címre.&lt;/p&gt;
-
-&lt;p&gt;A formon beírt email címre is jött egy levél, ami &lt;strong&gt;nyugtázza, hogy milyen adatokat küldtem és hova,&lt;/strong&gt; és még ezzel kapcsolatos kérelmekhez is biztosít lehetőséget:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/assets/basin/basin-receipt-email.png&quot;&gt;&lt;img src=&quot;/assets/basin/basin-receipt-email.png&quot; alt=&quot;Basin receipt email&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;A &lt;em&gt;Submissions&lt;/em&gt; panelen is megjelentek ezek az információk természetesen. Tovább nézve a funkciókat, az &lt;em&gt;Export&lt;/em&gt; panelen a beküldött form adatok &lt;strong&gt;letölthetőek CSV-ben, illetve JSON-ban is&lt;/strong&gt; egy API key segítségével. Az &lt;em&gt;Integrations&lt;/em&gt; fülön lehet &lt;a href=&quot;https://zapier.com/&quot;&gt;Zapier&lt;/a&gt;-hez kapcsolódni, de ezt most nem teszem meg, a célt elértük.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Az aranyérem jogos volt! A &lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt; professzionális, könnyen kezelhető, felhasználóbarát, GDPR-ready, ingyenes szolgáltatás.&lt;/strong&gt; 🏆&lt;/p&gt;
-
-&lt;p&gt;Pontosan erre volt szükségem.&lt;/p&gt;
-
-&lt;h2 id=&quot;kiegészítés&quot;&gt;Kiegészítés&lt;/h2&gt;
-
-&lt;p&gt;Egy apró kiegészítésre szükség van, a &lt;a href=&quot;https://developers.google.com/recaptcha/&quot;&gt;Google reCAPTCHA&lt;/a&gt; helyes működéséhez. A &lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt; által adott code snippet úgy működik, hogy a küldés gomb kattintás eseményét a reCAPTCHA kezeli le, és &lt;strong&gt;egyből elküldi&lt;/strong&gt; az űrlapot. Ez akkor okoz problémát, &lt;strong&gt;ha szeretnénk validálni a formot,&lt;/strong&gt; akár natívan, akár saját JS kóddal. A &lt;strong&gt;megoldást&lt;/strong&gt; &lt;a href=&quot;https://stackoverflow.com/a/41694352/2418224&quot;&gt;ez a válasz&lt;/a&gt; adja meg, bemutatom:&lt;/p&gt;
-
-&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;form&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;invisible-recaptcha-form&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;accept-charset=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;UTF-8&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;action=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://usebasin.com/f/...&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;method=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;POST&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-
-	&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- input elemek --&amp;gt;&lt;/span&gt;
-
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;g-recaptcha&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;data-sitekey=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;...&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;data-callback=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;onSubmit&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;data-badge=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;inline&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;data-size=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;invisible&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;button&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;btn btn-primary&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Küldés&lt;span class=&quot;nt&quot;&gt;&amp;lt;/button&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/form&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://www.google.com/recaptcha/api.js&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;defer&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;script&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;invisible-recaptcha-form&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;addEventListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;submit&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
-		&lt;span class=&quot;nx&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;preventDefault&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-		&lt;span class=&quot;nx&quot;&gt;grecaptcha&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;reset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-		&lt;span class=&quot;nx&quot;&gt;grecaptcha&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;execute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-	&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;onSubmit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;token&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;invisible-recaptcha-form&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;submit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-	&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Mit csináltam a &lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt; kódjához képest:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;A &lt;code class=&quot;highlighter-rouge&quot;&gt;g-recaptcha&lt;/code&gt; class-t levettem a küldés gombról, és egy új &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;div&amp;gt;&lt;/code&gt;-re raktam rá.&lt;/li&gt;
-  &lt;li&gt;Ebbe a &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;div&amp;gt;&lt;/code&gt; elembe átvittem a &lt;code class=&quot;highlighter-rouge&quot;&gt;data-*&lt;/code&gt; attribútumokat, illetve hozzá is adtam egyet: &lt;code class=&quot;highlighter-rouge&quot;&gt;data-size=&quot;invisible&quot;&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;A szkripthez hozzáadtam egy eseménykezelőt, ami a form elküldésekor fut le, és meghívja a captcha-t.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Így a küldés gombra kattintáskor a következő fog történni:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Először a böngésző natív validálási mechanizmusa fut le.&lt;/li&gt;
-  &lt;li&gt;Aztán az eseménykezelő inicializálja a captcha-t.&lt;/li&gt;
-  &lt;li&gt;A captcha elhelyezi a választ a formban, majd meghívja a callback-et, ami elküldi a form-ot.&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Zsolt Jurányi</name></author><category term="basin" /><category term="captcha" /><category term="email" /><category term="form" /><category term="serverless" /><category term="szolgáltatás" /><category term="tapasztalat" /><category term="weboldal" /><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /></entry><entry xml:lang="en_US"><title type="html">Free contact form using Basin</title><link href="https://juzraai.github.io/blog/2018/contact-form-using-basin/" rel="alternate" type="text/html" title="Free contact form using Basin" /><published>2018-06-03T00:00:00+02:00</published><updated>2018-06-24T12:44:37+02:00</updated><id>https://juzraai.github.io/blog/2018/contact-form-using-basin</id><content type="html" xml:base="https://juzraai.github.io/blog/2018/contact-form-using-basin/">&lt;p&gt;My &lt;a href=&quot;/blog/2018/contact-form-for-free&quot;&gt;previous post&lt;/a&gt; was about free contact form solutions that can send email. I tried out &lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt; which was before my gold medal winner based on its website only. Here are my experiences. 🙂&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="hu_HU"><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="https://juzraai.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://juzraai.github.io/" rel="alternate" type="text/html" hreflang="hu_HU" /><updated>2018-09-15T12:31:03+02:00</updated><id>https://juzraai.github.io/feed.xml</id><title type="html">Zsolt Jurányi (juzraai)</title><subtitle>Zsolt vagyok, full-stack fejlesztő. Crawlereket, webalkalmazásokat, statikus honlapokat és interaktív vizualizációkat készítek.</subtitle><author><name>Zsolt Jurányi</name></author><entry xml:lang="en_US"><title type="html">Free contact form using Basin</title><link href="https://juzraai.github.io/blog/2018/contact-form-using-basin/" rel="alternate" type="text/html" title="Free contact form using Basin" /><published>2018-06-03T00:00:00+02:00</published><updated>2018-06-24T12:44:37+02:00</updated><id>https://juzraai.github.io/blog/2018/contact-form-using-basin</id><content type="html" xml:base="https://juzraai.github.io/blog/2018/contact-form-using-basin/">&lt;p&gt;My &lt;a href=&quot;/blog/2018/contact-form-for-free&quot;&gt;previous post&lt;/a&gt; was about free contact form solutions that can send email. I tried out &lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt; which was before my gold medal winner based on its website only. Here are my experiences. 🙂&lt;/p&gt;
 
 &lt;h2 id=&quot;first-steps&quot;&gt;First steps&lt;/h2&gt;
 
@@ -158,163 +78,87 @@
   &lt;li&gt;The browser’s native validation will run first.&lt;/li&gt;
   &lt;li&gt;Then the event handler initializes the captcha.&lt;/li&gt;
   &lt;li&gt;Captcha inserts response in the form, and calls the callback, which submits the form.&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Zsolt Jurányi</name></author><category term="basin" /><category term="captcha" /><category term="email" /><category term="experience" /><category term="form" /><category term="serverless" /><category term="service" /><category term="website" /><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /></entry><entry xml:lang="hu_HU"><title type="html">Kontakt form ingyen - körbenézés</title><link href="https://juzraai.github.io/blog/2018/kontakt-form-ingyen/" rel="alternate" type="text/html" title="Kontakt form ingyen - körbenézés" /><published>2018-06-02T00:00:00+02:00</published><updated>2018-06-24T12:44:37+02:00</updated><id>https://juzraai.github.io/blog/2018/kontakt-form-ingyen</id><content type="html" xml:base="https://juzraai.github.io/blog/2018/kontakt-form-ingyen/">&lt;h2 id=&quot;a-probléma&quot;&gt;A probléma&lt;/h2&gt;
+&lt;/ul&gt;</content><author><name>Zsolt Jurányi</name></author><category term="basin" /><category term="captcha" /><category term="email" /><category term="experience" /><category term="form" /><category term="serverless" /><category term="service" /><category term="website" /><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /></entry><entry xml:lang="hu_HU"><title type="html">Kontakt form ingyen, Basin-nel</title><link href="https://juzraai.github.io/blog/2018/kontakt-form-basin-nel/" rel="alternate" type="text/html" title="Kontakt form ingyen, Basin-nel" /><published>2018-06-03T00:00:00+02:00</published><updated>2018-06-24T12:44:37+02:00</updated><id>https://juzraai.github.io/blog/2018/kontakt-form-basin-nel</id><content type="html" xml:base="https://juzraai.github.io/blog/2018/kontakt-form-basin-nel/">&lt;p&gt;A &lt;a href=&quot;/blog/2018/kontakt-form-ingyen&quot;&gt;minap írtam&lt;/a&gt; arról, milyen ingyenes lehetőségek vannak arra, hogy egy statikus honlapra kontakt formot illesszünk, amely emailt küld. Kipróbáltam a &lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt;-t, aminek látatlanban aranyérmet osztottam. Íme a tapasztalataim. 🙂&lt;/p&gt;
 
-&lt;p&gt;A blogom és egyben fejlesztői bemutatkozó oldalam egy &lt;strong&gt;statikus honlap,&lt;/strong&gt; amit a &lt;a href=&quot;https://pages.github.com/&quot;&gt;GitHub Pages&lt;/a&gt;-en hosztolok. Elérhetőségként feltüntetem a Facebook és LinkedIn profilom, de az email címemet nem szeretném, mert a &lt;strong&gt;spam nem hiányzik.&lt;/strong&gt; Kitennék viszont &lt;strong&gt;kapcsolati űrlapot&lt;/strong&gt;, ami lehetőséget biztosítana az oldalamra tévedőknek, hogy mindenféle bejelentkezés és továbbkattintás nélkül el tudjanak engem érni.&lt;/p&gt;
+&lt;h2 id=&quot;első-lépések&quot;&gt;Első lépések&lt;/h2&gt;
 
-&lt;p&gt;Mivel azonban a honlap statikus, &lt;strong&gt;szerveroldali szkript nélkül&lt;/strong&gt; kell megoldani a form feldolgozását, és a kapott adatok kiküldését az email címemre. Muszáj tehát erre a feladatra egy &lt;strong&gt;külső szolgáltatást&lt;/strong&gt; keresni. És persze, ha már eddig is spóroltam, akkor itt is tartsuk a &lt;strong&gt;költségeket zérón.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;A sign up oldal lényegretörő, csak az email címemet kéri és persze a leendő jelszavamat. Az email címet persze meg kell erősíteni, utána enged csak bejelentkezni.&lt;/p&gt;
 
-&lt;h2 id=&quot;lehetőségek&quot;&gt;Lehetőségek&lt;/h2&gt;
+&lt;p&gt;Bejelentkezés után bejön az üres dashboard. Mielőtt létrehoztam az űrlapomat, megnéztem az &lt;em&gt;Account settings&lt;/em&gt; menüpontot. Az email címen és a jelszón kívül ott sincs semmi extra, csak egy lehetőség a maradéktalan törlésre.&lt;/p&gt;
 
-&lt;p&gt;Egy napot töltöttem azzal, hogy körbenézzek, mik a lehetőségek. Csak olyan szolgáltatásokat kerestem, amelyek általam kreált &lt;strong&gt;saját HTML form&lt;/strong&gt; adatait is tudják fogadni és email-ben kiküldeni. Ábécé sorrendben listázom, amiket találtam.&lt;/p&gt;
+&lt;p&gt;Amikor létrehozunk egy új formot, először 2 dolgot kér be: a form nevét (amit a dashboard-on látunk majd), illetve a &lt;strong&gt;redirect URL-t,&lt;/strong&gt; ahová a látogatókat küldi majd a rendszer a form elküldése után. Ha ezutóbbit üresen hagyjuk, a Basin a saját oldalára visz alapértelmezésként.&lt;/p&gt;
 
-&lt;p&gt;Megjegyzés: &lt;em&gt;“AJAX”&lt;/em&gt; alatt a továbbiakban azt a funkciót értem, hogy az endpoint AJAX-al hívható és szöveges választ ad, szemben a hagyományos form küldéssel, ami jellemzően egy teljes lapot ad vissza, vagy átirányít.&lt;/p&gt;
+&lt;p&gt;Amint létrehoztuk a formot, az megnyílik a felületen, egyből az üres &lt;em&gt;Submissions&lt;/em&gt; panelt kapjuk meg. Az már látszik, hogy a beérkezett üzeneteket &lt;strong&gt;lehet szűrni, törölni, illetve spam-nek jelölni.&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;A &lt;a href=&quot;https://www.99inbound.com/&quot;&gt;99inbound&lt;/a&gt; &lt;strong&gt;korlátlan&lt;/strong&gt; form küldést kínál, van benne &lt;strong&gt;spam filter, illetve Slack integráció.&lt;/strong&gt; Ráadásként form builder is van hozzá, akinek kell. Friss, GDPR-os adatkezelési tájékoztatójuk van.&lt;/p&gt;
+&lt;p&gt;A &lt;em&gt;Setup&lt;/em&gt; fülön &lt;strong&gt;konkrét HTML kódokat mutat,&lt;/strong&gt; amivel tényleg csak copy-paste módon be lehet illeszteni a honlapba az űrlapot. Van snippet a kattintós Google captcha-hoz, és a láthatatlan verzióhoz is.&lt;/p&gt;
 
-&lt;p&gt;A &lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt; szintén &lt;strong&gt;korlátlan&lt;/strong&gt; form küldést biztosít már az ingyenes csomagban is, emellett rengeteg funkciója van: &lt;strong&gt;spam filter, redirect, fájl feltöltés, AJAX, export, analitika, valamint Zapier integráció&lt;/strong&gt; néhány népszerű alkalmazásba (pl. Slack, Trello, Asana, Google Sheets). A &lt;a href=&quot;https://zapier.com/&quot;&gt;Zapier&lt;/a&gt;-ben pedig a 2-lépcsős (trigger+action) folyamatok ingyenesek. Professzionális és felkészült cuccnak tűnik, korrekt GDPR notice is van a honlapjukon. A &lt;a href=&quot;https://www.producthunt.com/posts/basin&quot;&gt;ProductHunt&lt;/a&gt;-on pozitívak az értékelések és aktívak a fejlesztők.&lt;/p&gt;
-
-&lt;p&gt;A &lt;a href=&quot;https://www.briskforms.com/&quot;&gt;BriskForms&lt;/a&gt; nem ír limitekről, kihangsúlyozottan ingyenes szolgáltatás, emellett nyílt forráskódú is. Biztosít &lt;strong&gt;redirectet&lt;/strong&gt;, és/de úgy tűnik nem tárolja az űrlapadatokat.&lt;/p&gt;
-
-&lt;p&gt;Az &lt;a href=&quot;https://www.elformo.com/&quot;&gt;elFormo&lt;/a&gt; &lt;strong&gt;1500 emailt ad havonta&lt;/strong&gt; és van benne &lt;strong&gt;honeypot és redirect&lt;/strong&gt; lehetőség, bár átirányítás előtt felvillantja a logójukat. A beérkezett űrlapadatok böngészhetők és &lt;strong&gt;exportálhatók.&lt;/strong&gt; Noha a honlapjuk stílusos és megnyerő, nem sok review-t találni hozzá, és minden médiumon 2015-ben szólaltak meg utoljára.&lt;/p&gt;
-
-&lt;p&gt;Az &lt;a href=&quot;http://www.enformed.io/&quot;&gt;enformed.io&lt;/a&gt; &lt;strong&gt;100 emailt ad havonta&lt;/strong&gt;. Funkciók: &lt;strong&gt;egyéni levél tárgy, CC, BCC, honeypot, redirect, AJAX.&lt;/strong&gt; Viszont adatkezelési tájékoztatójuk nincs, a regisztrációs űrlapjuk meg konkrétan halott.&lt;/p&gt;
-
-&lt;p&gt;A &lt;a href=&quot;https://formspree.io/&quot;&gt;formspree.io&lt;/a&gt;-val évekkel ezelőtt is találkoztam már, egy ingyenes honlap sablon is ezt a szolgáltatást ajánlotta a kontakt formhoz. Az ingyenes rész limitje &lt;strong&gt;1000 email/hó&lt;/strong&gt;, van &lt;strong&gt;egyéni levél tárgy, CC, redirect, captcha,&lt;/strong&gt; viszont a &lt;strong&gt;form URL-ben szerepel a cél email cím.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;A kapcsolati űrlaphoz használható akár egy &lt;a href=&quot;https://github.com/toperkin/staticFormEmails&quot;&gt;Google Form&lt;/a&gt; is backend-ként. A limitre mindenhol más értéket találok, de &lt;strong&gt;50-100 email/napot&lt;/strong&gt; írnak a legtöbb helyen. Viszont ha nem küldi ki az email-t, akkor sincs gond, mert az űrlap adatait beteszi egy &lt;strong&gt;spreadsheet&lt;/strong&gt;-be.&lt;/p&gt;
-
-&lt;p&gt;Hasonlóan az előzőhöz, &lt;a href=&quot;https://github.com/dwyl/learn-to-send-email-via-google-script-html-no-server&quot;&gt;Google Apps Script&lt;/a&gt;-el is megoldható, hogy spreadsheet-be kerüljenek az adatok előbb, és aztán legyenek kiküldve email-ben. A kvóta &lt;strong&gt;100 email/nap&lt;/strong&gt; és van &lt;strong&gt;AJAX küldés.&lt;/strong&gt; A szkript nyilván kiegészíthető honeypot-tal és captcha-val is.&lt;/p&gt;
-
-&lt;p&gt;A &lt;a href=&quot;https://mailthis.to/&quot;&gt;mailthis.to&lt;/a&gt;-nál picit más az üzleti koncepció, a használat szerint kell fizetni. Nem havi limitek vannak, hanem regisztrációkor kapsz &lt;strong&gt;1000 ingyen emailt&lt;/strong&gt;, és további 1000 emailt vehetsz néhány dolcsiért. Van &lt;strong&gt;egyéni levél tárgy, honeypot, redirect, fájl feltöltés, AJAX és captcha.&lt;/strong&gt; &lt;a href=&quot;https://medium.com/@jamesfuthey/running-a-free-email-api-for-2-years-a39188e19985&quot;&gt;E cikk&lt;/a&gt; alapján is szimpatikus ez a cucc, viszont itt sem találok privacy policy-t.&lt;/p&gt;
-
-&lt;p&gt;A &lt;a href=&quot;https://pageclip.co/&quot;&gt;Pageclip&lt;/a&gt; &lt;strong&gt;havi 1000 küldést&lt;/strong&gt; enged, van &lt;strong&gt;egyéni levél tárgy és AJAX lehetőség, tárolja az adatokat&lt;/strong&gt; JSON formában. Van kliens és szerveroldali JavaScript könyvtár is hozzá. A főoldalon hirdetik a Slack integrációt, de a doksiban erről nincs infó. Elég részletes viszont az adatkezelési tájékoztatójuk.&lt;/p&gt;
-
-&lt;p&gt;A &lt;a href=&quot;https://getsimpleform.com/&quot;&gt;SimpleForm&lt;/a&gt; honlapja elég szűkszavú. Nincs szó limitekről, de azt megtudjuk, hogy &lt;strong&gt;fogad fájlokat&lt;/strong&gt; és az űrlapadatok lekérhetőek &lt;strong&gt;API-n&lt;/strong&gt; át. A copyright 2012-es, a blogjuk 2014-ben frissült utoljára, habár a site-on a verziószám 2018-as.&lt;/p&gt;
-
-&lt;p&gt;Lássuk mindezt táblázatban:&lt;/p&gt;
-
-&lt;table class=&quot;table table-sm table-responsive-md&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Szolgáltatás&lt;/th&gt;
-      &lt;th&gt;Limit&lt;/th&gt;
-      &lt;th&gt;Spam&lt;/th&gt;
-      &lt;th&gt;Redirect&lt;/th&gt;
-      &lt;th&gt;Tárol?&lt;/th&gt;
-      &lt;th&gt;Extra&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;https://www.99inbound.com/&quot;&gt;99inbound&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;filter&lt;/td&gt;
-      &lt;td&gt;?&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;Slack&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;filter&lt;/td&gt;
-      &lt;td&gt;van&lt;/td&gt;
-      &lt;td&gt;igen&lt;/td&gt;
-      &lt;td&gt;fájl, captcha, Zapier&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;https://www.briskforms.com/&quot;&gt;BriskForms&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;van&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;open-source&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;https://www.elformo.com/&quot;&gt;elFormo&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;1500/hó&lt;/td&gt;
-      &lt;td&gt;honeypot&lt;/td&gt;
-      &lt;td&gt;van&lt;/td&gt;
-      &lt;td&gt;igen&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;http://www.enformed.io/&quot;&gt;enformed.io&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;100/hó&lt;/td&gt;
-      &lt;td&gt;honeypot&lt;/td&gt;
-      &lt;td&gt;van&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;tárgy, CC, BCC, AJAX&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;https://formspree.io/&quot;&gt;formspree.io&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;1000/hó&lt;/td&gt;
-      &lt;td&gt;honeypot&lt;/td&gt;
-      &lt;td&gt;van&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;tárgy, CC, captcha&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;https://github.com/dwyl/learn-to-send-email-via-google-script-html-no-server&quot;&gt;G. Apps Script&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;100/nap&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;igen&lt;/td&gt;
-      &lt;td&gt;tárgy, AJAX, …&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;https://github.com/toperkin/staticFormEmails&quot;&gt;G. Forms&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;~ 50/nap&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;igen&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;https://mailthis.to/&quot;&gt;mailthis.to&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;1000&lt;/td&gt;
-      &lt;td&gt;honeypot&lt;/td&gt;
-      &lt;td&gt;van&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;tárgy, fájl, AJAX, captcha&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;https://pageclip.co/&quot;&gt;Pageclip&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;1000/hó&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;igen&lt;/td&gt;
-      &lt;td&gt;tárgy, AJAX, API&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;https://getsimpleform.com/&quot;&gt;SimpleForm&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;igen&lt;/td&gt;
-      &lt;td&gt;fájl&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h2 id=&quot;összegzés&quot;&gt;Összegzés&lt;/h2&gt;
-
-&lt;p&gt;A fenti listát a következőképp szűkítem:&lt;/p&gt;
+&lt;p&gt;Az &lt;em&gt;Edit&lt;/em&gt; fülön további beállításokat találunk az űrlaphoz:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;A 2 Google megoldást kicsit macerásabb összerakni, illetve nem érzem igazán elegáns megoldásnak erre a feladatra, pláne látva a többi versenyzőt.&lt;/li&gt;
-  &lt;li&gt;A &lt;a href=&quot;https://formspree.io/&quot;&gt;formspree.io&lt;/a&gt; nem rejti az email címemet.&lt;/li&gt;
-  &lt;li&gt;Az &lt;a href=&quot;http://www.enformed.io/&quot;&gt;enformed.io&lt;/a&gt; több sebből vérzik.&lt;/li&gt;
-  &lt;li&gt;A &lt;a href=&quot;https://mailthis.to/&quot;&gt;mailthis.to&lt;/a&gt; szimpatikus lenne, de csak egyszeri 1000 emailt ad, ami az összes többinél korlátoltabb.&lt;/li&gt;
-  &lt;li&gt;A &lt;a href=&quot;https://getsimpleform.com/&quot;&gt;SimpleForm&lt;/a&gt; nem informatív, puritán és réginek tűnik.&lt;/li&gt;
-  &lt;li&gt;Az &lt;a href=&quot;https://www.elformo.com/&quot;&gt;elFormo&lt;/a&gt; is szimpatikusnak tűnt, de ez is porosodik már, és vannak jobbak a mezőnyben.&lt;/li&gt;
-  &lt;li&gt;A &lt;a href=&quot;https://pageclip.co/&quot;&gt;Pageclip&lt;/a&gt;-en kívül az összes játékban maradt versenyző korlátlan küldést biztosít.&lt;/li&gt;
-  &lt;li&gt;🥉 A dobogó 3. fokán a &lt;a href=&quot;https://www.briskforms.com/&quot;&gt;BriskForms&lt;/a&gt; áll meg, spam elkerülési mechanizmus hiányában.&lt;/li&gt;
-  &lt;li&gt;🥈 Az ezüstérmet a &lt;a href=&quot;https://www.99inbound.com/&quot;&gt;99inbound&lt;/a&gt;-nak osztom, mert&lt;/li&gt;
-  &lt;li&gt;🥇 a &lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt; egy fokkal profibbnak és flexibilisebbnek tűnik.&lt;/li&gt;
+  &lt;li&gt;meg lehet adni &lt;strong&gt;több whitelisted domaint&lt;/strong&gt;, ahonnan engedélyezzük a form küldést&lt;/li&gt;
+  &lt;li&gt;be lehet kapcsolni a valid captcha válasz megkövetelését&lt;/li&gt;
+  &lt;li&gt;illetve van lehetőség GDPR kompatibilis &lt;strong&gt;nyugtát visszaküldeni az adatok fogadásáról&lt;/strong&gt; a küldőnek&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;A fenti dolgokat persze &lt;strong&gt;kipróbálás nélkül&lt;/strong&gt; írtam. A &lt;a href=&quot;/blog/2018/kontakt-form-basin-nel&quot;&gt;következő posztban&lt;/a&gt; leírom a tapasztalataimat a &lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt;-nel, ugyanis az aranyérem jó helyre került. 🤓&lt;/p&gt;</content><author><name>Zsolt Jurányi</name></author><category term="email" /><category term="form" /><category term="összehasonlítás" /><category term="serverless" /><category term="szolgáltatás" /><category term="weboldal" /><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /></entry><entry xml:lang="en_US"><title type="html">Contact form for free - looking around</title><link href="https://juzraai.github.io/blog/2018/contact-form-for-free/" rel="alternate" type="text/html" title="Contact form for free - looking around" /><published>2018-06-02T00:00:00+02:00</published><updated>2018-06-24T12:44:37+02:00</updated><id>https://juzraai.github.io/blog/2018/contact-form-for-free</id><content type="html" xml:base="https://juzraai.github.io/blog/2018/contact-form-for-free/">&lt;h2 id=&quot;problem&quot;&gt;Problem&lt;/h2&gt;
+&lt;p&gt;Az &lt;em&gt;Email&lt;/em&gt; fülön átállíthatjuk a cél email címet, ahová az űrlapadatokat kérjük küldeni. Ez alapértelmezésként a regisztrációkor megadott email cím. Továbbá megadhatunk &lt;strong&gt;CC-t, egyéni küldö nevet&lt;/strong&gt; (&lt;em&gt;“Basin”&lt;/em&gt; helyett) és a &lt;strong&gt;tárgy is szerkeszthető.&lt;/strong&gt; A tárgy alapértelmezésként a form neve + &lt;em&gt;“You’ve received a submission&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;tesztelés&quot;&gt;Tesztelés&lt;/h2&gt;
+
+&lt;p&gt;Bekapcsoltam a captcha-t és a receipt-et, és összeraktam a formot a láthatatlan captcha-val. Zseniális, hogy &lt;strong&gt;tesztelhető localhost-ról is.&lt;/strong&gt; Elküldtem a formot, és a megadott URL-re irányított a rendszer. A levél pár másodperc múlva megérkezett arra email címemre, amivel a &lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt;-be regisztráltam. Szépen formázva mutat minden fontos információt:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/basin/basin-submission-email.png&quot;&gt;&lt;img src=&quot;/assets/basin/basin-submission-email.png&quot; alt=&quot;Basin submission email&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;A reply-to is korrektül be van állítva, egy kattintással tudok válaszolni a formon megadott email címre.&lt;/p&gt;
+
+&lt;p&gt;A formon beírt email címre is jött egy levél, ami &lt;strong&gt;nyugtázza, hogy milyen adatokat küldtem és hova,&lt;/strong&gt; és még ezzel kapcsolatos kérelmekhez is biztosít lehetőséget:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/basin/basin-receipt-email.png&quot;&gt;&lt;img src=&quot;/assets/basin/basin-receipt-email.png&quot; alt=&quot;Basin receipt email&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;A &lt;em&gt;Submissions&lt;/em&gt; panelen is megjelentek ezek az információk természetesen. Tovább nézve a funkciókat, az &lt;em&gt;Export&lt;/em&gt; panelen a beküldött form adatok &lt;strong&gt;letölthetőek CSV-ben, illetve JSON-ban is&lt;/strong&gt; egy API key segítségével. Az &lt;em&gt;Integrations&lt;/em&gt; fülön lehet &lt;a href=&quot;https://zapier.com/&quot;&gt;Zapier&lt;/a&gt;-hez kapcsolódni, de ezt most nem teszem meg, a célt elértük.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Az aranyérem jogos volt! A &lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt; professzionális, könnyen kezelhető, felhasználóbarát, GDPR-ready, ingyenes szolgáltatás.&lt;/strong&gt; 🏆&lt;/p&gt;
+
+&lt;p&gt;Pontosan erre volt szükségem.&lt;/p&gt;
+
+&lt;h2 id=&quot;kiegészítés&quot;&gt;Kiegészítés&lt;/h2&gt;
+
+&lt;p&gt;Egy apró kiegészítésre szükség van, a &lt;a href=&quot;https://developers.google.com/recaptcha/&quot;&gt;Google reCAPTCHA&lt;/a&gt; helyes működéséhez. A &lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt; által adott code snippet úgy működik, hogy a küldés gomb kattintás eseményét a reCAPTCHA kezeli le, és &lt;strong&gt;egyből elküldi&lt;/strong&gt; az űrlapot. Ez akkor okoz problémát, &lt;strong&gt;ha szeretnénk validálni a formot,&lt;/strong&gt; akár natívan, akár saját JS kóddal. A &lt;strong&gt;megoldást&lt;/strong&gt; &lt;a href=&quot;https://stackoverflow.com/a/41694352/2418224&quot;&gt;ez a válasz&lt;/a&gt; adja meg, bemutatom:&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;form&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;invisible-recaptcha-form&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;accept-charset=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;UTF-8&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;action=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://usebasin.com/f/...&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;method=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;POST&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+
+	&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- input elemek --&amp;gt;&lt;/span&gt;
+
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;g-recaptcha&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;data-sitekey=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;...&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;data-callback=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;onSubmit&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;data-badge=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;inline&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;data-size=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;invisible&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;button&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;btn btn-primary&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Küldés&lt;span class=&quot;nt&quot;&gt;&amp;lt;/button&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/form&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://www.google.com/recaptcha/api.js&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;defer&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;script&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;invisible-recaptcha-form&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;addEventListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;submit&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+		&lt;span class=&quot;nx&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;preventDefault&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+		&lt;span class=&quot;nx&quot;&gt;grecaptcha&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;reset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+		&lt;span class=&quot;nx&quot;&gt;grecaptcha&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;execute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;onSubmit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;token&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;invisible-recaptcha-form&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;submit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Mit csináltam a &lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt; kódjához képest:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;A &lt;code class=&quot;highlighter-rouge&quot;&gt;g-recaptcha&lt;/code&gt; class-t levettem a küldés gombról, és egy új &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;div&amp;gt;&lt;/code&gt;-re raktam rá.&lt;/li&gt;
+  &lt;li&gt;Ebbe a &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;div&amp;gt;&lt;/code&gt; elembe átvittem a &lt;code class=&quot;highlighter-rouge&quot;&gt;data-*&lt;/code&gt; attribútumokat, illetve hozzá is adtam egyet: &lt;code class=&quot;highlighter-rouge&quot;&gt;data-size=&quot;invisible&quot;&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;A szkripthez hozzáadtam egy eseménykezelőt, ami a form elküldésekor fut le, és meghívja a captcha-t.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Így a küldés gombra kattintáskor a következő fog történni:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Először a böngésző natív validálási mechanizmusa fut le.&lt;/li&gt;
+  &lt;li&gt;Aztán az eseménykezelő inicializálja a captcha-t.&lt;/li&gt;
+  &lt;li&gt;A captcha elhelyezi a választ a formban, majd meghívja a callback-et, ami elküldi a form-ot.&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Zsolt Jurányi</name></author><category term="basin" /><category term="captcha" /><category term="email" /><category term="form" /><category term="serverless" /><category term="szolgáltatás" /><category term="tapasztalat" /><category term="weboldal" /><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /></entry><entry xml:lang="en_US"><title type="html">Contact form for free - looking around</title><link href="https://juzraai.github.io/blog/2018/contact-form-for-free/" rel="alternate" type="text/html" title="Contact form for free - looking around" /><published>2018-06-02T00:00:00+02:00</published><updated>2018-06-24T12:44:37+02:00</updated><id>https://juzraai.github.io/blog/2018/contact-form-for-free</id><content type="html" xml:base="https://juzraai.github.io/blog/2018/contact-form-for-free/">&lt;h2 id=&quot;problem&quot;&gt;Problem&lt;/h2&gt;
 
 &lt;p&gt;My blog and developer portfolio is a &lt;strong&gt;static website&lt;/strong&gt;, which I host on &lt;a href=&quot;https://pages.github.com/&quot;&gt;GitHub&lt;/a&gt;. As contact information, I link my Facebook and LinkedIn profiles, but I don’t want to publish my email address, because &lt;strong&gt;I don’t need spam.&lt;/strong&gt; Instead I’d place there a &lt;strong&gt;contact form&lt;/strong&gt; which would help those who arrive at my website to reach me without logging in or navigating anywhere else.&lt;/p&gt;
 
@@ -470,7 +314,163 @@
   &lt;li&gt;🥇 &lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt; seems more professional and flexible.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;I found out all of the above &lt;strong&gt;without trying out&lt;/strong&gt; the services. In my &lt;a href=&quot;/blog/2018/contact-form-using-basin&quot;&gt;next post&lt;/a&gt; I share my experiences with &lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt; which seems to deserve my gold medal. 🤓&lt;/p&gt;</content><author><name>Zsolt Jurányi</name></author><category term="comparison" /><category term="email" /><category term="form" /><category term="serverless" /><category term="service" /><category term="website" /><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /></entry><entry xml:lang="hu_HU"><title type="html">Rapid webapp fejlesztés II.</title><link href="https://juzraai.github.io/blog/2018/rapid-webapp-fejlesztes-ii/" rel="alternate" type="text/html" title="Rapid webapp fejlesztés II." /><published>2018-05-18T00:00:00+02:00</published><updated>2018-06-24T12:44:37+02:00</updated><id>https://juzraai.github.io/blog/2018/rapid-webapp-fejlesztes-ii</id><content type="html" xml:base="https://juzraai.github.io/blog/2018/rapid-webapp-fejlesztes-ii/">&lt;h2 id=&quot;elöljáróban&quot;&gt;Elöljáróban&lt;/h2&gt;
+&lt;p&gt;I found out all of the above &lt;strong&gt;without trying out&lt;/strong&gt; the services. In my &lt;a href=&quot;/blog/2018/contact-form-using-basin&quot;&gt;next post&lt;/a&gt; I share my experiences with &lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt; which seems to deserve my gold medal. 🤓&lt;/p&gt;</content><author><name>Zsolt Jurányi</name></author><category term="comparison" /><category term="email" /><category term="form" /><category term="serverless" /><category term="service" /><category term="website" /><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /></entry><entry xml:lang="hu_HU"><title type="html">Kontakt form ingyen - körbenézés</title><link href="https://juzraai.github.io/blog/2018/kontakt-form-ingyen/" rel="alternate" type="text/html" title="Kontakt form ingyen - körbenézés" /><published>2018-06-02T00:00:00+02:00</published><updated>2018-06-24T12:44:37+02:00</updated><id>https://juzraai.github.io/blog/2018/kontakt-form-ingyen</id><content type="html" xml:base="https://juzraai.github.io/blog/2018/kontakt-form-ingyen/">&lt;h2 id=&quot;a-probléma&quot;&gt;A probléma&lt;/h2&gt;
+
+&lt;p&gt;A blogom és egyben fejlesztői bemutatkozó oldalam egy &lt;strong&gt;statikus honlap,&lt;/strong&gt; amit a &lt;a href=&quot;https://pages.github.com/&quot;&gt;GitHub Pages&lt;/a&gt;-en hosztolok. Elérhetőségként feltüntetem a Facebook és LinkedIn profilom, de az email címemet nem szeretném, mert a &lt;strong&gt;spam nem hiányzik.&lt;/strong&gt; Kitennék viszont &lt;strong&gt;kapcsolati űrlapot&lt;/strong&gt;, ami lehetőséget biztosítana az oldalamra tévedőknek, hogy mindenféle bejelentkezés és továbbkattintás nélkül el tudjanak engem érni.&lt;/p&gt;
+
+&lt;p&gt;Mivel azonban a honlap statikus, &lt;strong&gt;szerveroldali szkript nélkül&lt;/strong&gt; kell megoldani a form feldolgozását, és a kapott adatok kiküldését az email címemre. Muszáj tehát erre a feladatra egy &lt;strong&gt;külső szolgáltatást&lt;/strong&gt; keresni. És persze, ha már eddig is spóroltam, akkor itt is tartsuk a &lt;strong&gt;költségeket zérón.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;lehetőségek&quot;&gt;Lehetőségek&lt;/h2&gt;
+
+&lt;p&gt;Egy napot töltöttem azzal, hogy körbenézzek, mik a lehetőségek. Csak olyan szolgáltatásokat kerestem, amelyek általam kreált &lt;strong&gt;saját HTML form&lt;/strong&gt; adatait is tudják fogadni és email-ben kiküldeni. Ábécé sorrendben listázom, amiket találtam.&lt;/p&gt;
+
+&lt;p&gt;Megjegyzés: &lt;em&gt;“AJAX”&lt;/em&gt; alatt a továbbiakban azt a funkciót értem, hogy az endpoint AJAX-al hívható és szöveges választ ad, szemben a hagyományos form küldéssel, ami jellemzően egy teljes lapot ad vissza, vagy átirányít.&lt;/p&gt;
+
+&lt;p&gt;A &lt;a href=&quot;https://www.99inbound.com/&quot;&gt;99inbound&lt;/a&gt; &lt;strong&gt;korlátlan&lt;/strong&gt; form küldést kínál, van benne &lt;strong&gt;spam filter, illetve Slack integráció.&lt;/strong&gt; Ráadásként form builder is van hozzá, akinek kell. Friss, GDPR-os adatkezelési tájékoztatójuk van.&lt;/p&gt;
+
+&lt;p&gt;A &lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt; szintén &lt;strong&gt;korlátlan&lt;/strong&gt; form küldést biztosít már az ingyenes csomagban is, emellett rengeteg funkciója van: &lt;strong&gt;spam filter, redirect, fájl feltöltés, AJAX, export, analitika, valamint Zapier integráció&lt;/strong&gt; néhány népszerű alkalmazásba (pl. Slack, Trello, Asana, Google Sheets). A &lt;a href=&quot;https://zapier.com/&quot;&gt;Zapier&lt;/a&gt;-ben pedig a 2-lépcsős (trigger+action) folyamatok ingyenesek. Professzionális és felkészült cuccnak tűnik, korrekt GDPR notice is van a honlapjukon. A &lt;a href=&quot;https://www.producthunt.com/posts/basin&quot;&gt;ProductHunt&lt;/a&gt;-on pozitívak az értékelések és aktívak a fejlesztők.&lt;/p&gt;
+
+&lt;p&gt;A &lt;a href=&quot;https://www.briskforms.com/&quot;&gt;BriskForms&lt;/a&gt; nem ír limitekről, kihangsúlyozottan ingyenes szolgáltatás, emellett nyílt forráskódú is. Biztosít &lt;strong&gt;redirectet&lt;/strong&gt;, és/de úgy tűnik nem tárolja az űrlapadatokat.&lt;/p&gt;
+
+&lt;p&gt;Az &lt;a href=&quot;https://www.elformo.com/&quot;&gt;elFormo&lt;/a&gt; &lt;strong&gt;1500 emailt ad havonta&lt;/strong&gt; és van benne &lt;strong&gt;honeypot és redirect&lt;/strong&gt; lehetőség, bár átirányítás előtt felvillantja a logójukat. A beérkezett űrlapadatok böngészhetők és &lt;strong&gt;exportálhatók.&lt;/strong&gt; Noha a honlapjuk stílusos és megnyerő, nem sok review-t találni hozzá, és minden médiumon 2015-ben szólaltak meg utoljára.&lt;/p&gt;
+
+&lt;p&gt;Az &lt;a href=&quot;http://www.enformed.io/&quot;&gt;enformed.io&lt;/a&gt; &lt;strong&gt;100 emailt ad havonta&lt;/strong&gt;. Funkciók: &lt;strong&gt;egyéni levél tárgy, CC, BCC, honeypot, redirect, AJAX.&lt;/strong&gt; Viszont adatkezelési tájékoztatójuk nincs, a regisztrációs űrlapjuk meg konkrétan halott.&lt;/p&gt;
+
+&lt;p&gt;A &lt;a href=&quot;https://formspree.io/&quot;&gt;formspree.io&lt;/a&gt;-val évekkel ezelőtt is találkoztam már, egy ingyenes honlap sablon is ezt a szolgáltatást ajánlotta a kontakt formhoz. Az ingyenes rész limitje &lt;strong&gt;1000 email/hó&lt;/strong&gt;, van &lt;strong&gt;egyéni levél tárgy, CC, redirect, captcha,&lt;/strong&gt; viszont a &lt;strong&gt;form URL-ben szerepel a cél email cím.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;A kapcsolati űrlaphoz használható akár egy &lt;a href=&quot;https://github.com/toperkin/staticFormEmails&quot;&gt;Google Form&lt;/a&gt; is backend-ként. A limitre mindenhol más értéket találok, de &lt;strong&gt;50-100 email/napot&lt;/strong&gt; írnak a legtöbb helyen. Viszont ha nem küldi ki az email-t, akkor sincs gond, mert az űrlap adatait beteszi egy &lt;strong&gt;spreadsheet&lt;/strong&gt;-be.&lt;/p&gt;
+
+&lt;p&gt;Hasonlóan az előzőhöz, &lt;a href=&quot;https://github.com/dwyl/learn-to-send-email-via-google-script-html-no-server&quot;&gt;Google Apps Script&lt;/a&gt;-el is megoldható, hogy spreadsheet-be kerüljenek az adatok előbb, és aztán legyenek kiküldve email-ben. A kvóta &lt;strong&gt;100 email/nap&lt;/strong&gt; és van &lt;strong&gt;AJAX küldés.&lt;/strong&gt; A szkript nyilván kiegészíthető honeypot-tal és captcha-val is.&lt;/p&gt;
+
+&lt;p&gt;A &lt;a href=&quot;https://mailthis.to/&quot;&gt;mailthis.to&lt;/a&gt;-nál picit más az üzleti koncepció, a használat szerint kell fizetni. Nem havi limitek vannak, hanem regisztrációkor kapsz &lt;strong&gt;1000 ingyen emailt&lt;/strong&gt;, és további 1000 emailt vehetsz néhány dolcsiért. Van &lt;strong&gt;egyéni levél tárgy, honeypot, redirect, fájl feltöltés, AJAX és captcha.&lt;/strong&gt; &lt;a href=&quot;https://medium.com/@jamesfuthey/running-a-free-email-api-for-2-years-a39188e19985&quot;&gt;E cikk&lt;/a&gt; alapján is szimpatikus ez a cucc, viszont itt sem találok privacy policy-t.&lt;/p&gt;
+
+&lt;p&gt;A &lt;a href=&quot;https://pageclip.co/&quot;&gt;Pageclip&lt;/a&gt; &lt;strong&gt;havi 1000 küldést&lt;/strong&gt; enged, van &lt;strong&gt;egyéni levél tárgy és AJAX lehetőség, tárolja az adatokat&lt;/strong&gt; JSON formában. Van kliens és szerveroldali JavaScript könyvtár is hozzá. A főoldalon hirdetik a Slack integrációt, de a doksiban erről nincs infó. Elég részletes viszont az adatkezelési tájékoztatójuk.&lt;/p&gt;
+
+&lt;p&gt;A &lt;a href=&quot;https://getsimpleform.com/&quot;&gt;SimpleForm&lt;/a&gt; honlapja elég szűkszavú. Nincs szó limitekről, de azt megtudjuk, hogy &lt;strong&gt;fogad fájlokat&lt;/strong&gt; és az űrlapadatok lekérhetőek &lt;strong&gt;API-n&lt;/strong&gt; át. A copyright 2012-es, a blogjuk 2014-ben frissült utoljára, habár a site-on a verziószám 2018-as.&lt;/p&gt;
+
+&lt;p&gt;Lássuk mindezt táblázatban:&lt;/p&gt;
+
+&lt;table class=&quot;table table-sm table-responsive-md&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Szolgáltatás&lt;/th&gt;
+      &lt;th&gt;Limit&lt;/th&gt;
+      &lt;th&gt;Spam&lt;/th&gt;
+      &lt;th&gt;Redirect&lt;/th&gt;
+      &lt;th&gt;Tárol?&lt;/th&gt;
+      &lt;th&gt;Extra&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://www.99inbound.com/&quot;&gt;99inbound&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;filter&lt;/td&gt;
+      &lt;td&gt;?&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;Slack&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;filter&lt;/td&gt;
+      &lt;td&gt;van&lt;/td&gt;
+      &lt;td&gt;igen&lt;/td&gt;
+      &lt;td&gt;fájl, captcha, Zapier&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://www.briskforms.com/&quot;&gt;BriskForms&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;van&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;open-source&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://www.elformo.com/&quot;&gt;elFormo&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;1500/hó&lt;/td&gt;
+      &lt;td&gt;honeypot&lt;/td&gt;
+      &lt;td&gt;van&lt;/td&gt;
+      &lt;td&gt;igen&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;http://www.enformed.io/&quot;&gt;enformed.io&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;100/hó&lt;/td&gt;
+      &lt;td&gt;honeypot&lt;/td&gt;
+      &lt;td&gt;van&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;tárgy, CC, BCC, AJAX&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://formspree.io/&quot;&gt;formspree.io&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;1000/hó&lt;/td&gt;
+      &lt;td&gt;honeypot&lt;/td&gt;
+      &lt;td&gt;van&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;tárgy, CC, captcha&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://github.com/dwyl/learn-to-send-email-via-google-script-html-no-server&quot;&gt;G. Apps Script&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;100/nap&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;igen&lt;/td&gt;
+      &lt;td&gt;tárgy, AJAX, …&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://github.com/toperkin/staticFormEmails&quot;&gt;G. Forms&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;~ 50/nap&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;igen&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://mailthis.to/&quot;&gt;mailthis.to&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;1000&lt;/td&gt;
+      &lt;td&gt;honeypot&lt;/td&gt;
+      &lt;td&gt;van&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;tárgy, fájl, AJAX, captcha&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://pageclip.co/&quot;&gt;Pageclip&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;1000/hó&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;igen&lt;/td&gt;
+      &lt;td&gt;tárgy, AJAX, API&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://getsimpleform.com/&quot;&gt;SimpleForm&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;igen&lt;/td&gt;
+      &lt;td&gt;fájl&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;összegzés&quot;&gt;Összegzés&lt;/h2&gt;
+
+&lt;p&gt;A fenti listát a következőképp szűkítem:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;A 2 Google megoldást kicsit macerásabb összerakni, illetve nem érzem igazán elegáns megoldásnak erre a feladatra, pláne látva a többi versenyzőt.&lt;/li&gt;
+  &lt;li&gt;A &lt;a href=&quot;https://formspree.io/&quot;&gt;formspree.io&lt;/a&gt; nem rejti az email címemet.&lt;/li&gt;
+  &lt;li&gt;Az &lt;a href=&quot;http://www.enformed.io/&quot;&gt;enformed.io&lt;/a&gt; több sebből vérzik.&lt;/li&gt;
+  &lt;li&gt;A &lt;a href=&quot;https://mailthis.to/&quot;&gt;mailthis.to&lt;/a&gt; szimpatikus lenne, de csak egyszeri 1000 emailt ad, ami az összes többinél korlátoltabb.&lt;/li&gt;
+  &lt;li&gt;A &lt;a href=&quot;https://getsimpleform.com/&quot;&gt;SimpleForm&lt;/a&gt; nem informatív, puritán és réginek tűnik.&lt;/li&gt;
+  &lt;li&gt;Az &lt;a href=&quot;https://www.elformo.com/&quot;&gt;elFormo&lt;/a&gt; is szimpatikusnak tűnt, de ez is porosodik már, és vannak jobbak a mezőnyben.&lt;/li&gt;
+  &lt;li&gt;A &lt;a href=&quot;https://pageclip.co/&quot;&gt;Pageclip&lt;/a&gt;-en kívül az összes játékban maradt versenyző korlátlan küldést biztosít.&lt;/li&gt;
+  &lt;li&gt;🥉 A dobogó 3. fokán a &lt;a href=&quot;https://www.briskforms.com/&quot;&gt;BriskForms&lt;/a&gt; áll meg, spam elkerülési mechanizmus hiányában.&lt;/li&gt;
+  &lt;li&gt;🥈 Az ezüstérmet a &lt;a href=&quot;https://www.99inbound.com/&quot;&gt;99inbound&lt;/a&gt;-nak osztom, mert&lt;/li&gt;
+  &lt;li&gt;🥇 a &lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt; egy fokkal profibbnak és flexibilisebbnek tűnik.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;A fenti dolgokat persze &lt;strong&gt;kipróbálás nélkül&lt;/strong&gt; írtam. A &lt;a href=&quot;/blog/2018/kontakt-form-basin-nel&quot;&gt;következő posztban&lt;/a&gt; leírom a tapasztalataimat a &lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt;-nel, ugyanis az aranyérem jó helyre került. 🤓&lt;/p&gt;</content><author><name>Zsolt Jurányi</name></author><category term="email" /><category term="form" /><category term="összehasonlítás" /><category term="serverless" /><category term="szolgáltatás" /><category term="weboldal" /><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /></entry><entry xml:lang="hu_HU"><title type="html">Rapid webapp fejlesztés II.</title><link href="https://juzraai.github.io/blog/2018/rapid-webapp-fejlesztes-ii/" rel="alternate" type="text/html" title="Rapid webapp fejlesztés II." /><published>2018-05-18T00:00:00+02:00</published><updated>2018-06-24T12:44:37+02:00</updated><id>https://juzraai.github.io/blog/2018/rapid-webapp-fejlesztes-ii</id><content type="html" xml:base="https://juzraai.github.io/blog/2018/rapid-webapp-fejlesztes-ii/">&lt;h2 id=&quot;elöljáróban&quot;&gt;Elöljáróban&lt;/h2&gt;
 
 &lt;p&gt;Gyakorlatilag az egyetemi éveim óta Java vonalon mozgok. Munkám során is ebben írtam mindent, ami szerveroldali és nem mini szkript, ami Bash-al megoldható. Az elmúlt 1-1.5 évben léptem tovább &lt;a href=&quot;https://kotlinlang.org&quot;&gt;Kotlin&lt;/a&gt;-ra, ami szintén JVM vonal ugye, de felgyorsítja és kényelmesebbé teszi a fejlesztést.&lt;/p&gt;
 
