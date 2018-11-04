@@ -1,4 +1,150 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="hu_HU"><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="https://juzraai.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://juzraai.github.io/" rel="alternate" type="text/html" hreflang="hu_HU" /><updated>2018-09-15T12:31:03+02:00</updated><id>https://juzraai.github.io/feed.xml</id><title type="html">Zsolt Jurányi (juzraai)</title><subtitle>Zsolt vagyok, full-stack fejlesztő. Crawlereket, webalkalmazásokat, statikus honlapokat és interaktív vizualizációkat készítek.</subtitle><author><name>Zsolt Jurányi</name></author><entry xml:lang="en_US"><title type="html">Free contact form using Basin</title><link href="https://juzraai.github.io/blog/2018/contact-form-using-basin/" rel="alternate" type="text/html" title="Free contact form using Basin" /><published>2018-06-03T00:00:00+02:00</published><updated>2018-06-24T12:44:37+02:00</updated><id>https://juzraai.github.io/blog/2018/contact-form-using-basin</id><content type="html" xml:base="https://juzraai.github.io/blog/2018/contact-form-using-basin/">&lt;p&gt;My &lt;a href=&quot;/blog/2018/contact-form-for-free&quot;&gt;previous post&lt;/a&gt; was about free contact form solutions that can send email. I tried out &lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt; which was before my gold medal winner based on its website only. Here are my experiences. 🙂&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="hu_HU"><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://juzraai.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://juzraai.github.io/" rel="alternate" type="text/html" hreflang="hu_HU" /><updated>2018-11-04T22:35:16+01:00</updated><id>https://juzraai.github.io/feed.xml</id><title type="html">Zsolt Jurányi (juzraai)</title><subtitle>Zsolt vagyok, full-stack fejlesztő. Crawlereket, webalkalmazásokat, statikus honlapokat és interaktív vizualizációkat készítek.</subtitle><author><name>Zsolt Jurányi</name></author><entry xml:lang="hu_HU"><title type="html">Lokális repók importálása Gitea-be</title><link href="https://juzraai.github.io/blog/2018/lokalis-repok-importalasa-gitea-be/" rel="alternate" type="text/html" title="Lokális repók importálása Gitea-be" /><published>2018-11-04T00:00:00+01:00</published><updated>2018-11-04T22:33:00+01:00</updated><id>https://juzraai.github.io/blog/2018/lokalis-repok-importalasa-gitea-be</id><content type="html" xml:base="https://juzraai.github.io/blog/2018/lokalis-repok-importalasa-gitea-be/">&lt;h2 id=&quot;bevezetés&quot;&gt;Bevezetés&lt;/h2&gt;
+
+&lt;p&gt;Az &lt;a href=&quot;/blog/2018/gitea-beuzemeles-rpi&quot;&gt;előző Gitea-s posztomban&lt;/a&gt; is kiemeltem, érdemes komolyabb használat előtt &lt;strong&gt;végigolvasni az &lt;a href=&quot;https://docs.gitea.io/en-us/config-cheat-sheet/&quot;&gt;összes beállítási lehetőséget&lt;/a&gt;&lt;/strong&gt;, ugyanis ez a kulcs sokmindenhez, bizonyos dolgok sehol máshol nincsenek dokumentálva. A Gitea-s doksi nem valami segítőkész, nem ír külön a funkciókról és azok használatáról, megkötéseiről. Így van ez a repó importálással is.&lt;/p&gt;
+
+&lt;p&gt;Az alapszitu az, hogy a Gitea &lt;code class=&quot;highlighter-rouge&quot;&gt;gitea-repositories&lt;/code&gt; mappájába sajnos nem elég és nem is célravezető csak simán bemásolni egy bare repository-t. Ugyanis a Gitea csak azokat a repókat kezeli, amiket ő nyilvántartásba vett az adatbázisában, és egyébként is saját Git hook-okat használ. Vagyis a Gitea UI-ról kell őket létrehozni, nincs mese.&lt;/p&gt;
+
+&lt;h2 id=&quot;migrálás&quot;&gt;Migrálás&lt;/h2&gt;
+
+&lt;p&gt;Szerencsére a felület biztosít egy migrálás opciót (fent a “+” ikon lenyíló menüjében). Ennek a funkciónak azonban vannak trükkjei.&lt;/p&gt;
+
+&lt;p&gt;Egyrészt, mint ahogy pár sikertelen próbálkozás után egy &lt;a href=&quot;https://github.com/go-gitea/gitea/issues/1635&quot;&gt;GitHub issue&lt;/a&gt;-ból megtudtam, az &lt;strong&gt;SSH nem támogatott&lt;/strong&gt; ennél a funkciónál.&lt;/p&gt;
+
+&lt;p&gt;Másrészt, kínjában az ember kipróbálja már a local path-t is, amikre a rendszer szintén visszapofázik, miszerint ez nem engedélyezett.&lt;/p&gt;
+
+&lt;p&gt;A &lt;em&gt;Site Administration &amp;gt; User Accounts&lt;/em&gt; oldalon a saját fiókom szerkesztésénél, a lap alján van egy &lt;em&gt;May import local repositories&lt;/em&gt; jelölőnégyzet. Ha ezt bepipálom és elmentem, csak egy pillanatig érzem a remény édes ízét, mert amint újratöltődik a lap, a pipa eltűnik. És persze az importálás nem működik. Mindennek ellenére az adatbázisban (megnéztem), a megfelelő flag-et átbillentette 1-esre, tehát elmentette, csak nem jeleníti meg…&lt;/p&gt;
+
+&lt;p&gt;…mert van egy globális tiltás is. És ezt én egyetlen egy helyen láttam leírva (amit jóval azután néztem meg, hogy beletőrödtem a kudarcba), a &lt;a href=&quot;https://docs.gitea.io/en-us/config-cheat-sheet/&quot;&gt;Config Cheat Sheet&lt;/a&gt;-en, ahol felsorolja az összes paramétert:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;IMPORT_LOCAL_PATHS&lt;/code&gt;: &lt;strong&gt;false:&lt;/strong&gt; Prevent all users (including admin) from importing local path on server.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Vagyis:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;A &lt;code class=&quot;highlighter-rouge&quot;&gt;custom/conf/app.ini&lt;/code&gt; konfigfájlban engedélyezni kell globálisan a lokális importot:
+    &lt;div class=&quot;language-ini highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nn&quot;&gt;[security]&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;IMPORT_LOCAL_PATHS&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;A felületen, a &lt;em&gt;Site Administration &amp;gt; User Accounts&lt;/em&gt; alatt a saját fiókunk szerkesztésénél (&lt;em&gt;Edit&lt;/em&gt;) egyénileg is engedélyezni kell ezt, a &lt;em&gt;May import local repositories&lt;/em&gt; jelölőnégyzet bepipálásával tehetjük meg&lt;/li&gt;
+  &lt;li&gt;Ezután már megadhatunk a migrálásnál helyi útvonalat, pl. &lt;code class=&quot;highlighter-rouge&quot;&gt;/home/me/bare-repos/repo1&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;git-módszer&quot;&gt;Git módszer&lt;/h2&gt;
+
+&lt;p&gt;Természetesen Git parancsokkal is migrálhatunk, kívülről:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git clone &lt;span class=&quot;nt&quot;&gt;--mirror&lt;/span&gt; OLD_REPO_URL
+&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;OLD_REPO.git
+git remote set-url origin http://GITEA_DOMAIN/GITEA_USER/NEW_REPO.git
+git push &lt;span class=&quot;nt&quot;&gt;--mirror&lt;/span&gt; origin
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Viszont a push előtt a fentebb írtak miatt &lt;strong&gt;előbb létre kell hozni a repót&lt;/strong&gt; a Gitea webes felületén.&lt;/p&gt;</content><author><name>Zsolt Jurányi</name></author><category term="config" /><category term="git" /><category term="gitea" /><category term="import" /><category term="migrate" /><category term="server" /><category term="web-ui" /><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /></entry><entry xml:lang="hu_HU"><title type="html">Gitea beüzemelés (Raspberry Pi)</title><link href="https://juzraai.github.io/blog/2018/gitea-beuzemeles-rpi/" rel="alternate" type="text/html" title="Gitea beüzemelés (Raspberry Pi)" /><published>2018-11-03T00:00:00+01:00</published><updated>2018-11-04T22:33:00+01:00</updated><id>https://juzraai.github.io/blog/2018/gitea-beuzemeles-rpi</id><content type="html" xml:base="https://juzraai.github.io/blog/2018/gitea-beuzemeles-rpi/">&lt;h2 id=&quot;bevezetés&quot;&gt;Bevezetés&lt;/h2&gt;
+
+&lt;p&gt;A munkafolyamataim hatékonyabbá és elegánsabbá tétele gyanánt azt tűztem ki célul, hogy a Git szerveremen beüzemelek egy webes felületet, amivel&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;tudom browse-olni a repókat a history-juk bármely pontján&lt;/li&gt;
+  &lt;li&gt;és egyszerűen tudom kezelni a hozzáféréseket.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Mindezt a &lt;a href=&quot;https://www.raspberrypi.org/products/raspberry-pi-3-model-b-plus/&quot;&gt;Raspberry Pi&lt;/a&gt;-men akarom kikísérletezni először, mielőtt az éles szerveren beállítom. A Pi-t azért tettem zárójelbe a bejegyzés címében, mert habár a málna PC-n tesztelek, &lt;strong&gt;az eredményre vezető lépéssorozat igazából hardver-, platform- és rendszerfüggetlen.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Git-hez való, saját szerveren hosztolható webes felületről szerintem sokaknak a &lt;strong&gt;&lt;a href=&quot;https://about.gitlab.com/&quot;&gt;GitLab&lt;/a&gt;&lt;/strong&gt; ugrik be, ahogy nekem is. Azonban őszentsége nagyon erőforrásigényes. Ugyan találtam ARM-re való &lt;a href=&quot;https://github.com/ulm0/gitlab&quot;&gt;Docker image&lt;/a&gt;-et, de a Pi nem bírta, úgyhogy a GitLab számomra felejtős egyelőre.&lt;/p&gt;
+
+&lt;p&gt;Értelmes alternatívának a &lt;a href=&quot;https://gitea.io/&quot;&gt;Gitea&lt;/a&gt;-t találtam, ami a &lt;a href=&quot;https://gogs.io/&quot;&gt;Gogs&lt;/a&gt; forkja, picivel &lt;a href=&quot;https://docs.gitea.io/en-us/comparison/&quot;&gt;több funkcióval&lt;/a&gt; és nyitottabb open-source felfogással. Eleve úgy van tervezve és fejlesztve, hogy gyengébb gépeken, ARM architektúrán és pl. Raspberry Pi-n is használható legyen.&lt;/p&gt;
+
+&lt;h2 id=&quot;telepítés&quot;&gt;Telepítés&lt;/h2&gt;
+
+&lt;p&gt;Meglepő módon &lt;a href=&quot;https://docs.gitea.io/en-us/install-from-package/&quot;&gt;nincs hozzá Debian csomag&lt;/a&gt;, a &lt;a href=&quot;https://hub.docker.com/r/gitea/gitea/&quot;&gt;Docker image&lt;/a&gt; pedig &lt;a href=&quot;https://github.com/go-gitea/gitea/issues/5180&quot;&gt;nem fut ARM-en&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Szerencsére a Gitea-t fejlesztő csapat egy &lt;strong&gt;csomó féle rendszerre elkészíti a binárisokat,&lt;/strong&gt; melyek a &lt;a href=&quot;https://dl.gitea.io/gitea/&quot;&gt;honlapjukról&lt;/a&gt; és &lt;a href=&quot;https://github.com/go-gitea/gitea/releases&quot;&gt;GitHub&lt;/a&gt;-ról is letölthetőek. És van köztük ARM-re fordított bináris, több is, nekem Raspberry Pi 3B+-ra a &lt;a href=&quot;https://dl.gitea.io/gitea/1.5.3/gitea-1.5.3-linux-arm-7&quot;&gt;gitea-1.5.3-linux-arm-7&lt;/a&gt; verzió kellett. Ezekben a fájlokban minden szükséges dolog megvan, &lt;strong&gt;csak futtatni kell&lt;/strong&gt; őket.&lt;/p&gt;
+
+&lt;p&gt;Érdemes neki létrehozni egy &lt;strong&gt;júzert és az alól&lt;/strong&gt; futtatni a programot:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;useradd gitea
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;su - gitea
+wget https://dl.gitea.io/gitea/1.5.3/gitea-1.5.3-linux-arm-7 &lt;span class=&quot;nt&quot;&gt;-O&lt;/span&gt; gitea
+&lt;span class=&quot;nb&quot;&gt;chmod &lt;/span&gt;u+x ./gitea
+./gitea web &lt;span class=&quot;nt&quot;&gt;--port&lt;/span&gt; 3000
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;A Gitea-nek &lt;strong&gt;kelleni fog egy adatbázis.&lt;/strong&gt; Tud SQLite-ot is használni (1 db adatfájlt jelent), de ha pl. MySQL-be vagy Postgres-be szeretnéd tárolni az adatokat, akkor érdemes előbb előkészíteni azt, mielőtt a &lt;code class=&quot;highlighter-rouge&quot;&gt;gitea&lt;/code&gt; binárist elindítod. Én a teszthez maradtam az SQLite-nál.&lt;/p&gt;
+
+&lt;h2 id=&quot;kezdeti-beállítások&quot;&gt;Kezdeti beállítások&lt;/h2&gt;
+
+&lt;p&gt;Ha a fenti paranccsal elindítjuk a Gitea-t, elindul a szerver és a &lt;strong&gt;böngészőnkben&lt;/strong&gt; a &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:3000/&lt;/code&gt; URL-en elérjük a főoldalt. Ha bármelyik linkre rákattintunk, a telepítő képernyő fog bejönni, ahol &lt;strong&gt;néhány kezdeti beállítást&lt;/strong&gt; megadhatunk, pl:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;app neve (címsorban megjelenő szöveg)&lt;/li&gt;
+  &lt;li&gt;adatbázis kapcsolódási adatok&lt;/li&gt;
+  &lt;li&gt;útvonalak&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;A fentiek ellenőrzésén/módosításán kívül amit fontosnak tartok, az a mentés gomb feletti egyik lenyitható szekcióban megbúvó &lt;strong&gt;admin account beállítás.&lt;/strong&gt; Érdemes itt megadni az adminisztrátor felhasználó adatait, pláne, ha letiltod a regisztrációt. Egyébként az első regisztrált júzer lesz az adminisztrátor.&lt;/p&gt;
+
+&lt;p&gt;Amikor ezt az űrlapot leokézzuk, a Gitea 1-2 percig (legalábbis Pi-n) elmolyol a mappák, konfigfájlok és adatbázistáblák létrehozásával, utána bejön a login képernyő és kezdhetünk vele játszani.&lt;/p&gt;
+
+&lt;p&gt;A megadott beállítások és még &lt;strong&gt;rengeteg paraméter&lt;/strong&gt; később is módosítható a konfigfájlban (&lt;code class=&quot;highlighter-rouge&quot;&gt;custom/conf/app.ini&lt;/code&gt;). Mielőtt komolyabban elkezdenénk használni a Gitea-t, érdemes &lt;strong&gt;végigolvasni&lt;/strong&gt; az &lt;a href=&quot;https://docs.gitea.io/en-us/config-cheat-sheet/&quot;&gt;összes beállítási lehetőséget&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;tapasztalatok-gyors-kipróbálás&quot;&gt;Tapasztalatok (gyors kipróbálás)&lt;/h2&gt;
+
+&lt;p&gt;A HTTP clone/push gyönyörűen működik a webes felület user+pass kombójával. Az SSH módszernél a clone URL generálás nem az igazi, a Git repók mappáját lehagyja az URL-ből, viszont a &lt;strong&gt;saját beépített SSH szerverével&lt;/strong&gt; frankón megy ez is. A webes felületen a profil beállításainál fel lehet tölteni SSH/RSA publikus kulcsot.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Meglévő repók importálása&lt;/strong&gt; is pofon egyszerű, ez nekem nagyon fontos volt. Persze órákig kísérleteztem vele, mire rájöttem a nyitjára - erről &lt;a href=&quot;/blog/2018/lokalis-repok-importalasa-gitea-be&quot;&gt;külön posztban&lt;/a&gt; írok.&lt;/p&gt;
+
+&lt;p&gt;A webes felületet és funkciókat tekintve &lt;strong&gt;gyakorlatilag egy GitHub klónt&lt;/strong&gt; kapunk. (Issues, PR, issue/pr templates, organizations, teams, etc.)&lt;/p&gt;
+
+&lt;h2 id=&quot;konfig&quot;&gt;Konfig&lt;/h2&gt;
+
+&lt;p&gt;Én az alábbiakat adtam hozzá kézzel a telepítő által kiköpött konfig fájlhoz. Ez nyilván nem lesz mindenkinek megfelelő, ízelítőként, illetve saját feljegyzésként (note to self) teszem ide.&lt;/p&gt;
+
+&lt;div class=&quot;language-ini highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nn&quot;&gt;[repository]&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;DEFAULT_PRIVATE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;true&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;FORCE_PRIVATE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;true&lt;/span&gt;
+
+&lt;span class=&quot;nn&quot;&gt;[security]&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;DISABLE_GIT_HOOKS&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;true&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;IMPORT_LOCAL_PATHS&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;true&lt;/span&gt;
+
+&lt;span class=&quot;nn&quot;&gt;[server]&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;DISABLE_ROUTER_LOG&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;true&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;START_SSH_SERVER&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;true&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;SSH_PORT&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;2222&lt;/span&gt;
+
+&lt;span class=&quot;nn&quot;&gt;[service]&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;DISABLE_REGISTRATION&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;true&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;REQUIRE_SIGNIN_VIEW&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;telepítés-service-ként-systemd&quot;&gt;Telepítés service-ként (systemd)&lt;/h2&gt;
+
+&lt;p&gt;Miután megbizonyosodtam róla, hogy jó lesz ez a cucc, beállítottam service-ként, hogy induljon a géppel automatikusan. Létrehoztam egy &lt;code class=&quot;highlighter-rouge&quot;&gt;gitea.service&lt;/code&gt; fájlt az alábbi tartalommal:&lt;/p&gt;
+
+&lt;div class=&quot;language-ini highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nn&quot;&gt;[Unit]&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;Description&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Gitea&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;After&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;network.target&lt;/span&gt;
+
+&lt;span class=&quot;nn&quot;&gt;[Service]&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;Type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;simple&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;gitea&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;Group&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;gitea&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;WorkingDirectory&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;/home/gitea&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;ExecStart&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;/home/gitea/gitea web --port 3000&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;Restart&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;always&lt;/span&gt;
+
+&lt;span class=&quot;nn&quot;&gt;[Install]&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;WantedBy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;multi-user.target&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Majd az alábbi parancsokkal telepítettem és elindítottam:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;systemctl &lt;span class=&quot;nb&quot;&gt;enable&lt;/span&gt; /home/gitea/gitea.service
+service gitea start
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Zsolt Jurányi</name></author><category term="config" /><category term="git" /><category term="gitea" /><category term="raspberry-pi" /><category term="server" /><category term="setup" /><category term="web-ui" /><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /></entry><entry xml:lang="en_US"><title type="html">Free contact form using Basin</title><link href="https://juzraai.github.io/blog/2018/contact-form-using-basin/" rel="alternate" type="text/html" title="Free contact form using Basin" /><published>2018-06-03T00:00:00+02:00</published><updated>2018-06-24T12:44:37+02:00</updated><id>https://juzraai.github.io/blog/2018/contact-form-using-basin</id><content type="html" xml:base="https://juzraai.github.io/blog/2018/contact-form-using-basin/">&lt;p&gt;My &lt;a href=&quot;/blog/2018/contact-form-for-free&quot;&gt;previous post&lt;/a&gt; was about free contact form solutions that can send email. I tried out &lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt; which was before my gold medal winner based on its website only. Here are my experiences. 🙂&lt;/p&gt;
 
 &lt;h2 id=&quot;first-steps&quot;&gt;First steps&lt;/h2&gt;
 
@@ -601,196 +747,4 @@
 
 &lt;p&gt;A &lt;a href=&quot;https://bootswatch.com/&quot;&gt;Bootswatch&lt;/a&gt; oldalon különböző theme-ek is elérhetőek hozzá.&lt;/p&gt;
 
-&lt;p&gt;Szóval tudom ajánlani mindenkinek a fenti cuccokat, nagyon hasznosak. 🙂&lt;/p&gt;</content><author><name>Zsolt Jurányi</name></author><category term="bootstrap" /><category term="knockoutjs" /><category term="springboot" /><category term="tapasztalat" /><category term="webalkalmazás" /><summary type="html">A tavalyi év utolsó hónapjában több új dolgot is megismertem, ezek közül az első csokor a technológiák, mégpedig olyanok, amelyek webalkalmazások gyors előállítását hivatottak nagyban segíteni.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /></entry><entry xml:lang="hu_HU"><title type="html">HVG Big Data a marketingben</title><link href="https://juzraai.github.io/blog/2014/hvg-big-data-a-marketingben/" rel="alternate" type="text/html" title="HVG Big Data a marketingben" /><published>2014-10-30T00:00:00+01:00</published><updated>2018-06-10T23:51:20+02:00</updated><id>https://juzraai.github.io/blog/2014/hvg-big-data-a-marketingben</id><content type="html" xml:base="https://juzraai.github.io/blog/2014/hvg-big-data-a-marketingben/">&lt;p&gt;Tegnap volt szerencsém részt venni a HVG rendezvényén, a &lt;a href=&quot;http://konferencia.hvg.hu/big-data-a-marketingben.html&quot;&gt;Big Data a marketingben&lt;/a&gt; című konferencián. Noha nem vagyok marketinges, hanem - crawler programok fejlesztése révén - inkább adatgyűjtő, a konferencia hasznos és érdekes volt számomra is. 🙂 A sok előadáson és az azt követő kerekasztal beszélgetésen elhangzott rengeteg gondolatot megpróbáltam összefoglalni, ezt osztom meg most itt.&lt;/p&gt;
-
-&lt;p&gt;Az előadások a big data marketingbeli hasznosítására fókuszáltak, de így érintettük a feldolgozási módszereket is. Magát a big datát sokféleképp értelmezik: flancos szó, lehetőség, fejlődés, vagy rombolás. Az adat az anyag, az &lt;strong&gt;adat megértéséből előállított információ&lt;/strong&gt; pedig az anyagban rejlő lehetőség, amit nagyon jól fel lehet használni a marketingben. A big datával való foglalkozás elkezdésekor már jogi tanácsadást érdemes kérni. A big data-hoz jól értő emberek szakmája a &lt;em&gt;“data scientist”&lt;/em&gt;, ami üzleti gondolkodást, adatelemző készséget és programozási tudást foglal magában - ilyen ember gyakorlatilag nincs. Érdemes tehát különválasztani: &lt;strong&gt;adatgyűjtő és adatelemző emberekre.&lt;/strong&gt; Érdemes minél több ilyen embert bevonzani, és minél több céget akik big dataval foglalkoznak, pl. adatcsere szempontjából. Minél több adat, minél sokrétűbb adat, minél frissebb adat előny. Minden adatot hasznosítani kell a jó eredmény érdekében.&lt;/p&gt;
-
-&lt;p&gt;Marketingben a cél az ember, a &lt;strong&gt;minél személyesebb kapcsolat&lt;/strong&gt; kialakítása, így a lojalitás megteremtése, fenntartása. A kéretlen leveleket, irreleváns tartalmakat fel kell számolni, a személyes érdeklődési körnek megfelelő tartalmat kell kitenni a webre, üzenetekbe. Így &lt;strong&gt;annak reklámozunk, akit érdekel,&lt;/strong&gt; a kevesebb több. Ehhez kell az adatgyűjtés és elemzés, szegmentálás, profilozás. Adatforrás lehet a Facebook kedvelések, vagy hogy mire kattint a hírlevélben, vagy akár a pozíció.&lt;/p&gt;
-
-&lt;p&gt;Big data-s módszereket használhatunk a &lt;strong&gt;vélemények begyűjtésére&lt;/strong&gt; is, ezáltal képet kaphatunk a saját vagy akár konkurens szolgáltatásról alkotott fogyasztói képről, és ez alapján kitalálhatjuk, mit kell változtatnunk.&lt;/p&gt;</content><author><name>Zsolt Jurányi</name></author><category term="bigdata" /><category term="konferencia" /><category term="marketing" /><summary type="html">Tegnap volt szerencsém részt venni a HVG rendezvényén, a Big Data a marketingben című konferencián. Noha nem vagyok marketinges, hanem - crawler programok fejlesztése révén - inkább adatgyűjtő, a konferencia hasznos és érdekes volt számomra is. 🙂 A sok előadáson és az azt követő kerekasztal beszélgetésen elhangzott rengeteg gondolatot megpróbáltam összefoglalni, ezt osztom meg most itt.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /></entry><entry xml:lang="hu_HU"><title type="html">Heritrix 3 konfig receptkönyv</title><link href="https://juzraai.github.io/blog/2013/heritrix-3-konfig-receptkonyv/" rel="alternate" type="text/html" title="Heritrix 3 konfig receptkönyv" /><published>2013-10-04T00:00:00+02:00</published><updated>2018-06-24T12:44:37+02:00</updated><id>https://juzraai.github.io/blog/2013/heritrix-3-konfig-receptkonyv</id><content type="html" xml:base="https://juzraai.github.io/blog/2013/heritrix-3-konfig-receptkonyv/">&lt;p&gt;Gondoltam megosztom a tapasztalatokat, hátha akad olyan “elvetemült”, aki szintén &lt;a href=&quot;https://webarchive.jira.com/wiki/spaces/Heritrix/overview&quot;&gt;Heritrix&lt;/a&gt;-szel akar nekiállni site-okat archiválni. 🤪 Az alábbiakban leírom azokat a beállítási lehetőségeket, amelyek munkám során előjöttek, fontosak voltak.&lt;/p&gt;
-
-&lt;p&gt;A konfigurációt Heritrix-ben job-onként lehet elvégezni, a &lt;code class=&quot;highlighter-rouge&quot;&gt;crawler-beans.cxml&lt;/code&gt; fájl módosításával.&lt;/p&gt;
-
-&lt;h2 id=&quot;1-kezdő-lépések&quot;&gt;1. Kezdő lépések&lt;/h2&gt;
-
-&lt;h3 id=&quot;11-url-ek-hozzáadása&quot;&gt;1.1. URL-ek hozzáadása&lt;/h3&gt;
-
-&lt;p&gt;A legfontosabb dolog egy job-nál a forrás URL-ek hozzáadása, vagyis: honnan induljon a letöltés? A CXML-ben keressük meg ezt a részt:&lt;/p&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;longerOverrides&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.springframework.beans.factory.config.PropertyOverrideConfigurer&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;properties&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;props&amp;gt;&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;&amp;lt;prop&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;seeds.textSource.value&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-
-        # URLS HERE
-
-      &lt;span class=&quot;nt&quot;&gt;&amp;lt;/prop&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/props&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Itt az URL-eket soronként írhatjuk be.&lt;/p&gt;
-
-&lt;h3 id=&quot;12-operátor-kontakt-címe&quot;&gt;1.2. Operátor kontakt címe&lt;/h3&gt;
-
-&lt;p&gt;A Heritrix &lt;strong&gt;megköveteli, hogy beírjunk egy URL-t,&lt;/strong&gt; ami a letöltést végző egyén/szervezet honlapjára mutat. Ez az URL hozzá lesz adva a &lt;code class=&quot;highlighter-rouge&quot;&gt;User-agent&lt;/code&gt; paraméterhez. (Lesz még szó róla a 2.6.-os bekezdésben.) Nyilván ez a felelősség miatt kell, hogy ha leterheljük valakinek a szerverét egy izmos crawl futammal, és az nemtetszést vált ki, akkor vissza lehessen keresni minket.&lt;/p&gt;
-
-&lt;p&gt;Keressünk rá az alábbira, hogy megtaláljuk, hova kell írni ezt a címet:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;metadata.operatorContactUrl=
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;2-testreszabás&quot;&gt;2. Testreszabás&lt;/h2&gt;
-
-&lt;h3 id=&quot;21-tárolási-mód&quot;&gt;2.1. Tárolási mód&lt;/h3&gt;
-
-&lt;p&gt;A Heritrix 3 alapesetben &lt;a href=&quot;https://en.wikipedia.org/wiki/Web_ARChive&quot;&gt;WARC&lt;/a&gt; fájlokba írja a letöltött adatokat. Előfordulhatnak esetek, amikor nekünk nem erre van szükségünk, hanem esetleg konkrétan a fájlokra, vagy esetleg WARC helyett &lt;a href=&quot;https://en.wikipedia.org/wiki/ARC_(file_format)&quot;&gt;ARC&lt;/a&gt; fájlokra.&lt;/p&gt;
-
-&lt;p&gt;Ehhez a &lt;code class=&quot;highlighter-rouge&quot;&gt;warcWriter&lt;/code&gt; bean class paraméterét kell megfelelően beállítanunk:&lt;/p&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;warcWriter&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.archive.modules.writer.WARCWriterProcessor&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Lehetőségek (a package ugyanaz):&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;WARCWriterProcessor&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ARCWriterProcessor&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;MirrorWriterProcessor&lt;/code&gt; - ez tükrözi a mappaszerkezetet&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;22-domain-en-belül-maradás&quot;&gt;2.2. Domain-en belül maradás&lt;/h3&gt;
-
-&lt;p&gt;Ha egy site-ot archiválunk, általában nem akarjuk követni az összes linket a végtelenségig rekurzívan, mert végtelen időnk és tárkapacitásunk nincs. Az lenne a cél, hogy a rekurzív bejárás az adott &lt;strong&gt;kiinduális domain-re szorítkozzon, ne lépjen ki onnan.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Ezt egy Heritrix 3 job esetén úgy tehetjük meg, hogy az alábbi bean-t konkrétan kitöröljük/kikommentezzük a config CXML-ből:&lt;/p&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!--
-  &amp;lt;bean class=&quot;org.archive.modules.deciderules.TransclusionDecideRule&quot;&amp;gt;
-    ...
-  &amp;lt;/bean&amp;gt;
---&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;23-bizonyos-url-minták-tiltása&quot;&gt;2.3. Bizonyos URL minták tiltása&lt;/h3&gt;
-
-&lt;p&gt;Azon túl, hogy domain-en maradunk, site-on belül is lehetnek olyan részek, amik minket nem érdekelnek, esetleg fájltípusok, vagy akár &lt;strong&gt;crawler csapdák&lt;/strong&gt; (pl. egy végtelen calendar, ami ráadásul minden aloldalról elérhető különböző URL-en).&lt;/p&gt;
-
-&lt;p&gt;Ezeket &lt;strong&gt;reguláris kifejezések&lt;/strong&gt; formájában mondhatjuk meg a Heritrix-nek, hogy kerülje el:&lt;/p&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;scope&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.archive.modules.deciderules.DecideRuleSequence&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-  ...
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;rules&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;list&amp;gt;&lt;/span&gt;
-
-      ...
-
-      &lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.archive.modules.deciderules.MatchesListRegexDecideRule&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;decision&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;REJECT&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;regexList&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-          &lt;span class=&quot;nt&quot;&gt;&amp;lt;list&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;value&amp;gt;&lt;/span&gt;regexp1&lt;span class=&quot;nt&quot;&gt;&amp;lt;/value&amp;gt;&lt;/span&gt;
-              ...
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;value&amp;gt;&lt;/span&gt;regexpN&lt;span class=&quot;nt&quot;&gt;&amp;lt;/value&amp;gt;&lt;/span&gt;
-          &lt;span class=&quot;nt&quot;&gt;&amp;lt;/list&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/list&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;24-gyorsítás&quot;&gt;2.4. Gyorsítás&lt;/h3&gt;
-
-&lt;p&gt;A Heritrix alapból nagyon komótosan tölt, akár másodperceket is vár URL-enként. A konfigban én 2 helyet találtam, ahol fel lehet turbózni a dolgot:&lt;/p&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;disposition&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.archive.crawler.postprocessor.DispositionProcessor&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;delayFactor&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1.0&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;minDelayMs&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;100&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;respectCrawlDelayUpToSeconds&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;maxDelayMs&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;100&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Illetve:&lt;/p&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'veryPolite'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'org.archive.spring.Sheet'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'map'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;map&amp;gt;&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;&amp;lt;entry&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'disposition.delayFactor'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'1'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;&amp;lt;entry&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'disposition.minDelayMs'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'100'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;&amp;lt;entry&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'disposition.maxDelayMs'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'1000'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;&amp;lt;entry&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'disposition.respectCrawlDelayUpToSeconds'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'1'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/map&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Az egyes property-k értékeinek magyarázatához lásd a &lt;a href=&quot;https://webarchive.jira.com/wiki/spaces/Heritrix/pages/5407381/Heritrix+3.0+and+3.1+User+Guide&quot;&gt;doksit&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h3 id=&quot;25-robotstxt-figyelmen-kívül-hagyása&quot;&gt;2.5. robots.txt figyelmen kívül hagyása&lt;/h3&gt;
-
-&lt;p&gt;A &lt;a href=&quot;https://support.google.com/webmasters/answer/6062608?hl=hu&quot;&gt;robots.txt&lt;/a&gt;-ben a webszerverek bizonyos robotokat, böngészőket (vagy akár mindenféle programot) tilthatnak el bizonyos mappáktól, illetve crawl delay-t is megszabhatnak. Persze ezek &lt;strong&gt;csak információk, ajánlások a programoknak,&lt;/strong&gt; az már egy másik kérdés, hogy be is akarják-e ezt tartani. A Heritrix persze alapvetően illedelmes robot, betartja, amit e szabályzatban megszabnak neki, de szerencsére tartalmaz konfigurálási lehetőséget a &lt;code class=&quot;highlighter-rouge&quot;&gt;robots.txt&lt;/code&gt; ignorálására.&lt;/p&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;metadata&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.archive.modules.CrawlMetadata&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;autowire=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;byName&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-  ...
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;robotsPolicyName&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ignore&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-  ...
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;26-saját-user-agent-megadása&quot;&gt;2.6. Saját User-agent megadása&lt;/h3&gt;
-
-&lt;p&gt;Vannak olyan site-ok, ahol akár &lt;code class=&quot;highlighter-rouge&quot;&gt;robots.txt&lt;/code&gt; szabályokkal, akár egy szerveroldali szkript segítségével szűrik, hogy milyen böngészővel lehet őket meglátogatni. A &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/User-Agent&quot;&gt;User-agent&lt;/a&gt; HTTP paraméter szolgál arra, hogy megnevezze a HTTP kérést küldő programot és annak verzióját, illetve esetleg a platformot, amin fut. Az ilyen szűréseket nagyon egyszerű kikerülni: beállítjuk ennek a paraméternek az értékét mondjuk egy népszerű böngészőére.&lt;/p&gt;
-
-&lt;p&gt;Heritrix-ben is beállítható ez természetesen, viszont annyi megkötés van, hogy &lt;strong&gt;a Heritrix verziószámának és az operátor URL-nek (lásd 1.2) szerepelnie kell benne.&lt;/strong&gt; A konfigfájlban egy template string-et kell megadni, amiben szerepel egyrészt a &lt;code class=&quot;highlighter-rouge&quot;&gt;@VERSION@&lt;/code&gt;, másrészt a &lt;code class=&quot;highlighter-rouge&quot;&gt;+@OPERATOR_CONTACT_URL@&lt;/code&gt; karakterlánc. Felhívom a figyelmet, hogy a &lt;code class=&quot;highlighter-rouge&quot;&gt;+&lt;/code&gt; jel is kell, különben hibát jelez a Heritrix a job build-elésekor.&lt;/p&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;metadata&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.archive.modules.CrawlMetadata&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;autowire=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;byName&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-  ...
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;userAgentTemplate&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Mozilla/5.0 (compatible; heritrix/@VERSION@ +@OPERATOR_CONTACT_URL@)&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-  ...
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;27-auto-pause-kikapcsolása&quot;&gt;2.7. Auto pause kikapcsolása&lt;/h3&gt;
-
-&lt;p&gt;A Heritrix-nek van egy olyan érdekessége, hogy alapértelmezésben ha egy job-ot elindítasz, rögtön lepauzálja. Külön rá kell menned az unpause gombra, hogy ténylegesen meginduljon a letöltés. (Érdekes dolog, én még nem jöttem rá mire jó ez… ha elindítok egy job-ot, akkor azért indítom el, hogy töltsön, nem? 😃) De ezt is ki lehet kapcsolni, itt:&lt;/p&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;crawlController&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.archive.crawler.framework.CrawlController&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;pauseAtStart&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;false&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;3-megfigyelések&quot;&gt;3. Megfigyelések&lt;/h2&gt;
-
-&lt;h3 id=&quot;31-memóriaigény&quot;&gt;3.1. Memóriaigény&lt;/h3&gt;
-
-&lt;p&gt;A doksi azt írja, hogy az alapértelmezett 256MB heap memória több száz oldal letöltéséhez jó. Tapasztalatom szerint 8-10 &lt;strong&gt;párhuzamosan futó job&lt;/strong&gt;-tól konkrétan meghal az egész &lt;code class=&quot;highlighter-rouge&quot;&gt;OutOfMemoryException&lt;/code&gt;-nel, szóval az &lt;code class=&quot;highlighter-rouge&quot;&gt;Xmx&lt;/code&gt; paramétert érdemes megadni, és &lt;strong&gt;GB-okban kell gondolkodni.&lt;/strong&gt; Én speciel 3GB-ot adok neki, ez elég arra, hogy 10 job fusson párhuzamosan.&lt;/p&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;export HERITRIX_HOME=/path/to/heritrix-3.1.1
-export JAVA_HOME=/path/to/jre
-export JAVA_OPTS=-Xmx3G
-$HERITRIX_HOME/bin/heritrix -a admin:admin
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Amit még érdemes megtenni: az épp nem futó &lt;strong&gt;job-okat teardown-olni&lt;/strong&gt;, ha sok van.&lt;/p&gt;
-
-&lt;h3 id=&quot;32-url-problémák&quot;&gt;3.2. URL problémák&lt;/h3&gt;
-
-&lt;p&gt;A &lt;code class=&quot;highlighter-rouge&quot;&gt;MirrorWriter&lt;/code&gt;-rel az a tapasztalat, hogy érdekes dolgokat produkál. &lt;strong&gt;Bizonyos URL-ekből én azt látom, hogy nem képes (valid) fájlnevet generálni,&lt;/strong&gt; tehát az a letöltött bájthalmaz elveszik az éterben. Konkrétan én ezt &lt;code class=&quot;highlighter-rouge&quot;&gt;/?a=b/c&lt;/code&gt; alakú relatív linkeknél tapasztaltam.&lt;/p&gt;
-
-&lt;p&gt;Ami nagy probléma, hogy a parszere elég érdekes felfogás mentén lett implementálva. A Heritrix &lt;strong&gt;mindenhonnan ki akar parszolni URL-t,&lt;/strong&gt; onnan is, ahol nincs. Kutat a CSS-ekben, JS-ben, és gazdagon kapok olyan fájlokat, amelyek neve egy stíluslapon használt szelektor, vagy egy szkriptben használt feltétel egyik fele. 😃&lt;/p&gt;
-
-&lt;p&gt;A forráskódban azt láttam, hogy ilyen &lt;em&gt;“likely-URL”&lt;/em&gt;-eket keres, tehát ami &lt;em&gt;“olyasmi, mint egy URL”&lt;/em&gt;… Találkoztam olyan mappanévvel is, ami egy komplett &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;iframe&amp;gt;&lt;/code&gt; tag volt.&lt;/p&gt;
-
-&lt;p&gt;Itt nyilván felmerül az emberben, hogy esetleg nem ez a “smart crawler” a hibás, hanem az adott oldal forráskódja… de egyrészt ezt nem egy oldalnál csinálja, másrészt pedig ezeket az adott oldalakat a &lt;a href=&quot;https://www.gnu.org/software/wget/&quot;&gt;WGET&lt;/a&gt; hibamentesen leszedte.&lt;/p&gt;
-
-&lt;p&gt;Azt olvastam, hogy érdemes kikapcsolni a job konfigban az &lt;code class=&quot;highlighter-rouge&quot;&gt;ExtractorJS&lt;/code&gt; és &lt;code class=&quot;highlighter-rouge&quot;&gt;ExtractorCSS&lt;/code&gt; modulokat, mert így megszabadulok ezektől a felesleges fájloktól (amelyek egyébként növelik az idő- és tárigényt, valamint redundáns adatot tartalmaznak!) - de még nem próbáltam ki. 🙂&lt;/p&gt;
-
-&lt;p&gt;További észrevétel a közelmúltból: Drupal-os oldalt nem tud jól kezelni, kaptam egy ilyen URL-t a crawl log-ban:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;http://***/calendar/month/2013-06/field/theme/sites/all/modules/ctools/css/sites/all/modules/ctools/css/modules/user/user.css
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;…amiben én egy ciklust vélek felfedezni. Természetesen a letöltött fájl sem egy stíluslap lett, hanem egy HTML, valószínűleg a Drupal rendszer olyan jószívű, hogy 404 hibalap helyett visszadobja a leghosszabb valid prefix-hez tartozó lapot. Bár talán pont azzal jártunk volna jobban, ha hibát ad vissza, mert akkor nem keletkezik redundáns adat… no mindegy. 🙂&lt;/p&gt;</content><author><name>Zsolt Jurányi</name></author><category term="crawling" /><category term="heritrix" /><category term="konfiguráció" /><category term="tapasztalat" /><summary type="html">Gondoltam megosztom a tapasztalatokat, hátha akad olyan “elvetemült”, aki szintén Heritrix-szel akar nekiállni site-okat archiválni. 🤪 Az alábbiakban leírom azokat a beállítási lehetőségeket, amelyek munkám során előjöttek, fontosak voltak.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /></entry></feed>
+&lt;p&gt;Szóval tudom ajánlani mindenkinek a fenti cuccokat, nagyon hasznosak. 🙂&lt;/p&gt;</content><author><name>Zsolt Jurányi</name></author><category term="bootstrap" /><category term="knockoutjs" /><category term="springboot" /><category term="tapasztalat" /><category term="webalkalmazás" /><summary type="html">A tavalyi év utolsó hónapjában több új dolgot is megismertem, ezek közül az első csokor a technológiák, mégpedig olyanok, amelyek webalkalmazások gyors előállítását hivatottak nagyban segíteni.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /></entry></feed>
