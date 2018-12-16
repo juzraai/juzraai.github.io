@@ -1,4 +1,218 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="hu_HU"><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://juzraai.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://juzraai.github.io/" rel="alternate" type="text/html" hreflang="hu_HU" /><updated>2018-12-14T00:56:24+01:00</updated><id>https://juzraai.github.io/feed.xml</id><title type="html">Zsolt Jurányi (juzraai)</title><subtitle>Zsolt vagyok, full-stack fejlesztő. Crawlereket, webalkalmazásokat, statikus honlapokat és interaktív vizualizációkat készítek.</subtitle><author><name>Zsolt Jurányi</name></author><entry xml:lang="hu_HU"><title type="html">Díjnet bot</title><link href="https://juzraai.github.io/blog/2018/dijnet-bot/" rel="alternate" type="text/html" title="Díjnet bot" /><published>2018-12-14T00:00:00+01:00</published><updated>2018-12-14T00:53:55+01:00</updated><id>https://juzraai.github.io/blog/2018/dijnet-bot</id><content type="html" xml:base="https://juzraai.github.io/blog/2018/dijnet-bot/">&lt;h2 id=&quot;a-probléma&quot;&gt;A probléma&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="hu_HU"><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://juzraai.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://juzraai.github.io/" rel="alternate" type="text/html" hreflang="hu_HU" /><updated>2018-12-16T01:29:26+01:00</updated><id>https://juzraai.github.io/feed.xml</id><title type="html">Zsolt Jurányi (juzraai)</title><subtitle>Zsolt vagyok, full-stack fejlesztő. Crawlereket, webalkalmazásokat, statikus honlapokat és interaktív vizualizációkat készítek.</subtitle><author><name>Zsolt Jurányi</name></author><entry xml:lang="hu_HU"><title type="html">Git changelog generálás</title><link href="https://juzraai.github.io/blog/2018/git-changelog-generalas/" rel="alternate" type="text/html" title="Git changelog generálás" /><published>2018-12-15T00:00:00+01:00</published><updated>2018-12-16T01:28:27+01:00</updated><id>https://juzraai.github.io/blog/2018/git-changelog-generalas</id><content type="html" xml:base="https://juzraai.github.io/blog/2018/git-changelog-generalas/">&lt;h2 id=&quot;bevezetés&quot;&gt;Bevezetés&lt;/h2&gt;
+
+&lt;p&gt;Böngészgettem GitHub-on, és felfigyeltem rá, hogy sok repóban van &lt;strong&gt;changelog fájl&lt;/strong&gt; vagy fejezet a readme-ben. A changelog egy &lt;strong&gt;hasznos dolog, tájékoztatja&lt;/strong&gt; a felhasználót (vagy fejlesztőt) az egyes verziók különbségeiről, a &lt;strong&gt;bekövetkezett változásokról.&lt;/strong&gt; Ha elég ügyesek vagyunk, ezt a naplót megfelelő tool segítségével le is tudjuk generálni. A jó changelog irányelveit a &lt;a href=&quot;https://keepachangelog.com/en/1.0.0/&quot;&gt;Keep a Changelog&lt;/a&gt; oldal írja le, szem előtt tartva úgy a napló olvashatóságát és értelmét, mint pedig a generálhatóságát (ld. commit message prefixek).&lt;/p&gt;
+
+&lt;p&gt;Namost a linken írtakat most olvastam el, miután a posztom vázlatát megírtam… és a helyzet az, hogy &lt;strong&gt;a bejegyzés további része szembemegy az irányelvekkel.&lt;/strong&gt; Ez kissé talán lelomboz, viszont ettől még nem haszontalan megosztanom a &lt;del&gt;mai szenvedésem&lt;/del&gt; ma szerzett tapasztalataimat a &lt;code class=&quot;highlighter-rouge&quot;&gt;git log&lt;/code&gt; paranccsal.&lt;/p&gt;
+
+&lt;h2 id=&quot;célkitűzés&quot;&gt;Célkitűzés&lt;/h2&gt;
+
+&lt;p&gt;A dolog ott indul, hogy a &lt;a href=&quot;/blog/2018/dijnet-bot/&quot;&gt;Díjnet bothoz&lt;/a&gt; gondoltam changelog-ot generálni. A &lt;a href=&quot;https://github.com/juzraai/dijnet-bot&quot;&gt;repóról&lt;/a&gt; azt kell most tudni, hogy a commit message-eket kivételesen magyarul írom. &lt;strong&gt;A célom pedig az, hogy a changelog tartalmazza az összes commit-ot, release-enként csoportosítva.&lt;/strong&gt; (vö. a fentebb linkelt irányelvekkel)&lt;/p&gt;
+
+&lt;p&gt;Keresgéltem létező generátorokat, kettőt emelnék ki:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/github-changelog-generator/github-changelog-generator&quot;&gt;github-changelog-generator&lt;/a&gt; - Ennek van a legtöbb csillaga, viszont nekem (most) nem megfelelő, mert &lt;strong&gt;GitHub Issues-ból dolgozik,&lt;/strong&gt; amit nem használok a fent említett repóban.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/git-chglog/git-chglog/&quot;&gt;git-chglog&lt;/a&gt; - Ez kevésbé népszerű, viszont nagyon szimpatikus, mert a &lt;strong&gt;git history-ból dolgozik,&lt;/strong&gt; egyetlen binárisból áll, könnyen &lt;strong&gt;testreszabható&lt;/strong&gt; és config generátora is van. Ugyanakkor kipróbáltam, és nem azt kapom, amit várok. Ha kikapcsolom a commit type detektálást (message első szava alapján csoportosítás), akkor konkrétan üres lesz a generált napló.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Szóval nekiültem saját szkriptet írni.&lt;/p&gt;
+
+&lt;h2 id=&quot;kísérletezés&quot;&gt;Kísérletezés&lt;/h2&gt;
+
+&lt;p&gt;Először nézzük, mivel állunk szemben. Így néz ki a teljes log:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git log --oneline
+b323e7d (HEAD -&amp;gt; master, single-inst) Lint
+73a4bcd Csak egy instance maradhat
+bf4a37f Szkriptek src mappába (átláthatóság++)
+7c1fdb0 (tag: 1.0.1, origin/master, origin/HEAD) Logger konfig itt jobb helyen van
+e724f7e Globális install működik
+c8d7518 (tag: 1.0.0) Dependency update
+e7e9abb Kép URL fix
+f4a4114 Feladatok, ötletek
+3655263 Doksi
+51c3039 Sleep konfigban, exit code
+2f6669e Fájlba mentés opcionális, log level állítható
+80d90db Lint
+285f280 Iteráció működik
+f929777 Számla fájlok letöltése
+d207817 Letöltő linkek parszolása
+39d0ae8 Számla kiválasztás, fájlba mentés
+f463a50 Számla alapadatok parszolása
+cd4e40e szamla_search_submit
+2ebca86 Login, szamla_search
+ff608c9 Logger
+5fa1938 Initial commit
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Kipróbáltam a &lt;code class=&quot;highlighter-rouge&quot;&gt;git log&lt;/code&gt; parancsot, és a &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;since&amp;gt;...&amp;lt;until&amp;gt;&lt;/code&gt; paramétert. Az unreleased commit-okat így tudom kilistázni:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git log --oneline 1.0.1...HEAD
+b323e7d (HEAD -&amp;gt; master, single-inst) Lint
+73a4bcd Csak egy instance maradhat
+bf4a37f Szkriptek src mappába (átláthatóság++)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Az utolsó release adatait hasonlóan egyszerűen:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git log --oneline 1.0.0...1.0.1
+7c1fdb0 (tag: 1.0.1, origin/master, origin/HEAD) Logger konfig itt jobb helyen van
+e724f7e Globális install működik
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Azonban a legelső release history-ját trükkösebb lekérdezni - mit kell megadni a &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;since&amp;gt;&lt;/code&gt;-nek? Semmit? Nem:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git log --oneline ...1.0.0
+b323e7d (HEAD -&amp;gt; master, single-inst) Lint
+73a4bcd Csak egy instance maradhat
+bf4a37f Szkriptek src mappába (átláthatóság++)
+7c1fdb0 (tag: 1.0.1, origin/master, origin/HEAD) Logger konfig itt jobb helyen van
+e724f7e Globális install működik
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;A &lt;code class=&quot;highlighter-rouge&quot;&gt;HEAD&lt;/code&gt; és az első release közti commit-okat kaptam vissza, vagyis pont az ellenkezőjét annak, amit szerettem volna.&lt;/p&gt;
+
+&lt;p&gt;Rengeteget keresgéltem, de nem találtam szebb megoldást annál, minthogy lekérem a legelső commit hash-t, és azt adom meg &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;since&amp;gt;&lt;/code&gt;-nek.&lt;/p&gt;
+
+&lt;p&gt;A legelső commit lekérdezésére 2 módszert találtam:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git log --oneline | tail -1 | cut -d' ' -f 1&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git rev-list --max-parents=0 HEAD&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Behelyettesítve a korábbi parancsba már megkapom az első release commit-jait:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git log --oneline `git log --oneline | tail -1 | cut -d' ' -f 1`...1.0.0
+c8d7518 (tag: 1.0.0) Dependency update
+e7e9abb Kép URL fix
+f4a4114 Feladatok, ötletek
+3655263 Doksi
+51c3039 Sleep konfigban, exit code
+2f6669e Fájlba mentés opcionális, log level állítható
+80d90db Lint
+285f280 Iteráció működik
+f929777 Számla fájlok letöltése
+d207817 Letöltő linkek parszolása
+39d0ae8 Számla kiválasztás, fájlba mentés
+f463a50 Számla alapadatok parszolása
+cd4e40e szamla_search_submit
+2ebca86 Login, szamla_search
+ff608c9 Logger
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Legalábbis majdnem. Ugyanis az intervallum alul nyitott, az &lt;em&gt;“Initial commit”&lt;/em&gt; kimaradt. Ezt explicit módon kell majd kiíratnom a changelog végére:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git log --oneline | tail -1
+5fa1938 Initial commit
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;A fentiek automatizálásához szükség van a release-ek listájára is. Ezt az alábbi paranccsal kérdezhetem le:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git tag | sort -r
+1.0.1
+1.0.0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;A changelog akkor szép, ha némileg formázva van, erre egy tökéletes eszköz a Markdown nyelv. A &lt;em&gt;“Changelog”&lt;/em&gt; felirat egy egyes szintű címsor, míg a release-ek másodszintűek lesznek. Köztük a commit-ok pedig felsorolások. Utóbbihoz a &lt;code class=&quot;highlighter-rouge&quot;&gt;--oneline&lt;/code&gt; helyett saját formátumot kell megadni a &lt;code class=&quot;highlighter-rouge&quot;&gt;git log&lt;/code&gt;-nak:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git log --pretty=&quot;* %s&quot; | tail -1
+* Initial commit
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;A &lt;code class=&quot;highlighter-rouge&quot;&gt;pretty&lt;/code&gt; paraméterben használható változókról &lt;a href=&quot;https://git-scm.com/docs/pretty-formats&quot;&gt;itt írnak részletesen&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;összekalapálás&quot;&gt;Összekalapálás&lt;/h2&gt;
+
+&lt;p&gt;Algoritmus:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;UNTIL := “HEAD”&lt;/li&gt;
+  &lt;li&gt;Végig a release-eken:
+    &lt;ul&gt;
+      &lt;li&gt;SINCE := aktuális release&lt;/li&gt;
+      &lt;li&gt;Release fejléc kiírása (UNTIL)&lt;/li&gt;
+      &lt;li&gt;Commitok kiírása SINCE…UNTIL tartományban&lt;/li&gt;
+      &lt;li&gt;UNTIL := SINCE&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;FIRST := legelső commit&lt;/li&gt;
+  &lt;li&gt;Commitok kiírása FIRST…UNTIL tartományban&lt;/li&gt;
+  &lt;li&gt;FIRST commit kiírása&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Bash implementáció:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/usr/bin/env bash&lt;/span&gt;
+
+write-commits&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	git log &lt;span class=&quot;nt&quot;&gt;--pretty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;* %s&quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+write-release&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;nv&quot;&gt;SINCE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;UNTIL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$2&lt;/span&gt;
+	&lt;span class=&quot;nb&quot;&gt;printf&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;## &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$UNTIL&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+	write-commits &lt;span class=&quot;nv&quot;&gt;$SINCE&lt;/span&gt;...&lt;span class=&quot;nv&quot;&gt;$UNTIL&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+main&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;# Changelog&quot;&lt;/span&gt;
+	&lt;span class=&quot;nv&quot;&gt;UNTIL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;HEAD&quot;&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;SINCE &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;git tag | &lt;span class=&quot;nb&quot;&gt;sort&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do
+		&lt;/span&gt;write-release &lt;span class=&quot;nv&quot;&gt;$SINCE&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$UNTIL&lt;/span&gt;
+		&lt;span class=&quot;nv&quot;&gt;UNTIL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$SINCE&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;done
+	&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;FIRST&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;git log &lt;span class=&quot;nt&quot;&gt;--oneline&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;tail&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-1&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;cut&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;' '&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; 1&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+	write-release &lt;span class=&quot;nv&quot;&gt;$FIRST&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$UNTIL&lt;/span&gt;
+	write-commits &lt;span class=&quot;nv&quot;&gt;$FIRST&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+main
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Output:&lt;/p&gt;
+
+&lt;div class=&quot;language-markdown highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ ./my-git-changelog.sh
+&lt;span class=&quot;gh&quot;&gt;# Changelog&lt;/span&gt;
+
+&lt;span class=&quot;gu&quot;&gt;## HEAD&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;
+*&lt;/span&gt; Lint
+&lt;span class=&quot;p&quot;&gt;*&lt;/span&gt; Csak egy instance maradhat
+&lt;span class=&quot;p&quot;&gt;*&lt;/span&gt; Szkriptek src mappába (átláthatóság++)
+
+&lt;span class=&quot;gu&quot;&gt;## 1.0.1&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;
+*&lt;/span&gt; Logger konfig itt jobb helyen van
+&lt;span class=&quot;p&quot;&gt;*&lt;/span&gt; Globális install működik
+
+&lt;span class=&quot;gu&quot;&gt;## 1.0.0&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;
+*&lt;/span&gt; Dependency update
+&lt;span class=&quot;p&quot;&gt;*&lt;/span&gt; Kép URL fix
+&lt;span class=&quot;p&quot;&gt;*&lt;/span&gt; Feladatok, ötletek
+&lt;span class=&quot;p&quot;&gt;*&lt;/span&gt; Doksi
+&lt;span class=&quot;p&quot;&gt;*&lt;/span&gt; Sleep konfigban, exit code
+&lt;span class=&quot;p&quot;&gt;*&lt;/span&gt; Fájlba mentés opcionális, log level állítható
+&lt;span class=&quot;p&quot;&gt;*&lt;/span&gt; Lint
+&lt;span class=&quot;p&quot;&gt;*&lt;/span&gt; Iteráció működik
+&lt;span class=&quot;p&quot;&gt;*&lt;/span&gt; Számla fájlok letöltése
+&lt;span class=&quot;p&quot;&gt;*&lt;/span&gt; Letöltő linkek parszolása
+&lt;span class=&quot;p&quot;&gt;*&lt;/span&gt; Számla kiválasztás, fájlba mentés
+&lt;span class=&quot;p&quot;&gt;*&lt;/span&gt; Számla alapadatok parszolása
+&lt;span class=&quot;p&quot;&gt;*&lt;/span&gt; szamla_search_submit
+&lt;span class=&quot;p&quot;&gt;*&lt;/span&gt; Login, szamla_search
+&lt;span class=&quot;p&quot;&gt;*&lt;/span&gt; Logger
+&lt;span class=&quot;p&quot;&gt;*&lt;/span&gt; Initial commit
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;A fájlba írás pedig innen már pofon egyszerű: &lt;code class=&quot;highlighter-rouge&quot;&gt;./my-git-changelog.sh &amp;gt; CHANGELOG.md&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;epilog&quot;&gt;EpiLog&lt;/h2&gt;
+
+&lt;p&gt;Lehetne még persze tuningolni azzal, hogy a release-ekhez dátumot is kiírok, de most ezt nem teszem meg.&lt;/p&gt;
+
+&lt;p&gt;Ahogy a bevezetőben is említettem, a &lt;strong&gt;jó changelog NEM ez,&lt;/strong&gt; amit most tákoltam össze. Ugyanis nem, vagy csak nagyon &lt;strong&gt;nehezen derül ki belőle,&lt;/strong&gt; hogy a felhasználónak mire kell figyelnie, mire számíthat - változott-e az API, bekerült-e új feaure, javítva lett-e a hiba, amitől kihullott a haja, etc. Ehelyett a fenti megoldás kiprinteli még a legeslegérdektelenebb commitot is, az &lt;em&gt;initial&lt;/em&gt;-t… 🤓&lt;/p&gt;</content><author><name>Zsolt Jurányi</name></author><category term="bash" /><category term="changelog" /><category term="commit" /><category term="generator" /><category term="git" /><category term="markdown" /><category term="log" /><category term="script" /><summary type="html">Bevezetés</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /></entry><entry xml:lang="hu_HU"><title type="html">Díjnet bot</title><link href="https://juzraai.github.io/blog/2018/dijnet-bot/" rel="alternate" type="text/html" title="Díjnet bot" /><published>2018-12-14T00:00:00+01:00</published><updated>2018-12-14T00:53:55+01:00</updated><id>https://juzraai.github.io/blog/2018/dijnet-bot</id><content type="html" xml:base="https://juzraai.github.io/blog/2018/dijnet-bot/">&lt;h2 id=&quot;a-probléma&quot;&gt;A probléma&lt;/h2&gt;
 
 &lt;p&gt;A közüzemi számlák befizetésének egyik legkényelmesebb módja a &lt;a href=&quot;https://www.dijnet.hu/&quot;&gt;Díjnet&lt;/a&gt;. Emailt küld a számláról, ami webes felületről letölthető, és online bankkártyás fizetési lehetőséget biztosít, amellyel több számla is kiegyenlíthető egyetlen tranzakcióval.&lt;/p&gt;
 
@@ -411,163 +625,7 @@ service gitea start
   &lt;li&gt;Először a böngésző natív validálási mechanizmusa fut le.&lt;/li&gt;
   &lt;li&gt;Aztán az eseménykezelő inicializálja a captcha-t.&lt;/li&gt;
   &lt;li&gt;A captcha elhelyezi a választ a formban, majd meghívja a callback-et, ami elküldi a form-ot.&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Zsolt Jurányi</name></author><category term="basin" /><category term="captcha" /><category term="email" /><category term="form" /><category term="serverless" /><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /></entry><entry xml:lang="en_US"><title type="html">Contact form for free - looking around</title><link href="https://juzraai.github.io/blog/2018/contact-form-for-free/" rel="alternate" type="text/html" title="Contact form for free - looking around" /><published>2018-06-02T00:00:00+02:00</published><updated>2018-11-07T21:45:44+01:00</updated><id>https://juzraai.github.io/blog/2018/contact-form-for-free</id><content type="html" xml:base="https://juzraai.github.io/blog/2018/contact-form-for-free/">&lt;h2 id=&quot;problem&quot;&gt;Problem&lt;/h2&gt;
-
-&lt;p&gt;My blog and developer portfolio is a &lt;strong&gt;static website&lt;/strong&gt;, which I host on &lt;a href=&quot;https://pages.github.com/&quot;&gt;GitHub&lt;/a&gt;. As contact information, I link my Facebook and LinkedIn profiles, but I don’t want to publish my email address, because &lt;strong&gt;I don’t need spam.&lt;/strong&gt; Instead I’d place there a &lt;strong&gt;contact form&lt;/strong&gt; which would help those who arrive at my website to reach me without logging in or navigating anywhere else.&lt;/p&gt;
-
-&lt;p&gt;Because of the site is static, processing of the form and sending data to my email address has to be done &lt;strong&gt;without server-side script.&lt;/strong&gt; So I have to find a &lt;strong&gt;third-party service&lt;/strong&gt; for this task. And since I’ve been saving money, I’d like to &lt;strong&gt;keep the costs of this at zero too.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;possible-solutions&quot;&gt;Possible solutions&lt;/h2&gt;
-
-&lt;p&gt;I spent a day to search for potential solutions. I looked for services which can process a &lt;strong&gt;custom HTML form&lt;/strong&gt; and can send me an email with the form data. I list them alphabetized.&lt;/p&gt;
-
-&lt;p&gt;Note: below when I write &lt;em&gt;AJAX&lt;/em&gt;, it means a function which provides an endpoint that can be called via AJAX and responds with a text message, unlike the usual form sending methods that return with a page or a redirect.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://www.99inbound.com/&quot;&gt;99inbound&lt;/a&gt; gives &lt;strong&gt;unlimited&lt;/strong&gt; form submissions, &lt;strong&gt;spam filter, and Slack integration.&lt;/strong&gt; As a bonus it can build you HTML forms too if you need it. Their privacy policy looks fresh and GDPR-ready.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt; also gives &lt;strong&gt;unlimited&lt;/strong&gt; submission in the free tier, and it has a lot of features: &lt;strong&gt;spam filter, redirect, file upload, AJAX, export, analytics, and Zapier integration&lt;/strong&gt; to some popular apps (e.g. Slack, Trello, Asana, Google Sheets). &lt;a href=&quot;https://zapier.com/&quot;&gt;Zapier&lt;/a&gt; is also free if you use only 2-step (trigger+action) workflows. Basin looks professional and prepared, their GDPR notice is clear. They got positive reviews on &lt;a href=&quot;https://www.producthunt.com/posts/basin&quot;&gt;ProductHunt&lt;/a&gt;, and their developers are actively responding there too.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://www.briskforms.com/&quot;&gt;BriskForms&lt;/a&gt; emphasizes that it’s a free service, there’s no word about any limit and it’s open-source too. Provides &lt;strong&gt;redirect&lt;/strong&gt; and/but doesn’t store form data.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://www.elformo.com/&quot;&gt;elFormo&lt;/a&gt; gives &lt;strong&gt;1500 emails/month, honeypot and redirect,&lt;/strong&gt; though they flash their logo to the users. Form data is stored and can be &lt;strong&gt;exported.&lt;/strong&gt; Their website has style and is appealing, but it’s hard to find a review and their last tweet is from 2015.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://www.enformed.io/&quot;&gt;enformed.io&lt;/a&gt; gives &lt;strong&gt;100 emails/month, custom subject, CC, BCC, honeypot, redirect, AJAX.&lt;/strong&gt; But they don’t have any privacy policy and their sign up form is actually dead.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://formspree.io/&quot;&gt;formspree.io&lt;/a&gt; looks familiar to me, I saw some website templates that recommended this service for the contact form. It gives &lt;strong&gt;1000 emails/month, custom subject, CC, redirect, captcha,&lt;/strong&gt; but &lt;strong&gt;target email address is public in the form code.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;A &lt;a href=&quot;https://github.com/toperkin/staticFormEmails&quot;&gt;Google Form&lt;/a&gt; can also be used as a contact form backend. I found different limits for this, but most of them says &lt;strong&gt;50-100 emails/day&lt;/strong&gt;. Form data is also inserted into a &lt;strong&gt;spreadsheet&lt;/strong&gt; so there’s no problem if email sending fails due to the limits.&lt;/p&gt;
-
-&lt;p&gt;This spreadsheet + email sending mechanism can also be achieved via a &lt;a href=&quot;https://github.com/dwyl/learn-to-send-email-via-google-script-html-no-server&quot;&gt;Google Apps Script&lt;/a&gt;. The quota is &lt;strong&gt;100 emails/day&lt;/strong&gt; and it can be used via &lt;strong&gt;AJAX&lt;/strong&gt; too. The script can be surely extended with honeypot and captcha.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://mailthis.to/&quot;&gt;mailthis.to&lt;/a&gt; pricing is based on the usage. Initially you get &lt;strong&gt;1000 emails for free&lt;/strong&gt;, then you can pay a few dollars for additional 1000 emails. They provide &lt;strong&gt;custom subject, honeypot, redirect, file upload, AJAX and captcha.&lt;/strong&gt; They &lt;a href=&quot;https://medium.com/@jamesfuthey/running-a-free-email-api-for-2-years-a39188e19985&quot;&gt;seem to be nice&lt;/a&gt; for me, but they also lack the privacy policy.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://pageclip.co/&quot;&gt;Pageclip&lt;/a&gt; gives &lt;strong&gt;1000 submissions/month, custom subject, AJAX and data export&lt;/strong&gt; in JSON. They have both client and server-side JavaScript library. They highlight Slack integration on their front page, but the documentation doesn’t mention it. They have a detailed privacy policy.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://getsimpleform.com/&quot;&gt;SimpleForm&lt;/a&gt;’s site is very minimal. Does not mention limits, but it says it has &lt;strong&gt;file upload&lt;/strong&gt; and &lt;strong&gt;API&lt;/strong&gt; for downloading submission data. Though version number starts with 2018, copyright says 2012 and their blog is updated in 2014.&lt;/p&gt;
-
-&lt;p&gt;Let’s see them in a nice table:&lt;/p&gt;
-
-&lt;table class=&quot;table table-sm table-responsive-md&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Service&lt;/th&gt;
-      &lt;th&gt;Limit&lt;/th&gt;
-      &lt;th&gt;Spam&lt;/th&gt;
-      &lt;th&gt;Redirect&lt;/th&gt;
-      &lt;th&gt;Stores?&lt;/th&gt;
-      &lt;th&gt;Extra&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;https://www.99inbound.com/&quot;&gt;99inbound&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;filter&lt;/td&gt;
-      &lt;td&gt;?&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;Slack&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;filter&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-      &lt;td&gt;file, captcha, Zapier&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;https://www.briskforms.com/&quot;&gt;BriskForms&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;open-source&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;https://www.elformo.com/&quot;&gt;elFormo&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;1500/month&lt;/td&gt;
-      &lt;td&gt;honeypot&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;http://www.enformed.io/&quot;&gt;enformed.io&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;100/month&lt;/td&gt;
-      &lt;td&gt;honeypot&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;subject, CC, BCC, AJAX&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;https://formspree.io/&quot;&gt;formspree.io&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;1000/month&lt;/td&gt;
-      &lt;td&gt;honeypot&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;subject, CC, captcha&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;https://github.com/dwyl/learn-to-send-email-via-google-script-html-no-server&quot;&gt;G. Apps Script&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;100/day&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-      &lt;td&gt;subject, AJAX, …&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;https://github.com/toperkin/staticFormEmails&quot;&gt;G. Forms&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;~ 50/day&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;https://mailthis.to/&quot;&gt;mailthis.to&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;1000&lt;/td&gt;
-      &lt;td&gt;honeypot&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;subject, file, AJAX, captcha&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;https://pageclip.co/&quot;&gt;Pageclip&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;1000/month&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-      &lt;td&gt;subject, AJAX, API&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;https://getsimpleform.com/&quot;&gt;SimpleForm&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-      &lt;td&gt;file&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h2 id=&quot;summary&quot;&gt;Summary&lt;/h2&gt;
-
-&lt;p&gt;I narrow down the above list in the following way:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;The 2 approach using Google services seems a bit hacky and not elegant, especially if we look at the other competitors.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://formspree.io/&quot;&gt;formspree.io&lt;/a&gt; does not hide my email address.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.enformed.io/&quot;&gt;enformed.io&lt;/a&gt; has more than one issue.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://mailthis.to/&quot;&gt;mailthis.to&lt;/a&gt; seems nice, but the one-time 1000 email limit is worse than the rest where at least the quota is renewed every month.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://getsimpleform.com/&quot;&gt;SimpleForm&lt;/a&gt; is not so informative and it seems to be old.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.elformo.com/&quot;&gt;elFormo&lt;/a&gt; seems nice too, but there are better choices in the list.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://pageclip.co/&quot;&gt;Pageclip&lt;/a&gt; is the only one left which doesn’t provide unlimited submissions.&lt;/li&gt;
-  &lt;li&gt;🥉 &lt;a href=&quot;https://www.briskforms.com/&quot;&gt;BriskForms&lt;/a&gt; stops at the 3rd place, because it doesn’t have methods to avoid spam.&lt;/li&gt;
-  &lt;li&gt;🥈 &lt;a href=&quot;https://www.99inbound.com/&quot;&gt;99inbound&lt;/a&gt; gets the silver, because&lt;/li&gt;
-  &lt;li&gt;🥇 &lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt; seems more professional and flexible.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I found out all of the above &lt;strong&gt;without trying out&lt;/strong&gt; the services. In my &lt;a href=&quot;/blog/2018/contact-form-using-basin&quot;&gt;next post&lt;/a&gt; I share my experiences with &lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt; which seems to deserve my gold medal. 🤓&lt;/p&gt;</content><author><name>Zsolt Jurányi</name></author><category term="comparison" /><category term="email" /><category term="form" /><category term="serverless" /><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /></entry><entry xml:lang="hu_HU"><title type="html">Kontakt form ingyen - körbenézés</title><link href="https://juzraai.github.io/blog/2018/kontakt-form-ingyen/" rel="alternate" type="text/html" title="Kontakt form ingyen - körbenézés" /><published>2018-06-02T00:00:00+02:00</published><updated>2018-11-07T21:45:36+01:00</updated><id>https://juzraai.github.io/blog/2018/kontakt-form-ingyen</id><content type="html" xml:base="https://juzraai.github.io/blog/2018/kontakt-form-ingyen/">&lt;h2 id=&quot;a-probléma&quot;&gt;A probléma&lt;/h2&gt;
+&lt;/ul&gt;</content><author><name>Zsolt Jurányi</name></author><category term="basin" /><category term="captcha" /><category term="email" /><category term="form" /><category term="serverless" /><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /></entry><entry xml:lang="hu_HU"><title type="html">Kontakt form ingyen - körbenézés</title><link href="https://juzraai.github.io/blog/2018/kontakt-form-ingyen/" rel="alternate" type="text/html" title="Kontakt form ingyen - körbenézés" /><published>2018-06-02T00:00:00+02:00</published><updated>2018-11-07T21:45:36+01:00</updated><id>https://juzraai.github.io/blog/2018/kontakt-form-ingyen</id><content type="html" xml:base="https://juzraai.github.io/blog/2018/kontakt-form-ingyen/">&lt;h2 id=&quot;a-probléma&quot;&gt;A probléma&lt;/h2&gt;
 
 &lt;p&gt;A blogom és egyben fejlesztői bemutatkozó oldalam egy &lt;strong&gt;statikus honlap,&lt;/strong&gt; amit a &lt;a href=&quot;https://pages.github.com/&quot;&gt;GitHub Pages&lt;/a&gt;-en hosztolok. Elérhetőségként feltüntetem a Facebook és LinkedIn profilom, de az email címemet nem szeretném, mert a &lt;strong&gt;spam nem hiányzik.&lt;/strong&gt; Kitennék viszont &lt;strong&gt;kapcsolati űrlapot&lt;/strong&gt;, ami lehetőséget biztosítana az oldalamra tévedőknek, hogy mindenféle bejelentkezés és továbbkattintás nélkül el tudjanak engem érni.&lt;/p&gt;
 
@@ -723,65 +781,160 @@ service gitea start
   &lt;li&gt;🥇 a &lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt; egy fokkal profibbnak és flexibilisebbnek tűnik.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;A fenti dolgokat persze &lt;strong&gt;kipróbálás nélkül&lt;/strong&gt; írtam. A &lt;a href=&quot;/blog/2018/kontakt-form-basin-nel&quot;&gt;következő posztban&lt;/a&gt; leírom a tapasztalataimat a &lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt;-nel, ugyanis az aranyérem jó helyre került. 🤓&lt;/p&gt;</content><author><name>Zsolt Jurányi</name></author><category term="comparison" /><category term="email" /><category term="form" /><category term="serverless" /><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /></entry><entry xml:lang="hu_HU"><title type="html">Rapid webapp fejlesztés II.</title><link href="https://juzraai.github.io/blog/2018/rapid-webapp-fejlesztes-ii/" rel="alternate" type="text/html" title="Rapid webapp fejlesztés II." /><published>2018-05-18T00:00:00+02:00</published><updated>2018-11-07T21:55:05+01:00</updated><id>https://juzraai.github.io/blog/2018/rapid-webapp-fejlesztes-ii</id><content type="html" xml:base="https://juzraai.github.io/blog/2018/rapid-webapp-fejlesztes-ii/">&lt;h2 id=&quot;elöljáróban&quot;&gt;Elöljáróban&lt;/h2&gt;
+&lt;p&gt;A fenti dolgokat persze &lt;strong&gt;kipróbálás nélkül&lt;/strong&gt; írtam. A &lt;a href=&quot;/blog/2018/kontakt-form-basin-nel&quot;&gt;következő posztban&lt;/a&gt; leírom a tapasztalataimat a &lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt;-nel, ugyanis az aranyérem jó helyre került. 🤓&lt;/p&gt;</content><author><name>Zsolt Jurányi</name></author><category term="comparison" /><category term="email" /><category term="form" /><category term="serverless" /><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /></entry><entry xml:lang="en_US"><title type="html">Contact form for free - looking around</title><link href="https://juzraai.github.io/blog/2018/contact-form-for-free/" rel="alternate" type="text/html" title="Contact form for free - looking around" /><published>2018-06-02T00:00:00+02:00</published><updated>2018-11-07T21:45:44+01:00</updated><id>https://juzraai.github.io/blog/2018/contact-form-for-free</id><content type="html" xml:base="https://juzraai.github.io/blog/2018/contact-form-for-free/">&lt;h2 id=&quot;problem&quot;&gt;Problem&lt;/h2&gt;
 
-&lt;p&gt;Gyakorlatilag az egyetemi éveim óta Java vonalon mozgok. Munkám során is ebben írtam mindent, ami szerveroldali és nem mini szkript, ami Bash-al megoldható. Az elmúlt 1-1.5 évben léptem tovább &lt;a href=&quot;https://kotlinlang.org&quot;&gt;Kotlin&lt;/a&gt;-ra, ami szintén JVM vonal ugye, de felgyorsítja és kényelmesebbé teszi a fejlesztést.&lt;/p&gt;
+&lt;p&gt;My blog and developer portfolio is a &lt;strong&gt;static website&lt;/strong&gt;, which I host on &lt;a href=&quot;https://pages.github.com/&quot;&gt;GitHub&lt;/a&gt;. As contact information, I link my Facebook and LinkedIn profiles, but I don’t want to publish my email address, because &lt;strong&gt;I don’t need spam.&lt;/strong&gt; Instead I’d place there a &lt;strong&gt;contact form&lt;/strong&gt; which would help those who arrive at my website to reach me without logging in or navigating anywhere else.&lt;/p&gt;
 
-&lt;p&gt;Leginkább crawlereket fejlesztek, de emellett gyakran webalkalmazásokat is készítenem kell. Ezeket eddig Spring Boot-ra építettem, és különféle template engine-ekkel dolgoztam: kezdetben &lt;a href=&quot;https://freemarker.apache.org/&quot;&gt;Freemarker&lt;/a&gt;-rel, majd utána még 3-4-et kipróbáltam a projektek során.&lt;/p&gt;
+&lt;p&gt;Because of the site is static, processing of the form and sending data to my email address has to be done &lt;strong&gt;without server-side script.&lt;/strong&gt; So I have to find a &lt;strong&gt;third-party service&lt;/strong&gt; for this task. And since I’ve been saving money, I’d like to &lt;strong&gt;keep the costs of this at zero too.&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;A webapp fejlesztéshez persze párosult frontend tákolás is. Sok tapasztalatot gyűjtöttem CSS-ben és JS-ben, előbbinél a Bootstrap valamint a LESS/SASS, utóbbinál a &lt;a href=&quot;http://knockoutjs.com/&quot;&gt;KnockoutJS&lt;/a&gt; megismerése és használatba vétele volt mérföldkő.&lt;/p&gt;
+&lt;h2 id=&quot;possible-solutions&quot;&gt;Possible solutions&lt;/h2&gt;
 
-&lt;p&gt;Mindezekről egyszer &lt;a href=&quot;/blog/2015/rapid-webapp-fejlesztes&quot;&gt;már írtam&lt;/a&gt; pár éve.&lt;/p&gt;
+&lt;p&gt;I spent a day to search for potential solutions. I looked for services which can process a &lt;strong&gt;custom HTML form&lt;/strong&gt; and can send me an email with the form data. I list them alphabetized.&lt;/p&gt;
 
-&lt;p&gt;Viszont miközben jól elvoltam &lt;a href=&quot;https://projects.spring.io/spring-boot/&quot;&gt;Spring Boot&lt;/a&gt;-tal, Kotlin-nal és Knockout-tal, elrohantak mellettem a frontend technológiák, ES6, TypeScript, Node JS, React, Angular, Grunt, Gulp és társaik… ezekkel sajnos le vagyok maradva.&lt;/p&gt;
+&lt;p&gt;Note: below when I write &lt;em&gt;AJAX&lt;/em&gt;, it means a function which provides an endpoint that can be called via AJAX and responds with a text message, unlike the usual form sending methods that return with a page or a redirect.&lt;/p&gt;
 
-&lt;p&gt;De már nem is annyira! 😀&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.99inbound.com/&quot;&gt;99inbound&lt;/a&gt; gives &lt;strong&gt;unlimited&lt;/strong&gt; form submissions, &lt;strong&gt;spam filter, and Slack integration.&lt;/strong&gt; As a bonus it can build you HTML forms too if you need it. Their privacy policy looks fresh and GDPR-ready.&lt;/p&gt;
 
-&lt;h2 id=&quot;vue&quot;&gt;Vue&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt; also gives &lt;strong&gt;unlimited&lt;/strong&gt; submission in the free tier, and it has a lot of features: &lt;strong&gt;spam filter, redirect, file upload, AJAX, export, analytics, and Zapier integration&lt;/strong&gt; to some popular apps (e.g. Slack, Trello, Asana, Google Sheets). &lt;a href=&quot;https://zapier.com/&quot;&gt;Zapier&lt;/a&gt; is also free if you use only 2-step (trigger+action) workflows. Basin looks professional and prepared, their GDPR notice is clear. They got positive reviews on &lt;a href=&quot;https://www.producthunt.com/posts/basin&quot;&gt;ProductHunt&lt;/a&gt;, and their developers are actively responding there too.&lt;/p&gt;
 
-&lt;p&gt;A minap kaptam egy olyan feladatot, hogy tákoljak össze egy kísérleti admin felületet egy kis adatbázishoz. Nem kell jól kinéznie, az a cél, hogy interaktívan elő tudják szűrni a sorokat és azok bizonyos kombinációit. Kéne bele CRUD, meg minimális értékelési lehetőség is (+/-).&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.briskforms.com/&quot;&gt;BriskForms&lt;/a&gt; emphasizes that it’s a free service, there’s no word about any limit and it’s open-source too. Provides &lt;strong&gt;redirect&lt;/strong&gt; and/but doesn’t store form data.&lt;/p&gt;
 
-&lt;p&gt;Azt elég hamar eldöntöttem, hogy nem akarok template engine-ekkel időt vesztegetni, egy egyszerű REST API-t csinálok, és a kliensoldal sima HTML+JS lesz, AJAX hívásokkal.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.elformo.com/&quot;&gt;elFormo&lt;/a&gt; gives &lt;strong&gt;1500 emails/month, honeypot and redirect,&lt;/strong&gt; though they flash their logo to the users. Form data is stored and can be &lt;strong&gt;exported.&lt;/strong&gt; Their website has style and is appealing, but it’s hard to find a review and their last tweet is from 2015.&lt;/p&gt;
 
-&lt;p&gt;A frontend megvalósításához a &lt;a href=&quot;https://vuejs.org/&quot;&gt;Vue&lt;/a&gt;-t hívtam segítségül, amit pár hónapja ismertem meg. Egyből beleszerettem, sokkal kényelmesebb a Knockout-nál, nem kell observable izékkel szórakozni, a view model is szépen strukturált, a HTML attribútumok barátságosak. Egy baja van szegénynek, hogy régebbi böngészőkön nem megy, ellentétben a Knockout-tal.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.enformed.io/&quot;&gt;enformed.io&lt;/a&gt; gives &lt;strong&gt;100 emails/month, custom subject, CC, BCC, honeypot, redirect, AJAX.&lt;/strong&gt; But they don’t have any privacy policy and their sign up form is actually dead.&lt;/p&gt;
 
-&lt;h2 id=&quot;node&quot;&gt;Node&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://formspree.io/&quot;&gt;formspree.io&lt;/a&gt; looks familiar to me, I saw some website templates that recommended this service for the contact form. It gives &lt;strong&gt;1000 emails/month, custom subject, CC, redirect, captcha,&lt;/strong&gt; but &lt;strong&gt;target email address is public in the form code.&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;Már nem is tudom hogyan, de a backend kapcsán bevillant egy gondolat: &lt;em&gt;“Mi lenne, ha megpróbálnám Node-dal?”&lt;/em&gt;. Ami meglepő, mert sosem használtam még ezelőtt. Legutóbb pár hónapja merült fel egy adatvizualizációs klubban, hogy majd összepattintanak egy API-t Node-ban egy adatbázis elé - ez ragadhatott meg bennem.&lt;/p&gt;
+&lt;p&gt;A &lt;a href=&quot;https://github.com/toperkin/staticFormEmails&quot;&gt;Google Form&lt;/a&gt; can also be used as a contact form backend. I found different limits for this, but most of them says &lt;strong&gt;50-100 emails/day&lt;/strong&gt;. Form data is also inserted into a &lt;strong&gt;spreadsheet&lt;/strong&gt; so there’s no problem if email sending fails due to the limits.&lt;/p&gt;
 
-&lt;p&gt;Felkerekedtem és elég hamar ráakadtam erre a tutorial-ra: &lt;a href=&quot;https://medium.com/@avanthikameenakshi/building-restful-api-with-nodejs-and-mysql-in-10-min-ff740043d4be&quot;&gt;Building REST API in the blink of an eye&lt;/a&gt;. Végigolvastam, elképedtem, majd újra átnéztem. Gyakorlatilag 30 sorból épít egy mini webappot, ami lekérdez egy adatbázisból.&lt;/p&gt;
+&lt;p&gt;This spreadsheet + email sending mechanism can also be achieved via a &lt;a href=&quot;https://github.com/dwyl/learn-to-send-email-via-google-script-html-no-server&quot;&gt;Google Apps Script&lt;/a&gt;. The quota is &lt;strong&gt;100 emails/day&lt;/strong&gt; and it can be used via &lt;strong&gt;AJAX&lt;/strong&gt; too. The script can be surely extended with honeypot and captcha.&lt;/p&gt;
 
-&lt;p&gt;Elkezdtem reprodukálni a dolgot, hogy lássam működés közben, és így megismertem a technológiákat. A webapp keretét az &lt;a href=&quot;https://expressjs.com/&quot;&gt;ExpressJS&lt;/a&gt; adja, és gyakorlatilag a request-eket feldolgozó láncba tudunk betoldani saját dolgokat. Van hozzá parancssoros projekt generátor is, de nekem nem kellettek view engine-ek, egyszerűbb appot kreáltam &lt;a href=&quot;https://stackoverflow.com/a/19415943/2418224&quot;&gt;e válasz&lt;/a&gt; alapján.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://mailthis.to/&quot;&gt;mailthis.to&lt;/a&gt; pricing is based on the usage. Initially you get &lt;strong&gt;1000 emails for free&lt;/strong&gt;, then you can pay a few dollars for additional 1000 emails. They provide &lt;strong&gt;custom subject, honeypot, redirect, file upload, AJAX and captcha.&lt;/strong&gt; They &lt;a href=&quot;https://medium.com/@jamesfuthey/running-a-free-email-api-for-2-years-a39188e19985&quot;&gt;seem to be nice&lt;/a&gt; for me, but they also lack the privacy policy.&lt;/p&gt;
 
-&lt;p&gt;Az adatbázissal való kommunikációért a &lt;a href=&quot;https://github.com/mysqljs/mysql&quot;&gt;mysqljs&lt;/a&gt; csomag felel, a lekérdezések eredményeit gyönyörű JS objektumokban adja vissza.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://pageclip.co/&quot;&gt;Pageclip&lt;/a&gt; gives &lt;strong&gt;1000 submissions/month, custom subject, AJAX and data export&lt;/strong&gt; in JSON. They have both client and server-side JavaScript library. They highlight Slack integration on their front page, but the documentation doesn’t mention it. They have a detailed privacy policy.&lt;/p&gt;
 
-&lt;p&gt;Mielőtt nekiültem ennek a dolognak, elindítottam a &lt;a href=&quot;https://toggl.com/&quot;&gt;Toggl&lt;/a&gt; stoppert, és amikor eljutottam odáig, hogy van egy kis API-m, ami visszaad egy szimpla lekérdezést, elkerekedett a szemem: kb. 1 óránál járt a számláló. Annyi idő volt összerakni a cuccot nulla Node tapasztalattal, guglizással, mint több év tapasztalattal bekonfigolni egy Maven + Kotlin + Spring Boot + MySQL projektet IDE-ben.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://getsimpleform.com/&quot;&gt;SimpleForm&lt;/a&gt;’s site is very minimal. Does not mention limits, but it says it has &lt;strong&gt;file upload&lt;/strong&gt; and &lt;strong&gt;API&lt;/strong&gt; for downloading submission data. Though version number starts with 2018, copyright says 2012 and their blog is updated in 2014.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Szóval úgy érzem, új dimenziók nyílnak :) és komolyan elfilózom most, hogy ebbe az irányba haladok tovább, elfordulva a JVM világtól.&lt;/strong&gt; Legalábbis a webappok területén… de talán akkor már a crawlerekkel is. 😎&lt;/p&gt;
+&lt;p&gt;Let’s see them in a nice table:&lt;/p&gt;
 
-&lt;h2 id=&quot;kiegészítők&quot;&gt;Kiegészítők&lt;/h2&gt;
+&lt;table class=&quot;table table-sm table-responsive-md&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Service&lt;/th&gt;
+      &lt;th&gt;Limit&lt;/th&gt;
+      &lt;th&gt;Spam&lt;/th&gt;
+      &lt;th&gt;Redirect&lt;/th&gt;
+      &lt;th&gt;Stores?&lt;/th&gt;
+      &lt;th&gt;Extra&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://www.99inbound.com/&quot;&gt;99inbound&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;filter&lt;/td&gt;
+      &lt;td&gt;?&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;Slack&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;filter&lt;/td&gt;
+      &lt;td&gt;yes&lt;/td&gt;
+      &lt;td&gt;yes&lt;/td&gt;
+      &lt;td&gt;file, captcha, Zapier&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://www.briskforms.com/&quot;&gt;BriskForms&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;yes&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;open-source&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://www.elformo.com/&quot;&gt;elFormo&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;1500/month&lt;/td&gt;
+      &lt;td&gt;honeypot&lt;/td&gt;
+      &lt;td&gt;yes&lt;/td&gt;
+      &lt;td&gt;yes&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;http://www.enformed.io/&quot;&gt;enformed.io&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;100/month&lt;/td&gt;
+      &lt;td&gt;honeypot&lt;/td&gt;
+      &lt;td&gt;yes&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;subject, CC, BCC, AJAX&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://formspree.io/&quot;&gt;formspree.io&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;1000/month&lt;/td&gt;
+      &lt;td&gt;honeypot&lt;/td&gt;
+      &lt;td&gt;yes&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;subject, CC, captcha&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://github.com/dwyl/learn-to-send-email-via-google-script-html-no-server&quot;&gt;G. Apps Script&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;100/day&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;yes&lt;/td&gt;
+      &lt;td&gt;subject, AJAX, …&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://github.com/toperkin/staticFormEmails&quot;&gt;G. Forms&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;~ 50/day&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;yes&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://mailthis.to/&quot;&gt;mailthis.to&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;1000&lt;/td&gt;
+      &lt;td&gt;honeypot&lt;/td&gt;
+      &lt;td&gt;yes&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;subject, file, AJAX, captcha&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://pageclip.co/&quot;&gt;Pageclip&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;1000/month&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;yes&lt;/td&gt;
+      &lt;td&gt;subject, AJAX, API&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://getsimpleform.com/&quot;&gt;SimpleForm&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;yes&lt;/td&gt;
+      &lt;td&gt;file&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
 
-&lt;p&gt;A projekt lényegi részét azóta összekalapáltam, a fentebb vázolt stack-hez (MySQL + Node + Vue) kellett még pár lib, hogy megfelelően működjön a dolog és elegáns is legyen a megvalósítás.&lt;/p&gt;
+&lt;h2 id=&quot;summary&quot;&gt;Summary&lt;/h2&gt;
 
-&lt;p&gt;Az első ilyen a &lt;a href=&quot;https://github.com/motdotla/dotenv&quot;&gt;dotenv&lt;/a&gt;, ami annyit csinál, hogy a program könyvtárából beolvassa a &lt;code class=&quot;highlighter-rouge&quot;&gt;.env&lt;/code&gt; fájl tartalmát és betölti a &lt;code class=&quot;highlighter-rouge&quot;&gt;process.env&lt;/code&gt; objektumba, a környezeti változókhoz. A konfigfájlt érdemes kihagyni verziókövetésből, és minden egyes környezetben külön definiálni az értékeket. (Analógia: &lt;code class=&quot;highlighter-rouge&quot;&gt;application.yml&lt;/code&gt; a Spring Boot háza táján.)&lt;/p&gt;
-
-&lt;p&gt;Keresgéltem megoldásokat a Node JS appom biztonságosabbá tételére, az egyik csomag a &lt;a href=&quot;https://github.com/helmetjs/helmet&quot;&gt;helmet&lt;/a&gt; volt, ami szembe jött. Fontos HTTP header-öket injektál a válaszokba, pl. frameguard, nosniff, vagy opcionálisan kikapcsolja a kliensoldali cache-elést is.&lt;/p&gt;
-
-&lt;p&gt;Aztán rátaláltam a &lt;a href=&quot;http://www.passportjs.org/&quot;&gt;Passport&lt;/a&gt;-ra, és igazából ezt kerestem. Mindenféle authentikációt be lehet kötni az Express alkalmazásba, a fentiekben megszokott módon, pár sorban. Tud pl. HTTP Basic-et is, amit sokkal gyorsabb itt beállítani, mint &lt;code class=&quot;highlighter-rouge&quot;&gt;.htaccess&lt;/code&gt;-el és &lt;code class=&quot;highlighter-rouge&quot;&gt;.htpasswd&lt;/code&gt;-vel szórakozva Apache-ban.&lt;/p&gt;
-
-&lt;p&gt;Nagyon hasznos még a &lt;a href=&quot;https://db-migrate.readthedocs.io/en/latest/&quot;&gt;db-migrate&lt;/a&gt;, melynek segítségével az adatbázis séma felépítésének lépéseit egy kötött formában rögzíthetjük, hogy aztán később konzisztensen reprodukálni tudjuk egy másik környezetben. (Ld. &lt;a href=&quot;https://www.liquibase.org/&quot;&gt;Liquibase&lt;/a&gt; a Java világban.)&lt;/p&gt;
-
-&lt;p&gt;Utolsóként a &lt;a href=&quot;http://pm2.keymetrics.io/&quot;&gt;PM2&lt;/a&gt; nevű zseniális toolt említeném meg. Ez egy process manager, leginkább a &lt;code class=&quot;highlighter-rouge&quot;&gt;systemd&lt;/code&gt; féle &lt;code class=&quot;highlighter-rouge&quot;&gt;service&lt;/code&gt; &lt;a href=&quot;https://www.commandlinux.com/man-page/man5/systemd.service.5.html&quot;&gt;parancshoz&lt;/a&gt; hasonlítanám, de sokkal barátságosabb annál és (laikus szemmel nézve) többet is tud. Tud processzeket nyilvántartani, indítani, leállítani, újraindítani, státuszt és logot listázni. Szkriptek (nem csak Node) futtatására van kitalálva, képes arra is, hogy újraindítson egy appot, ha annak fájljai frissülnek (&lt;code class=&quot;highlighter-rouge&quot;&gt;--watch&lt;/code&gt;).&lt;/p&gt;
-
-&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
-
-&lt;p&gt;Ez a poszt elég hosszúra sikeredett, összefoglalom:&lt;/p&gt;
+&lt;p&gt;I narrow down the above list in the following way:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Eddig Java/Kotlin + Spring + Knockout vonalon mozogtam webalkalmazás fejlesztés terén.&lt;/li&gt;
-  &lt;li&gt;Az utóbbi időben a Knockout-ot Vue-ra cseréltem, sokkal barátságosabb.&lt;/li&gt;
-  &lt;li&gt;A minap kaptam egy mini webalkalmazás megrendelést és úgy döntöttem, megpróbálom Node-dal megvalósítani.&lt;/li&gt;
-  &lt;li&gt;Keresgéltem tutorialokat és technológiákat, és elképedve tapasztaltam, hogy nagyon gyorsan tudok vele haladni.&lt;/li&gt;
-  &lt;li&gt;Megismertem az ExpressJS-t, a Passport-ot, a db-migrate-et és a PM2-t.&lt;/li&gt;
-  &lt;li&gt;Komolyan fontolgatom az irányváltást a JVM világtól a Node felé.&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Zsolt Jurányi</name></author><category term="js" /><category term="nodejs" /><category term="stack" /><category term="vuejs" /><category term="webapp" /><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /></entry></feed>
+  &lt;li&gt;The 2 approach using Google services seems a bit hacky and not elegant, especially if we look at the other competitors.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://formspree.io/&quot;&gt;formspree.io&lt;/a&gt; does not hide my email address.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.enformed.io/&quot;&gt;enformed.io&lt;/a&gt; has more than one issue.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://mailthis.to/&quot;&gt;mailthis.to&lt;/a&gt; seems nice, but the one-time 1000 email limit is worse than the rest where at least the quota is renewed every month.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://getsimpleform.com/&quot;&gt;SimpleForm&lt;/a&gt; is not so informative and it seems to be old.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.elformo.com/&quot;&gt;elFormo&lt;/a&gt; seems nice too, but there are better choices in the list.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://pageclip.co/&quot;&gt;Pageclip&lt;/a&gt; is the only one left which doesn’t provide unlimited submissions.&lt;/li&gt;
+  &lt;li&gt;🥉 &lt;a href=&quot;https://www.briskforms.com/&quot;&gt;BriskForms&lt;/a&gt; stops at the 3rd place, because it doesn’t have methods to avoid spam.&lt;/li&gt;
+  &lt;li&gt;🥈 &lt;a href=&quot;https://www.99inbound.com/&quot;&gt;99inbound&lt;/a&gt; gets the silver, because&lt;/li&gt;
+  &lt;li&gt;🥇 &lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt; seems more professional and flexible.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I found out all of the above &lt;strong&gt;without trying out&lt;/strong&gt; the services. In my &lt;a href=&quot;/blog/2018/contact-form-using-basin&quot;&gt;next post&lt;/a&gt; I share my experiences with &lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt; which seems to deserve my gold medal. 🤓&lt;/p&gt;</content><author><name>Zsolt Jurányi</name></author><category term="comparison" /><category term="email" /><category term="form" /><category term="serverless" /><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /></entry></feed>

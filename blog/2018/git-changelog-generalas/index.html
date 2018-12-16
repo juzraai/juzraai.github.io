@@ -1,0 +1,116 @@
+<!DOCTYPE html> <html lang="hu"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <meta http-equiv="X-UA-Compatible" content="ie=edge"> <!-- Begin Jekyll SEO tag v2.5.0 --> <title>Git changelog generálás | Zsolt Jurányi (juzraai)</title> <meta name="generator" content="Jekyll v3.8.5" /> <meta property="og:title" content="Git changelog generálás" /> <meta name="author" content="Zsolt Jurányi" /> <meta property="og:locale" content="hu_HU" /> <meta name="description" content="…" /> <meta property="og:description" content="…" /> <link rel="canonical" href="https://juzraai.github.io/blog/2018/git-changelog-generalas/" /> <meta property="og:url" content="https://juzraai.github.io/blog/2018/git-changelog-generalas/" /> <meta property="og:site_name" content="Zsolt Jurányi (juzraai)" /> <meta property="og:image" content="https://juzraai.github.io/assets/facebook-og-image.png" /> <meta property="og:image:height" content="630" /> <meta property="og:image:width" content="1200" /> <meta property="og:type" content="article" /> <meta property="article:published_time" content="2018-12-15T00:00:00+01:00" /> <script type="application/ld+json"> {"description":"…","author":{"@type":"Person","name":"Zsolt Jurányi"},"@type":"BlogPosting","url":"https://juzraai.github.io/blog/2018/git-changelog-generalas/","image":{"width":1200,"height":630,"url":"https://juzraai.github.io/assets/facebook-og-image.png","@type":"imageObject"},"headline":"Git changelog generálás","dateModified":"2018-12-16T01:28:27+01:00","datePublished":"2018-12-15T00:00:00+01:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://juzraai.github.io/blog/2018/git-changelog-generalas/"},"@context":"http://schema.org"}</script> <!-- End Jekyll SEO tag --> <meta property="og:image:type" content="image/png" /> <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"> <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"> <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"> <link rel="manifest" href="/site.webmanifest"> <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#016fb9"> <meta name="msapplication-TileColor" content="#016fb9"> <meta name="theme-color" content="#016fb9"> <link type="application/atom+xml" rel="alternate" href="https://juzraai.github.io/feed.xml" title="Zsolt Jurányi (juzraai)" /> <link rel="dns-prefetch" href="//fonts.googleapis.com/"> <link rel="dns-prefetch" href="//cdnjs.cloudflare.com"> <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Barlow+Condensed:300,300i,400,500,600|Inconsolata:400,700&amp;subset=latin-ext" /> <link rel="stylesheet" href="/assets/page.css" /> </head> <body> <nav class="navbar navbar-expand-lg navbar-dark bg-dark"> <div class="container"> <a class="navbar-brand" href="/">Zsolt</a> <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button> <div class="collapse navbar-collapse" id="navbarSupportedContent"> <ul class="navbar-nav mr-auto w-100"> <li class="nav-item"> <a class="nav-link" href="/projects/hu/" target="">Munkáim</a> </li> <li class="nav-item"> <a class="nav-link" href="/blog/hu/" target="">Feljegyzéseim</a> </li> <li class="nav-item"> <a class="nav-link" href="https://github.com/juzraai" target="_blank">GitHub</a> </li> <li class="nav-item"> <a class="nav-link" href="/contact/hu/" target="">Kontakt</a> </li> </ul> </div> </div> </nav> <div class="container"> <div class="row my-5 border-bottom"> <div class="col"> <div class="mb-3 text-muted"> Dec 15, 2018 / <a class="d-inline-block mr-1 mb-1" href="/blog/hu/tag/bash/">#bash</a> <a class="d-inline-block mr-1 mb-1" href="/blog/hu/tag/changelog/">#changelog</a> <a class="d-inline-block mr-1 mb-1" href="/blog/hu/tag/commit/">#commit</a> <a class="d-inline-block mr-1 mb-1" href="/blog/hu/tag/generator/">#generator</a> <a class="d-inline-block mr-1 mb-1" href="/blog/hu/tag/git/">#git</a> <a class="d-inline-block mr-1 mb-1" href="/blog/hu/tag/markdown/">#markdown</a> <a class="d-inline-block mr-1 mb-1" href="/blog/hu/tag/log/">#log</a> <a class="d-inline-block mr-1 mb-1" href="/blog/hu/tag/script/">#script</a> </div> <h1>Git changelog generálás</h1> </div> </div> <div class="row"> <div class="col content"> <ul class="list-unstyled mb-5 toc"> <li><a href="#bevezetés">Bevezetés</a></li> <li><a href="#célkitűzés">Célkitűzés</a></li> <li><a href="#kísérletezés">Kísérletezés</a></li> <li><a href="#összekalapálás">Összekalapálás</a></li> <li><a href="#epilog">EpiLog</a></li> </ul> <h2 id="bevezetés">Bevezetés</h2> <p>Böngészgettem GitHub-on, és felfigyeltem rá, hogy sok repóban van <strong>changelog fájl</strong> vagy fejezet a readme-ben. A changelog egy <strong>hasznos dolog, tájékoztatja</strong> a felhasználót (vagy fejlesztőt) az egyes verziók különbségeiről, a <strong>bekövetkezett változásokról.</strong> Ha elég ügyesek vagyunk, ezt a naplót megfelelő tool segítségével le is tudjuk generálni. A jó changelog irányelveit a <a href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a> oldal írja le, szem előtt tartva úgy a napló olvashatóságát és értelmét, mint pedig a generálhatóságát (ld. commit message prefixek).</p> <p>Namost a linken írtakat most olvastam el, miután a posztom vázlatát megírtam… és a helyzet az, hogy <strong>a bejegyzés további része szembemegy az irányelvekkel.</strong> Ez kissé talán lelomboz, viszont ettől még nem haszontalan megosztanom a <del>mai szenvedésem</del> ma szerzett tapasztalataimat a <code class="highlighter-rouge">git log</code> paranccsal.</p> <h2 id="célkitűzés">Célkitűzés</h2> <p>A dolog ott indul, hogy a <a href="/blog/2018/dijnet-bot/">Díjnet bothoz</a> gondoltam changelog-ot generálni. A <a href="https://github.com/juzraai/dijnet-bot">repóról</a> azt kell most tudni, hogy a commit message-eket kivételesen magyarul írom. <strong>A célom pedig az, hogy a changelog tartalmazza az összes commit-ot, release-enként csoportosítva.</strong> (vö. a fentebb linkelt irányelvekkel)</p> <p>Keresgéltem létező generátorokat, kettőt emelnék ki:</p> <ul> <li><a href="https://github.com/github-changelog-generator/github-changelog-generator">github-changelog-generator</a> - Ennek van a legtöbb csillaga, viszont nekem (most) nem megfelelő, mert <strong>GitHub Issues-ból dolgozik,</strong> amit nem használok a fent említett repóban.</li> <li><a href="https://github.com/git-chglog/git-chglog/">git-chglog</a> - Ez kevésbé népszerű, viszont nagyon szimpatikus, mert a <strong>git history-ból dolgozik,</strong> egyetlen binárisból áll, könnyen <strong>testreszabható</strong> és config generátora is van. Ugyanakkor kipróbáltam, és nem azt kapom, amit várok. Ha kikapcsolom a commit type detektálást (message első szava alapján csoportosítás), akkor konkrétan üres lesz a generált napló.</li> </ul> <p>Szóval nekiültem saját szkriptet írni.</p> <h2 id="kísérletezés">Kísérletezés</h2> <p>Először nézzük, mivel állunk szemben. Így néz ki a teljes log:</p> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git log --oneline
+b323e7d (HEAD -&gt; master, single-inst) Lint
+73a4bcd Csak egy instance maradhat
+bf4a37f Szkriptek src mappába (átláthatóság++)
+7c1fdb0 (tag: 1.0.1, origin/master, origin/HEAD) Logger konfig itt jobb helyen van
+e724f7e Globális install működik
+c8d7518 (tag: 1.0.0) Dependency update
+e7e9abb Kép URL fix
+f4a4114 Feladatok, ötletek
+3655263 Doksi
+51c3039 Sleep konfigban, exit code
+2f6669e Fájlba mentés opcionális, log level állítható
+80d90db Lint
+285f280 Iteráció működik
+f929777 Számla fájlok letöltése
+d207817 Letöltő linkek parszolása
+39d0ae8 Számla kiválasztás, fájlba mentés
+f463a50 Számla alapadatok parszolása
+cd4e40e szamla_search_submit
+2ebca86 Login, szamla_search
+ff608c9 Logger
+5fa1938 Initial commit
+</code></pre></div></div> <p>Kipróbáltam a <code class="highlighter-rouge">git log</code> parancsot, és a <code class="highlighter-rouge">&lt;since&gt;...&lt;until&gt;</code> paramétert. Az unreleased commit-okat így tudom kilistázni:</p> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git log --oneline 1.0.1...HEAD
+b323e7d (HEAD -&gt; master, single-inst) Lint
+73a4bcd Csak egy instance maradhat
+bf4a37f Szkriptek src mappába (átláthatóság++)
+</code></pre></div></div> <p>Az utolsó release adatait hasonlóan egyszerűen:</p> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git log --oneline 1.0.0...1.0.1
+7c1fdb0 (tag: 1.0.1, origin/master, origin/HEAD) Logger konfig itt jobb helyen van
+e724f7e Globális install működik
+</code></pre></div></div> <p>Azonban a legelső release history-ját trükkösebb lekérdezni - mit kell megadni a <code class="highlighter-rouge">&lt;since&gt;</code>-nek? Semmit? Nem:</p> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git log --oneline ...1.0.0
+b323e7d (HEAD -&gt; master, single-inst) Lint
+73a4bcd Csak egy instance maradhat
+bf4a37f Szkriptek src mappába (átláthatóság++)
+7c1fdb0 (tag: 1.0.1, origin/master, origin/HEAD) Logger konfig itt jobb helyen van
+e724f7e Globális install működik
+</code></pre></div></div> <p>A <code class="highlighter-rouge">HEAD</code> és az első release közti commit-okat kaptam vissza, vagyis pont az ellenkezőjét annak, amit szerettem volna.</p> <p>Rengeteget keresgéltem, de nem találtam szebb megoldást annál, minthogy lekérem a legelső commit hash-t, és azt adom meg <code class="highlighter-rouge">&lt;since&gt;</code>-nek.</p> <p>A legelső commit lekérdezésére 2 módszert találtam:</p> <ul> <li><code class="highlighter-rouge">git log --oneline | tail -1 | cut -d' ' -f 1</code></li> <li><code class="highlighter-rouge">git rev-list --max-parents=0 HEAD</code></li> </ul> <p>Behelyettesítve a korábbi parancsba már megkapom az első release commit-jait:</p> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git log --oneline `git log --oneline | tail -1 | cut -d' ' -f 1`...1.0.0
+c8d7518 (tag: 1.0.0) Dependency update
+e7e9abb Kép URL fix
+f4a4114 Feladatok, ötletek
+3655263 Doksi
+51c3039 Sleep konfigban, exit code
+2f6669e Fájlba mentés opcionális, log level állítható
+80d90db Lint
+285f280 Iteráció működik
+f929777 Számla fájlok letöltése
+d207817 Letöltő linkek parszolása
+39d0ae8 Számla kiválasztás, fájlba mentés
+f463a50 Számla alapadatok parszolása
+cd4e40e szamla_search_submit
+2ebca86 Login, szamla_search
+ff608c9 Logger
+</code></pre></div></div> <p>Legalábbis majdnem. Ugyanis az intervallum alul nyitott, az <em>“Initial commit”</em> kimaradt. Ezt explicit módon kell majd kiíratnom a changelog végére:</p> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git log --oneline | tail -1
+5fa1938 Initial commit
+</code></pre></div></div> <p>A fentiek automatizálásához szükség van a release-ek listájára is. Ezt az alábbi paranccsal kérdezhetem le:</p> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git tag | sort -r
+1.0.1
+1.0.0
+</code></pre></div></div> <p>A changelog akkor szép, ha némileg formázva van, erre egy tökéletes eszköz a Markdown nyelv. A <em>“Changelog”</em> felirat egy egyes szintű címsor, míg a release-ek másodszintűek lesznek. Köztük a commit-ok pedig felsorolások. Utóbbihoz a <code class="highlighter-rouge">--oneline</code> helyett saját formátumot kell megadni a <code class="highlighter-rouge">git log</code>-nak:</p> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git log --pretty="* %s" | tail -1
+* Initial commit
+</code></pre></div></div> <p>A <code class="highlighter-rouge">pretty</code> paraméterben használható változókról <a href="https://git-scm.com/docs/pretty-formats">itt írnak részletesen</a>.</p> <h2 id="összekalapálás">Összekalapálás</h2> <p>Algoritmus:</p> <ul> <li>UNTIL := “HEAD”</li> <li>Végig a release-eken: <ul> <li>SINCE := aktuális release</li> <li>Release fejléc kiírása (UNTIL)</li> <li>Commitok kiírása SINCE…UNTIL tartományban</li> <li>UNTIL := SINCE</li> </ul> </li> <li>FIRST := legelső commit</li> <li>Commitok kiírása FIRST…UNTIL tartományban</li> <li>FIRST commit kiírása</li> </ul> <p>Bash implementáció:</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/usr/bin/env bash</span>
+
+write-commits<span class="o">()</span> <span class="o">{</span>
+	git log <span class="nt">--pretty</span><span class="o">=</span><span class="s2">"* %s"</span> <span class="nv">$1</span>
+<span class="o">}</span>
+
+write-release<span class="o">()</span> <span class="o">{</span>
+	<span class="nv">SINCE</span><span class="o">=</span><span class="nv">$1</span><span class="p">;</span> <span class="nv">UNTIL</span><span class="o">=</span><span class="nv">$2</span>
+	<span class="nb">printf</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">## </span><span class="nv">$UNTIL</span><span class="se">\n</span><span class="s2">"</span>
+	write-commits <span class="nv">$SINCE</span>...<span class="nv">$UNTIL</span>
+<span class="o">}</span>
+
+main<span class="o">()</span> <span class="o">{</span>
+	<span class="nb">echo</span> <span class="s2">"# Changelog"</span>
+	<span class="nv">UNTIL</span><span class="o">=</span><span class="s2">"HEAD"</span>
+	<span class="k">for </span>SINCE <span class="k">in</span> <span class="sb">`</span>git tag | <span class="nb">sort</span> <span class="nt">-r</span><span class="sb">`</span><span class="p">;</span> <span class="k">do
+		</span>write-release <span class="nv">$SINCE</span> <span class="nv">$UNTIL</span>
+		<span class="nv">UNTIL</span><span class="o">=</span><span class="nv">$SINCE</span>
+	<span class="k">done
+	</span><span class="nv">FIRST</span><span class="o">=</span><span class="sb">`</span>git log <span class="nt">--oneline</span> | <span class="nb">tail</span> <span class="nt">-1</span> | <span class="nb">cut</span> <span class="nt">-d</span><span class="s1">' '</span> <span class="nt">-f</span> 1<span class="sb">`</span>
+	write-release <span class="nv">$FIRST</span> <span class="nv">$UNTIL</span>
+	write-commits <span class="nv">$FIRST</span>
+<span class="o">}</span>
+
+main
+</code></pre></div></div> <p>Output:</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ./my-git-changelog.sh
+<span class="gh"># Changelog</span>
+
+<span class="gu">## HEAD</span>
+<span class="p">
+*</span> Lint
+<span class="p">*</span> Csak egy instance maradhat
+<span class="p">*</span> Szkriptek src mappába (átláthatóság++)
+
+<span class="gu">## 1.0.1</span>
+<span class="p">
+*</span> Logger konfig itt jobb helyen van
+<span class="p">*</span> Globális install működik
+
+<span class="gu">## 1.0.0</span>
+<span class="p">
+*</span> Dependency update
+<span class="p">*</span> Kép URL fix
+<span class="p">*</span> Feladatok, ötletek
+<span class="p">*</span> Doksi
+<span class="p">*</span> Sleep konfigban, exit code
+<span class="p">*</span> Fájlba mentés opcionális, log level állítható
+<span class="p">*</span> Lint
+<span class="p">*</span> Iteráció működik
+<span class="p">*</span> Számla fájlok letöltése
+<span class="p">*</span> Letöltő linkek parszolása
+<span class="p">*</span> Számla kiválasztás, fájlba mentés
+<span class="p">*</span> Számla alapadatok parszolása
+<span class="p">*</span> szamla_search_submit
+<span class="p">*</span> Login, szamla_search
+<span class="p">*</span> Logger
+<span class="p">*</span> Initial commit
+</code></pre></div></div> <p>A fájlba írás pedig innen már pofon egyszerű: <code class="highlighter-rouge">./my-git-changelog.sh &gt; CHANGELOG.md</code>.</p> <h2 id="epilog">EpiLog</h2> <p>Lehetne még persze tuningolni azzal, hogy a release-ekhez dátumot is kiírok, de most ezt nem teszem meg.</p> <p>Ahogy a bevezetőben is említettem, a <strong>jó changelog NEM ez,</strong> amit most tákoltam össze. Ugyanis nem, vagy csak nagyon <strong>nehezen derül ki belőle,</strong> hogy a felhasználónak mire kell figyelnie, mire számíthat - változott-e az API, bekerült-e új feaure, javítva lett-e a hiba, amitől kihullott a haja, etc. Ehelyett a fenti megoldás kiprinteli még a legeslegérdektelenebb commitot is, az <em>initial</em>-t… 🤓</p> </div> </div> <div class="row mt-3"> <div class="col text-center"> <script> if (!window.scripts) window.scripts = []; window.scripts = window.scripts.concat('https://connect.facebook.net/hu_HU/sdk.js#xfbml=1&version=v3.0'); </script> <div class="fb-like" data-href="https://juzraai.github.io/blog/2018/git-changelog-generalas/" data-layout="button_count" data-action="like" data-size="large" data-show-faces="false" data-share="true"></div> </div> </div> <div class="row my-5 border-top"> <div class="col-md-8 mt-3"> <big class="font-weight-normal text-dark"> <strong>Zsolt vagyok,</strong> full-stack fejlesztő. </big> <br> Crawlereket, webalkalmazásokat, statikus honlapokat és interaktív vizualizációkat készítek. </div> <div class="col mt-3 small"> <ul class="list-unstyled d-flex d-md-block pl-md-3"> <li class="mr-3 mr-md-0"><a href="/projects/hu/" target="">Munkáim</a></li> <li class="mr-3 mr-md-0"><a href="/blog/hu/" target="">Feljegyzéseim</a></li> <li class="mr-3 mr-md-0"><a href="https://github.com/juzraai" target="_blank">GitHub</a></li> <li class="mr-3 mr-md-0"><a href="/contact/hu/" target="">Kontakt</a></li> </ul> </div> </div> <div class="row"> <div class="col mb-3 small text-center text-muted"> Copyright &copy; 2018 Zsolt Jurányi | All rights reserved. </div> </div> </div> <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.min.js"></script> <script>$(function () { $('a[href^=http]').attr('target', '_blank'); })</script> <script> if (!window.scripts) window.scripts = []; window.scripts = window.scripts.concat('https://www.googletagmanager.com/gtag/js?id=UA-41050675-1'); window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'UA-41050675-1', { 'anonymize_ip': true }); </script> <div id="cc" style="display:none"> <div class="c" onclick="ccClear()"></div> <div class="p"> <p> A honlap helyes működéséhez és némi statisztikához szeretnék sütiket használni. <a href="/privacy/hu/">Részletek</a> </p> <div class="r"> <a href="javascript:void(0)" onclick="ccDeny()">Elrejtés</a> <a class="b" href="javascript:void(0)" onclick="ccAllow()">Engedélyezem</a> </div> </div> </div> <script> /* js-cookie v2.2.0 */ !function(e){var n=!1;if("function"==typeof define&&define.amd&&(define(e),n=!0),"object"==typeof exports&&(module.exports=e(),n=!0),!n){var o=window.Cookies,t=window.Cookies=e();t.noConflict=function(){return window.Cookies=o,t}}}(function(){function e(){for(var e=0,n={};e<arguments.length;e++){var o=arguments[e];for(var t in o)n[t]=o[t]}return n}function n(o){function t(n,r,i){var c;if("undefined"!=typeof document){if(arguments.length>1){if("number"==typeof(i=e({path:"/"},t.defaults,i)).expires){var a=new Date;a.setMilliseconds(a.getMilliseconds()+864e5*i.expires),i.expires=a}i.expires=i.expires?i.expires.toUTCString():"";try{/^[\{\[]/.test(c=JSON.stringify(r))&&(r=c)}catch(e){}r=o.write?o.write(r,n):encodeURIComponent(String(r)).replace(/%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g,decodeURIComponent),n=(n=(n=encodeURIComponent(String(n))).replace(/%(23|24|26|2B|5E|60|7C)/g,decodeURIComponent)).replace(/[\(\)]/g,escape);var s="";for(var f in i)i[f]&&(s+="; "+f,!0!==i[f]&&(s+="="+i[f]));return document.cookie=n+"="+r+s}n||(c={});for(var p=document.cookie?document.cookie.split("; "):[],d=/(%[0-9A-Z]{2})+/g,u=0;u<p.length;u++){var l=p[u].split("="),C=l.slice(1).join("=");this.json||'"'!==C.charAt(0)||(C=C.slice(1,-1));try{var g=l[0].replace(d,decodeURIComponent);if(C=o.read?o.read(C,g):o(C,g)||C.replace(d,decodeURIComponent),this.json)try{C=JSON.parse(C)}catch(e){}if(n===g){c=C;break}n||(c[g]=C)}catch(e){}}return c}}return t.set=t,t.get=function(e){return t.call(t,e)},t.getJSON=function(){return t.apply({json:!0},[].slice.call(arguments))},t.defaults={},t.remove=function(n,o){t(n,"",e(o,{expires:-1}))},t.withConverter=n,t}return n(function(){})}); function addClass(element, className) { element.className += ' ' + className; } function removeClass(element, className) { element.className = element.className.replace( new RegExp('( |^)' + className + '( |$)', 'g'), ' ').trim(); } var c = 'juzraai-cc-v1'; function ccInit() { var v = Cookies.get(c); var e = document.getElementById('cc'); if ('allow' == v) { e.style.display = 'none'; ccLoadScripts(); } else { if ('deny' == v) { addClass(e, 'small'); } else { removeClass(e, 'small'); } e.style.display = null; } } function ccAllow() { Cookies.set(c, 'allow', { expires: 365 }); ccInit(); } function ccClear() { Cookies.remove(c); ccInit(); } function ccDeny() { Cookies.set(c, 'deny', { expires: 7 }); ccInit(); } function ccLoadScripts() { if (!window.scripts) window.scripts = []; for (var i = 0; i < window.scripts.length; i++) { var script = document.createElement('script'); script.src = window.scripts[i]; document.body.appendChild(script); } } ccInit(); </script> </body> </html>
