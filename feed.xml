@@ -1,4 +1,118 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="hu_HU"><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://juzraai.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://juzraai.github.io/" rel="alternate" type="text/html" hreflang="hu_HU" /><updated>2018-12-16T01:32:51+01:00</updated><id>https://juzraai.github.io/feed.xml</id><title type="html">Zsolt Jurányi (juzraai)</title><subtitle>Zsolt vagyok, full-stack fejlesztő. Crawlereket, webalkalmazásokat, statikus honlapokat és interaktív vizualizációkat készítek.</subtitle><author><name>Zsolt Jurányi</name></author><entry xml:lang="hu_HU"><title type="html">Git changelog generálás</title><link href="https://juzraai.github.io/blog/2018/git-changelog-generalas/" rel="alternate" type="text/html" title="Git changelog generálás" /><published>2018-12-15T00:00:00+01:00</published><updated>2018-12-16T01:32:14+01:00</updated><id>https://juzraai.github.io/blog/2018/git-changelog-generalas</id><content type="html" xml:base="https://juzraai.github.io/blog/2018/git-changelog-generalas/">&lt;h2 id=&quot;bevezetés&quot;&gt;Bevezetés&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="hu_HU"><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://juzraai.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://juzraai.github.io/" rel="alternate" type="text/html" hreflang="hu_HU" /><updated>2019-05-12T16:02:55+02:00</updated><id>https://juzraai.github.io/feed.xml</id><title type="html">Zsolt Jurányi (juzraai)</title><subtitle>Zsolt vagyok, full-stack fejlesztő. Crawlereket, webalkalmazásokat, statikus honlapokat és interaktív vizualizációkat készítek.</subtitle><author><name>Zsolt Jurányi</name></author><entry xml:lang="en_US"><title type="html">Is Popper.js required for Bootstrap 4?</title><link href="https://juzraai.github.io/blog/2019/is-popperjs-requried-for-bootstrap4/" rel="alternate" type="text/html" title="Is Popper.js required for Bootstrap 4?" /><published>2019-05-12T00:00:00+02:00</published><updated>2019-05-12T15:58:50+02:00</updated><id>https://juzraai.github.io/blog/2019/is-popperjs-requried-for-bootstrap4</id><content type="html" xml:base="https://juzraai.github.io/blog/2019/is-popperjs-requried-for-bootstrap4/">&lt;p&gt;Several months ago I saw this &lt;a href=&quot;https://stackoverflow.com/questions/46155017/bootstrap-4-beta-is-popper-js-required/46155285&quot;&gt;question on StackOverflow&lt;/a&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;I wanted to ask if Popper.js is absolutely necessary or not if I don’t use dropdown menus. Are there any other parts of Bootstrap 4 driven by Popper.js that would not work without the library?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I made a little research and posted &lt;a href=&quot;https://stackoverflow.com/a/46155285/2418224&quot;&gt;my answer&lt;/a&gt;. I’m revisiting this now because from time to time I get upvotes and currently this is my highest voted answer. (I know, 15 upvotes is ridiculous if we compare it to posts of &lt;a href=&quot;https://stackoverflow.com/users?tab=Reputation&amp;amp;filter=all&quot;&gt;Stack Overflow ninjas&lt;/a&gt;, but I’m happy with it now. 🤓) This blog post is here to spread the knowledge by mirroring my answer, and also to add some minor thoughts to it.&lt;/p&gt;
+
+&lt;h2 id=&quot;which-parts-of-bootstrap-4-uses-popperjs&quot;&gt;Which parts of Bootstrap 4 uses Popper.js?&lt;/h2&gt;
+
+&lt;p&gt;To answer this part of the original question, the easiest we can do is to open the documentation and use its search box.&lt;/p&gt;
+
+&lt;p&gt;If we search for &lt;code class=&quot;highlighter-rouge&quot;&gt;popper&lt;/code&gt; in &lt;a href=&quot;https://getbootstrap.com/docs/4.3/getting-started/introduction/&quot;&gt;Bootstrap 4’s documentation&lt;/a&gt;, the following results will come up:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Tooltips rely on the 3rd party library &lt;strong&gt;Popper.js&lt;/strong&gt; for positioning.&lt;/p&gt;
+
+  &lt;p&gt;Popovers rely on the 3rd party library &lt;strong&gt;Popper.js&lt;/strong&gt; for positioning.&lt;/p&gt;
+
+  &lt;p&gt;Dropdowns are built on a third party library, &lt;strong&gt;Popper.js&lt;/strong&gt;, which provides dynamic positioning and viewport detection.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;(These quotes are from the Beta documentation. Currently the phrasing is different but the results are the same.)&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;So these are the Bootstrap 4 components that need Popper.js:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;dropdowns&lt;/li&gt;
+  &lt;li&gt;popovers&lt;/li&gt;
+  &lt;li&gt;tooltips&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;(According to my answer on StackOverflow, Bootstrap 4 Beta needed Popper.js for modals as well, which is not true for the current 4.3.1 version.)&lt;/p&gt;
+
+&lt;h2 id=&quot;do-i-need-popperjs-if-i-dont-use-these-components&quot;&gt;Do I need Popper.js if I don’t use these components?&lt;/h2&gt;
+
+&lt;p&gt;Popper.js is stated as required in the documentation:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Many of our components require the use of JavaScript to function. Specifically, they require jQuery, Popper.js, and our own JavaScript plugins. Place the following scripts near the end of your pages, right before the closing &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;/body&amp;gt;&lt;/code&gt; tag, to enable them. jQuery must come first, then Popper.js, and then our JavaScript plugins.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;And Bootstrap 4 JS (Beta version at least) logs an error if it can’t find Popper.js:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Uncaught Error: Bootstrap dropdown require Popper.js (https://popper.js.org)
+    at bootstrap.min.js:6
+    at bootstrap.min.js:6
+    at bootstrap.min.js:6
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;However, &lt;strong&gt;Bootstrap 4 can be used without Popper.js, if we don’t use tooltips, popovers nor dropdowns.&lt;/strong&gt; For example, navbar’s JS functionality (mobile menu on the right) &lt;a href=&quot;https://stackoverflow.com/a/46155285/2418224&quot;&gt;works well without Popper.js&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;but-theres-a-bundle&quot;&gt;…but there’s a bundle!&lt;/h2&gt;
+
+&lt;p&gt;More answers on the same topic mentions that there’s a bundle version of Bootstrap 4 JS, which &lt;strong&gt;includes Popper.js,&lt;/strong&gt; therefore there’s no need to bother including Popper.js by hand.&lt;/p&gt;
+
+&lt;p&gt;In my opinion, or at least for me, the whole point of not importing Popper.js is to reduce loading time of a webpage by &lt;strong&gt;importing only what is required.&lt;/strong&gt;&lt;/p&gt;</content><author><name>Zsolt Jurányi</name></author><category term="bootstrap" /><category term="popperjs" /><category term="stackoverflow" /><summary type="html">Several months ago I saw this question on StackOverflow:</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /></entry><entry xml:lang="hu_HU"><title type="html">Tényleg kell Popper.js Bootstrap 4-hez?</title><link href="https://juzraai.github.io/blog/2019/tenyleg-kell-popperjs-bootstrap4-hez/" rel="alternate" type="text/html" title="Tényleg kell Popper.js Bootstrap 4-hez?" /><published>2019-05-12T00:00:00+02:00</published><updated>2019-05-12T15:58:58+02:00</updated><id>https://juzraai.github.io/blog/2019/tenyleg-kell-popperjs-bootstrap4-hez</id><content type="html" xml:base="https://juzraai.github.io/blog/2019/tenyleg-kell-popperjs-bootstrap4-hez/">&lt;p&gt;Jó pár hónapja találtam &lt;a href=&quot;https://stackoverflow.com/questions/46155017/bootstrap-4-beta-is-popper-js-required/46155285&quot;&gt;ezt a kérdést StackOverflow-n&lt;/a&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Azt szeretném kérdezni, hogy a Popper.js tényleg szükséges-e, ha nem használok dropdown menu-t*? Vannak más Bootstrap 4 komponensek, amik a Popper.js-re épülnek és nem tudnak működni nélküle?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;small&gt;*: A komponenseket direkt nem fogom lefordítgatni, mert 1) nem tudom, mi lenne a korrekt magyar megfelelőjük, 2) mivel szakszavak, talán nem is kell őket fordítani.&lt;/small&gt;&lt;/p&gt;
+
+&lt;p&gt;Utánanéztem kicsit a dolgoknak, és &lt;a href=&quot;https://stackoverflow.com/a/46155285/2418224&quot;&gt;válaszoltam a kérdésre&lt;/a&gt;. Azért került most elő ez a téma, mert időnként kapok upvote-okat, és eddig ez a legmagasabb pontszámú válaszom. (Jó, hát a 15 pontjával nyilván nevetséges a &lt;a href=&quot;https://stackoverflow.com/users?tab=Reputation&amp;amp;filter=all&quot;&gt;Stack Overflow nindzsák&lt;/a&gt; posztjaihoz képest, de én ezzel is boldog vagyok. 🤓) Jelen bejegyzés azért születik, hogy terjesszem az infókat, illetve hogy még pár gondolatot hozzátoldjak a válaszomhoz.&lt;/p&gt;
+
+&lt;h2 id=&quot;mely-bootstrap-4-komponensek-használják-a-popperjs-t&quot;&gt;Mely Bootstrap 4 komponensek használják a Popper.js-t?&lt;/h2&gt;
+
+&lt;p&gt;Ahhoz, hogy ezt megválaszoljuk, a legegyszerűbb, amit tehetünk, hogy megnyitjuk a dokumentációt és használjuk a keresődobozát.&lt;/p&gt;
+
+&lt;p&gt;Ha rákeresünk a &lt;code class=&quot;highlighter-rouge&quot;&gt;popper&lt;/code&gt;-re a &lt;a href=&quot;https://getbootstrap.com/docs/4.3/getting-started/introduction/&quot;&gt;Bootstrap 4’s dokumentációban&lt;/a&gt;, az alábbi találatokat kapjuk:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Tooltips rely on the 3rd party library &lt;strong&gt;Popper.js&lt;/strong&gt; for positioning.&lt;/p&gt;
+
+  &lt;p&gt;Popovers rely on the 3rd party library &lt;strong&gt;Popper.js&lt;/strong&gt; for positioning.&lt;/p&gt;
+
+  &lt;p&gt;Dropdowns are built on a third party library, &lt;strong&gt;Popper.js&lt;/strong&gt;, which provides dynamic positioning and viewport detection.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;(A fentiek a Beta doksiból vannak. A kurrens doksiban más a megfogalmazás, de az eredmény azonos.)&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Szóval ezek a Bootstrap 4 komponensek használnak Popperjs-t:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;dropdown&lt;/li&gt;
+  &lt;li&gt;popover&lt;/li&gt;
+  &lt;li&gt;tooltip&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;(A StackOverflow-n olvasható válaszom tanúsága szerint a Bootstrap 4 Beta verziójának még a modal-hoz is kellett a Popper.js, de ez már nem igaz a kurrens 4.3.1 verzióra.)&lt;/p&gt;
+
+&lt;h2 id=&quot;szükséges-a-popperjs-ha-nem-használom-a-fenti-komponenseket&quot;&gt;Szükséges a Popper.js, ha nem használom a fenti komponenseket?&lt;/h2&gt;
+
+&lt;p&gt;A Popper.js követelményként van említve a dokumentációban:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Many of our components require the use of JavaScript to function. Specifically, they require jQuery, Popper.js, and our own JavaScript plugins. Place the following scripts near the end of your pages, right before the closing &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;/body&amp;gt;&lt;/code&gt; tag, to enable them. jQuery must come first, then Popper.js, and then our JavaScript plugins.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;És a Bootstrap 4 JS (legalábbis a Beta verzió) hibaüzenetet ír a logba, ha nem találja a Popper.js-t:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Uncaught Error: Bootstrap dropdown require Popper.js (https://popper.js.org)
+    at bootstrap.min.js:6
+    at bootstrap.min.js:6
+    at bootstrap.min.js:6
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Ugyanakkor a &lt;strong&gt;Bootstrap 4 használható Popper.js nélkül, ha nem használunk tooltip-eket, popover-eket vagy dropdown-okat.&lt;/strong&gt; Például a navbar JS funkcionalitása (mobil menu a jobb szélen) &lt;a href=&quot;https://stackoverflow.com/a/46155285/2418224&quot;&gt;kiválóan működik Popper.js nélkül&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;de-hát-van-bundle&quot;&gt;…de hát van bundle!&lt;/h2&gt;
+
+&lt;p&gt;Több válasz is említi a szóban forgó kérdés alatt, hogy a Bootstrap 4-nek van egy bundle verziója, ami &lt;strong&gt;tartalmazza a Popper.js-t,&lt;/strong&gt; tehát nem kell görcsölni a Popper.js kézzel importálásán.&lt;/p&gt;
+
+&lt;p&gt;Az én véleményem viszont az, vagy legalábbis számomra a kérdésnek pont az az értelme, hogy azért nem importáljuk a Popper.js-t, mert csökkenteni szeretnénk a weboldalunk betöltési idejét azzal, hogy &lt;strong&gt;csak a szükséges dolgokat importáljuk.&lt;/strong&gt;&lt;/p&gt;</content><author><name>Zsolt Jurányi</name></author><category term="bootstrap" /><category term="popperjs" /><category term="stackoverflow" /><summary type="html">Jó pár hónapja találtam ezt a kérdést StackOverflow-n:</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /></entry><entry xml:lang="hu_HU"><title type="html">Git changelog generálás</title><link href="https://juzraai.github.io/blog/2018/git-changelog-generalas/" rel="alternate" type="text/html" title="Git changelog generálás" /><published>2018-12-15T00:00:00+01:00</published><updated>2018-12-16T01:32:14+01:00</updated><id>https://juzraai.github.io/blog/2018/git-changelog-generalas</id><content type="html" xml:base="https://juzraai.github.io/blog/2018/git-changelog-generalas/">&lt;h2 id=&quot;bevezetés&quot;&gt;Bevezetés&lt;/h2&gt;
 
 &lt;p&gt;Böngészgettem GitHub-on, és felfigyeltem rá, hogy sok repóban van &lt;strong&gt;changelog fájl&lt;/strong&gt; vagy fejezet a readme-ben. A changelog egy &lt;strong&gt;hasznos dolog, tájékoztatja&lt;/strong&gt; a felhasználót (vagy fejlesztőt) az egyes verziók különbségeiről, a &lt;strong&gt;bekövetkezett változásokról.&lt;/strong&gt; Ha elég ügyesek vagyunk, ezt a naplót megfelelő tool segítségével le is tudjuk generálni. A jó changelog irányelveit a &lt;a href=&quot;https://keepachangelog.com/en/1.0.0/&quot;&gt;Keep a Changelog&lt;/a&gt; oldal írja le, szem előtt tartva úgy a napló olvashatóságát és értelmét, mint pedig a generálhatóságát (ld. commit message prefixek).&lt;/p&gt;
 
@@ -625,316 +739,4 @@ service gitea start
   &lt;li&gt;Először a böngésző natív validálási mechanizmusa fut le.&lt;/li&gt;
   &lt;li&gt;Aztán az eseménykezelő inicializálja a captcha-t.&lt;/li&gt;
   &lt;li&gt;A captcha elhelyezi a választ a formban, majd meghívja a callback-et, ami elküldi a form-ot.&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Zsolt Jurányi</name></author><category term="basin" /><category term="captcha" /><category term="email" /><category term="form" /><category term="serverless" /><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /></entry><entry xml:lang="hu_HU"><title type="html">Kontakt form ingyen - körbenézés</title><link href="https://juzraai.github.io/blog/2018/kontakt-form-ingyen/" rel="alternate" type="text/html" title="Kontakt form ingyen - körbenézés" /><published>2018-06-02T00:00:00+02:00</published><updated>2018-11-07T21:45:36+01:00</updated><id>https://juzraai.github.io/blog/2018/kontakt-form-ingyen</id><content type="html" xml:base="https://juzraai.github.io/blog/2018/kontakt-form-ingyen/">&lt;h2 id=&quot;a-probléma&quot;&gt;A probléma&lt;/h2&gt;
-
-&lt;p&gt;A blogom és egyben fejlesztői bemutatkozó oldalam egy &lt;strong&gt;statikus honlap,&lt;/strong&gt; amit a &lt;a href=&quot;https://pages.github.com/&quot;&gt;GitHub Pages&lt;/a&gt;-en hosztolok. Elérhetőségként feltüntetem a Facebook és LinkedIn profilom, de az email címemet nem szeretném, mert a &lt;strong&gt;spam nem hiányzik.&lt;/strong&gt; Kitennék viszont &lt;strong&gt;kapcsolati űrlapot&lt;/strong&gt;, ami lehetőséget biztosítana az oldalamra tévedőknek, hogy mindenféle bejelentkezés és továbbkattintás nélkül el tudjanak engem érni.&lt;/p&gt;
-
-&lt;p&gt;Mivel azonban a honlap statikus, &lt;strong&gt;szerveroldali szkript nélkül&lt;/strong&gt; kell megoldani a form feldolgozását, és a kapott adatok kiküldését az email címemre. Muszáj tehát erre a feladatra egy &lt;strong&gt;külső szolgáltatást&lt;/strong&gt; keresni. És persze, ha már eddig is spóroltam, akkor itt is tartsuk a &lt;strong&gt;költségeket zérón.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;lehetőségek&quot;&gt;Lehetőségek&lt;/h2&gt;
-
-&lt;p&gt;Egy napot töltöttem azzal, hogy körbenézzek, mik a lehetőségek. Csak olyan szolgáltatásokat kerestem, amelyek általam kreált &lt;strong&gt;saját HTML form&lt;/strong&gt; adatait is tudják fogadni és email-ben kiküldeni. Ábécé sorrendben listázom, amiket találtam.&lt;/p&gt;
-
-&lt;p&gt;Megjegyzés: &lt;em&gt;“AJAX”&lt;/em&gt; alatt a továbbiakban azt a funkciót értem, hogy az endpoint AJAX-al hívható és szöveges választ ad, szemben a hagyományos form küldéssel, ami jellemzően egy teljes lapot ad vissza, vagy átirányít.&lt;/p&gt;
-
-&lt;p&gt;A &lt;a href=&quot;https://www.99inbound.com/&quot;&gt;99inbound&lt;/a&gt; &lt;strong&gt;korlátlan&lt;/strong&gt; form küldést kínál, van benne &lt;strong&gt;spam filter, illetve Slack integráció.&lt;/strong&gt; Ráadásként form builder is van hozzá, akinek kell. Friss, GDPR-os adatkezelési tájékoztatójuk van.&lt;/p&gt;
-
-&lt;p&gt;A &lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt; szintén &lt;strong&gt;korlátlan&lt;/strong&gt; form küldést biztosít már az ingyenes csomagban is, emellett rengeteg funkciója van: &lt;strong&gt;spam filter, redirect, fájl feltöltés, AJAX, export, analitika, valamint Zapier integráció&lt;/strong&gt; néhány népszerű alkalmazásba (pl. Slack, Trello, Asana, Google Sheets). A &lt;a href=&quot;https://zapier.com/&quot;&gt;Zapier&lt;/a&gt;-ben pedig a 2-lépcsős (trigger+action) folyamatok ingyenesek. Professzionális és felkészült cuccnak tűnik, korrekt GDPR notice is van a honlapjukon. A &lt;a href=&quot;https://www.producthunt.com/posts/basin&quot;&gt;ProductHunt&lt;/a&gt;-on pozitívak az értékelések és aktívak a fejlesztők.&lt;/p&gt;
-
-&lt;p&gt;A &lt;a href=&quot;https://www.briskforms.com/&quot;&gt;BriskForms&lt;/a&gt; nem ír limitekről, kihangsúlyozottan ingyenes szolgáltatás, emellett nyílt forráskódú is. Biztosít &lt;strong&gt;redirectet&lt;/strong&gt;, és/de úgy tűnik nem tárolja az űrlapadatokat.&lt;/p&gt;
-
-&lt;p&gt;Az &lt;a href=&quot;https://www.elformo.com/&quot;&gt;elFormo&lt;/a&gt; &lt;strong&gt;1500 emailt ad havonta&lt;/strong&gt; és van benne &lt;strong&gt;honeypot és redirect&lt;/strong&gt; lehetőség, bár átirányítás előtt felvillantja a logójukat. A beérkezett űrlapadatok böngészhetők és &lt;strong&gt;exportálhatók.&lt;/strong&gt; Noha a honlapjuk stílusos és megnyerő, nem sok review-t találni hozzá, és minden médiumon 2015-ben szólaltak meg utoljára.&lt;/p&gt;
-
-&lt;p&gt;Az &lt;a href=&quot;http://www.enformed.io/&quot;&gt;enformed.io&lt;/a&gt; &lt;strong&gt;100 emailt ad havonta&lt;/strong&gt;. Funkciók: &lt;strong&gt;egyéni levél tárgy, CC, BCC, honeypot, redirect, AJAX.&lt;/strong&gt; Viszont adatkezelési tájékoztatójuk nincs, a regisztrációs űrlapjuk meg konkrétan halott.&lt;/p&gt;
-
-&lt;p&gt;A &lt;a href=&quot;https://formspree.io/&quot;&gt;formspree.io&lt;/a&gt;-val évekkel ezelőtt is találkoztam már, egy ingyenes honlap sablon is ezt a szolgáltatást ajánlotta a kontakt formhoz. Az ingyenes rész limitje &lt;strong&gt;1000 email/hó&lt;/strong&gt;, van &lt;strong&gt;egyéni levél tárgy, CC, redirect, captcha,&lt;/strong&gt; viszont a &lt;strong&gt;form URL-ben szerepel a cél email cím.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;A kapcsolati űrlaphoz használható akár egy &lt;a href=&quot;https://github.com/toperkin/staticFormEmails&quot;&gt;Google Form&lt;/a&gt; is backend-ként. A limitre mindenhol más értéket találok, de &lt;strong&gt;50-100 email/napot&lt;/strong&gt; írnak a legtöbb helyen. Viszont ha nem küldi ki az email-t, akkor sincs gond, mert az űrlap adatait beteszi egy &lt;strong&gt;spreadsheet&lt;/strong&gt;-be.&lt;/p&gt;
-
-&lt;p&gt;Hasonlóan az előzőhöz, &lt;a href=&quot;https://github.com/dwyl/learn-to-send-email-via-google-script-html-no-server&quot;&gt;Google Apps Script&lt;/a&gt;-el is megoldható, hogy spreadsheet-be kerüljenek az adatok előbb, és aztán legyenek kiküldve email-ben. A kvóta &lt;strong&gt;100 email/nap&lt;/strong&gt; és van &lt;strong&gt;AJAX küldés.&lt;/strong&gt; A szkript nyilván kiegészíthető honeypot-tal és captcha-val is.&lt;/p&gt;
-
-&lt;p&gt;A &lt;a href=&quot;https://mailthis.to/&quot;&gt;mailthis.to&lt;/a&gt;-nál picit más az üzleti koncepció, a használat szerint kell fizetni. Nem havi limitek vannak, hanem regisztrációkor kapsz &lt;strong&gt;1000 ingyen emailt&lt;/strong&gt;, és további 1000 emailt vehetsz néhány dolcsiért. Van &lt;strong&gt;egyéni levél tárgy, honeypot, redirect, fájl feltöltés, AJAX és captcha.&lt;/strong&gt; &lt;a href=&quot;https://medium.com/@jamesfuthey/running-a-free-email-api-for-2-years-a39188e19985&quot;&gt;E cikk&lt;/a&gt; alapján is szimpatikus ez a cucc, viszont itt sem találok privacy policy-t.&lt;/p&gt;
-
-&lt;p&gt;A &lt;a href=&quot;https://pageclip.co/&quot;&gt;Pageclip&lt;/a&gt; &lt;strong&gt;havi 1000 küldést&lt;/strong&gt; enged, van &lt;strong&gt;egyéni levél tárgy és AJAX lehetőség, tárolja az adatokat&lt;/strong&gt; JSON formában. Van kliens és szerveroldali JavaScript könyvtár is hozzá. A főoldalon hirdetik a Slack integrációt, de a doksiban erről nincs infó. Elég részletes viszont az adatkezelési tájékoztatójuk.&lt;/p&gt;
-
-&lt;p&gt;A &lt;a href=&quot;https://getsimpleform.com/&quot;&gt;SimpleForm&lt;/a&gt; honlapja elég szűkszavú. Nincs szó limitekről, de azt megtudjuk, hogy &lt;strong&gt;fogad fájlokat&lt;/strong&gt; és az űrlapadatok lekérhetőek &lt;strong&gt;API-n&lt;/strong&gt; át. A copyright 2012-es, a blogjuk 2014-ben frissült utoljára, habár a site-on a verziószám 2018-as.&lt;/p&gt;
-
-&lt;p&gt;Lássuk mindezt táblázatban:&lt;/p&gt;
-
-&lt;table class=&quot;table table-sm table-responsive-md&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Szolgáltatás&lt;/th&gt;
-      &lt;th&gt;Limit&lt;/th&gt;
-      &lt;th&gt;Spam&lt;/th&gt;
-      &lt;th&gt;Redirect&lt;/th&gt;
-      &lt;th&gt;Tárol?&lt;/th&gt;
-      &lt;th&gt;Extra&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;https://www.99inbound.com/&quot;&gt;99inbound&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;filter&lt;/td&gt;
-      &lt;td&gt;?&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;Slack&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;filter&lt;/td&gt;
-      &lt;td&gt;van&lt;/td&gt;
-      &lt;td&gt;igen&lt;/td&gt;
-      &lt;td&gt;fájl, captcha, Zapier&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;https://www.briskforms.com/&quot;&gt;BriskForms&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;van&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;open-source&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;https://www.elformo.com/&quot;&gt;elFormo&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;1500/hó&lt;/td&gt;
-      &lt;td&gt;honeypot&lt;/td&gt;
-      &lt;td&gt;van&lt;/td&gt;
-      &lt;td&gt;igen&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;http://www.enformed.io/&quot;&gt;enformed.io&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;100/hó&lt;/td&gt;
-      &lt;td&gt;honeypot&lt;/td&gt;
-      &lt;td&gt;van&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;tárgy, CC, BCC, AJAX&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;https://formspree.io/&quot;&gt;formspree.io&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;1000/hó&lt;/td&gt;
-      &lt;td&gt;honeypot&lt;/td&gt;
-      &lt;td&gt;van&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;tárgy, CC, captcha&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;https://github.com/dwyl/learn-to-send-email-via-google-script-html-no-server&quot;&gt;G. Apps Script&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;100/nap&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;igen&lt;/td&gt;
-      &lt;td&gt;tárgy, AJAX, …&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;https://github.com/toperkin/staticFormEmails&quot;&gt;G. Forms&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;~ 50/nap&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;igen&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;https://mailthis.to/&quot;&gt;mailthis.to&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;1000&lt;/td&gt;
-      &lt;td&gt;honeypot&lt;/td&gt;
-      &lt;td&gt;van&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;tárgy, fájl, AJAX, captcha&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;https://pageclip.co/&quot;&gt;Pageclip&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;1000/hó&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;igen&lt;/td&gt;
-      &lt;td&gt;tárgy, AJAX, API&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;https://getsimpleform.com/&quot;&gt;SimpleForm&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;igen&lt;/td&gt;
-      &lt;td&gt;fájl&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h2 id=&quot;összegzés&quot;&gt;Összegzés&lt;/h2&gt;
-
-&lt;p&gt;A fenti listát a következőképp szűkítem:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;A 2 Google megoldást kicsit macerásabb összerakni, illetve nem érzem igazán elegáns megoldásnak erre a feladatra, pláne látva a többi versenyzőt.&lt;/li&gt;
-  &lt;li&gt;A &lt;a href=&quot;https://formspree.io/&quot;&gt;formspree.io&lt;/a&gt; nem rejti az email címemet.&lt;/li&gt;
-  &lt;li&gt;Az &lt;a href=&quot;http://www.enformed.io/&quot;&gt;enformed.io&lt;/a&gt; több sebből vérzik.&lt;/li&gt;
-  &lt;li&gt;A &lt;a href=&quot;https://mailthis.to/&quot;&gt;mailthis.to&lt;/a&gt; szimpatikus lenne, de csak egyszeri 1000 emailt ad, ami az összes többinél korlátoltabb.&lt;/li&gt;
-  &lt;li&gt;A &lt;a href=&quot;https://getsimpleform.com/&quot;&gt;SimpleForm&lt;/a&gt; nem informatív, puritán és réginek tűnik.&lt;/li&gt;
-  &lt;li&gt;Az &lt;a href=&quot;https://www.elformo.com/&quot;&gt;elFormo&lt;/a&gt; is szimpatikusnak tűnt, de ez is porosodik már, és vannak jobbak a mezőnyben.&lt;/li&gt;
-  &lt;li&gt;A &lt;a href=&quot;https://pageclip.co/&quot;&gt;Pageclip&lt;/a&gt;-en kívül az összes játékban maradt versenyző korlátlan küldést biztosít.&lt;/li&gt;
-  &lt;li&gt;🥉 A dobogó 3. fokán a &lt;a href=&quot;https://www.briskforms.com/&quot;&gt;BriskForms&lt;/a&gt; áll meg, spam elkerülési mechanizmus hiányában.&lt;/li&gt;
-  &lt;li&gt;🥈 Az ezüstérmet a &lt;a href=&quot;https://www.99inbound.com/&quot;&gt;99inbound&lt;/a&gt;-nak osztom, mert&lt;/li&gt;
-  &lt;li&gt;🥇 a &lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt; egy fokkal profibbnak és flexibilisebbnek tűnik.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;A fenti dolgokat persze &lt;strong&gt;kipróbálás nélkül&lt;/strong&gt; írtam. A &lt;a href=&quot;/blog/2018/kontakt-form-basin-nel&quot;&gt;következő posztban&lt;/a&gt; leírom a tapasztalataimat a &lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt;-nel, ugyanis az aranyérem jó helyre került. 🤓&lt;/p&gt;</content><author><name>Zsolt Jurányi</name></author><category term="comparison" /><category term="email" /><category term="form" /><category term="serverless" /><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /></entry><entry xml:lang="en_US"><title type="html">Contact form for free - looking around</title><link href="https://juzraai.github.io/blog/2018/contact-form-for-free/" rel="alternate" type="text/html" title="Contact form for free - looking around" /><published>2018-06-02T00:00:00+02:00</published><updated>2018-11-07T21:45:44+01:00</updated><id>https://juzraai.github.io/blog/2018/contact-form-for-free</id><content type="html" xml:base="https://juzraai.github.io/blog/2018/contact-form-for-free/">&lt;h2 id=&quot;problem&quot;&gt;Problem&lt;/h2&gt;
-
-&lt;p&gt;My blog and developer portfolio is a &lt;strong&gt;static website&lt;/strong&gt;, which I host on &lt;a href=&quot;https://pages.github.com/&quot;&gt;GitHub&lt;/a&gt;. As contact information, I link my Facebook and LinkedIn profiles, but I don’t want to publish my email address, because &lt;strong&gt;I don’t need spam.&lt;/strong&gt; Instead I’d place there a &lt;strong&gt;contact form&lt;/strong&gt; which would help those who arrive at my website to reach me without logging in or navigating anywhere else.&lt;/p&gt;
-
-&lt;p&gt;Because of the site is static, processing of the form and sending data to my email address has to be done &lt;strong&gt;without server-side script.&lt;/strong&gt; So I have to find a &lt;strong&gt;third-party service&lt;/strong&gt; for this task. And since I’ve been saving money, I’d like to &lt;strong&gt;keep the costs of this at zero too.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;possible-solutions&quot;&gt;Possible solutions&lt;/h2&gt;
-
-&lt;p&gt;I spent a day to search for potential solutions. I looked for services which can process a &lt;strong&gt;custom HTML form&lt;/strong&gt; and can send me an email with the form data. I list them alphabetized.&lt;/p&gt;
-
-&lt;p&gt;Note: below when I write &lt;em&gt;AJAX&lt;/em&gt;, it means a function which provides an endpoint that can be called via AJAX and responds with a text message, unlike the usual form sending methods that return with a page or a redirect.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://www.99inbound.com/&quot;&gt;99inbound&lt;/a&gt; gives &lt;strong&gt;unlimited&lt;/strong&gt; form submissions, &lt;strong&gt;spam filter, and Slack integration.&lt;/strong&gt; As a bonus it can build you HTML forms too if you need it. Their privacy policy looks fresh and GDPR-ready.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt; also gives &lt;strong&gt;unlimited&lt;/strong&gt; submission in the free tier, and it has a lot of features: &lt;strong&gt;spam filter, redirect, file upload, AJAX, export, analytics, and Zapier integration&lt;/strong&gt; to some popular apps (e.g. Slack, Trello, Asana, Google Sheets). &lt;a href=&quot;https://zapier.com/&quot;&gt;Zapier&lt;/a&gt; is also free if you use only 2-step (trigger+action) workflows. Basin looks professional and prepared, their GDPR notice is clear. They got positive reviews on &lt;a href=&quot;https://www.producthunt.com/posts/basin&quot;&gt;ProductHunt&lt;/a&gt;, and their developers are actively responding there too.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://www.briskforms.com/&quot;&gt;BriskForms&lt;/a&gt; emphasizes that it’s a free service, there’s no word about any limit and it’s open-source too. Provides &lt;strong&gt;redirect&lt;/strong&gt; and/but doesn’t store form data.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://www.elformo.com/&quot;&gt;elFormo&lt;/a&gt; gives &lt;strong&gt;1500 emails/month, honeypot and redirect,&lt;/strong&gt; though they flash their logo to the users. Form data is stored and can be &lt;strong&gt;exported.&lt;/strong&gt; Their website has style and is appealing, but it’s hard to find a review and their last tweet is from 2015.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://www.enformed.io/&quot;&gt;enformed.io&lt;/a&gt; gives &lt;strong&gt;100 emails/month, custom subject, CC, BCC, honeypot, redirect, AJAX.&lt;/strong&gt; But they don’t have any privacy policy and their sign up form is actually dead.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://formspree.io/&quot;&gt;formspree.io&lt;/a&gt; looks familiar to me, I saw some website templates that recommended this service for the contact form. It gives &lt;strong&gt;1000 emails/month, custom subject, CC, redirect, captcha,&lt;/strong&gt; but &lt;strong&gt;target email address is public in the form code.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;A &lt;a href=&quot;https://github.com/toperkin/staticFormEmails&quot;&gt;Google Form&lt;/a&gt; can also be used as a contact form backend. I found different limits for this, but most of them says &lt;strong&gt;50-100 emails/day&lt;/strong&gt;. Form data is also inserted into a &lt;strong&gt;spreadsheet&lt;/strong&gt; so there’s no problem if email sending fails due to the limits.&lt;/p&gt;
-
-&lt;p&gt;This spreadsheet + email sending mechanism can also be achieved via a &lt;a href=&quot;https://github.com/dwyl/learn-to-send-email-via-google-script-html-no-server&quot;&gt;Google Apps Script&lt;/a&gt;. The quota is &lt;strong&gt;100 emails/day&lt;/strong&gt; and it can be used via &lt;strong&gt;AJAX&lt;/strong&gt; too. The script can be surely extended with honeypot and captcha.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://mailthis.to/&quot;&gt;mailthis.to&lt;/a&gt; pricing is based on the usage. Initially you get &lt;strong&gt;1000 emails for free&lt;/strong&gt;, then you can pay a few dollars for additional 1000 emails. They provide &lt;strong&gt;custom subject, honeypot, redirect, file upload, AJAX and captcha.&lt;/strong&gt; They &lt;a href=&quot;https://medium.com/@jamesfuthey/running-a-free-email-api-for-2-years-a39188e19985&quot;&gt;seem to be nice&lt;/a&gt; for me, but they also lack the privacy policy.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://pageclip.co/&quot;&gt;Pageclip&lt;/a&gt; gives &lt;strong&gt;1000 submissions/month, custom subject, AJAX and data export&lt;/strong&gt; in JSON. They have both client and server-side JavaScript library. They highlight Slack integration on their front page, but the documentation doesn’t mention it. They have a detailed privacy policy.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://getsimpleform.com/&quot;&gt;SimpleForm&lt;/a&gt;’s site is very minimal. Does not mention limits, but it says it has &lt;strong&gt;file upload&lt;/strong&gt; and &lt;strong&gt;API&lt;/strong&gt; for downloading submission data. Though version number starts with 2018, copyright says 2012 and their blog is updated in 2014.&lt;/p&gt;
-
-&lt;p&gt;Let’s see them in a nice table:&lt;/p&gt;
-
-&lt;table class=&quot;table table-sm table-responsive-md&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Service&lt;/th&gt;
-      &lt;th&gt;Limit&lt;/th&gt;
-      &lt;th&gt;Spam&lt;/th&gt;
-      &lt;th&gt;Redirect&lt;/th&gt;
-      &lt;th&gt;Stores?&lt;/th&gt;
-      &lt;th&gt;Extra&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;https://www.99inbound.com/&quot;&gt;99inbound&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;filter&lt;/td&gt;
-      &lt;td&gt;?&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;Slack&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;filter&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-      &lt;td&gt;file, captcha, Zapier&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;https://www.briskforms.com/&quot;&gt;BriskForms&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;open-source&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;https://www.elformo.com/&quot;&gt;elFormo&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;1500/month&lt;/td&gt;
-      &lt;td&gt;honeypot&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;http://www.enformed.io/&quot;&gt;enformed.io&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;100/month&lt;/td&gt;
-      &lt;td&gt;honeypot&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;subject, CC, BCC, AJAX&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;https://formspree.io/&quot;&gt;formspree.io&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;1000/month&lt;/td&gt;
-      &lt;td&gt;honeypot&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;subject, CC, captcha&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;https://github.com/dwyl/learn-to-send-email-via-google-script-html-no-server&quot;&gt;G. Apps Script&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;100/day&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-      &lt;td&gt;subject, AJAX, …&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;https://github.com/toperkin/staticFormEmails&quot;&gt;G. Forms&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;~ 50/day&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;https://mailthis.to/&quot;&gt;mailthis.to&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;1000&lt;/td&gt;
-      &lt;td&gt;honeypot&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;subject, file, AJAX, captcha&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;https://pageclip.co/&quot;&gt;Pageclip&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;1000/month&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-      &lt;td&gt;subject, AJAX, API&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;https://getsimpleform.com/&quot;&gt;SimpleForm&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-      &lt;td&gt;file&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h2 id=&quot;summary&quot;&gt;Summary&lt;/h2&gt;
-
-&lt;p&gt;I narrow down the above list in the following way:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;The 2 approach using Google services seems a bit hacky and not elegant, especially if we look at the other competitors.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://formspree.io/&quot;&gt;formspree.io&lt;/a&gt; does not hide my email address.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.enformed.io/&quot;&gt;enformed.io&lt;/a&gt; has more than one issue.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://mailthis.to/&quot;&gt;mailthis.to&lt;/a&gt; seems nice, but the one-time 1000 email limit is worse than the rest where at least the quota is renewed every month.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://getsimpleform.com/&quot;&gt;SimpleForm&lt;/a&gt; is not so informative and it seems to be old.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.elformo.com/&quot;&gt;elFormo&lt;/a&gt; seems nice too, but there are better choices in the list.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://pageclip.co/&quot;&gt;Pageclip&lt;/a&gt; is the only one left which doesn’t provide unlimited submissions.&lt;/li&gt;
-  &lt;li&gt;🥉 &lt;a href=&quot;https://www.briskforms.com/&quot;&gt;BriskForms&lt;/a&gt; stops at the 3rd place, because it doesn’t have methods to avoid spam.&lt;/li&gt;
-  &lt;li&gt;🥈 &lt;a href=&quot;https://www.99inbound.com/&quot;&gt;99inbound&lt;/a&gt; gets the silver, because&lt;/li&gt;
-  &lt;li&gt;🥇 &lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt; seems more professional and flexible.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I found out all of the above &lt;strong&gt;without trying out&lt;/strong&gt; the services. In my &lt;a href=&quot;/blog/2018/contact-form-using-basin&quot;&gt;next post&lt;/a&gt; I share my experiences with &lt;a href=&quot;https://usebasin.com/&quot;&gt;Basin&lt;/a&gt; which seems to deserve my gold medal. 🤓&lt;/p&gt;</content><author><name>Zsolt Jurányi</name></author><category term="comparison" /><category term="email" /><category term="form" /><category term="serverless" /><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /></entry></feed>
+&lt;/ul&gt;</content><author><name>Zsolt Jurányi</name></author><category term="basin" /><category term="captcha" /><category term="email" /><category term="form" /><category term="serverless" /><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /></entry></feed>
