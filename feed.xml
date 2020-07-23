@@ -1,11 +1,101 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="hu_HU"><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://juzraai.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://juzraai.github.io/" rel="alternate" type="text/html" hreflang="hu_HU" /><updated>2020-07-08T23:23:59+02:00</updated><id>https://juzraai.github.io/feed.xml</id><title type="html">Zsolt Jurányi (juzraai)</title><subtitle>Zsolt vagyok, full-stack fejlesztő. Crawlereket, webalkalmazásokat, statikus honlapokat és interaktív vizualizációkat készítek.</subtitle><author><name>Zsolt Jurányi</name></author><entry xml:lang="hu_HU"><title type="html">Node.js app egy fájlba csomagolása</title><link href="https://juzraai.github.io/blog/2019/nodejs-app-egy-fajlba-csomagolasa/" rel="alternate" type="text/html" title="Node.js app egy fájlba csomagolása" /><published>2019-11-02T00:00:00+01:00</published><updated>2019-11-02T12:12:01+01:00</updated><id>https://juzraai.github.io/blog/2019/nodejs-app-egy-fajlba-csomagolasa</id><content type="html" xml:base="https://juzraai.github.io/blog/2019/nodejs-app-egy-fajlba-csomagolasa/">&lt;h2 id=&quot;motiváció-és-célkitűzés&quot;&gt;Motiváció és célkitűzés&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="hu_HU"><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://juzraai.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://juzraai.github.io/" rel="alternate" type="text/html" hreflang="hu_HU" /><updated>2020-07-23T18:19:20+02:00</updated><id>https://juzraai.github.io/feed.xml</id><title type="html">Zsolt Jurányi (juzraai)</title><subtitle>Zsolt vagyok, full-stack fejlesztő. Crawlereket, webalkalmazásokat, statikus honlapokat és interaktív vizualizációkat készítek.</subtitle><author><name>Zsolt Jurányi</name></author><entry xml:lang="hu_HU"><title type="html">GeoJSON összeállítása megyetérképhez</title><link href="https://juzraai.github.io/blog/2020/geojson-osszeallitasa-megyeterkephez/" rel="alternate" type="text/html" title="GeoJSON összeállítása megyetérképhez" /><published>2020-07-19T00:00:00+02:00</published><updated>2020-07-23T18:15:49+02:00</updated><id>https://juzraai.github.io/blog/2020/geojson-osszeallitasa-megyeterkephez</id><content type="html" xml:base="https://juzraai.github.io/blog/2020/geojson-osszeallitasa-megyeterkephez/">&lt;p&gt;Adott a feladat, hogy egy weboldalon megjelenítsük &lt;strong&gt;kis hazánk megyetérképét, valamilyen érték szerinti színezéssel.&lt;/strong&gt; Hogyan fogjunk neki?&lt;/p&gt;
+
+&lt;p&gt;Pár éve - jobb ötlet hiányában - én erre mindig rávágtam, hogy a Wikipédián fent van &lt;a href=&quot;https://hu.wikipedia.org/wiki/F%C3%A1jl:HU_counties_colored.svg&quot;&gt;Magyarország megyetérképe SVG-ben&lt;/a&gt;, ahol az egyes megyéknek van &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;id&lt;/code&gt; attribútuma. Utóbbi alapján egyszerű őket CSS és JS segítségével formázni és interaktívvá tenni (pl. hover, click). Persze ezzel SVG-s megoldással macerás megoldani a zoom-ot, a dragging-et, illetve ha később kitaláljuk, hogy városokat is rá kéne dobálni, valószínűleg meg vagyunk lőve.&lt;/p&gt;
+
+&lt;p&gt;Itt jön képbe a &lt;a href=&quot;https://leafletjs.com/&quot;&gt;Leaflet.js&lt;/a&gt; library, amivel piszok egyszerűen lehet &lt;strong&gt;interaktív térképeket kreálni webes környezetben.&lt;/strong&gt; SVG-t épít ő is, de a fenti funkciókat és még csillió más dolgot megvalósít nekünk. A drag mellett többféle zoom lehetőséget és könnyen hozzáadható vezérlőket, tooltip-eket, popup-okat biztosít, illetve több réteget tud kezelni egymásra pakolva.&lt;/p&gt;
+
+&lt;p&gt;Interaktív megyetérképhez van egy remek &lt;a href=&quot;https://leafletjs.com/examples/choropleth/&quot;&gt;útmutatójuk&lt;/a&gt; is, jelen posztommal ezt egészíteném ki. 🙂&lt;/p&gt;
+
+&lt;p&gt;Ez a Choropleth tutorial USA adatok bemutatásáról szól, az államokat &lt;strong&gt;GeoJSON formában adagolja be a Leaflet-nek.&lt;/strong&gt; A GeoJSON földrajzi adatokat ír le, de kiegészíthető egyéb adatokkal is, melyeket a térkép testreszabásakor felhasználhatunk. A cikkben nem írják le, hogy az amerikai államokat tartalmazó GeoJSON-t hogyan állították össze, így kicsit kutatnom kellett, hogyan tehetem meg ugyanezt Magyarország megyéivel.&lt;/p&gt;
+
+&lt;p&gt;Rákerestem &lt;strong&gt;Magyarország megyéire&lt;/strong&gt; OpenStreetMap viszonylatban, és ezt a &lt;a href=&quot;https://wiki.openstreetmap.org/wiki/Hungary/Boundaries#Megy.C3.A9k&quot;&gt;Boundaries&lt;/a&gt; oldalt találtam, ahol mind fel vannak sorolva egy-egy &lt;strong&gt;OSM relation ID kíséretében.&lt;/strong&gt; Ezeket a relation-öket meg lehet tekinteni a térképen, amely mutatja a megye határvonalát.&lt;/p&gt;
+
+&lt;p&gt;Már csak az kell, hogy ezt a határvonalat megkapjuk GeoJSON formátumban. Felütöttem a guglit erre a kérdésre is, és &lt;a href=&quot;https://peteris.rocks/blog/openstreetmap-administrative-boundaries-in-geojson/&quot;&gt;erre a cikkre&lt;/a&gt; akadtam rá, mely megmondja az egyszerű megoldást. Az alábbi URL-ről &lt;strong&gt;letölthető az X azonosítójú relation GeoJSON fájlja:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;http://polygons.openstreetmap.fr/get_geojson.py?id=&lt;span style=&quot;color:red&quot;&gt;X&lt;/span&gt;&amp;amp;params=0&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Az ID-k és a hozzájuk tartozó GeoJSON-ök legyűjtése után persze utóbbiakat &lt;strong&gt;össze kell fűzni egy darab GeoJSON-be&lt;/strong&gt; úgy, hogy a megyékhez kapott adatot becsomagoljuk &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Feature&lt;/code&gt; objektumokba, majd az összeset egy &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;FeatureCollection&lt;/code&gt;-be.&lt;/p&gt;
+
+&lt;p&gt;Érdekesség, hogy a letöltött GeoJSON-ok nem teljesen validak, ugyanis &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;GeometryCollection&lt;/code&gt;-t írnak le, de csak egyetlen elemmel, amire a &lt;a href=&quot;https://geojsonlint.com/&quot;&gt;validátor&lt;/a&gt; visszapofázik. A megoldás az, hogy ki kell bújtani azt az egyetlen elemet a collection-ből.&lt;/p&gt;
+
+&lt;p&gt;A fentieket természetesen nem bonyolult automatizálni. Íme egy Node.js szkript, ami legyűjti Magyarország megyéit és egyetlen GeoJSON-ba fűzi őket:&lt;/p&gt;
+
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// npm i cheerio got&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;fs&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;cheerio&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;cheerio&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;got&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;got&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;getCountyOsmIds&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;got&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;https://wiki.openstreetmap.org/wiki/Hungary/Boundaries&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;cheerio&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;load&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;h2:contains(&quot;Megyék&quot;) + table tr&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toArray&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;tr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;td a&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;tr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toArray&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;}).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;downloadGeoJson&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;osmId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;geoJsonUrlTemplate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;http://polygons.openstreetmap.fr/get_geojson.py?id=X&amp;amp;params=0&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;got&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;geoJsonUrlTemplate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;replace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;osmId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;body&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;getGeoJson&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;file&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;.json`&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;existsSync&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;readFileSync&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;json&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;downloadGeoJson&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;nx&quot;&gt;fs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;writeFileSync&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;json&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fixGeometryCollection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;geometry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;geometry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;GeometryCollection&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;geometry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;geometries&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;geometry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;geometries&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;geometry&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;feature&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;geometry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;na&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Feature&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+		&lt;span class=&quot;na&quot;&gt;properties&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;id&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// will be useful :)&lt;/span&gt;
+		&lt;span class=&quot;na&quot;&gt;geometry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fixGeometryCollection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;geometry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;getFeature&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;geometryJson&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;getGeoJson&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;geometry&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;JSON&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;parse&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;geometryJson&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;feature&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;geometry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;featureCollection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;features&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;FeatureCollection&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;features&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;generateFeatureCollection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ids&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;features&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Promise&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;all&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ids&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getFeature&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+	&lt;span class=&quot;nx&quot;&gt;fs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;writeFileSync&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;JSON&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;stringify&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;featureCollection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;features&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ids&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;getCountyOsmIds&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;generateFeatureCollection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ids&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;counties.json&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;A fenti szkripttel kapott GeoJSON egy-az-egyben hozzáadható a Leaflet térképhez, ahogy a fentebb linkelt Choropleth tutorial-ban le van írva. Ott a megyei adatokat is beleapplikálták a GeoJSON fájlba, én inkább csak a megyéhez tartozó OSM relation ID-t tettem bele, így bármilyen projekthez jó lesz az összeállított &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;FeatureCollection&lt;/code&gt;. Kliensoldalon nem lesz kunszt összekötni a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;feature.properties.id&lt;/code&gt;-t az épp aktuális adatokkal és a megyék nevével.&lt;/p&gt;
+
+&lt;p&gt;Hasonló módszerrel rá tudjuk dobni a térképünkre Budapest kerületeit, vagy akár a szomszédos országokat is.&lt;/p&gt;</content><author><name>Zsolt Jurányi</name></author><category term="automation" /><category term="choropleth" /><category term="geojson" /><category term="leaflet" /><category term="map" /><category term="nodejs" /><category term="script" /><summary type="html">Adott a feladat, hogy egy weboldalon megjelenítsük kis hazánk megyetérképét, valamilyen érték szerinti színezéssel. Hogyan fogjunk neki?</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /><media:content medium="image" url="https://juzraai.github.io/assets/facebook-og-image.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry xml:lang="hu_HU"><title type="html">Node.js app egy fájlba csomagolása</title><link href="https://juzraai.github.io/blog/2019/nodejs-app-egy-fajlba-csomagolasa/" rel="alternate" type="text/html" title="Node.js app egy fájlba csomagolása" /><published>2019-11-02T00:00:00+01:00</published><updated>2020-07-11T11:07:54+02:00</updated><id>https://juzraai.github.io/blog/2019/nodejs-app-egy-fajlba-csomagolasa</id><content type="html" xml:base="https://juzraai.github.io/blog/2019/nodejs-app-egy-fajlba-csomagolasa/">&lt;h2 id=&quot;motiváció-és-célkitűzés&quot;&gt;Motiváció és célkitűzés&lt;/h2&gt;
 
 &lt;p&gt;Az utóbbi hetekben elővettem a &lt;a href=&quot;https://github.com/juzraai/dijnet-bot&quot;&gt;Díjnet Bot&lt;/a&gt; projektemet, és elkezdtem tuningolási ötleteket összeírni, illetve megvalósítani. Az egyik ilyen ötlet a program egyetlen fájlba csomagolása volt. Végiggondoltam ugyanis, hogy a &lt;strong&gt;célközönségem nem csak a fejlesztők, hanem mindenki&lt;/strong&gt;, és egy mezei felhasználó nem biztos, hogy tudja mi az a parancssor, meg nem feltétlenül kényelmes Node.js-t meg dependency-ket telepítgetni, mielőtt használni tudná a programomat.&lt;/p&gt;
 
 &lt;p&gt;A fentiek alapján 2 célt fogalmaztam meg: a program &lt;strong&gt;legyen használható&lt;/strong&gt;&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;Node.js telepítés és &lt;code class=&quot;highlighter-rouge&quot;&gt;npm i -g&lt;/code&gt;  futtatása nélkül,&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Node.js telepítés és &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;npm i -g&lt;/code&gt;  futtatása nélkül,&lt;/strong&gt;&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;illetve parancssorba/terminálba pötyögés nélkül.&lt;/strong&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
@@ -29,9 +119,9 @@
 
 &lt;p&gt;Különféle platformokat és különféle Node.js verziókat lehet választani, és a folyamat végén minden megadott platform+Node kombinációra 1-1 futtatható fájlt köp ki, amik egyenként kb. 20-40 MB-ot nyomnak.&lt;/p&gt;
 
-&lt;p&gt;A kapott fájl ugyanúgy futtatható parancssorból, mint az eredeti program, emellett duplaklikkel is indítható, ekkor nyit magának egy Node konzolablakot (mint amikor a Node-hoz társítjuk a &lt;code class=&quot;highlighter-rouge&quot;&gt;.js&lt;/code&gt; fájlunkat).&lt;/p&gt;
+&lt;p&gt;A kapott fájl ugyanúgy futtatható parancssorból, mint az eredeti program, emellett duplaklikkel is indítható, ekkor nyit magának egy Node konzolablakot (mint amikor a Node-hoz társítjuk a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.js&lt;/code&gt; fájlunkat).&lt;/p&gt;
 
-&lt;p&gt;Mindez &lt;strong&gt;perfektül hangzik&lt;/strong&gt;, mert mindkét célomat elérném pár karakter leütésével, viszont a kiköpott &lt;code class=&quot;highlighter-rouge&quot;&gt;.exe&lt;/code&gt; fájlokat a &lt;strong&gt;BitDefender kivétel nélkül kártékonynak érzékelte.&lt;/strong&gt; 🚨 Nem Díjnet Bot-specifikus a probléma, és a kiválasztott Node runtime verziótól sem függ. Érdekesség, hogy a BitDefender a fájl futtatása közben vagy után jelzett, ha pedig explicite kértem, hogy szkennelje az &lt;code class=&quot;highlighter-rouge&quot;&gt;.exe&lt;/code&gt; fájlt, akkor azt mondta, hogy minden oké. 🤯&lt;/p&gt;
+&lt;p&gt;Mindez &lt;strong&gt;perfektül hangzik&lt;/strong&gt;, mert mindkét célomat elérném pár karakter leütésével, viszont a kiköpott &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.exe&lt;/code&gt; fájlokat a &lt;strong&gt;BitDefender kivétel nélkül kártékonynak érzékelte.&lt;/strong&gt; 🚨 Nem Díjnet Bot-specifikus a probléma, és a kiválasztott Node runtime verziótól sem függ. Érdekesség, hogy a BitDefender a fájl futtatása közben vagy után jelzett, ha pedig explicite kértem, hogy szkennelje az &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.exe&lt;/code&gt; fájlt, akkor azt mondta, hogy minden oké. 🤯&lt;/p&gt;
 
 &lt;p&gt;Tettem egy próbát &lt;a href=&quot;https://electronjs.org/&quot;&gt;Electron.js&lt;/a&gt;-el is, ami noha jóval nagyobb output méretet generál, a fenti célok elérésén felül egyszerűen tudnék vele GUI-t is csinálni az appnak. A BitDefender itt is lecsapott.&lt;/p&gt;
 
@@ -39,7 +129,7 @@
 
 &lt;p&gt;&lt;a href=&quot;/assets/dijnet-bot/dijnet-bot-exe-vt1.png&quot;&gt;&lt;img src=&quot;/assets/dijnet-bot/dijnet-bot-exe-vt1.png&quot; alt=&quot;VirusTotal Detection&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;Tippre az a baja, hogy a &lt;code class=&quot;highlighter-rouge&quot;&gt;pkg&lt;/code&gt; úgy generálja a kimenetet, hogy egy meglévő &lt;code class=&quot;highlighter-rouge&quot;&gt;.exe&lt;/code&gt; fájlba (&lt;code class=&quot;highlighter-rouge&quot;&gt;node.exe&lt;/code&gt;) injektálja a programomat (valahol érthető, hogy ez gyanús, de na):&lt;/p&gt;
+&lt;p&gt;Tippre az a baja, hogy a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pkg&lt;/code&gt; úgy generálja a kimenetet, hogy egy meglévő &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.exe&lt;/code&gt; fájlba (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;node.exe&lt;/code&gt;) injektálja a programomat (valahol érthető, hogy ez gyanús, de na):&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;/assets/dijnet-bot/dijnet-bot-exe-vt2.png&quot;&gt;&lt;img src=&quot;/assets/dijnet-bot/dijnet-bot-exe-vt2.png&quot; alt=&quot;VirusTotal Details&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
@@ -49,24 +139,24 @@
 
 &lt;p&gt;Találtam egy köztes megoldást, amivel a Node.js telepítést ugyan nem tudom &lt;strong&gt;megspórolni a júzernek,&lt;/strong&gt; de az &lt;strong&gt;NPM-ezést&lt;/strong&gt; igen, illetve a parancssor használata is kikerülhető.&lt;/p&gt;
 
-&lt;p&gt;A &lt;strong&gt;&lt;a href=&quot;http://browserify.org/&quot;&gt;Browserify&lt;/a&gt;&lt;/strong&gt; jutott eszembe, ami ugye egyetlen bundle fájlt tud generálni egy kiinduló &lt;code class=&quot;highlighter-rouge&quot;&gt;.js&lt;/code&gt; fájlból, végigkövetve annak &lt;code class=&quot;highlighter-rouge&quot;&gt;require&lt;/code&gt; hívásait. A &lt;code class=&quot;highlighter-rouge&quot;&gt;--node&lt;/code&gt; kapcsolóval tud Node.js-kompatibilis kimenetet is generálni:&lt;/p&gt;
+&lt;p&gt;A &lt;strong&gt;&lt;a href=&quot;http://browserify.org/&quot;&gt;Browserify&lt;/a&gt;&lt;/strong&gt; jutott eszembe, ami ugye egyetlen bundle fájlt tud generálni egy kiinduló &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.js&lt;/code&gt; fájlból, végigkövetve annak &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;require&lt;/code&gt; hívásait. A &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--node&lt;/code&gt; kapcsolóval tud Node.js-kompatibilis kimenetet is generálni:&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;browserify index.js &lt;span class=&quot;nt&quot;&gt;--node&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; dijnet-bot.js
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Az így kapott &lt;code class=&quot;highlighter-rouge&quot;&gt;.js&lt;/code&gt; fájl pontosan úgy működik, mint az &lt;code class=&quot;highlighter-rouge&quot;&gt;index.js&lt;/code&gt;, viszont nem kell mellé semmi más: sem &lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt;, sem &lt;code class=&quot;highlighter-rouge&quot;&gt;node_modules&lt;/code&gt; mappa. Ha a felhasználó társítja a &lt;code class=&quot;highlighter-rouge&quot;&gt;.js&lt;/code&gt; fájlokat a Node runtime-al, akkor &lt;strong&gt;duplaklikkel is indítható, vagyis a 2. célt elértük.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Az így kapott &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.js&lt;/code&gt; fájl pontosan úgy működik, mint az &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;index.js&lt;/code&gt;, viszont nem kell mellé semmi más: sem &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;package.json&lt;/code&gt;, sem &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;node_modules&lt;/code&gt; mappa. Ha a felhasználó társítja a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.js&lt;/code&gt; fájlokat a Node runtime-al, akkor &lt;strong&gt;duplaklikkel is indítható, vagyis a 2. célt elértük.&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;A kimeneti fájl mérete 1.3 MB, ami a 12 MB-os &lt;code class=&quot;highlighter-rouge&quot;&gt;node_modules&lt;/code&gt; mappával szemben hatalmas előrelépés. Azonban én itt nem álltam meg - hamár csomagolunk, csomagoljunk rendesen! 🤓&lt;/p&gt;
+&lt;p&gt;A kimeneti fájl mérete 1.3 MB, ami a 12 MB-os &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;node_modules&lt;/code&gt; mappával szemben hatalmas előrelépés. Azonban én itt nem álltam meg - hamár csomagolunk, csomagoljunk rendesen! 🤓&lt;/p&gt;
 
-&lt;p&gt;A &lt;code class=&quot;highlighter-rouge&quot;&gt;.js&lt;/code&gt; fájlok tömörítési eljárása a &lt;em&gt;minification&lt;/em&gt;, melyre a standard tool az &lt;a href=&quot;https://www.npmjs.com/package/uglify-js&quot;&gt;Uglify JS&lt;/a&gt;. Ez viszont elsírja magát egy &lt;code class=&quot;highlighter-rouge&quot;&gt;const&lt;/code&gt; keyword-től is, vagyis kell még egy Babel fázis elé, ami a JavaScript egy régebbi verziójára fordítja a programom. Utóbbihoz kevéssé értek még és fölösleges bonyolításnak is tartom, szóval más utat kerestem.&lt;/p&gt;
+&lt;p&gt;A &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.js&lt;/code&gt; fájlok tömörítési eljárása a &lt;em&gt;minification&lt;/em&gt;, melyre a standard tool az &lt;a href=&quot;https://www.npmjs.com/package/uglify-js&quot;&gt;Uglify JS&lt;/a&gt;. Ez viszont elsírja magát egy &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;const&lt;/code&gt; keyword-től is, vagyis kell még egy Babel fázis elé, ami a JavaScript egy régebbi verziójára fordítja a programom. Utóbbihoz kevéssé értek még és fölösleges bonyolításnak is tartom, szóval más utat kerestem.&lt;/p&gt;
 
 &lt;p&gt;Több más eszköz kipróbálása után rátaláltam a &lt;a href=&quot;https://terser.org/&quot;&gt;Terser&lt;/a&gt;-re, ami modern JS kódot is tud kezelni. A Browserify után bekötve a &lt;strong&gt;végső fájlméret 707 KB lett.&lt;/strong&gt;&lt;/p&gt;
 
-&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'fs'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;browserify&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'browserify'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;terser&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'terser'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;fs&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;browserify&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;browserify&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;terser&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;terser&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 
-&lt;span class=&quot;nx&quot;&gt;browserify&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'./index.js'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;browserify&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;./index.js&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
 		&lt;span class=&quot;cm&quot;&gt;/* --node */&lt;/span&gt;
 		&lt;span class=&quot;na&quot;&gt;bare&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
 		&lt;span class=&quot;na&quot;&gt;browserField&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;
@@ -75,13 +165,13 @@
 		&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 		&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;bundle&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;buffer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 1.3 MB&lt;/span&gt;
 		&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;minified&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;terser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;minify&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;bundle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;code&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 0.7 MB&lt;/span&gt;
-		&lt;span class=&quot;nx&quot;&gt;fs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;writeFileSync&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'./dijnet-bot.js'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;minified&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+		&lt;span class=&quot;nx&quot;&gt;fs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;writeFileSync&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;./dijnet-bot.js&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;minified&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 	&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;A v2.1.0 verziótól kezdve a Díjnet Bot-hoz generálok egy ilyen bundle-t is.&lt;/p&gt;
 
-&lt;p&gt;A BitDefender-es fonalat lehet, hogy felveszem még, hátha sikerül valahogy megoldani vagy többet megtudni a problémáról. Emellett a GUI témán is agyalok, hogyan tudom megoldani, Electron-nal vagy anélkül.&lt;/p&gt;</content><author><name>Zsolt Jurányi</name></author><category term="bitdefender" /><category term="bundle" /><category term="browserify" /><category term="minify" /><category term="nodejs" /><summary type="html">Motiváció és célkitűzés</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/dijnet-bot/dijnet-bot-exe-vt1.png" /></entry><entry xml:lang="hu_HU"><title type="html">Facebook hirdetési profil kinullázása</title><link href="https://juzraai.github.io/blog/2019/facebook-hirdetesi-profil-kinullazasa/" rel="alternate" type="text/html" title="Facebook hirdetési profil kinullázása" /><published>2019-08-12T00:00:00+02:00</published><updated>2019-11-01T10:49:06+01:00</updated><id>https://juzraai.github.io/blog/2019/facebook-hirdetesi-profil-kinullazasa</id><content type="html" xml:base="https://juzraai.github.io/blog/2019/facebook-hirdetesi-profil-kinullazasa/">&lt;p&gt;Ma felfedeztem, hogy nagyon sok hirdetés jelenik meg a Facebook hírfolyamomban. A hirdetéseket egyrészt utálom, másrészt az esetek 99%-ban nem akkor vásárolok, amikor valaki az arcomba tolt egy hirdetést, hanem akkor, amikor szükségem van rá.&lt;/p&gt;
+&lt;p&gt;A BitDefender-es fonalat lehet, hogy felveszem még, hátha sikerül valahogy megoldani vagy többet megtudni a problémáról. Emellett a GUI témán is agyalok, hogyan tudom megoldani, Electron-nal vagy anélkül.&lt;/p&gt;</content><author><name>Zsolt Jurányi</name></author><category term="bitdefender" /><category term="bundle" /><category term="browserify" /><category term="minify" /><category term="nodejs" /><summary type="html">Motiváció és célkitűzés</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/dijnet-bot/dijnet-bot-exe-vt1.png" /><media:content medium="image" url="https://juzraai.github.io/assets/dijnet-bot/dijnet-bot-exe-vt1.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry xml:lang="hu_HU"><title type="html">Facebook hirdetési profil kinullázása</title><link href="https://juzraai.github.io/blog/2019/facebook-hirdetesi-profil-kinullazasa/" rel="alternate" type="text/html" title="Facebook hirdetési profil kinullázása" /><published>2019-08-12T00:00:00+02:00</published><updated>2019-11-01T10:49:06+01:00</updated><id>https://juzraai.github.io/blog/2019/facebook-hirdetesi-profil-kinullazasa</id><content type="html" xml:base="https://juzraai.github.io/blog/2019/facebook-hirdetesi-profil-kinullazasa/">&lt;p&gt;Ma felfedeztem, hogy nagyon sok hirdetés jelenik meg a Facebook hírfolyamomban. A hirdetéseket egyrészt utálom, másrészt az esetek 99%-ban nem akkor vásárolok, amikor valaki az arcomba tolt egy hirdetést, hanem akkor, amikor szükségem van rá.&lt;/p&gt;
 
 &lt;p&gt;A hirdetéseket elkezdtem hát egyesével elrejteni a Facebook hírfolyamomban. A 3-4. környékén felfedeztem, hogy a lenyíló menüből el lehet jutni a &lt;a href=&quot;https://www.facebook.com/ads/preferences/?entry_product=tombstone&quot;&gt;Személyes hirdetési beállítások&lt;/a&gt; nevű felületre, ami egészen konkrétan megmutatja a hirdetési profilomat, kilistázza azokat a hozzám rendelt érdeklődési köröket, amik alapján a Facebook megjeleníti a hirdetéseket.&lt;/p&gt;
 
@@ -97,7 +187,7 @@
  &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;WAIT_2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;500&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
  &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;removeAllInterests&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
      &lt;span class=&quot;c1&quot;&gt;// megkeressük a &quot;Továbbiak&quot; linket:&lt;/span&gt;
-     &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;more&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;querySelector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'._45yr'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+     &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;more&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;querySelector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;._45yr&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
      &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;more&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
          &lt;span class=&quot;c1&quot;&gt;// ha van, odagörgetünk és rákattintunk:&lt;/span&gt;
          &lt;span class=&quot;nx&quot;&gt;more&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;scrollIntoView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
@@ -109,7 +199,7 @@
          &lt;span class=&quot;c1&quot;&gt;// ha nincs, akkor a lista végén vagyunk.&lt;/span&gt;
          &lt;span class=&quot;c1&quot;&gt;// rákattintunk minden &quot;Eltávolítás&quot; linkre,&lt;/span&gt;
          &lt;span class=&quot;c1&quot;&gt;// de csak szép lassanként:&lt;/span&gt;
-         &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;querySelectorAll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'[title=&quot;Eltávolítás&quot;]'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+         &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;querySelectorAll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;[title=&quot;Eltávolítás&quot;]&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
              &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;forEach&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
                  &lt;span class=&quot;nx&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
                      &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`Removing &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
@@ -121,7 +211,7 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;Válassz ki egy kategória fület a Facebook beállítási felületén, &lt;em&gt;Az érdeklődési köreid&lt;/em&gt; dobozban!&lt;/li&gt;
-  &lt;li&gt;A &lt;em&gt;Console&lt;/em&gt;-ba írd be, hogy &lt;code class=&quot;highlighter-rouge&quot;&gt;removeAllInterests();&lt;/code&gt;, majd &lt;kbd&gt;Enter&lt;/kbd&gt;
+  &lt;li&gt;A &lt;em&gt;Console&lt;/em&gt;-ba írd be, hogy &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;removeAllInterests();&lt;/code&gt;, majd &lt;kbd&gt;Enter&lt;/kbd&gt;
     &lt;ul&gt;
       &lt;li&gt;A program másodpercenként rákattint a &lt;em&gt;Továbbiak&lt;/em&gt; linkre a lista alján, majd amikor az már nincs, minden egyes érdeklődési körnél rákattint az &lt;em&gt;Eltávolítás&lt;/em&gt;ra.&lt;/li&gt;
       &lt;li&gt;Utóbbinál minden egyes kattintás között fél másodpercet vár, ugyanis azt tapasztaltam, hogy várakozás nélkül a Facebook nem dolgozza fel a szinte egyszerre érkező, többtucatnyi AJAX request mindegyikét.&lt;/li&gt;
@@ -136,7 +226,7 @@
 
 &lt;p&gt;Valószínű, hogy a Facebook tevékenységem során új érdeklődési körök be fognak kerülni a profilomba, szóval néha el kell végezni a fentieket, ha tisztán akarom ezt tartani. Mindenesetre jó móka volt. 🙃&lt;/p&gt;
 
-&lt;p&gt;Aki még többet akar ezzel mókázni, csinálhat belőle egy GreaseMonkey/TamperMonkey userscript-et, ami akár még egy gombot is betesz a művelet elvégzésére és nem kell utána a &lt;em&gt;Console&lt;/em&gt;-al bajlódni.&lt;/p&gt;</content><author><name>Zsolt Jurányi</name></author><category term="ads" /><category term="automation" /><category term="cleanup" /><category term="facebook" /><category term="javascript" /><category term="script" /><summary type="html">Ma felfedeztem, hogy nagyon sok hirdetés jelenik meg a Facebook hírfolyamomban. A hirdetéseket egyrészt utálom, másrészt az esetek 99%-ban nem akkor vásárolok, amikor valaki az arcomba tolt egy hirdetést, hanem akkor, amikor szükségem van rá.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook/fb-ads-empty-interests.png" /></entry><entry xml:lang="en_US"><title type="html">Is Popper.js required for Bootstrap 4?</title><link href="https://juzraai.github.io/blog/2019/is-popperjs-requried-for-bootstrap4/" rel="alternate" type="text/html" title="Is Popper.js required for Bootstrap 4?" /><published>2019-05-12T00:00:00+02:00</published><updated>2019-11-01T10:49:06+01:00</updated><id>https://juzraai.github.io/blog/2019/is-popperjs-requried-for-bootstrap4</id><content type="html" xml:base="https://juzraai.github.io/blog/2019/is-popperjs-requried-for-bootstrap4/">&lt;p&gt;Several months ago I saw this &lt;a href=&quot;https://stackoverflow.com/questions/46155017/bootstrap-4-beta-is-popper-js-required/46155285&quot;&gt;question on StackOverflow&lt;/a&gt;:&lt;/p&gt;
+&lt;p&gt;Aki még többet akar ezzel mókázni, csinálhat belőle egy GreaseMonkey/TamperMonkey userscript-et, ami akár még egy gombot is betesz a művelet elvégzésére és nem kell utána a &lt;em&gt;Console&lt;/em&gt;-al bajlódni.&lt;/p&gt;</content><author><name>Zsolt Jurányi</name></author><category term="ads" /><category term="automation" /><category term="cleanup" /><category term="facebook" /><category term="javascript" /><category term="script" /><summary type="html">Ma felfedeztem, hogy nagyon sok hirdetés jelenik meg a Facebook hírfolyamomban. A hirdetéseket egyrészt utálom, másrészt az esetek 99%-ban nem akkor vásárolok, amikor valaki az arcomba tolt egy hirdetést, hanem akkor, amikor szükségem van rá.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook/fb-ads-empty-interests.png" /><media:content medium="image" url="https://juzraai.github.io/assets/facebook/fb-ads-empty-interests.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry xml:lang="en_US"><title type="html">Is Popper.js required for Bootstrap 4?</title><link href="https://juzraai.github.io/blog/2019/is-popperjs-requried-for-bootstrap4/" rel="alternate" type="text/html" title="Is Popper.js required for Bootstrap 4?" /><published>2019-05-12T00:00:00+02:00</published><updated>2019-11-01T10:49:06+01:00</updated><id>https://juzraai.github.io/blog/2019/is-popperjs-requried-for-bootstrap4</id><content type="html" xml:base="https://juzraai.github.io/blog/2019/is-popperjs-requried-for-bootstrap4/">&lt;p&gt;Several months ago I saw this &lt;a href=&quot;https://stackoverflow.com/questions/46155017/bootstrap-4-beta-is-popper-js-required/46155285&quot;&gt;question on StackOverflow&lt;/a&gt;:&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;I wanted to ask if Popper.js is absolutely necessary or not if I don’t use dropdown menus. Are there any other parts of Bootstrap 4 driven by Popper.js that would not work without the library?&lt;/p&gt;
@@ -148,7 +238,7 @@
 
 &lt;p&gt;To answer this part of the original question, the easiest we can do is to open the documentation and use its search box.&lt;/p&gt;
 
-&lt;p&gt;If we search for &lt;code class=&quot;highlighter-rouge&quot;&gt;popper&lt;/code&gt; in &lt;a href=&quot;https://getbootstrap.com/docs/4.3/getting-started/introduction/&quot;&gt;Bootstrap 4’s documentation&lt;/a&gt;, the following results will come up:&lt;/p&gt;
+&lt;p&gt;If we search for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;popper&lt;/code&gt; in &lt;a href=&quot;https://getbootstrap.com/docs/4.3/getting-started/introduction/&quot;&gt;Bootstrap 4’s documentation&lt;/a&gt;, the following results will come up:&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;Tooltips rely on the 3rd party library &lt;strong&gt;Popper.js&lt;/strong&gt; for positioning.&lt;/p&gt;
@@ -175,12 +265,12 @@
 &lt;p&gt;Popper.js is stated as required in the documentation:&lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;Many of our components require the use of JavaScript to function. Specifically, they require jQuery, Popper.js, and our own JavaScript plugins. Place the following scripts near the end of your pages, right before the closing &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;/body&amp;gt;&lt;/code&gt; tag, to enable them. jQuery must come first, then Popper.js, and then our JavaScript plugins.&lt;/p&gt;
+  &lt;p&gt;Many of our components require the use of JavaScript to function. Specifically, they require jQuery, Popper.js, and our own JavaScript plugins. Place the following scripts near the end of your pages, right before the closing &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;/body&amp;gt;&lt;/code&gt; tag, to enable them. jQuery must come first, then Popper.js, and then our JavaScript plugins.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;And Bootstrap 4 JS (Beta version at least) logs an error if it can’t find Popper.js:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Uncaught Error: Bootstrap dropdown require Popper.js (https://popper.js.org)
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Uncaught Error: Bootstrap dropdown require Popper.js (https://popper.js.org)
     at bootstrap.min.js:6
     at bootstrap.min.js:6
     at bootstrap.min.js:6
@@ -192,7 +282,7 @@
 
 &lt;p&gt;More answers on the same topic mentions that there’s a bundle version of Bootstrap 4 JS, which &lt;strong&gt;includes Popper.js,&lt;/strong&gt; therefore there’s no need to bother including Popper.js by hand.&lt;/p&gt;
 
-&lt;p&gt;In my opinion, or at least for me, the whole point of not importing Popper.js is to reduce loading time of a webpage by &lt;strong&gt;importing only what is required.&lt;/strong&gt; In this case, the bundle doesn’t help.&lt;/p&gt;</content><author><name>Zsolt Jurányi</name></author><category term="bootstrap" /><category term="optimization" /><category term="popperjs" /><category term="stackoverflow" /><summary type="html">Several months ago I saw this question on StackOverflow:</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /></entry><entry xml:lang="hu_HU"><title type="html">Tényleg kell Popper.js Bootstrap 4-hez?</title><link href="https://juzraai.github.io/blog/2019/tenyleg-kell-popperjs-bootstrap4-hez/" rel="alternate" type="text/html" title="Tényleg kell Popper.js Bootstrap 4-hez?" /><published>2019-05-12T00:00:00+02:00</published><updated>2019-11-01T10:49:06+01:00</updated><id>https://juzraai.github.io/blog/2019/tenyleg-kell-popperjs-bootstrap4-hez</id><content type="html" xml:base="https://juzraai.github.io/blog/2019/tenyleg-kell-popperjs-bootstrap4-hez/">&lt;p&gt;Jó pár hónapja találtam &lt;a href=&quot;https://stackoverflow.com/questions/46155017/bootstrap-4-beta-is-popper-js-required/46155285&quot;&gt;ezt a kérdést StackOverflow-n&lt;/a&gt;:&lt;/p&gt;
+&lt;p&gt;In my opinion, or at least for me, the whole point of not importing Popper.js is to reduce loading time of a webpage by &lt;strong&gt;importing only what is required.&lt;/strong&gt; In this case, the bundle doesn’t help.&lt;/p&gt;</content><author><name>Zsolt Jurányi</name></author><category term="bootstrap" /><category term="optimization" /><category term="popperjs" /><category term="stackoverflow" /><summary type="html">Several months ago I saw this question on StackOverflow:</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /><media:content medium="image" url="https://juzraai.github.io/assets/facebook-og-image.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry xml:lang="hu_HU"><title type="html">Tényleg kell Popper.js Bootstrap 4-hez?</title><link href="https://juzraai.github.io/blog/2019/tenyleg-kell-popperjs-bootstrap4-hez/" rel="alternate" type="text/html" title="Tényleg kell Popper.js Bootstrap 4-hez?" /><published>2019-05-12T00:00:00+02:00</published><updated>2019-11-01T10:49:06+01:00</updated><id>https://juzraai.github.io/blog/2019/tenyleg-kell-popperjs-bootstrap4-hez</id><content type="html" xml:base="https://juzraai.github.io/blog/2019/tenyleg-kell-popperjs-bootstrap4-hez/">&lt;p&gt;Jó pár hónapja találtam &lt;a href=&quot;https://stackoverflow.com/questions/46155017/bootstrap-4-beta-is-popper-js-required/46155285&quot;&gt;ezt a kérdést StackOverflow-n&lt;/a&gt;:&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;Azt szeretném kérdezni, hogy a Popper.js tényleg szükséges-e, ha nem használok dropdown menu-t*? Vannak más Bootstrap 4 komponensek, amik a Popper.js-re épülnek és nem tudnak működni nélküle?&lt;/p&gt;
@@ -206,7 +296,7 @@
 
 &lt;p&gt;Ahhoz, hogy ezt megválaszoljuk, a legegyszerűbb, amit tehetünk, hogy megnyitjuk a dokumentációt és használjuk a keresődobozát.&lt;/p&gt;
 
-&lt;p&gt;Ha rákeresünk a &lt;code class=&quot;highlighter-rouge&quot;&gt;popper&lt;/code&gt;-re a &lt;a href=&quot;https://getbootstrap.com/docs/4.3/getting-started/introduction/&quot;&gt;Bootstrap 4 dokumentációban&lt;/a&gt;, az alábbi találatokat kapjuk:&lt;/p&gt;
+&lt;p&gt;Ha rákeresünk a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;popper&lt;/code&gt;-re a &lt;a href=&quot;https://getbootstrap.com/docs/4.3/getting-started/introduction/&quot;&gt;Bootstrap 4 dokumentációban&lt;/a&gt;, az alábbi találatokat kapjuk:&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;Tooltips rely on the 3rd party library &lt;strong&gt;Popper.js&lt;/strong&gt; for positioning.&lt;/p&gt;
@@ -233,12 +323,12 @@
 &lt;p&gt;A Popper.js követelményként van említve a dokumentációban:&lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;Many of our components require the use of JavaScript to function. Specifically, they require jQuery, Popper.js, and our own JavaScript plugins. Place the following scripts near the end of your pages, right before the closing &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;/body&amp;gt;&lt;/code&gt; tag, to enable them. jQuery must come first, then Popper.js, and then our JavaScript plugins.&lt;/p&gt;
+  &lt;p&gt;Many of our components require the use of JavaScript to function. Specifically, they require jQuery, Popper.js, and our own JavaScript plugins. Place the following scripts near the end of your pages, right before the closing &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;/body&amp;gt;&lt;/code&gt; tag, to enable them. jQuery must come first, then Popper.js, and then our JavaScript plugins.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;És a Bootstrap 4 JS (legalábbis a Beta verzió) hibaüzenetet ír a logba, ha nem találja a Popper.js-t:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Uncaught Error: Bootstrap dropdown require Popper.js (https://popper.js.org)
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Uncaught Error: Bootstrap dropdown require Popper.js (https://popper.js.org)
     at bootstrap.min.js:6
     at bootstrap.min.js:6
     at bootstrap.min.js:6
@@ -250,11 +340,11 @@
 
 &lt;p&gt;Több válasz is említi a szóban forgó kérdés alatt, hogy a Bootstrap 4-nek van egy bundle verziója, ami &lt;strong&gt;tartalmazza a Popper.js-t,&lt;/strong&gt; tehát nem kell görcsölni a Popper.js kézzel importálásán.&lt;/p&gt;
 
-&lt;p&gt;Az én véleményem viszont az, vagy legalábbis számomra a kérdésnek pont az az értelme, hogy azért nem importáljuk a Popper.js-t, mert csökkenteni szeretnénk a weboldalunk betöltési idejét azzal, hogy &lt;strong&gt;csak a szükséges dolgokat importáljuk.&lt;/strong&gt; Ebben az esetben azonban a bundle nem segít.&lt;/p&gt;</content><author><name>Zsolt Jurányi</name></author><category term="bootstrap" /><category term="popperjs" /><category term="stackoverflow" /><summary type="html">Jó pár hónapja találtam ezt a kérdést StackOverflow-n:</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /></entry><entry xml:lang="hu_HU"><title type="html">Git changelog generálás</title><link href="https://juzraai.github.io/blog/2018/git-changelog-generalas/" rel="alternate" type="text/html" title="Git changelog generálás" /><published>2018-12-15T00:00:00+01:00</published><updated>2019-11-01T10:49:06+01:00</updated><id>https://juzraai.github.io/blog/2018/git-changelog-generalas</id><content type="html" xml:base="https://juzraai.github.io/blog/2018/git-changelog-generalas/">&lt;h2 id=&quot;bevezetés&quot;&gt;Bevezetés&lt;/h2&gt;
+&lt;p&gt;Az én véleményem viszont az, vagy legalábbis számomra a kérdésnek pont az az értelme, hogy azért nem importáljuk a Popper.js-t, mert csökkenteni szeretnénk a weboldalunk betöltési idejét azzal, hogy &lt;strong&gt;csak a szükséges dolgokat importáljuk.&lt;/strong&gt; Ebben az esetben azonban a bundle nem segít.&lt;/p&gt;</content><author><name>Zsolt Jurányi</name></author><category term="bootstrap" /><category term="popperjs" /><category term="stackoverflow" /><summary type="html">Jó pár hónapja találtam ezt a kérdést StackOverflow-n:</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /><media:content medium="image" url="https://juzraai.github.io/assets/facebook-og-image.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry xml:lang="hu_HU"><title type="html">Git changelog generálás</title><link href="https://juzraai.github.io/blog/2018/git-changelog-generalas/" rel="alternate" type="text/html" title="Git changelog generálás" /><published>2018-12-15T00:00:00+01:00</published><updated>2019-11-01T10:49:06+01:00</updated><id>https://juzraai.github.io/blog/2018/git-changelog-generalas</id><content type="html" xml:base="https://juzraai.github.io/blog/2018/git-changelog-generalas/">&lt;h2 id=&quot;bevezetés&quot;&gt;Bevezetés&lt;/h2&gt;
 
 &lt;p&gt;Böngészgettem GitHub-on, és felfigyeltem rá, hogy sok repóban van &lt;strong&gt;changelog fájl&lt;/strong&gt; vagy fejezet a readme-ben. A changelog egy &lt;strong&gt;hasznos dolog, tájékoztatja&lt;/strong&gt; a felhasználót (vagy fejlesztőt) az egyes verziók különbségeiről, a &lt;strong&gt;bekövetkezett változásokról.&lt;/strong&gt; Ha elég ügyesek vagyunk, ezt a naplót megfelelő tool segítségével le is tudjuk generálni. A jó changelog irányelveit a &lt;a href=&quot;https://keepachangelog.com/en/1.0.0/&quot;&gt;Keep a Changelog&lt;/a&gt; oldal írja le, szem előtt tartva úgy a napló olvashatóságát és értelmét, mint pedig a generálhatóságát (ld. commit message prefixek).&lt;/p&gt;
 
-&lt;p&gt;Namost a linken írtakat most olvastam el, miután a posztom vázlatát megírtam… és a helyzet az, hogy &lt;strong&gt;a bejegyzés további része szembemegy az irányelvekkel.&lt;/strong&gt; Ez kissé talán lelomboz, viszont ettől még nem haszontalan megosztanom a &lt;del&gt;mai szenvedésem&lt;/del&gt; ma szerzett tapasztalataimat a &lt;code class=&quot;highlighter-rouge&quot;&gt;git log&lt;/code&gt; paranccsal.&lt;/p&gt;
+&lt;p&gt;Namost a linken írtakat most olvastam el, miután a posztom vázlatát megírtam… és a helyzet az, hogy &lt;strong&gt;a bejegyzés további része szembemegy az irányelvekkel.&lt;/strong&gt; Ez kissé talán lelomboz, viszont ettől még nem haszontalan megosztanom a &lt;del&gt;mai szenvedésem&lt;/del&gt; ma szerzett tapasztalataimat a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git log&lt;/code&gt; paranccsal.&lt;/p&gt;
 
 &lt;h2 id=&quot;célkitűzés&quot;&gt;Célkitűzés&lt;/h2&gt;
 
@@ -273,7 +363,7 @@
 
 &lt;p&gt;Először nézzük, mivel állunk szemben. Így néz ki a teljes log:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git log --oneline
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git log --oneline
 b323e7d (HEAD -&amp;gt; master, single-inst) Lint
 73a4bcd Csak egy instance maradhat
 bf4a37f Szkriptek src mappába (átláthatóság++)
@@ -297,9 +387,9 @@ ff608c9 Logger
 5fa1938 Initial commit
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Kipróbáltam a &lt;code class=&quot;highlighter-rouge&quot;&gt;git log&lt;/code&gt; parancsot, és a &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;since&amp;gt;...&amp;lt;until&amp;gt;&lt;/code&gt; paramétert. Az unreleased commit-okat így tudom kilistázni:&lt;/p&gt;
+&lt;p&gt;Kipróbáltam a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git log&lt;/code&gt; parancsot, és a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;since&amp;gt;...&amp;lt;until&amp;gt;&lt;/code&gt; paramétert. Az unreleased commit-okat így tudom kilistázni:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git log --oneline 1.0.1...HEAD
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git log --oneline 1.0.1...HEAD
 b323e7d (HEAD -&amp;gt; master, single-inst) Lint
 73a4bcd Csak egy instance maradhat
 bf4a37f Szkriptek src mappába (átláthatóság++)
@@ -307,14 +397,14 @@ bf4a37f Szkriptek src mappába (átláthatóság++)
 
 &lt;p&gt;Az utolsó release adatait hasonlóan egyszerűen:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git log --oneline 1.0.0...1.0.1
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git log --oneline 1.0.0...1.0.1
 7c1fdb0 (tag: 1.0.1, origin/master, origin/HEAD) Logger konfig itt jobb helyen van
 e724f7e Globális install működik
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Azonban a legelső release history-ját trükkösebb lekérdezni - mit kell megadni a &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;since&amp;gt;&lt;/code&gt;-nek? Semmit? Nem:&lt;/p&gt;
+&lt;p&gt;Azonban a legelső release history-ját trükkösebb lekérdezni - mit kell megadni a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;since&amp;gt;&lt;/code&gt;-nek? Semmit? Nem:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git log --oneline ...1.0.0
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git log --oneline ...1.0.0
 b323e7d (HEAD -&amp;gt; master, single-inst) Lint
 73a4bcd Csak egy instance maradhat
 bf4a37f Szkriptek src mappába (átláthatóság++)
@@ -322,20 +412,20 @@ bf4a37f Szkriptek src mappába (átláthatóság++)
 e724f7e Globális install működik
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;A &lt;code class=&quot;highlighter-rouge&quot;&gt;HEAD&lt;/code&gt; és az első release közti commit-okat kaptam vissza, vagyis pont az ellenkezőjét annak, amit szerettem volna.&lt;/p&gt;
+&lt;p&gt;A &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HEAD&lt;/code&gt; és az első release közti commit-okat kaptam vissza, vagyis pont az ellenkezőjét annak, amit szerettem volna.&lt;/p&gt;
 
-&lt;p&gt;Rengeteget keresgéltem, de nem találtam szebb megoldást annál, minthogy lekérem a legelső commit hash-t, és azt adom meg &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;since&amp;gt;&lt;/code&gt;-nek.&lt;/p&gt;
+&lt;p&gt;Rengeteget keresgéltem, de nem találtam szebb megoldást annál, minthogy lekérem a legelső commit hash-t, és azt adom meg &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;since&amp;gt;&lt;/code&gt;-nek.&lt;/p&gt;
 
 &lt;p&gt;A legelső commit lekérdezésére 2 módszert találtam:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git log --oneline | tail -1 | cut -d' ' -f 1&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git rev-list --max-parents=0 HEAD&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git log --oneline | tail -1 | cut -d' ' -f 1&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git rev-list --max-parents=0 HEAD&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Behelyettesítve a korábbi parancsba már megkapom az első release commit-jait:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git log --oneline `git log --oneline | tail -1 | cut -d' ' -f 1`...1.0.0
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git log --oneline `git log --oneline | tail -1 | cut -d' ' -f 1`...1.0.0
 c8d7518 (tag: 1.0.0) Dependency update
 e7e9abb Kép URL fix
 f4a4114 Feladatok, ötletek
@@ -355,24 +445,24 @@ ff608c9 Logger
 
 &lt;p&gt;Legalábbis majdnem. Ugyanis az intervallum alul nyitott, az &lt;em&gt;“Initial commit”&lt;/em&gt; kimaradt. Ezt explicit módon kell majd kiíratnom a changelog végére:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git log --oneline | tail -1
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git log --oneline | tail -1
 5fa1938 Initial commit
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;A fentiek automatizálásához szükség van a release-ek listájára is. Ezt az alábbi paranccsal kérdezhetem le:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git tag | sort -r
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git tag | sort -r
 1.0.1
 1.0.0
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;A changelog akkor szép, ha némileg formázva van, erre egy tökéletes eszköz a Markdown nyelv. A &lt;em&gt;“Changelog”&lt;/em&gt; felirat egy egyes szintű címsor, míg a release-ek másodszintűek lesznek. Köztük a commit-ok pedig felsorolások. Utóbbihoz a &lt;code class=&quot;highlighter-rouge&quot;&gt;--oneline&lt;/code&gt; helyett saját formátumot kell megadni a &lt;code class=&quot;highlighter-rouge&quot;&gt;git log&lt;/code&gt;-nak:&lt;/p&gt;
+&lt;p&gt;A changelog akkor szép, ha némileg formázva van, erre egy tökéletes eszköz a Markdown nyelv. A &lt;em&gt;“Changelog”&lt;/em&gt; felirat egy egyes szintű címsor, míg a release-ek másodszintűek lesznek. Köztük a commit-ok pedig felsorolások. Utóbbihoz a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--oneline&lt;/code&gt; helyett saját formátumot kell megadni a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git log&lt;/code&gt;-nak:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git log --pretty=&quot;* %s&quot; | tail -1
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git log --pretty=&quot;* %s&quot; | tail -1
 * Initial commit
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;A &lt;code class=&quot;highlighter-rouge&quot;&gt;pretty&lt;/code&gt; paraméterben használható változókról &lt;a href=&quot;https://git-scm.com/docs/pretty-formats&quot;&gt;itt írnak részletesen&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;A &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pretty&lt;/code&gt; paraméterben használható változókról &lt;a href=&quot;https://git-scm.com/docs/pretty-formats&quot;&gt;itt írnak részletesen&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h2 id=&quot;összekalapálás&quot;&gt;Összekalapálás&lt;/h2&gt;
 
@@ -458,13 +548,13 @@ main
 &lt;span class=&quot;p&quot;&gt;*&lt;/span&gt; Initial commit
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;A fájlba írás pedig innen már pofon egyszerű: &lt;code class=&quot;highlighter-rouge&quot;&gt;./my-git-changelog.sh &amp;gt; CHANGELOG.md&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;A fájlba írás pedig innen már pofon egyszerű: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;./my-git-changelog.sh &amp;gt; CHANGELOG.md&lt;/code&gt;.&lt;/p&gt;
 
 &lt;h2 id=&quot;epilog&quot;&gt;EpiLog&lt;/h2&gt;
 
 &lt;p&gt;Lehetne még persze tuningolni azzal, hogy a release-ekhez dátumot is kiírok, de most ezt nem teszem meg.&lt;/p&gt;
 
-&lt;p&gt;Ahogy a bevezetőben is említettem, a &lt;strong&gt;jó changelog NEM ez,&lt;/strong&gt; amit most tákoltam össze. Ugyanis nem, vagy csak nagyon &lt;strong&gt;nehezen derül ki belőle,&lt;/strong&gt; hogy a felhasználónak mire kell figyelnie, mire számíthat - változott-e az API, bekerült-e új feaure, javítva lett-e a hiba, amitől kihullott a haja, etc. Ehelyett a fenti megoldás kiprinteli még a legeslegérdektelenebb commitot is, az &lt;em&gt;initial&lt;/em&gt;-t… 🤓&lt;/p&gt;</content><author><name>Zsolt Jurányi</name></author><category term="automation" /><category term="bash" /><category term="changelog" /><category term="commit" /><category term="generator" /><category term="git" /><category term="markdown" /><category term="log" /><category term="script" /><summary type="html">Bevezetés</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /></entry><entry xml:lang="hu_HU"><title type="html">Díjnet bot</title><link href="https://juzraai.github.io/blog/2018/dijnet-bot/" rel="alternate" type="text/html" title="Díjnet bot" /><published>2018-12-14T00:00:00+01:00</published><updated>2019-11-01T10:49:06+01:00</updated><id>https://juzraai.github.io/blog/2018/dijnet-bot</id><content type="html" xml:base="https://juzraai.github.io/blog/2018/dijnet-bot/">&lt;h2 id=&quot;a-probléma&quot;&gt;A probléma&lt;/h2&gt;
+&lt;p&gt;Ahogy a bevezetőben is említettem, a &lt;strong&gt;jó changelog NEM ez,&lt;/strong&gt; amit most tákoltam össze. Ugyanis nem, vagy csak nagyon &lt;strong&gt;nehezen derül ki belőle,&lt;/strong&gt; hogy a felhasználónak mire kell figyelnie, mire számíthat - változott-e az API, bekerült-e új feaure, javítva lett-e a hiba, amitől kihullott a haja, etc. Ehelyett a fenti megoldás kiprinteli még a legeslegérdektelenebb commitot is, az &lt;em&gt;initial&lt;/em&gt;-t… 🤓&lt;/p&gt;</content><author><name>Zsolt Jurányi</name></author><category term="automation" /><category term="bash" /><category term="changelog" /><category term="commit" /><category term="generator" /><category term="git" /><category term="markdown" /><category term="log" /><category term="script" /><summary type="html">Bevezetés</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /><media:content medium="image" url="https://juzraai.github.io/assets/facebook-og-image.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry xml:lang="hu_HU"><title type="html">Díjnet bot</title><link href="https://juzraai.github.io/blog/2018/dijnet-bot/" rel="alternate" type="text/html" title="Díjnet bot" /><published>2018-12-14T00:00:00+01:00</published><updated>2019-11-01T10:49:06+01:00</updated><id>https://juzraai.github.io/blog/2018/dijnet-bot</id><content type="html" xml:base="https://juzraai.github.io/blog/2018/dijnet-bot/">&lt;h2 id=&quot;a-probléma&quot;&gt;A probléma&lt;/h2&gt;
 
 &lt;p&gt;A közüzemi számlák befizetésének egyik legkényelmesebb módja a &lt;a href=&quot;https://www.dijnet.hu/&quot;&gt;Díjnet&lt;/a&gt;. Emailt küld a számláról, ami webes felületről letölthető, és online bankkártyás fizetési lehetőséget biztosít, amellyel több számla is kiegyenlíthető egyetlen tranzakcióval.&lt;/p&gt;
 
@@ -483,7 +573,7 @@ main
 
 &lt;h2 id=&quot;megoldásom&quot;&gt;Megoldásom&lt;/h2&gt;
 
-&lt;p&gt;Nekiültem tehát összerakni a saját crawler-emet. Először Bash-ban csináltam meg &lt;code class=&quot;highlighter-rouge&quot;&gt;curl&lt;/code&gt;-el, de aztán Node.js-re váltottam, főként azért, mert ott kényelmesen tudok HTML-t is parszolni, illetve könnyebben futtatható lesz a szkript Windows-on is. Csak &lt;a href=&quot;https://nodejs.org/en/&quot;&gt;Node.js&lt;/a&gt;-t kell telepíteni hozzá.&lt;/p&gt;
+&lt;p&gt;Nekiültem tehát összerakni a saját crawler-emet. Először Bash-ban csináltam meg &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;curl&lt;/code&gt;-el, de aztán Node.js-re váltottam, főként azért, mert ott kényelmesen tudok HTML-t is parszolni, illetve könnyebben futtatható lesz a szkript Windows-on is. Csak &lt;a href=&quot;https://nodejs.org/en/&quot;&gt;Node.js&lt;/a&gt;-t kell telepíteni hozzá.&lt;/p&gt;
 
 &lt;p&gt;Összeraktam a &lt;strong&gt;Díjnet botot&lt;/strong&gt;, amely &lt;strong&gt;automatikusan le tudja tölteni az összes Díjnet-en levő számlámat és azok minden fájlját&lt;/strong&gt;, vagyis így meglesz a gépen minden számla PDF és XML formátumban, illetve a terhelési összesítők is, ahol van ilyen. A &lt;strong&gt;fájlokat mappázza szolgáltató, szolgáltatási azonosító és dátum szerint.&lt;/strong&gt;&lt;/p&gt;
 
@@ -499,13 +589,13 @@ main
 
 &lt;p&gt;Fura volt, hogy a Díjneten meg kell nyitni a számla kereső űrlapot, mielőtt elküldeném az adatait, illetve a számla listához is vissza kell térni minden számla után, hogy a következőre rámehessek. Így sajnos jóval több request-be kerül az egész procedúra, mint egy átlagos weboldal esetében.&lt;/p&gt;
 
-&lt;p&gt;Figyelni kellett a HTTP header-ökre is, bizonyos URL-ekre kontent nélküli lapot dob a szerver, ha hiányzik az &lt;code class=&quot;highlighter-rouge&quot;&gt;Accept&lt;/code&gt; és &lt;code class=&quot;highlighter-rouge&quot;&gt;Accept-Language&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Figyelni kellett a HTTP header-ökre is, bizonyos URL-ekre kontent nélküli lapot dob a szerver, ha hiányzik az &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Accept&lt;/code&gt; és &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Accept-Language&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;A karakterkódolás is elég fura, amit használnak. Na ennek a nyitjára még nem jöttem rá, próbáltam jobbra-balra konvertálni, de csak nem kaptam szép ő/ű betűket. Egyelőre úgy hidaltam át, hogy az ékezeteket leveszem (á » a), az ismeretlen karaktereket meg kidobálom.&lt;/p&gt;
 
 &lt;h2 id=&quot;tervek&quot;&gt;Tervek&lt;/h2&gt;
 
-&lt;p&gt;Azért van még pár ötlet a tarsolyomban a Díjnet bot továbbfejlesztéséhez. Gondolkozom azon, hogy &lt;strong&gt;valamiféle statisztikát&lt;/strong&gt; is generálhatna a számla infók alapján. Például átlagolhatná a havi kiadást, vagy tehetne javaslatot az &lt;strong&gt;optimális számlafizetési napra,&lt;/strong&gt; amikor minél több számlát ki tudok fizetni egyetlen kattintással és tranzakcióval.&lt;/p&gt;</content><author><name>Zsolt Jurányi</name></author><category term="automation" /><category term="backup" /><category term="bot" /><category term="crawler" /><category term="díjnet" /><category term="invoice" /><category term="nodejs" /><category term="project" /><category term="script" /><summary type="html">A probléma</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/dijnet-bot/dijnet-bot-run.png" /></entry><entry xml:lang="hu_HU"><title type="html">Nyomdakész PDF előállítása</title><link href="https://juzraai.github.io/blog/2018/nyomdakesz-pdf-eloallitasa/" rel="alternate" type="text/html" title="Nyomdakész PDF előállítása" /><published>2018-11-20T00:00:00+01:00</published><updated>2019-11-01T10:49:06+01:00</updated><id>https://juzraai.github.io/blog/2018/nyomdakesz-pdf-eloallitasa</id><content type="html" xml:base="https://juzraai.github.io/blog/2018/nyomdakesz-pdf-eloallitasa/">&lt;h2 id=&quot;bevezetés&quot;&gt;Bevezetés&lt;/h2&gt;
+&lt;p&gt;Azért van még pár ötlet a tarsolyomban a Díjnet bot továbbfejlesztéséhez. Gondolkozom azon, hogy &lt;strong&gt;valamiféle statisztikát&lt;/strong&gt; is generálhatna a számla infók alapján. Például átlagolhatná a havi kiadást, vagy tehetne javaslatot az &lt;strong&gt;optimális számlafizetési napra,&lt;/strong&gt; amikor minél több számlát ki tudok fizetni egyetlen kattintással és tranzakcióval.&lt;/p&gt;</content><author><name>Zsolt Jurányi</name></author><category term="automation" /><category term="backup" /><category term="bot" /><category term="crawler" /><category term="díjnet" /><category term="invoice" /><category term="nodejs" /><category term="project" /><category term="script" /><summary type="html">A probléma</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/dijnet-bot/dijnet-bot-run.png" /><media:content medium="image" url="https://juzraai.github.io/assets/dijnet-bot/dijnet-bot-run.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry xml:lang="hu_HU"><title type="html">Nyomdakész PDF előállítása</title><link href="https://juzraai.github.io/blog/2018/nyomdakesz-pdf-eloallitasa/" rel="alternate" type="text/html" title="Nyomdakész PDF előállítása" /><published>2018-11-20T00:00:00+01:00</published><updated>2019-11-01T10:49:06+01:00</updated><id>https://juzraai.github.io/blog/2018/nyomdakesz-pdf-eloallitasa</id><content type="html" xml:base="https://juzraai.github.io/blog/2018/nyomdakesz-pdf-eloallitasa/">&lt;h2 id=&quot;bevezetés&quot;&gt;Bevezetés&lt;/h2&gt;
 
 &lt;p&gt;Kissé rendhagyó ez a poszt, de ki mondta, hogy csak programozásról fogok írni? 😜 Messze nem vagyok profi ezen a téren, de egyszerűbb vektorgrafikákat olykor összetákolok, ha szükségem van rá és nem bonyolult a feladat. Egyrészt élvezem is, másrészt így ingyen van. A honlapom logóját és a kapcsolódó social media képeket &lt;a href=&quot;https://inkscape.org/&quot;&gt;Inkscape&lt;/a&gt;-ben raktam össze. Már pár hónapja megterveztem a névjegykártyámat, illetve a minap egy cégtáblát készítettem és gyártattam le.&lt;/p&gt;
 
@@ -536,30 +626,30 @@ main
 
 &lt;p&gt;Windows-on azt lehet csinálni, hogy feltelepítjük a &lt;a href=&quot;https://www.ghostscript.com/download/gsdnld.html&quot;&gt;GhostScript&lt;/a&gt;-et, és megkérjük rá, hogy az Inkscape-ből kimentett PDF-et alakítsa át CMYK színeket tartalmazó PDF-re:&lt;/p&gt;
 
-&lt;div class=&quot;language-powershell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;c:\Program Files\gs\gs9.25\bin\gswin64.exe&quot;&lt;/span&gt; ^
-		-o &lt;span class=&quot;s2&quot;&gt;&quot;KIMENETI FÁJL ÚTVONALA&quot;&lt;/span&gt; ^
-		-sDEVICE&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pdfwrite ^
-		-dUseCIEColor ^
-		-sProcessColorModel&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;DeviceCMYK ^
-		-sColorConversionStrategy&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;CMYK ^
-		-sColorConversionStrategyForImages&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;CMYK ^
-		&lt;span class=&quot;s2&quot;&gt;&quot;BEMENETI FÁJL ÚTVONALA&quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Zsolt Jurányi</name></author><category term="cmyk" /><category term="ghostscript" /><category term="inkscape" /><category term="pdf" /><category term="printing" /><category term="vector-graphics" /><summary type="html">Bevezetés</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /></entry><entry xml:lang="hu_HU"><title type="html">Gitea nyitóoldal cseréje</title><link href="https://juzraai.github.io/blog/2018/gitea-nyitooldal-csereje/" rel="alternate" type="text/html" title="Gitea nyitóoldal cseréje" /><published>2018-11-19T00:00:00+01:00</published><updated>2019-11-01T10:49:05+01:00</updated><id>https://juzraai.github.io/blog/2018/gitea-nyitooldal-csereje</id><content type="html" xml:base="https://juzraai.github.io/blog/2018/gitea-nyitooldal-csereje/">&lt;p&gt;A Gitea nagyon megtetszett, úgyhogy beüzemeltem élesben is. Noha a &lt;code class=&quot;highlighter-rouge&quot;&gt;REQUIRE_SIGNIN_VIEW = true&lt;/code&gt; konfig paraméterrel login form mögé lehet tenni az egészet, a landing page továbbra is a Gitea funkcióit sorolja fel, amire adott esetben egy céges felületen már nincs szükség. Sokkal mutatósabb és célravezetőbb lehet például egy középre rakott logó és alatta egy link a belépéshez.&lt;/p&gt;
+&lt;div class=&quot;language-powershell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;c:\Program Files\gs\gs9.25\bin\gswin64.exe&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+		&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;KIMENETI FÁJL ÚTVONALA&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+		&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-sDEVICE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;pdfwrite&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+		&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-dUseCIEColor&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+		&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-sProcessColorModel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;DeviceCMYK&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+		&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-sColorConversionStrategy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;CMYK&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+		&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-sColorConversionStrategyForImages&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;CMYK&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+		&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;BEMENETI FÁJL ÚTVONALA&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Zsolt Jurányi</name></author><category term="cmyk" /><category term="ghostscript" /><category term="inkscape" /><category term="pdf" /><category term="printing" /><category term="vector-graphics" /><summary type="html">Bevezetés</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /><media:content medium="image" url="https://juzraai.github.io/assets/facebook-og-image.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry xml:lang="hu_HU"><title type="html">Gitea nyitóoldal cseréje</title><link href="https://juzraai.github.io/blog/2018/gitea-nyitooldal-csereje/" rel="alternate" type="text/html" title="Gitea nyitóoldal cseréje" /><published>2018-11-19T00:00:00+01:00</published><updated>2019-11-01T10:49:05+01:00</updated><id>https://juzraai.github.io/blog/2018/gitea-nyitooldal-csereje</id><content type="html" xml:base="https://juzraai.github.io/blog/2018/gitea-nyitooldal-csereje/">&lt;p&gt;A Gitea nagyon megtetszett, úgyhogy beüzemeltem élesben is. Noha a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;REQUIRE_SIGNIN_VIEW = true&lt;/code&gt; konfig paraméterrel login form mögé lehet tenni az egészet, a landing page továbbra is a Gitea funkcióit sorolja fel, amire adott esetben egy céges felületen már nincs szükség. Sokkal mutatósabb és célravezetőbb lehet például egy középre rakott logó és alatta egy link a belépéshez.&lt;/p&gt;
 
 &lt;p&gt;Ennek a nyitólapnak a cseréjét szerencsére egyszerűen meg lehet oldani, nem kell a forrást túrni és újrabuild-elni a cuccot. Igaz, egy párat kellett gugliznom, hogy lássam, pontosan hogyan kell elhelyezni a fájlokat, de megvan a recept:&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;Hozzuk létre &lt;code class=&quot;highlighter-rouge&quot;&gt;custom/templates/home.tmpl&lt;/code&gt; fájlt, a bináris mellett, ezzel felüldefiniáljuk a binárisban levő landing page sablont.&lt;/li&gt;
-  &lt;li&gt;A fájlba HTML kódot írhatunk. Ha linkelnénk a bejelentkező oldalt, hivatkozzuk a &lt;code class=&quot;highlighter-rouge&quot;&gt;/user/login&lt;/code&gt; útvonalat. Ha csak a header/footer közti részt akarjuk lecserélni, akkor másoljuk át az include-okat az &lt;a href=&quot;https://github.com/go-gitea/gitea/blob/master/templates/home.tmpl&quot;&gt;eredeti fájlból&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;Statikus fájlokat a &lt;code class=&quot;highlighter-rouge&quot;&gt;custom/public&lt;/code&gt; mappába pakolhatunk, és ezt tekinthetjük root-nak a hivatkozásokban.&lt;/li&gt;
-  &lt;li&gt;A favicon-t is ide kell tenni &lt;code class=&quot;highlighter-rouge&quot;&gt;custom/public/favicon.ico&lt;/code&gt; néven.&lt;/li&gt;
-  &lt;li&gt;A navbar-ban levő Gitea ikont úgy tudjuk felülírni, hogy létrehozunk egy &lt;code class=&quot;highlighter-rouge&quot;&gt;custom/public/img/gitea-sm.png&lt;/code&gt; fájlt.&lt;/li&gt;
+  &lt;li&gt;Hozzuk létre &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;custom/templates/home.tmpl&lt;/code&gt; fájlt, a bináris mellett, ezzel felüldefiniáljuk a binárisban levő landing page sablont.&lt;/li&gt;
+  &lt;li&gt;A fájlba HTML kódot írhatunk. Ha linkelnénk a bejelentkező oldalt, hivatkozzuk a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/user/login&lt;/code&gt; útvonalat. Ha csak a header/footer közti részt akarjuk lecserélni, akkor másoljuk át az include-okat az &lt;a href=&quot;https://github.com/go-gitea/gitea/blob/master/templates/home.tmpl&quot;&gt;eredeti fájlból&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Statikus fájlokat a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;custom/public&lt;/code&gt; mappába pakolhatunk, és ezt tekinthetjük root-nak a hivatkozásokban.&lt;/li&gt;
+  &lt;li&gt;A favicon-t is ide kell tenni &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;custom/public/favicon.ico&lt;/code&gt; néven.&lt;/li&gt;
+  &lt;li&gt;A navbar-ban levő Gitea ikont úgy tudjuk felülírni, hogy létrehozunk egy &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;custom/public/img/gitea-sm.png&lt;/code&gt; fájlt.&lt;/li&gt;
   &lt;li&gt;Ha megvagyunk a fájlok elhelyezésével, indítsuk újra a Gitea-t, hogy életbe lépjenek a módosítások.&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;A végén egy ilyen fájlszerkezetet fogunk kapni:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;custom/
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;custom/
 	conf/
 		app.ini
 	public/
@@ -569,11 +659,11 @@ main
 	templates/
 		home.tmpl
 gitea
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Zsolt Jurányi</name></author><category term="customize" /><category term="gitea" /><category term="landing" /><category term="web-ui" /><summary type="html">A Gitea nagyon megtetszett, úgyhogy beüzemeltem élesben is. Noha a REQUIRE_SIGNIN_VIEW = true konfig paraméterrel login form mögé lehet tenni az egészet, a landing page továbbra is a Gitea funkcióit sorolja fel, amire adott esetben egy céges felületen már nincs szükség. Sokkal mutatósabb és célravezetőbb lehet például egy középre rakott logó és alatta egy link a belépéshez.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /></entry><entry xml:lang="hu_HU"><title type="html">Lokális repók importálása Gitea-be</title><link href="https://juzraai.github.io/blog/2018/lokalis-repok-importalasa-gitea-be/" rel="alternate" type="text/html" title="Lokális repók importálása Gitea-be" /><published>2018-11-04T00:00:00+01:00</published><updated>2019-11-01T10:49:05+01:00</updated><id>https://juzraai.github.io/blog/2018/lokalis-repok-importalasa-gitea-be</id><content type="html" xml:base="https://juzraai.github.io/blog/2018/lokalis-repok-importalasa-gitea-be/">&lt;h2 id=&quot;bevezetés&quot;&gt;Bevezetés&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Zsolt Jurányi</name></author><category term="customize" /><category term="gitea" /><category term="landing" /><category term="web-ui" /><summary type="html">A Gitea nagyon megtetszett, úgyhogy beüzemeltem élesben is. Noha a REQUIRE_SIGNIN_VIEW = true konfig paraméterrel login form mögé lehet tenni az egészet, a landing page továbbra is a Gitea funkcióit sorolja fel, amire adott esetben egy céges felületen már nincs szükség. Sokkal mutatósabb és célravezetőbb lehet például egy középre rakott logó és alatta egy link a belépéshez.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /><media:content medium="image" url="https://juzraai.github.io/assets/facebook-og-image.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry xml:lang="hu_HU"><title type="html">Lokális repók importálása Gitea-be</title><link href="https://juzraai.github.io/blog/2018/lokalis-repok-importalasa-gitea-be/" rel="alternate" type="text/html" title="Lokális repók importálása Gitea-be" /><published>2018-11-04T00:00:00+01:00</published><updated>2019-11-01T10:49:05+01:00</updated><id>https://juzraai.github.io/blog/2018/lokalis-repok-importalasa-gitea-be</id><content type="html" xml:base="https://juzraai.github.io/blog/2018/lokalis-repok-importalasa-gitea-be/">&lt;h2 id=&quot;bevezetés&quot;&gt;Bevezetés&lt;/h2&gt;
 
 &lt;p&gt;Az &lt;a href=&quot;/blog/2018/gitea-beuzemeles-rpi&quot;&gt;előző Gitea-s posztomban&lt;/a&gt; is kiemeltem, érdemes komolyabb használat előtt &lt;strong&gt;végigolvasni az &lt;a href=&quot;https://docs.gitea.io/en-us/config-cheat-sheet/&quot;&gt;összes beállítási lehetőséget&lt;/a&gt;&lt;/strong&gt;, ugyanis ez a kulcs sokmindenhez, bizonyos dolgok sehol máshol nincsenek dokumentálva. A Gitea-s doksi nem valami segítőkész, nem ír külön a funkciókról és azok használatáról, megkötéseiről. Így van ez a repó importálással is.&lt;/p&gt;
 
-&lt;p&gt;Az alapszitu az, hogy a Gitea &lt;code class=&quot;highlighter-rouge&quot;&gt;gitea-repositories&lt;/code&gt; mappájába sajnos nem elég és nem is célravezető csak simán bemásolni egy bare repository-t. Ugyanis a Gitea csak azokat a repókat kezeli, amiket ő nyilvántartásba vett az &lt;strong&gt;adatbázisában,&lt;/strong&gt; és egyébként is &lt;strong&gt;saját Git hook-okat&lt;/strong&gt; használ. Vagyis a Gitea UI-ról kell őket létrehozni, nincs mese.&lt;/p&gt;
+&lt;p&gt;Az alapszitu az, hogy a Gitea &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gitea-repositories&lt;/code&gt; mappájába sajnos nem elég és nem is célravezető csak simán bemásolni egy bare repository-t. Ugyanis a Gitea csak azokat a repókat kezeli, amiket ő nyilvántartásba vett az &lt;strong&gt;adatbázisában,&lt;/strong&gt; és egyébként is &lt;strong&gt;saját Git hook-okat&lt;/strong&gt; használ. Vagyis a Gitea UI-ról kell őket létrehozni, nincs mese.&lt;/p&gt;
 
 &lt;h2 id=&quot;migrálás&quot;&gt;Migrálás&lt;/h2&gt;
 
@@ -588,22 +678,22 @@ gitea
 &lt;p&gt;…mert van egy &lt;strong&gt;globális tiltás is.&lt;/strong&gt; És ezt én egyetlen egy helyen láttam leírva (amit jóval azután néztem meg, hogy beletőrödtem a kudarcba), a &lt;a href=&quot;https://docs.gitea.io/en-us/config-cheat-sheet/&quot;&gt;Config Cheat Sheet&lt;/a&gt;-en, ahol felsorolja az összes paramétert:&lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;IMPORT_LOCAL_PATHS&lt;/code&gt;: &lt;strong&gt;false:&lt;/strong&gt; Prevent all users (including admin) from importing local path on server.&lt;/p&gt;
+  &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IMPORT_LOCAL_PATHS&lt;/code&gt;: &lt;strong&gt;false:&lt;/strong&gt; Prevent all users (including admin) from importing local path on server.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;Vagyis:&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;A &lt;code class=&quot;highlighter-rouge&quot;&gt;custom/conf/app.ini&lt;/code&gt; konfigfájlban engedélyezni kell globálisan a lokális importot:
+  &lt;li&gt;A &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;custom/conf/app.ini&lt;/code&gt; konfigfájlban engedélyezni kell globálisan a lokális importot:
     &lt;div class=&quot;language-ini highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nn&quot;&gt;[security]&lt;/span&gt;
 &lt;span class=&quot;py&quot;&gt;IMPORT_LOCAL_PATHS&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;true&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;A felületen, a &lt;em&gt;Site Administration &amp;gt; User Accounts&lt;/em&gt; alatt a saját fiókunk szerkesztésénél (&lt;em&gt;Edit&lt;/em&gt;) egyénileg is engedélyezni kell ezt, a &lt;em&gt;May import local repositories&lt;/em&gt; jelölőnégyzet bepipálásával tehetjük meg&lt;/li&gt;
-  &lt;li&gt;Ezután már megadhatunk a migrálásnál helyi útvonalat, pl. &lt;code class=&quot;highlighter-rouge&quot;&gt;/home/me/bare-repos/repo1&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Ezután már megadhatunk a migrálásnál helyi útvonalat, pl. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/home/me/bare-repos/repo1&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;Migráláskor a Gitea gyakorlatilag csinál egy másolatot a megadott repóról a &lt;code class=&quot;highlighter-rouge&quot;&gt;gitea-repositories&lt;/code&gt;-ba és regisztrálja az adatbázisba.&lt;/p&gt;
+&lt;p&gt;Migráláskor a Gitea gyakorlatilag csinál egy másolatot a megadott repóról a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gitea-repositories&lt;/code&gt;-ba és regisztrálja az adatbázisba.&lt;/p&gt;
 
 &lt;h2 id=&quot;git-módszer&quot;&gt;Git módszer&lt;/h2&gt;
 
@@ -615,106 +705,4 @@ git remote set-url origin http://GITEA_DOMAIN/GITEA_USER/NEW_REPO.git
 git push &lt;span class=&quot;nt&quot;&gt;--mirror&lt;/span&gt; origin
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Viszont a push előtt a fentebb írtak miatt &lt;strong&gt;előbb létre kell hozni a repót&lt;/strong&gt; a Gitea webes felületén.&lt;/p&gt;</content><author><name>Zsolt Jurányi</name></author><category term="config" /><category term="git" /><category term="gitea" /><category term="import" /><category term="migrate" /><category term="server" /><category term="web-ui" /><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /></entry><entry xml:lang="hu_HU"><title type="html">Gitea beüzemelés (Raspberry Pi)</title><link href="https://juzraai.github.io/blog/2018/gitea-beuzemeles-rpi/" rel="alternate" type="text/html" title="Gitea beüzemelés (Raspberry Pi)" /><published>2018-11-03T00:00:00+01:00</published><updated>2019-11-01T10:49:05+01:00</updated><id>https://juzraai.github.io/blog/2018/gitea-beuzemeles-rpi</id><content type="html" xml:base="https://juzraai.github.io/blog/2018/gitea-beuzemeles-rpi/">&lt;h2 id=&quot;bevezetés&quot;&gt;Bevezetés&lt;/h2&gt;
-
-&lt;p&gt;A munkafolyamataim hatékonyabbá és elegánsabbá tétele gyanánt azt tűztem ki célul, hogy a Git szerveremen beüzemelek egy webes felületet, amivel&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;tudom browse-olni a repókat a history-juk bármely pontján&lt;/li&gt;
-  &lt;li&gt;és egyszerűen tudom kezelni a hozzáféréseket.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Mindezt a &lt;a href=&quot;https://www.raspberrypi.org/products/raspberry-pi-3-model-b-plus/&quot;&gt;Raspberry Pi&lt;/a&gt;-men akarom kikísérletezni először, mielőtt az éles szerveren beállítom. A Pi-t azért tettem zárójelbe a bejegyzés címében, mert habár a málna PC-n tesztelek, &lt;strong&gt;az eredményre vezető lépéssorozat igazából hardver-, platform- és rendszerfüggetlen.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Git-hez való, saját szerveren hosztolható webes felületről szerintem sokaknak a &lt;strong&gt;&lt;a href=&quot;https://about.gitlab.com/&quot;&gt;GitLab&lt;/a&gt;&lt;/strong&gt; ugrik be, ahogy nekem is. Azonban őszentsége nagyon erőforrásigényes. Ugyan találtam ARM-re való &lt;a href=&quot;https://github.com/ulm0/gitlab&quot;&gt;Docker image&lt;/a&gt;-et, de a Pi nem bírta, úgyhogy a GitLab számomra felejtős egyelőre.&lt;/p&gt;
-
-&lt;p&gt;Értelmes alternatívának a &lt;a href=&quot;https://gitea.io/&quot;&gt;Gitea&lt;/a&gt;-t találtam, ami a &lt;a href=&quot;https://gogs.io/&quot;&gt;Gogs&lt;/a&gt; forkja, picivel &lt;a href=&quot;https://docs.gitea.io/en-us/comparison/&quot;&gt;több funkcióval&lt;/a&gt; és nyitottabb open-source felfogással. Eleve úgy van tervezve és fejlesztve, hogy gyengébb gépeken, ARM architektúrán és pl. Raspberry Pi-n is használható legyen.&lt;/p&gt;
-
-&lt;h2 id=&quot;telepítés&quot;&gt;Telepítés&lt;/h2&gt;
-
-&lt;p&gt;Meglepő módon &lt;a href=&quot;https://docs.gitea.io/en-us/install-from-package/&quot;&gt;nincs hozzá Debian csomag&lt;/a&gt;, a &lt;a href=&quot;https://hub.docker.com/r/gitea/gitea/&quot;&gt;Docker image&lt;/a&gt; pedig &lt;a href=&quot;https://github.com/go-gitea/gitea/issues/5180&quot;&gt;nem fut ARM-en&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Szerencsére a Gitea-t fejlesztő csapat egy &lt;strong&gt;csomó féle rendszerre elkészíti a binárisokat,&lt;/strong&gt; melyek a &lt;a href=&quot;https://dl.gitea.io/gitea/&quot;&gt;honlapjukról&lt;/a&gt; és &lt;a href=&quot;https://github.com/go-gitea/gitea/releases&quot;&gt;GitHub&lt;/a&gt;-ról is letölthetőek. És van köztük ARM-re fordított bináris, több is, nekem Raspberry Pi 3B+-ra a &lt;a href=&quot;https://dl.gitea.io/gitea/1.5.3/gitea-1.5.3-linux-arm-7&quot;&gt;gitea-1.5.3-linux-arm-7&lt;/a&gt; verzió kellett. Ezekben a fájlokban minden szükséges dolog megvan, &lt;strong&gt;csak futtatni kell&lt;/strong&gt; őket.&lt;/p&gt;
-
-&lt;p&gt;Érdemes neki létrehozni egy &lt;strong&gt;júzert és az alól&lt;/strong&gt; futtatni a programot:&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;adduser gitea
-&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;su - gitea
-wget https://dl.gitea.io/gitea/1.5.3/gitea-1.5.3-linux-arm-7 &lt;span class=&quot;nt&quot;&gt;-O&lt;/span&gt; gitea
-&lt;span class=&quot;nb&quot;&gt;chmod &lt;/span&gt;u+x ./gitea
-./gitea web &lt;span class=&quot;nt&quot;&gt;--port&lt;/span&gt; 3000
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;A Gitea-nek &lt;strong&gt;kelleni fog egy adatbázis.&lt;/strong&gt; Tud SQLite-ot is használni (1 db adatfájlt jelent), de ha pl. MySQL-be vagy Postgres-be szeretnéd tárolni az adatokat, akkor érdemes előbb előkészíteni azt, mielőtt a &lt;code class=&quot;highlighter-rouge&quot;&gt;gitea&lt;/code&gt; binárist elindítod. Én a teszthez maradtam az SQLite-nál.&lt;/p&gt;
-
-&lt;h2 id=&quot;kezdeti-beállítások&quot;&gt;Kezdeti beállítások&lt;/h2&gt;
-
-&lt;p&gt;Ha a fenti paranccsal elindítjuk a Gitea-t, elindul a szerver és a &lt;strong&gt;böngészőnkben&lt;/strong&gt; a &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:3000/&lt;/code&gt; URL-en elérjük a főoldalt. Ha bármelyik linkre rákattintunk, a telepítő képernyő fog bejönni, ahol &lt;strong&gt;néhány kezdeti beállítást&lt;/strong&gt; megadhatunk, pl:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;app neve (címsorban megjelenő szöveg)&lt;/li&gt;
-  &lt;li&gt;adatbázis kapcsolódási adatok&lt;/li&gt;
-  &lt;li&gt;útvonalak&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;A fentiek ellenőrzésén/módosításán kívül amit fontosnak tartok, az a mentés gomb feletti egyik lenyitható szekcióban megbúvó &lt;strong&gt;admin account beállítás.&lt;/strong&gt; Érdemes itt megadni az adminisztrátor felhasználó adatait, pláne, ha letiltod a regisztrációt. Egyébként az első regisztrált júzer lesz az adminisztrátor.&lt;/p&gt;
-
-&lt;p&gt;Amikor ezt az űrlapot leokézzuk, a Gitea 1-2 percig (legalábbis Pi-n) elmolyol a mappák, konfigfájlok és adatbázistáblák létrehozásával, utána bejön a login képernyő és kezdhetünk vele játszani.&lt;/p&gt;
-
-&lt;p&gt;A megadott beállítások és még &lt;strong&gt;rengeteg paraméter&lt;/strong&gt; később is módosítható a konfigfájlban (&lt;code class=&quot;highlighter-rouge&quot;&gt;custom/conf/app.ini&lt;/code&gt;). Mielőtt komolyabban elkezdenénk használni a Gitea-t, érdemes &lt;strong&gt;végigolvasni&lt;/strong&gt; az &lt;a href=&quot;https://docs.gitea.io/en-us/config-cheat-sheet/&quot;&gt;összes beállítási lehetőséget&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h2 id=&quot;tapasztalatok-gyors-kipróbálás&quot;&gt;Tapasztalatok (gyors kipróbálás)&lt;/h2&gt;
-
-&lt;p&gt;A HTTP clone/push gyönyörűen működik a webes felület user+pass kombójával. Az SSH módszernél a clone URL generálás nem az igazi, a Git repók mappáját lehagyja az URL-ből, viszont a &lt;strong&gt;saját beépített SSH szerverével&lt;/strong&gt; frankón megy ez is. A webes felületen a profil beállításainál fel lehet tölteni SSH/RSA publikus kulcsot.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Meglévő repók importálása&lt;/strong&gt; is pofon egyszerű, ez nekem nagyon fontos volt. Persze órákig kísérleteztem vele, mire rájöttem a nyitjára - erről &lt;a href=&quot;/blog/2018/lokalis-repok-importalasa-gitea-be&quot;&gt;külön posztban&lt;/a&gt; írok.&lt;/p&gt;
-
-&lt;p&gt;A webes felületet és funkciókat tekintve &lt;strong&gt;gyakorlatilag egy GitHub klónt&lt;/strong&gt; kapunk. (Issues, PR, issue/pr templates, organizations, teams, etc.)&lt;/p&gt;
-
-&lt;h2 id=&quot;konfig&quot;&gt;Konfig&lt;/h2&gt;
-
-&lt;p&gt;Én az alábbiakat adtam hozzá kézzel a telepítő által kiköpött konfig fájlhoz. Ez nyilván nem lesz mindenkinek megfelelő, ízelítőként, illetve saját feljegyzésként (note to self) teszem ide.&lt;/p&gt;
-
-&lt;div class=&quot;language-ini highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nn&quot;&gt;[repository]&lt;/span&gt;
-&lt;span class=&quot;py&quot;&gt;DEFAULT_PRIVATE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;true&lt;/span&gt;
-&lt;span class=&quot;py&quot;&gt;FORCE_PRIVATE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;true&lt;/span&gt;
-
-&lt;span class=&quot;nn&quot;&gt;[security]&lt;/span&gt;
-&lt;span class=&quot;py&quot;&gt;DISABLE_GIT_HOOKS&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;true&lt;/span&gt;
-&lt;span class=&quot;py&quot;&gt;IMPORT_LOCAL_PATHS&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;true&lt;/span&gt;
-
-&lt;span class=&quot;nn&quot;&gt;[server]&lt;/span&gt;
-&lt;span class=&quot;py&quot;&gt;DISABLE_ROUTER_LOG&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;true&lt;/span&gt;
-&lt;span class=&quot;py&quot;&gt;START_SSH_SERVER&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;true&lt;/span&gt;
-&lt;span class=&quot;py&quot;&gt;SSH_PORT&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;2222&lt;/span&gt;
-
-&lt;span class=&quot;nn&quot;&gt;[service]&lt;/span&gt;
-&lt;span class=&quot;py&quot;&gt;DISABLE_REGISTRATION&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;true&lt;/span&gt;
-&lt;span class=&quot;py&quot;&gt;REQUIRE_SIGNIN_VIEW&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;true&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;telepítés-service-ként-systemd&quot;&gt;Telepítés service-ként (systemd)&lt;/h2&gt;
-
-&lt;p&gt;Miután megbizonyosodtam róla, hogy jó lesz ez a cucc, beállítottam service-ként, hogy induljon a géppel automatikusan. Létrehoztam egy &lt;code class=&quot;highlighter-rouge&quot;&gt;gitea.service&lt;/code&gt; fájlt az alábbi tartalommal:&lt;/p&gt;
-
-&lt;div class=&quot;language-ini highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nn&quot;&gt;[Unit]&lt;/span&gt;
-&lt;span class=&quot;py&quot;&gt;Description&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Gitea&lt;/span&gt;
-&lt;span class=&quot;py&quot;&gt;After&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;network.target&lt;/span&gt;
-
-&lt;span class=&quot;nn&quot;&gt;[Service]&lt;/span&gt;
-&lt;span class=&quot;py&quot;&gt;Type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;simple&lt;/span&gt;
-&lt;span class=&quot;py&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;gitea&lt;/span&gt;
-&lt;span class=&quot;py&quot;&gt;Group&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;gitea&lt;/span&gt;
-&lt;span class=&quot;py&quot;&gt;WorkingDirectory&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;/home/gitea&lt;/span&gt;
-&lt;span class=&quot;py&quot;&gt;ExecStart&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;/home/gitea/gitea web --port 3000&lt;/span&gt;
-&lt;span class=&quot;py&quot;&gt;Restart&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;always&lt;/span&gt;
-
-&lt;span class=&quot;nn&quot;&gt;[Install]&lt;/span&gt;
-&lt;span class=&quot;py&quot;&gt;WantedBy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;multi-user.target&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Majd az alábbi parancsokkal telepítettem és elindítottam:&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;systemctl &lt;span class=&quot;nb&quot;&gt;enable&lt;/span&gt; /home/gitea/gitea.service
-service gitea start
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Zsolt Jurányi</name></author><category term="config" /><category term="git" /><category term="gitea" /><category term="raspberry-pi" /><category term="server" /><category term="setup" /><category term="web-ui" /><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /></entry></feed>
+&lt;p&gt;Viszont a push előtt a fentebb írtak miatt &lt;strong&gt;előbb létre kell hozni a repót&lt;/strong&gt; a Gitea webes felületén.&lt;/p&gt;</content><author><name>Zsolt Jurányi</name></author><category term="config" /><category term="git" /><category term="gitea" /><category term="import" /><category term="migrate" /><category term="server" /><category term="web-ui" /><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://juzraai.github.io/assets/facebook-og-image.png" /><media:content medium="image" url="https://juzraai.github.io/assets/facebook-og-image.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
