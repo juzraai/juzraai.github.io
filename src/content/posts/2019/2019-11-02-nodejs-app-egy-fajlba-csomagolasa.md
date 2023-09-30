@@ -1,9 +1,10 @@
 ---
+date: 2019-11-02
 description: Júzer szempontból nem feltétlenül kényelmes Node.js-t és dependency-ket telepítgetni, meg parancssort nyitni a Díjnet Bot használata előtt. Erre próbáltam megoldást keresni. Többé-kevésbé sikerült is.
 image:
-  path: /assets/dijnet-bot/dijnet-bot-exe-vt1.png
-  height: 908
-  width: 1001
+    path: /assets/dijnet-bot/dijnet-bot-exe-vt1.png
+    height: 908
+    width: 1001
 lang: hu_HU
 lightbox: true
 tags: bitdefender bundle browserify minify nodejs
@@ -16,28 +17,24 @@ Az utóbbi hetekben elővettem a [Díjnet Bot](https://github.com/juzraai/dijnet
 
 A fentiek alapján 2 célt fogalmaztam meg: a program **legyen használható**
 
-1. **Node.js telepítés és `npm i -g`  futtatása nélkül,**
+1. **Node.js telepítés és `npm i -g` futtatása nélkül,**
 2. **illetve parancssorba/terminálba pötyögés nélkül.**
-
-
 
 ## Előkészületek
 
-A fentiekből következik, hogy a program **konfigurálhatóságát** is úgy kellett kialakítani, hogy ahhoz se kelljen parancssor.  Szerencsére a **konfigfájl** olvasása, illetve a környezeti változók kezelése a program legelső változatától kezdve adott volt.
+A fentiekből következik, hogy a program **konfigurálhatóságát** is úgy kellett kialakítani, hogy ahhoz se kelljen parancssor. Szerencsére a **konfigfájl** olvasása, illetve a környezeti változók kezelése a program legelső változatától kezdve adott volt.
 
 Azonban ha elképzeljük, hogy duplaklikkre indul a program, és Díjnet bejelentkezési adatok hiányában kiprinteli a help-et, majd kilép, az nem valami felhasználóbarát működés. Ennek orvoslására a v2.0.0-ban bevezettem azt, hogy ha a szükséges adatokat nem kapja meg, akkor a program **prompttal** kéri be azokat a terminálban.
 
 Ennek szebb/elegánsabb formája lenne egy korrekt **GUI**, de az egy külön történet. 🙂
 
-
-
 ## Bináris generálása
 
 Szétnéztem, hogyan tudnám a fenti célokat elérni, és az első út, ami elém került, az a **bináris fájl generálása.** Van is két tool, ami ezt kínálja: a [pkg](https://www.npmjs.com/package/pkg) és a [nexe](https://www.npmjs.com/package/nexe). Mindkettő azt csinálja, hogy **egyetlen futtatható fájlba** csomagolja össze
 
-- a Node.js runtime-ot
-- a programomat
-- és a programom dependency-jeit.
+-   a Node.js runtime-ot
+-   a programomat
+-   és a programom dependency-jeit.
 
 Különféle platformokat és különféle Node.js verziókat lehet választani, és a folyamat végén minden megadott platform+Node kombinációra 1-1 futtatható fájlt köp ki, amik egyenként kb. 20-40 MB-ot nyomnak.
 
@@ -57,8 +54,6 @@ Tippre az a baja, hogy a `pkg` úgy generálja a kimenetet, hogy egy meglévő `
 
 Több helyen olvastam, hogy a program aláírása megoldhatja a gondot. A tanúsítványok, amiket eddig találtam, több száz dolcsiba kerülnek, ami csak a Díjnet Bot miatt nem éri meg. A témába nem ástam bele magam mélyebben, talán később megteszem. 🤨 Itt ezt a szálat feladtam, és egy **B-tervet** valósítottam meg.
 
-
-
 ## B-terv
 
 Találtam egy köztes megoldást, amivel a Node.js telepítést ugyan nem tudom **megspórolni a júzernek,** de az **NPM-ezést** igen, illetve a parancssor használata is kikerülhető.
@@ -73,7 +68,7 @@ Az így kapott `.js` fájl pontosan úgy működik, mint az `index.js`, viszont 
 
 A kimeneti fájl mérete 1.3 MB, ami a 12 MB-os `node_modules` mappával szemben hatalmas előrelépés. Azonban én itt nem álltam meg - hamár csomagolunk, csomagoljunk rendesen! 🤓
 
-A `.js` fájlok tömörítési eljárása a *minification*, melyre a standard tool az [Uglify JS](https://www.npmjs.com/package/uglify-js). Ez viszont elsírja magát egy `const` keyword-től is, vagyis kell még egy Babel fázis elé, ami a JavaScript egy régebbi verziójára fordítja a programom. Utóbbihoz kevéssé értek még és fölösleges bonyolításnak is tartom, szóval más utat kerestem.
+A `.js` fájlok tömörítési eljárása a _minification_, melyre a standard tool az [Uglify JS](https://www.npmjs.com/package/uglify-js). Ez viszont elsírja magát egy `const` keyword-től is, vagyis kell még egy Babel fázis elé, ami a JavaScript egy régebbi verziójára fordítja a programom. Utóbbihoz kevéssé értek még és fölösleges bonyolításnak is tartom, szóval más utat kerestem.
 
 Több más eszköz kipróbálása után rátaláltam a [Terser](https://terser.org/)-re, ami modern JS kódot is tud kezelni. A Browserify után bekötve a **végső fájlméret 707 KB lett.**
 
@@ -83,16 +78,15 @@ const browserify = require('browserify');
 const terser = require('terser');
 
 browserify('./index.js', {
-		/* --node */
-		bare: true,
-		browserField: false
-	})
-	.bundle((error, buffer) => {
-		if (error) throw error;
-		const bundle = buffer.toString(); // 1.3 MB
-		const minified = terser.minify(bundle).code // 0.7 MB
-		fs.writeFileSync('./dijnet-bot.js', minified);
-	});
+	/* --node */
+	bare: true,
+	browserField: false,
+}).bundle((error, buffer) => {
+	if (error) throw error;
+	const bundle = buffer.toString(); // 1.3 MB
+	const minified = terser.minify(bundle).code; // 0.7 MB
+	fs.writeFileSync('./dijnet-bot.js', minified);
+});
 ```
 
 A v2.1.0 verziótól kezdve a Díjnet Bot-hoz generálok egy ilyen bundle-t is.

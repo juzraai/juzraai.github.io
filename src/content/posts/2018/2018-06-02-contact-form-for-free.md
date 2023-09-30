@@ -1,11 +1,13 @@
 ---
 alt:
-  hu_HU: /blog/2018/kontakt-form-ingyen
-description: "[Updated in 2020] I searched for free solutions to process the contact form on my static website. In this post, I compare the services I found."
+    hu_HU: /blog/2018/kontakt-form-ingyen
+date: 2018-06-02
+description: '[Updated in 2020] I searched for free solutions to process the contact form on my static website. In this post, I compare the services I found.'
 lang: en_US
 tags: comparison email form serverless
 title: Contact form for free - looking around
 ---
+
 [next]: {{ 'blog/2018/contact-form-using-basin' | relative_url }}
 
 I updated data included in the post below in July, 2020.
@@ -16,13 +18,11 @@ My blog and developer portfolio is a **static website**, which I host on [GitHub
 
 Because of the site is static, processing of the form and sending data to my email address has to be done **without server-side script.** So I have to find a **third-party service** for this task. And since I've been saving money, I'd like to **keep the costs of this at zero too.**
 
-
-
 ## Possible solutions
 
 I spent a day to search for potential solutions. I looked for services which can process a **custom HTML form** and can send me an email with the form data. I list them alphabetized.
 
-Note: below when I write *AJAX*, it means a function which provides an endpoint that can be called via AJAX and responds with a text message, unlike the usual form sending methods that return with a page or a redirect.
+Note: below when I write _AJAX_, it means a function which provides an endpoint that can be called via AJAX and responds with a text message, unlike the usual form sending methods that return with a page or a redirect.
 
 [99inbound][99inbound] has a **100 email/month** limit, provides **spam filter, and Slack integration.** As a bonus it can build you HTML forms too if you need it. Their privacy policy looks fresh and GDPR-ready.
 
@@ -44,45 +44,42 @@ This spreadsheet + email sending mechanism can also be achieved via a [Google Ap
 
 [SimpleForm][simpleform]'s site is very minimal. Does not mention limits, but it says it has **file upload** and **API** for downloading submission data. Though version number starts with 2018, copyright says 2012 and their blog is updated in 2014.
 
-[Un-Static][unstatic] (formerly: BriskForms) has a  **25 email/form/month** limit, but it provides **redirect, spam filter** and **captcha**.
+[Un-Static][unstatic] (formerly: BriskForms) has a **25 email/form/month** limit, but it provides **redirect, spam filter** and **captcha**.
 
 Let's see them in a nice table:
 
-Service                      | Limit      | Spam     | Redirect | Stores? | Extra
--                            |            |          |          |         |
-[99inbound][99inbound]       |  100/month | filter   | ?        | -       | Slack
-[Basin][basin]               |  100/month | filter   | yes      | yes     | file, captcha, Zapier
-[elFormo][elFormo]           | 1500/month | honeypot | yes      | yes     | -
-[enformed.io][enformed.io]   |  100/month | honeypot | yes      | -       | subject, CC, BCC, AJAX
-[formspree.io][formspree.io] |   50/month | honeypot | yes      | yes     | subject, CC, AJAX, captcha, Zapier
-[G. Apps Script][g-script]   |  100/day   | -        | -        | yes     | subject, AJAX, ...
-[G. Forms][g-forms]          | ~ 50/day   | -        | -        | yes     | -
-[mailthis.to][mailthis.to]   | 1000       | honeypot | yes      | -       | subject, file, AJAX, captcha
-[Pageclip][pageclip]         | 1000/month | -        | -        | yes     | subject, AJAX, API
-[SimpleForm][simpleform]     | -          | -        | -        | yes     | file
-[Un-Static][unstatic]        |   25/month | filter   | yes      | -      | captcha
-{: .table.table-sm.table-responsive-md}
+Service | Limit | Spam | Redirect | Stores? | Extra
 
-
+-                              |            |          |          |         |
+    [99inbound][99inbound] | 100/month | filter | ? | - | Slack
+    [Basin][basin] | 100/month | filter | yes | yes | file, captcha, Zapier
+    [elFormo][elFormo] | 1500/month | honeypot | yes | yes | -
+    [enformed.io][enformed.io] | 100/month | honeypot | yes | - | subject, CC, BCC, AJAX
+    [formspree.io][formspree.io] | 50/month | honeypot | yes | yes | subject, CC, AJAX, captcha, Zapier
+    [G. Apps Script][g-script] | 100/day | - | - | yes | subject, AJAX, ...
+    [G. Forms][g-forms] | ~ 50/day | - | - | yes | -
+    [mailthis.to][mailthis.to] | 1000 | honeypot | yes | - | subject, file, AJAX, captcha
+    [Pageclip][pageclip] | 1000/month | - | - | yes | subject, AJAX, API
+    [SimpleForm][simpleform] | - | - | - | yes | file
+    [Un-Static][unstatic] | 25/month | filter | yes | - | captcha
+    {: .table.table-sm.table-responsive-md}
 
 ## Summary
 
 I narrow down the above list in the following way:
 
-* The 2 approach using Google services seems a bit hacky and not elegant, especially if we look at the other competitors.
-* [formspree.io][formspree.io]... couldn't hide my email address, at the time of writing this post, now it can.
-* [enformed.io][enformed.io] has more than one issue.
-* [mailthis.to][mailthis.to] seems nice, but the one-time 1000 email limit is worse than the rest where at least the quota is renewed every month.
-* [SimpleForm][simpleform] is not so informative and it seems to be old.
-* [elFormo][elFormo] seems nice too, but there are better choices in the list.
-* [Pageclip][pageclip] is the only one left which doesn't provide spam filter.
-* 🥉 [Un-Static][unstatic] stops at the 3rd place, because... it replaces BriskForms which was the 3rd at the time of writing this post.
-* 🥈 [99inbound][99inbound] gets the silver, because
-* 🥇 [Basin][basin] seems more professional and flexible. (+ At the time of writing this post, it provided unlimited submissions in the free plan.)
+-   The 2 approach using Google services seems a bit hacky and not elegant, especially if we look at the other competitors.
+-   [formspree.io][formspree.io]... couldn't hide my email address, at the time of writing this post, now it can.
+-   [enformed.io][enformed.io] has more than one issue.
+-   [mailthis.to][mailthis.to] seems nice, but the one-time 1000 email limit is worse than the rest where at least the quota is renewed every month.
+-   [SimpleForm][simpleform] is not so informative and it seems to be old.
+-   [elFormo][elFormo] seems nice too, but there are better choices in the list.
+-   [Pageclip][pageclip] is the only one left which doesn't provide spam filter.
+-   🥉 [Un-Static][unstatic] stops at the 3rd place, because... it replaces BriskForms which was the 3rd at the time of writing this post.
+-   🥈 [99inbound][99inbound] gets the silver, because
+-   🥇 [Basin][basin] seems more professional and flexible. (+ At the time of writing this post, it provided unlimited submissions in the free plan.)
 
 I found out all of the above **without trying out** the services. In my [next post][next] I share my experiences with [Basin][basin] which seems to deserve my gold medal. 🤓
-
-
 
 [99inbound]: https://www.99inbound.com/
 [basin]: https://usebasin.com/

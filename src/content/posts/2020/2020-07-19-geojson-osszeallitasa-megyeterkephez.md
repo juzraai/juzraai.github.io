@@ -1,4 +1,5 @@
 ---
+date: 2020-07-19
 description: Interaktív megyetérképet érdemes lehet Leaflet-tel készíteni, ehhez viszont kellenek a megyék GeoJSON adatai, összefűzve. Ezt a feladatot automatizáltam egy Node.js szkripttel.
 lang: hu_HU
 tags: automation choropleth geojson leaflet map nodejs script
@@ -30,66 +31,71 @@ A fentieket természetesen nem bonyolult automatizálni. Íme egy Node.js szkrip
 ```js
 // npm i cheerio got
 
-const fs = require('fs')
-const cheerio = require('cheerio')
-const got = require('got')
+const fs = require('fs');
+const cheerio = require('cheerio');
+const got = require('got');
 
 async function getCountyOsmIds() {
-	const res = await got('https://wiki.openstreetmap.org/wiki/Hungary/Boundaries')
-	const $ = cheerio.load(res.body)
-	return $('h2:contains("Megyék") + table tr').toArray().map(tr => {
-		return $('td a', tr).toArray().map(a => $(a).text())[2]
-	}).filter(id => id)
+	const res = await got('https://wiki.openstreetmap.org/wiki/Hungary/Boundaries');
+	const $ = cheerio.load(res.body);
+	return $('h2:contains("Megyék") + table tr')
+		.toArray()
+		.map((tr) => {
+			return $('td a', tr)
+				.toArray()
+				.map((a) => $(a).text())[2];
+		})
+		.filter((id) => id);
 }
 
 async function downloadGeoJson(osmId) {
-	const geoJsonUrlTemplate = 'http://polygons.openstreetmap.fr/get_geojson.py?id=X&params=0'
-	const res = await got(geoJsonUrlTemplate.replace('X', osmId))
-	return res.body
+	const geoJsonUrlTemplate = 'http://polygons.openstreetmap.fr/get_geojson.py?id=X&params=0';
+	const res = await got(geoJsonUrlTemplate.replace('X', osmId));
+	return res.body;
 }
 
 async function getGeoJson(id) {
-	const file = `${id}.json`
-	if (fs.existsSync(file)) return fs.readFileSync(file)
-	const json = await downloadGeoJson(id)
-	fs.writeFileSync(file, json)
-	return json
+	const file = `${id}.json`;
+	if (fs.existsSync(file)) return fs.readFileSync(file);
+	const json = await downloadGeoJson(id);
+	fs.writeFileSync(file, json);
+	return json;
 }
 
 function fixGeometryCollection(geometry) {
 	if (geometry.type === 'GeometryCollection' && geometry.geometries.length === 1) {
-		return geometry.geometries[0]
+		return geometry.geometries[0];
 	}
-	return geometry
+	return geometry;
 }
 
 function feature(geometry, id) {
 	return {
 		type: 'Feature',
 		properties: { id }, // will be useful :)
-		geometry: fixGeometryCollection(geometry)
-	}
+		geometry: fixGeometryCollection(geometry),
+	};
 }
 
 async function getFeature(id) {
-	const geometryJson = await getGeoJson(id)
-	const geometry = JSON.parse(geometryJson)
-	return feature(geometry, id)
+	const geometryJson = await getGeoJson(id);
+	const geometry = JSON.parse(geometryJson);
+	return feature(geometry, id);
 }
 
 function featureCollection(features) {
-	return { type: 'FeatureCollection', features }
+	return { type: 'FeatureCollection', features };
 }
 
 async function generateFeatureCollection(ids, file) {
-	const features = await Promise.all(ids.map(getFeature))
-	fs.writeFileSync(file, JSON.stringify(featureCollection(features)))
+	const features = await Promise.all(ids.map(getFeature));
+	fs.writeFileSync(file, JSON.stringify(featureCollection(features)));
 }
 
 (async () => {
-	const ids = await getCountyOsmIds()
-	await generateFeatureCollection(ids, 'counties.json')
-})()
+	const ids = await getCountyOsmIds();
+	await generateFeatureCollection(ids, 'counties.json');
+})();
 ```
 
 A fenti szkripttel kapott GeoJSON egy-az-egyben hozzáadható a Leaflet térképhez, ahogy a fentebb linkelt Choropleth tutorial-ban le van írva. Ott a megyei adatokat is beleapplikálták a GeoJSON fájlba, én inkább csak a megyéhez tartozó OSM relation ID-t tettem bele, így bármilyen projekthez jó lesz az összeállított `FeatureCollection`. Kliensoldalon nem lesz kunszt összekötni a `feature.properties.id`-t az épp aktuális adatokkal és a megyék nevével.

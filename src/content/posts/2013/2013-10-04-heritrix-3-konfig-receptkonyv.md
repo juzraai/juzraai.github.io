@@ -1,4 +1,5 @@
 ---
+date: 2013-10-04
 description: Néhány konfigurációs lépés és tapasztalat, különböző szituációkhoz Heritrix 3-mal történő weboldal archiváláshoz.
 lang: hu_HU
 tags: automation config crawling heritrix
@@ -31,8 +32,6 @@ A legfontosabb dolog egy job-nál a forrás URL-ek hozzáadása, vagyis: honnan 
 
 Itt az URL-eket soronként írhatjuk be.
 
-
-
 ### 1.2. Operátor kontakt címe
 
 A Heritrix **megköveteli, hogy beírjunk egy URL-t,** ami a letöltést végző egyén/szervezet honlapjára mutat. Ez az URL hozzá lesz adva a `User-agent` paraméterhez. (Lesz még szó róla a 2.6.-os bekezdésben.) Nyilván ez a felelősség miatt kell, hogy ha leterheljük valakinek a szerverét egy izmos crawl futammal, és az nemtetszést vált ki, akkor vissza lehessen keresni minket.
@@ -42,8 +41,6 @@ Keressünk rá az alábbira, hogy megtaláljuk, hova kell írni ezt a címet:
 ```
 metadata.operatorContactUrl=
 ```
-
-
 
 ## 2. Testreszabás
 
@@ -59,11 +56,9 @@ Ehhez a `warcWriter` bean class paraméterét kell megfelelően beállítanunk:
 
 Lehetőségek (a package ugyanaz):
 
-* `WARCWriterProcessor`
-* `ARCWriterProcessor`
-* `MirrorWriterProcessor` - ez tükrözi a mappaszerkezetet
-
-
+-   `WARCWriterProcessor`
+-   `ARCWriterProcessor`
+-   `MirrorWriterProcessor` - ez tükrözi a mappaszerkezetet
 
 ### 2.2. Domain-en belül maradás
 
@@ -78,8 +73,6 @@ Ezt egy Heritrix 3 job esetén úgy tehetjük meg, hogy az alábbi bean-t konkr�
   </bean>
 -->
 ```
-
-
 
 ### 2.3. Bizonyos URL minták tiltása
 
@@ -109,8 +102,6 @@ Ezeket **reguláris kifejezések** formájában mondhatjuk meg a Heritrix-nek, h
   </property>
 </bean>
 ```
-
-
 
 ### 2.4. Gyorsítás
 
@@ -142,8 +133,6 @@ Illetve:
 
 Az egyes property-k értékeinek magyarázatához lásd a [doksit][docs].
 
-
-
 ### 2.5. robots.txt figyelmen kívül hagyása
 
 A [robots.txt][robots-txt]-ben a webszerverek bizonyos robotokat, böngészőket (vagy akár mindenféle programot) tilthatnak el bizonyos mappáktól, illetve crawl delay-t is megszabhatnak. Persze ezek **csak információk, ajánlások a programoknak,** az már egy másik kérdés, hogy be is akarják-e ezt tartani. A Heritrix persze alapvetően illedelmes robot, betartja, amit e szabályzatban megszabnak neki, de szerencsére tartalmaz konfigurálási lehetőséget a `robots.txt` ignorálására.
@@ -155,8 +144,6 @@ A [robots.txt][robots-txt]-ben a webszerverek bizonyos robotokat, böngészőket
   ...
 </bean>
 ```
-
-
 
 ### 2.6. Saját User-agent megadása
 
@@ -172,8 +159,6 @@ Heritrix-ben is beállítható ez természetesen, viszont annyi megkötés van, 
 </bean>
 ```
 
-
-
 ### 2.7. Auto pause kikapcsolása
 
 A Heritrix-nek van egy olyan érdekessége, hogy alapértelmezésben ha egy job-ot elindítasz, rögtön lepauzálja. Külön rá kell menned az unpause gombra, hogy ténylegesen meginduljon a letöltés. (Érdekes dolog, én még nem jöttem rá mire jó ez... ha elindítok egy job-ot, akkor azért indítom el, hogy töltsön, nem? 😃) De ezt is ki lehet kapcsolni, itt:
@@ -183,8 +168,6 @@ A Heritrix-nek van egy olyan érdekessége, hogy alapértelmezésben ha egy job-
   <property name="pauseAtStart" value="false" />
 </bean>
 ```
-
-
 
 ## 3. Megfigyelések
 
@@ -201,15 +184,13 @@ $HERITRIX_HOME/bin/heritrix -a admin:admin
 
 Amit még érdemes megtenni: az épp nem futó **job-okat teardown-olni**, ha sok van.
 
-
-
 ### 3.2. URL problémák
 
 A `MirrorWriter`-rel az a tapasztalat, hogy érdekes dolgokat produkál. **Bizonyos URL-ekből én azt látom, hogy nem képes (valid) fájlnevet generálni,** tehát az a letöltött bájthalmaz elveszik az éterben. Konkrétan én ezt `/?a=b/c` alakú relatív linkeknél tapasztaltam.
 
 Ami nagy probléma, hogy a parszere elég érdekes felfogás mentén lett implementálva. A Heritrix **mindenhonnan ki akar parszolni URL-t,** onnan is, ahol nincs. Kutat a CSS-ekben, JS-ben, és gazdagon kapok olyan fájlokat, amelyek neve egy stíluslapon használt szelektor, vagy egy szkriptben használt feltétel egyik fele. 😃
 
-A forráskódban azt láttam, hogy ilyen *"likely-URL"*-eket keres, tehát ami *"olyasmi, mint egy URL"*... Találkoztam olyan mappanévvel is, ami egy komplett `<iframe>` tag volt.
+A forráskódban azt láttam, hogy ilyen _"likely-URL"_-eket keres, tehát ami _"olyasmi, mint egy URL"_... Találkoztam olyan mappanévvel is, ami egy komplett `<iframe>` tag volt.
 
 Itt nyilván felmerül az emberben, hogy esetleg nem ez a "smart crawler" a hibás, hanem az adott oldal forráskódja... de egyrészt ezt nem egy oldalnál csinálja, másrészt pedig ezeket az adott oldalakat a [WGET][wget] hibamentesen leszedte.
 
@@ -222,8 +203,6 @@ http://***/calendar/month/2013-06/field/theme/sites/all/modules/ctools/css/sites
 ```
 
 ...amiben én egy ciklust vélek felfedezni. Természetesen a letöltött fájl sem egy stíluslap lett, hanem egy HTML, valószínűleg a Drupal rendszer olyan jószívű, hogy 404 hibalap helyett visszadobja a leghosszabb valid prefix-hez tartozó lapot. Bár talán pont azzal jártunk volna jobban, ha hibát ad vissza, mert akkor nem keletkezik redundáns adat... no mindegy. 🙂
-
-
 
 [arc]: https://en.wikipedia.org/wiki/ARC_(file_format)
 [docs]: https://webarchive.jira.com/wiki/spaces/Heritrix/pages/5407381/Heritrix+3.0+and+3.1+User+Guide

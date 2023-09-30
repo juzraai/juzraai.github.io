@@ -1,9 +1,10 @@
 ---
+date: 2018-12-14
 description: A Díjnet csak bizonyos ideig őrzi meg a számlákat, a kézi lementés pedig fárasztó dolog. Szerencsére a feladat könnyen automatizálható, írtam rá egy szkriptet Node.js-ben. :)
 image:
-  path: /assets/dijnet-bot/dijnet-bot-run.png
-  height: 925
-  width: 925
+    path: /assets/dijnet-bot/dijnet-bot-run.png
+    height: 925
+    width: 925
 lang: hu_HU
 lightbox: true
 tags: automation backup bot crawler díjnet invoice nodejs project script
@@ -16,16 +17,14 @@ A közüzemi számlák befizetésének egyik legkényelmesebb módja a [Díjnet]
 
 **Az ingyenes szolgáltatás keretében a Díjnet az utolsó 18 hónap számláit tárolja.** Ha a fájlokat később is el akarjuk érni, akkor két választásunk van:
 
-* vagy lementjük a számlákat kézzel
-* vagy fizetünk a [SzámlaPlusz](https://www.dijnet.hu/ekonto/docs/hu/szamlaplusz_tajekoztato.pdf) nevű szolgáltatásért (évi ~1000 Ft)
+-   vagy lementjük a számlákat kézzel
+-   vagy fizetünk a [SzámlaPlusz](https://www.dijnet.hu/ekonto/docs/hu/szamlaplusz_tajekoztato.pdf) nevű szolgáltatásért (évi ~1000 Ft)
 
 A fizetős csomag - valljuk be - egyáltalán nem drága, az alább írtak ellenére én is előfizettem rá.
 
 Van viszont úgy, hogy szeretnénk ezeket a fájlokat (mégis) a saját gépünkön tudni, hogy kéznél legyenek. Itt jönne az, hogy **kézzel lementjük őket** - viszont sok számlát eléggé időigényes és fárasztó lenne letöltögetni egyesével, érdemes a **feladatot automatizálni.**
 
 Mielőtt belefogtam a projektbe, azért körbenéztem, és nem meglepő módon nem nekem jutott eszembe először egy Díjnet számla letöltő szkript megírása. GitHub-on 2-3 repót találtam, ezek közül a [wolandmaster/dijnet-dump](https://github.com/wolandmaster/dijnet-dump) megvalósítás ahogy látom, viszonylag frissen is van tartva. Én ezt nem próbáltam ki, mert kihívást éreztem abban, hogy magam is összerakjak egy ilyen programot nulláról, elsősorban saját célra, saját igények szerint.
-
-
 
 ## Megoldásom
 
@@ -41,8 +40,6 @@ Nálam gyönyörűen működik, legalábbis UPC, FVM és FCSM számlákkal nincs
 
 [![Díjnet bot futás]({{ '/assets/dijnet-bot/dijnet-bot-run.png' | relative_url }})]({{ '/assets/dijnet-bot/dijnet-bot-run.png' | relative_url }})
 
-
-
 ## Nehézségek
 
 Fura volt, hogy a Díjneten meg kell nyitni a számla kereső űrlapot, mielőtt elküldeném az adatait, illetve a számla listához is vissza kell térni minden számla után, hogy a következőre rámehessek. Így sajnos jóval több request-be kerül az egész procedúra, mint egy átlagos weboldal esetében.
@@ -50,8 +47,6 @@ Fura volt, hogy a Díjneten meg kell nyitni a számla kereső űrlapot, mielőtt
 Figyelni kellett a HTTP header-ökre is, bizonyos URL-ekre kontent nélküli lapot dob a szerver, ha hiányzik az `Accept` és `Accept-Language`.
 
 A karakterkódolás is elég fura, amit használnak. Na ennek a nyitjára még nem jöttem rá, próbáltam jobbra-balra konvertálni, de csak nem kaptam szép ő/ű betűket. Egyelőre úgy hidaltam át, hogy az ékezeteket leveszem (á &raquo; a), az ismeretlen karaktereket meg kidobálom.
-
-
 
 ## Tervek
 

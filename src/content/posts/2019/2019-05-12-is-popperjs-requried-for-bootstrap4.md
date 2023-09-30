@@ -1,6 +1,7 @@
 ---
 alt:
-  hu_HU: /blog/2019/tenyleg-kell-popperjs-bootstrap4-hez/
+    hu_HU: /blog/2019/tenyleg-kell-popperjs-bootstrap4-hez/
+date: 2019-05-12
 description: Several months ago I answered a topic on StackOverflow to find out which parts of Bootstrap 4 requires Popper.js and whether importing Popper.js is necessary.
 lang: en_US
 tags: bootstrap optimization popperjs stackoverflow
@@ -12,8 +13,6 @@ Several months ago I saw this [question on StackOverflow][q]:
 > I wanted to ask if Popper.js is absolutely necessary or not if I don't use dropdown menus. Are there any other parts of Bootstrap 4 driven by Popper.js that would not work without the library?
 
 I made a little research and posted [my answer][a]. I'm revisiting this now because from time to time I get upvotes and currently this is my highest voted answer. (I know, 15 upvotes is ridiculous if we compare it to posts of [Stack Overflow ninjas][n], but I'm happy with it now. 🤓) This blog post is here to spread the knowledge by mirroring my answer, and also to add some minor thoughts to it.
-
-
 
 ## Which parts of Bootstrap 4 uses Popper.js?
 
@@ -31,13 +30,11 @@ If we search for `popper` in [Bootstrap 4's documentation][d], the following res
 
 **So these are the Bootstrap 4 components that need Popper.js:**
 
-* dropdowns
-* popovers
-* tooltips
+-   dropdowns
+-   popovers
+-   tooltips
 
 (According to my answer on StackOverflow, Bootstrap 4 Beta needed Popper.js for modals as well, which is not true for the current 4.3.1 version.)
-
-
 
 ## Do I need Popper.js if I don't use these components?
 
@@ -56,15 +53,11 @@ Uncaught Error: Bootstrap dropdown require Popper.js (https://popper.js.org)
 
 However, **Bootstrap 4 can be used without Popper.js, if we don't use tooltips, popovers nor dropdowns.** For example, navbar's JS functionality (mobile menu on the right) [works well without Popper.js][a].
 
-
-
 ## ...but there's a bundle!
 
 More answers on the same topic mentions that there's a bundle version of Bootstrap 4 JS, which **includes Popper.js,** therefore there's no need to bother including Popper.js by hand.
 
 In my opinion, or at least for me, the whole point of not importing Popper.js is to reduce loading time of a webpage by **importing only what is required.** In this case, the bundle doesn't help.
-
-
 
 [a]: https://stackoverflow.com/a/46155285/2418224
 [d]: https://getbootstrap.com/docs/4.3/getting-started/introduction/

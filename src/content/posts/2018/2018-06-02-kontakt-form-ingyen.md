@@ -1,11 +1,13 @@
 ---
 alt:
-  en_US: /blog/2018/contact-form-for-free
-description: "[Frissítve: 2020] A statikus honlapomra keresgéltem ingyenes kontakt form megoldásokat. Ebben a posztban összehasonlítom a szolgáltatásokat, amiket találtam."
+    en_US: /blog/2018/contact-form-for-free
+date: 2018-06-02
+description: '[Frissítve: 2020] A statikus honlapomra keresgéltem ingyenes kontakt form megoldásokat. Ebben a posztban összehasonlítom a szolgáltatásokat, amiket találtam.'
 lang: hu_HU
 tags: comparison email form serverless
 title: Kontakt form ingyen - körbenézés
 ---
+
 [next]: {{ 'blog/2018/kontakt-form-basin-nel' | relative_url }}
 
 A bejegyzésben szereplő adatokat 2020. júliusában frissítettem.
@@ -16,13 +18,11 @@ A blogom és egyben fejlesztői bemutatkozó oldalam egy **statikus honlap,** am
 
 Mivel azonban a honlap statikus, **szerveroldali szkript nélkül** kell megoldani a form feldolgozását, és a kapott adatok kiküldését az email címemre. Muszáj tehát erre a feladatra egy **külső szolgáltatást** keresni. És persze, ha már eddig is spóroltam, akkor itt is tartsuk a **költségeket zérón.**
 
-
-
 ## Lehetőségek
 
 Egy napot töltöttem azzal, hogy körbenézzek, mik a lehetőségek. Csak olyan szolgáltatásokat kerestem, amelyek általam kreált **saját HTML form** adatait is tudják fogadni és email-ben kiküldeni. Ábécé sorrendben listázom, amiket találtam.
 
-Megjegyzés: *"AJAX"* alatt a továbbiakban azt a funkciót értem, hogy az endpoint AJAX-al hívható és szöveges választ ad, szemben a hagyományos form küldéssel, ami jellemzően egy teljes lapot ad vissza, vagy átirányít.
+Megjegyzés: _"AJAX"_ alatt a továbbiakban azt a funkciót értem, hogy az endpoint AJAX-al hívható és szöveges választ ad, szemben a hagyományos form küldéssel, ami jellemzően egy teljes lapot ad vissza, vagy átirányít.
 
 A [99inbound][99inbound] **100 email/hó** limittel rendelkezik, van benne **spam filter, illetve Slack integráció.** Ráadásként form builder is van hozzá, akinek kell. Friss, GDPR-os adatkezelési tájékoztatójuk van.
 
@@ -48,41 +48,38 @@ Az [Un-Static][unstatic] (korábban: BriskForms) szűk **25 email/form/hó**-ná
 
 Lássuk mindezt táblázatban:
 
-Szolgáltatás                 | Limit    | Spam     | Redirect | Tárol? | Extra
--                            |          |          |          |        |
-[99inbound][99inbound]       |  100/hó  | filter   | ?        | -      | Slack
-[Basin][basin]               |  100/hó  | filter   | van      | igen   | fájl, captcha, Zapier
-[elFormo][elFormo]           | 1500/hó  | honeypot | van      | igen   | -
-[enformed.io][enformed.io]   |  100/hó  | honeypot | van      | -      | tárgy, CC, BCC, AJAX
-[formspree.io][formspree.io] |   50/hó  | honeypot | van      | igen   | tárgy, CC, AJAX, captcha, Zapier
-[G. Apps Script][g-script]   |  100/nap | -        | -        | igen   | tárgy, AJAX, ...
-[G. Forms][g-forms]          | ~ 50/nap | -        | -        | igen   | -
-[mailthis.to][mailthis.to]   | 1000     | honeypot | van      | -      | tárgy, fájl, AJAX, captcha
-[Pageclip][pageclip]         | 1000/hó  | -        | -        | igen   | tárgy, AJAX, API
-[SimpleForm][simpleform]     | -        | -        | -        | igen   | fájl
-[Un-Static][unstatic]        |   25/hó  | filter   | van      | -      | captcha
-{: .table.table-sm.table-responsive-md}
+Szolgáltatás | Limit | Spam | Redirect | Tárol? | Extra
 
-
+-                              |          |          |          |        |
+    [99inbound][99inbound] | 100/hó | filter | ? | - | Slack
+    [Basin][basin] | 100/hó | filter | van | igen | fájl, captcha, Zapier
+    [elFormo][elFormo] | 1500/hó | honeypot | van | igen | -
+    [enformed.io][enformed.io] | 100/hó | honeypot | van | - | tárgy, CC, BCC, AJAX
+    [formspree.io][formspree.io] | 50/hó | honeypot | van | igen | tárgy, CC, AJAX, captcha, Zapier
+    [G. Apps Script][g-script] | 100/nap | - | - | igen | tárgy, AJAX, ...
+    [G. Forms][g-forms] | ~ 50/nap | - | - | igen | -
+    [mailthis.to][mailthis.to] | 1000 | honeypot | van | - | tárgy, fájl, AJAX, captcha
+    [Pageclip][pageclip] | 1000/hó | - | - | igen | tárgy, AJAX, API
+    [SimpleForm][simpleform] | - | - | - | igen | fájl
+    [Un-Static][unstatic] | 25/hó | filter | van | - | captcha
+    {: .table.table-sm.table-responsive-md}
 
 ## Összegzés
 
 A fenti listát a következőképp szűkítem:
 
-* A 2 Google megoldást kicsit macerásabb összerakni, illetve nem érzem igazán elegáns megoldásnak erre a feladatra, pláne látva a többi versenyzőt.
-* A [formspree.io][formspree.io]... a poszt megírásakor nem tudta elrejteni az email címemet, de most már tudja.
-* Az [enformed.io][enformed.io] több sebből vérzik.
-* A [mailthis.to][mailthis.to] szimpatikus lenne, de csak egyszeri 1000 emailt ad, ami az összes többinél korlátoltabb.
-* A [SimpleForm][simpleform] nem informatív, puritán és réginek tűnik.
-* Az [elFormo][elFormo] is szimpatikusnak tűnt, de ez is porosodik már, és vannak jobbak a mezőnyben.
-* A [Pageclip][pageclip]-en kívül az összes játékban maradt versenyző biztosít spam filtert.
-* 🥉 A dobogó 3. fokán az [Un-Static][unstatic] áll meg, mert... ez a régi BriskForms, ami a 3. helyre került a poszt írásakor.
-* 🥈 Az ezüstérmet a [99inbound][99inbound]-nak osztom, mert
-* 🥇 a [Basin][basin] egy fokkal profibbnak és flexibilisebbnek tűnik. (+ A poszt írásakor korlátlan form küldést biztosított az ingyenes csomagban is.)
+-   A 2 Google megoldást kicsit macerásabb összerakni, illetve nem érzem igazán elegáns megoldásnak erre a feladatra, pláne látva a többi versenyzőt.
+-   A [formspree.io][formspree.io]... a poszt megírásakor nem tudta elrejteni az email címemet, de most már tudja.
+-   Az [enformed.io][enformed.io] több sebből vérzik.
+-   A [mailthis.to][mailthis.to] szimpatikus lenne, de csak egyszeri 1000 emailt ad, ami az összes többinél korlátoltabb.
+-   A [SimpleForm][simpleform] nem informatív, puritán és réginek tűnik.
+-   Az [elFormo][elFormo] is szimpatikusnak tűnt, de ez is porosodik már, és vannak jobbak a mezőnyben.
+-   A [Pageclip][pageclip]-en kívül az összes játékban maradt versenyző biztosít spam filtert.
+-   🥉 A dobogó 3. fokán az [Un-Static][unstatic] áll meg, mert... ez a régi BriskForms, ami a 3. helyre került a poszt írásakor.
+-   🥈 Az ezüstérmet a [99inbound][99inbound]-nak osztom, mert
+-   🥇 a [Basin][basin] egy fokkal profibbnak és flexibilisebbnek tűnik. (+ A poszt írásakor korlátlan form küldést biztosított az ingyenes csomagban is.)
 
 A fenti dolgokat persze **kipróbálás nélkül** írtam. A [következő posztban][next] leírom a tapasztalataimat a [Basin][basin]-nel, ugyanis az aranyérem jó helyre került. 🤓
-
-
 
 [99inbound]: https://www.99inbound.com/
 [basin]: https://usebasin.com/
