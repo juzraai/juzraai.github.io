@@ -1,13 +1,13 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 
-interface Props {
+type Props = {
 	post: CollectionEntry<'posts'>;
-}
+};
 const { post } = Astro.props;
 ---
 
 <li>
 	<a href={`/blog/${post.slug}`}>{post.data.title}</a>
-	<span>({post.data.date.toLocaleDateString('hu')})</span>
+	<span>({post.data.date.toLocaleDateString(post.data.lang)})</span>
 </li>

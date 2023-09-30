@@ -1,8 +1,15 @@
 ---
 import PostList from '../../components/PostList.astro';
+import SeoTags from '../../components/SeoTags.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout>
-	<PostList lang="hu_HU" />
+<BaseLayout lang="hu">
+	<SeoTags
+		slot="head"
+		alt={{ en: '/blog/en/' }}
+		lang="hu"
+		title="Blog"
+	/>
+	<PostList lang="hu" />
 </BaseLayout>

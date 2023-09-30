@@ -1,9 +1,9 @@
 ---
 alt:
-    hu_HU: /blog/2013/a-pubsearch-rol/
+    hu: /blog/2013/a-pubsearch-rol/
 date: 2013-02-22
 description: This was my thesis at university. It can search in multiple publication databases and crawl citations too. In 2013, it was picked by Softpedia.
-lang: en_US
+lang: en
 lightbox: true
 tags: crawling project pubsearch
 title: About PubSearch

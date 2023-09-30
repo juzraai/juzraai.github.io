@@ -7,5 +7,8 @@ import { defineConfig } from 'astro/config';
 // https://astro.build/config
 export default defineConfig({
 	integrations: [compress({ Logger: 0 }), robots(), sitemap(), tailwind()],
+	redirects: {
+		blog: '/blog/hu/',
+	},
 	site: 'https://juzraai.github.io',
 });

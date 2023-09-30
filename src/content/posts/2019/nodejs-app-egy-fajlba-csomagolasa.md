@@ -1,11 +1,8 @@
 ---
 date: 2019-11-02
 description: Júzer szempontból nem feltétlenül kényelmes Node.js-t és dependency-ket telepítgetni, meg parancssort nyitni a Díjnet Bot használata előtt. Erre próbáltam megoldást keresni. Többé-kevésbé sikerült is.
-image:
-    path: /assets/dijnet-bot/dijnet-bot-exe-vt1.png
-    height: 908
-    width: 1001
-lang: hu_HU
+image: /assets/dijnet-bot/dijnet-bot-exe-vt1.png
+lang: hu
 lightbox: true
 tags: bitdefender bundle browserify minify nodejs
 title: Node.js app egy fájlba csomagolása

@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import SeoTags from '../../components/SeoTags.astro';
 
 export async function getStaticPaths() {
 	const posts = await getCollection('posts');
@@ -14,7 +15,16 @@ const { entry } = Astro.props;
 const { Content } = await entry.render();
 ---
 
-<BaseLayout>
+<BaseLayout lang={entry.data.lang}>
+	<SeoTags
+		slot="head"
+		alt={entry.data.alt}
+		date={entry.data.date}
+		description={entry.data.description}
+		image={entry.data.image}
+		lang={entry.data.lang}
+		title={entry.data.title}
+	/>
 	<h1>{entry.data.title}</h1>
 	<Content />
 </BaseLayout>

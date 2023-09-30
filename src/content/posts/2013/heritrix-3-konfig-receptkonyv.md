@@ -1,7 +1,7 @@
 ---
 date: 2013-10-04
 description: Néhány konfigurációs lépés és tapasztalat, különböző szituációkhoz Heritrix 3-mal történő weboldal archiváláshoz.
-lang: hu_HU
+lang: hu
 tags: automation config crawling heritrix
 title: Heritrix 3 konfig receptkönyv
 ---

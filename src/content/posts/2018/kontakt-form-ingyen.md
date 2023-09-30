@@ -1,9 +1,9 @@
 ---
 alt:
-    en_US: /blog/2018/contact-form-for-free
+    en: /blog/2018/contact-form-for-free
 date: 2018-06-02
 description: '[Frissítve: 2020] A statikus honlapomra keresgéltem ingyenes kontakt form megoldásokat. Ebben a posztban összehasonlítom a szolgáltatásokat, amiket találtam.'
-lang: hu_HU
+lang: hu
 tags: comparison email form serverless
 title: Kontakt form ingyen - körbenézés
 ---
@@ -50,7 +50,7 @@ Lássuk mindezt táblázatban:
 
 Szolgáltatás | Limit | Spam | Redirect | Tárol? | Extra
 
--                              |          |          |          |        |
+-                                  |          |          |          |        |
     [99inbound][99inbound] | 100/hó | filter | ? | - | Slack
     [Basin][basin] | 100/hó | filter | van | igen | fájl, captcha, Zapier
     [elFormo][elFormo] | 1500/hó | honeypot | van | igen | -

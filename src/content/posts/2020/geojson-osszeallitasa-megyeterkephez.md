@@ -1,7 +1,7 @@
 ---
 date: 2020-07-19
 description: Interaktív megyetérképet érdemes lehet Leaflet-tel készíteni, ehhez viszont kellenek a megyék GeoJSON adatai, összefűzve. Ezt a feladatot automatizáltam egy Node.js szkripttel.
-lang: hu_HU
+lang: hu
 tags: automation choropleth geojson leaflet map nodejs script
 title: GeoJSON összeállítása megyetérképhez
 ---

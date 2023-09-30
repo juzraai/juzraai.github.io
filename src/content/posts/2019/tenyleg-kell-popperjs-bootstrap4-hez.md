@@ -1,9 +1,9 @@
 ---
 alt:
-    en_US: /blog/2019/is-popperjs-requried-for-bootstrap4/
+    en: /blog/2019/is-popperjs-requried-for-bootstrap4/
 date: 2019-05-12
 description: Jó pár hónapja válaszoltam StackOverflow-n arra a kérdésre, hogy a Bootstrap 4 mely komponensei használnak Popper.js-t, és utóbbit muszáj-e importálni.
-lang: hu_HU
+lang: hu
 tags: bootstrap popperjs stackoverflow
 title: Tényleg kell Popper.js Bootstrap 4-hez?
 ---

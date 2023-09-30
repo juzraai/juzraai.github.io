@@ -1,7 +1,7 @@
 ---
 date: 2018-11-20
 description: Pár egyszerű művelet, amivel nyomdakésszé varázsolhatjuk vektorgrafikánkat, legyen az névjegykártya vagy cégtábla. A font probléma elkerülése és CMYK-ra konvertálás.
-lang: hu_HU
+lang: hu
 lightbox: true
 tags: cmyk ghostscript inkscape pdf printing vector-graphics
 title: Nyomdakész PDF előállítása

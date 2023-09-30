@@ -1,7 +1,7 @@
 ---
 date: 2018-11-04
 description: Pár órát elmolyoltam, mire megtaláltam a megoldást, hogyan tudok könnyen Gitea-be költözni a repóimmal. A doksi nem valami segítőkész, az apróbetű a kulcs.
-lang: hu_HU
+lang: hu
 tags: config git gitea import migrate server web-ui
 title: Lokális repók importálása Gitea-be
 ---

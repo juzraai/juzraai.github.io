@@ -1,9 +1,9 @@
 ---
 alt:
-    hu_HU: /blog/2017/hogyan-tisztitsuk-meg-az-osszes-maven-projektet
+    hu: /blog/2017/hogyan-tisztitsuk-meg-az-osszes-maven-projektet
 date: 2017-06-16
 description: There are cases when cleaning all Maven projects in a directory is necessary. Here's a Bash one-liner to do it. :)
-lang: en_US
+lang: en
 tags: automation bash cleanup maven script
 title: How to clean all Maven projects
 ---

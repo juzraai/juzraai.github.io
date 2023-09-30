@@ -1,9 +1,9 @@
 ---
 alt:
-    en_US: /blog/2018/contact-form-using-basin
+    en: /blog/2018/contact-form-using-basin
 date: 2018-06-03
 description: A minap írtam arról, milyen ingyenes lehetőségek vannak arra, hogy egy statikus honlapra kontakt formot illesszünk, amely emailt küld. Kipróbáltam a Basin-t, aminek látatlanban aranyérmet osztottam. Lássuk a tapasztalatokat!
-lang: hu_HU
+lang: hu
 lightbox: true
 tags: basin captcha email form serverless
 title: Kontakt form ingyen, Basin-nel

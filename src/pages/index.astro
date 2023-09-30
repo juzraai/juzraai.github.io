@@ -1,7 +1,13 @@
 ---
+import SeoTags from '../components/SeoTags.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout>
+<BaseLayout lang="hu">
+	<SeoTags
+		slot="head"
+		lang="hu"
+		title="Üdv!"
+	/>
 	<h1>Astro</h1>
 </BaseLayout>

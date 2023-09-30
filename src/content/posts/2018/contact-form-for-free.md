@@ -1,9 +1,9 @@
 ---
 alt:
-    hu_HU: /blog/2018/kontakt-form-ingyen
+    hu: /blog/2018/kontakt-form-ingyen
 date: 2018-06-02
 description: '[Updated in 2020] I searched for free solutions to process the contact form on my static website. In this post, I compare the services I found.'
-lang: en_US
+lang: en
 tags: comparison email form serverless
 title: Contact form for free - looking around
 ---
@@ -50,7 +50,7 @@ Let's see them in a nice table:
 
 Service | Limit | Spam | Redirect | Stores? | Extra
 
--                              |            |          |          |         |
+-                                  |            |          |          |         |
     [99inbound][99inbound] | 100/month | filter | ? | - | Slack
     [Basin][basin] | 100/month | filter | yes | yes | file, captcha, Zapier
     [elFormo][elFormo] | 1500/month | honeypot | yes | yes | -

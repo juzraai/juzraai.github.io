@@ -1,9 +1,9 @@
 ---
 alt:
-    hu_HU: /blog/2019/tenyleg-kell-popperjs-bootstrap4-hez/
+    hu: /blog/2019/tenyleg-kell-popperjs-bootstrap4-hez/
 date: 2019-05-12
 description: Several months ago I answered a topic on StackOverflow to find out which parts of Bootstrap 4 requires Popper.js and whether importing Popper.js is necessary.
-lang: en_US
+lang: en
 tags: bootstrap optimization popperjs stackoverflow
 title: Is Popper.js required for Bootstrap 4?
 ---

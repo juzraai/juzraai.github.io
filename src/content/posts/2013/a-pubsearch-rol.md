@@ -1,9 +1,9 @@
 ---
 alt:
-    en_US: /blog/2013/about-pubsearch/
+    en: /blog/2013/about-pubsearch/
 date: 2013-02-12
 description: Ez volt az egyetemi szakdolgozatom. Publikációs adatbázisokban lehet vele keresni, és az idézéseket is leszedi. 2013-ban a Softpedia is felkapta.
-lang: hu_HU
+lang: hu
 lightbox: true
 tags: crawling project pubsearch
 title: A PubSearch-ről

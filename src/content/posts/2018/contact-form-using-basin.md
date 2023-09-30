@@ -1,9 +1,9 @@
 ---
 alt:
-    hu_HU: /blog/2018/kontakt-form-basin-nel
+    hu: /blog/2018/kontakt-form-basin-nel
 date: 2018-06-03
 description: My previous post was about free contact form solutions that can be inserted into static sites and can send email. I tried out Basin which won my gold prize before based on its website only. Here are my experiences.
-lang: en_US
+lang: en
 lightbox: true
 tags: basin captcha email form serverless
 title: Free contact form using Basin

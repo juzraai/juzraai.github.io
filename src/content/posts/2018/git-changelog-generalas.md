@@ -1,7 +1,7 @@
 ---
 date: 2018-12-15
 description: Összetákoltam egy szkriptet, amivel egy puritán changelog-ot tudok generálni. Aztán rájöttem, hogy egyáltalán nem követtem a jó changelog irányelveit.
-lang: hu_HU
+lang: hu
 tags: automation bash changelog commit generator git markdown log script
 title: Git changelog generálás
 ---

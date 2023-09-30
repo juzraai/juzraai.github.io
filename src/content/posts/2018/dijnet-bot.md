@@ -1,11 +1,8 @@
 ---
 date: 2018-12-14
 description: A Díjnet csak bizonyos ideig őrzi meg a számlákat, a kézi lementés pedig fárasztó dolog. Szerencsére a feladat könnyen automatizálható, írtam rá egy szkriptet Node.js-ben. :)
-image:
-    path: /assets/dijnet-bot/dijnet-bot-run.png
-    height: 925
-    width: 925
-lang: hu_HU
+image: /assets/dijnet-bot/dijnet-bot-run.png
+lang: hu
 lightbox: true
 tags: automation backup bot crawler díjnet invoice nodejs project script
 title: Díjnet bot

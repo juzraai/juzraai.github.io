@@ -1,9 +1,9 @@
 ---
 alt:
-    en_US: /blog/2017/how-to-clean-all-maven-projects
+    en: /blog/2017/how-to-clean-all-maven-projects
 date: 2017-06-16
 description: Bizonyos szituációkban szükségessé válik, hogy egy mappán belül az összes Maven projektet megpucoljuk. Itt egy Bash egysoros megoldás rá. :)
-lang: hu_HU
+lang: hu
 tags: automation bash cleanup maven script
 title: Hogyan tisztítsuk meg az összes Maven projektet
 ---
