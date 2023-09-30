@@ -1,0 +1,28 @@
+---
+import { ThemeSwitch } from 'astro-color-scheme';
+import { Icon } from 'astro-icon';
+---
+
+<label
+	class="relative block h-8 w-8 text-black dark:text-white"
+	for="darkmode"
+>
+	<ThemeSwitch
+		defaultTheme="light"
+		strategy="checkbox"
+	>
+		<input
+			class="hidden"
+			id="darkmode"
+			type="checkbox"
+		/>
+		<Icon
+			class="absolute h-full w-full transition-transform dark:scale-0"
+			name="carbon:sun"
+		/>
+		<Icon
+			class="absolute h-full w-full scale-0 transition-transform dark:scale-100"
+			name="carbon:moon"
+		/>
+	</ThemeSwitch>
+</label>

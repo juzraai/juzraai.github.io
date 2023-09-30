@@ -1,10 +1,13 @@
 ---
+import DarkModeToggle from '../components/DarkModeToggle.astro';
 import type { Lang } from '../content/config';
 
 type Props = {
 	lang?: Lang;
 };
 const { lang } = Astro.props;
+
+// TODO google analytics + cookie consent
 ---
 
 <html lang={lang}>
@@ -30,6 +33,7 @@ const { lang } = Astro.props;
 		<slot name="head" />
 	</head>
 	<body>
+		<DarkModeToggle />
 		<slot />
 	</body>
 </html>
