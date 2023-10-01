@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { type CollectionEntry, getCollection } from 'astro:content';
 import BlogButton from '../../components/BlogButton.astro';
 import type { Lang } from '../../content/config';
 import BaseLayout from '../../layouts/BaseLayout.astro';
@@ -12,40 +12,48 @@ export async function getStaticPaths() {
 	}));
 }
 
-const { entry } = Astro.props;
-const { Content } = await entry.render();
-
-const alt: Record<Lang, string> = {
-	en: entry.data.alt?.en || '/blog/en/',
-	hu: entry.data.alt?.hu || '/blog/hu/',
+type Props = {
+	entry: CollectionEntry<'blog'>;
 };
-new Date().toDateString();
+const { entry } = Astro.props;
+
+const { Content } = await entry.render();
+const { alt, date, description, image, lang, title } = entry.data;
+
+const fixedAlt: Record<Lang, string> = {
+	en: alt?.en ?? '/blog/en/',
+	hu: alt?.hu ?? '/blog/hu/',
+};
 
 // TODO single backtick code blocks: hide backticks, add bg
 ---
 
 <BaseLayout
-	alt={alt}
-	date={entry.data.date}
-	description={entry.data.description}
-	image={entry.data.image}
-	lang={entry.data.lang}
-	title={entry.data.title}
+	alt={fixedAlt}
+	date={date}
+	description={description}
+	image={image}
+	lang={lang}
+	title={title}
 >
-	<article
-		class="prose prose-neutral mx-auto py-16 dark:prose-invert lg:prose-lg xl:prose-xl prose-a:text-sky-600 dark:prose-a:text-sky-500"
-	>
-		<p class="inline-flex items-center gap-3 pb-12 text-neutral-500 dark:text-neutral-400">
-			<BlogButton lang={entry.data.lang} />
-			 /
-			<time
-				class="whitespace-nowrap"
-				datetime={entry.data.date.toISOString()}
+	<div class="container mx-auto px-4 lg:px-8">
+		<article
+			class="prose prose-neutral mx-auto py-16 dark:prose-invert lg:prose-lg xl:prose-xl prose-a:text-sky-600 dark:prose-a:text-sky-500"
+		>
+			<p
+				class="inline-flex items-center gap-3 pb-4 text-neutral-500 dark:text-neutral-400 lg:pb-12"
 			>
-				{entry.data.date.toLocaleDateString(entry.data.lang)}
-			</time>
-		</p>
-		<h1>{entry.data.title}</h1>
-		<Content />
-	</article>
+				<BlogButton lang={lang} />
+				 /
+				<time
+					class="whitespace-nowrap"
+					datetime={date.toISOString()}
+				>
+					{date.toLocaleDateString(lang)}
+				</time>
+			</p>
+			<h1>{title}</h1>
+			<Content />
+		</article>
+	</div>
 </BaseLayout>
