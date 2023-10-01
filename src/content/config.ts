@@ -19,6 +19,23 @@ const blog = defineCollection({
 	}),
 });
 
+const portfolio = defineCollection({
+	type: 'data',
+	schema: z.object({
+		description: z.record(langSchema, z.string()),
+		post: z.string().optional(),
+		source: z.string().url().optional(),
+		tags: z.string(),
+		title: z.string(),
+		url: z.string().url().optional(),
+		year: z.number().min(2012),
+	}),
+});
+
+// TODO tags should be an array instead of string (both collections)
+// TODO (?) turn portfolio into content collection, move project posts
+
 export const collections = {
 	blog,
+	portfolio,
 };

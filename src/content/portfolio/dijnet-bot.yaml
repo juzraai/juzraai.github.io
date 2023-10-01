@@ -1,0 +1,8 @@
+title: Díjnet Bot
+description:
+    en: Incrementally downloads bills from Díjnet and organizes them into folders. It can be configured in multiple ways, ideal to be run as a scheduled task, and you can use it even without opening a terminal.
+    hu: Inkrementálisan letölti a Díjnet-en tárolt számlákat, a fájlokat mappákba rendezi. Több módon konfigurálható, ütemezett feladatnak is ideális, de terminálban pötyögés nélkül is használható.
+post: /blog/2018/dijnet-bot/
+source: https://github.com/juzraai/dijnet-bot
+tags: crawler nodejs
+year: 2018

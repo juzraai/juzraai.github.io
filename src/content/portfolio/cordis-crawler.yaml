@@ -1,0 +1,8 @@
+title: Cordis Projects Crawler
+description:
+    en: Grabs EU projects' information from CORDIS and OpenAIRE. Downloads the raw XML files and it can generate TSV or MySQL export. I implemented it using a modular approach, can be extendended in Kotlin/Java.
+    hu: EU-s projektek adatait gyűjti le CORDIS-ról és OpenAIRE-ről. A nyers XML fájlok lementésén túl TSV és MySQL exportot is tud generálni. A programot modulárisan építettem fel, Kotlin/Java nyelven könnyen továbbfejleszthető.
+source: https://github.com/juzraai/cordis-projects-crawler
+tags: crawler kotlin
+url: https://juzraai.github.io/cordis-projects-crawler/
+year: 2013

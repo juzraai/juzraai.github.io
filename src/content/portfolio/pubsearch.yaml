@@ -1,0 +1,9 @@
+title: PubSearch
+description:
+    en: This was my thesis at university. It's a desktop app which helps you search in multiple publication databases (Google Scholar, ACM, Springer, etc.) and crawl citations too. In 2013, Softpedia included it in its public database.
+    hu: Ez volt az egyetemi szakdolgozatom. Ezzel az asztali alkalmazással publikációs adatbázisokban lehet keresni (Google Scholar, ACM, Springer, etc.), és az idézéseket is leszedi. 2013-ban a Softpedia felvette a szoftveradatbázisába.
+post: /blog/2013/about-pubsearch/
+source: https://github.com/juzraai/PubSearch
+tags: crawler java javafx
+url: https://sourceforge.net/projects/pubsearch/
+year: 2013

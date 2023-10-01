@@ -1,0 +1,21 @@
+---
+import { getCollection } from 'astro:content';
+import type { Lang } from '../content/config';
+
+type Props = {
+	lang: Lang;
+};
+const { lang } = Astro.props;
+
+const projects = await getCollection('portfolio');
+---
+
+<ul>
+	{
+		projects.map((p) => (
+			<li>
+				({p.data.year}) {p.data.title} - {p.data.description[lang]}
+			</li>
+		))
+	}
+</ul>
