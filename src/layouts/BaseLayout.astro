@@ -1,9 +1,7 @@
 ---
 import { GoogleFontsOptimizer } from 'astro-google-fonts-optimizer';
 import type { BlogPosting, WebSite, WithContext } from 'schema-dts';
-import BlogButton from '../components/BlogButton.astro';
-import DarkModeToggle from '../components/DarkModeToggle.astro';
-import LangSwitcher from '../components/LangSwitcher.astro';
+import NavBar from '../components/NavBar.astro';
 import { locales, type AltLinks, type Lang } from '../content/config';
 
 const SITE_TITLE = 'Zsolt Jurányi (juzraai)';
@@ -145,12 +143,10 @@ const schema = isPost ? blogPostSchema : websiteSchema;
 		/>
 	</head>
 	<body>
-		<BlogButton lang={lang} />
-		<LangSwitcher
+		<NavBar
 			alt={alt}
-			current={lang}
+			lang={lang}
 		/>
-		<DarkModeToggle />
 		<slot />
 	</body>
 </html>

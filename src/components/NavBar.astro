@@ -1,0 +1,41 @@
+---
+import type { AltLinks, Lang } from '../content/config';
+import CenteredContainer from './CenteredContainer.astro';
+import DarkModeToggle from './DarkModeToggle.astro';
+import LangSwitcher from './LangSwitcher.astro';
+import NavLink from './NavLink.astro';
+
+type Props = {
+	alt: AltLinks;
+	lang: Lang;
+};
+const { alt, lang } = Astro.props;
+---
+
+<CenteredContainer
+	as="nav"
+	class="flex items-center justify-between text-2xl py-3 tracking-tight"
+>
+	<div class="flex gap-8">
+		<div class="font-bold">
+			<a href={lang === 'hu' ? '/' : `/${lang}/`}>Zsolt</a>
+		</div>
+		<div class="flex gap-4">
+			<NavLink
+				lang={lang}
+				path="blog"
+			/>
+			<NavLink
+				lang={lang}
+				path="portfolio"
+			/>
+		</div>
+	</div>
+	<div class="flex items-center gap-4">
+		<LangSwitcher
+			alt={alt}
+			current={lang}
+		/>
+		<DarkModeToggle />
+	</div>
+</CenteredContainer>
