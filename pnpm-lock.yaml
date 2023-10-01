@@ -23,6 +23,9 @@ dependencies:
   astro-compress:
     specifier: ^2.0.15
     version: 2.0.15
+  astro-google-fonts-optimizer:
+    specifier: ^0.2.2
+    version: 0.2.2
   astro-icon:
     specifier: ^0.8.1
     version: 0.8.1
@@ -1327,6 +1330,10 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /astro-google-fonts-optimizer@0.2.2:
+    resolution: {integrity: sha512-YQxp/ExF3NzUomAGuu1VKecO7/ETRnhnE50gqwAqfpbGPZFj4MYa4XxK1ukBg3R63QmKuE5uurOiKmXiLzttuw==}
+    dev: false
 
   /astro-icon@0.8.1:
     resolution: {integrity: sha512-APk+fbFnoyGdIVSPFrdrOW9YBK96/1fYuVe7ULTGW92+z00RKB8GfLJiUvzNVXUAX2rZJCFmruGVF4rrhcTYsg==}
