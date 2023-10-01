@@ -1,7 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogButton from '../../components/BlogButton.astro';
 import type { Lang } from '../../content/config';
+import BaseLayout from '../../layouts/BaseLayout.astro';
 
 export async function getStaticPaths() {
 	const posts = await getCollection('blog');
@@ -18,6 +19,9 @@ const alt: Record<Lang, string> = {
 	en: entry.data.alt?.en || '/blog/en/',
 	hu: entry.data.alt?.hu || '/blog/hu/',
 };
+new Date().toDateString();
+
+// TODO single backtick code blocks: hide backticks, add bg
 ---
 
 <BaseLayout
@@ -28,6 +32,20 @@ const alt: Record<Lang, string> = {
 	lang={entry.data.lang}
 	title={entry.data.title}
 >
-	<h1>{entry.data.title}</h1>
-	<Content />
+	<article
+		class="prose prose-neutral mx-auto py-16 dark:prose-invert lg:prose-lg xl:prose-xl prose-a:text-sky-700 dark:prose-a:text-sky-300"
+	>
+		<p class="inline-flex items-center gap-3 pb-12 text-neutral-500 dark:text-neutral-400">
+			<BlogButton lang={entry.data.lang} />
+			 /
+			<time
+				class="whitespace-nowrap"
+				datetime={entry.data.date.toISOString()}
+			>
+				{entry.data.date.toLocaleDateString(entry.data.lang)}
+			</time>
+		</p>
+		<h1>{entry.data.title}</h1>
+		<Content />
+	</article>
 </BaseLayout>
