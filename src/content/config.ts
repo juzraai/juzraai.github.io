@@ -6,7 +6,7 @@ export type Lang = z.infer<typeof langSchema>;
 const altLinksSchema = z.record(langSchema, z.string()).optional();
 export type AltLinks = z.infer<typeof altLinksSchema>;
 
-const postsCollection = defineCollection({
+const blog = defineCollection({
 	type: 'content',
 	schema: z.object({
 		alt: altLinksSchema,
@@ -20,5 +20,5 @@ const postsCollection = defineCollection({
 });
 
 export const collections = {
-	posts: postsCollection,
+	blog,
 };
