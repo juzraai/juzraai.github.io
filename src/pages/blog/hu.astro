@@ -1,12 +1,5 @@
 ---
-import PostList from '../../components/PostList.astro';
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogPageLayout from '../../layouts/BlogPageLayout.astro';
 ---
 
-<BaseLayout
-	alt={{ en: '/blog/en/' }}
-	lang="hu"
-	title="Blog"
->
-	<PostList lang="hu" />
-</BaseLayout>
+<BlogPageLayout lang="hu" />

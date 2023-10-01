@@ -1,0 +1,46 @@
+---
+import { type CollectionEntry } from 'astro:content';
+import CenteredContainer from '../components/CenteredContainer.astro';
+import FormattedContent from '../components/FormattedContent.astro';
+import type { Lang } from '../content/config';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+type Props = {
+	post: CollectionEntry<'blog'>;
+};
+const { post } = Astro.props;
+
+const { Content } = await post.render();
+const { alt, date, description, image, lang, title } = post.data;
+
+const fixedAlt: Record<Lang, string> = {
+	en: alt?.en ?? '/blog/en/',
+	hu: alt?.hu ?? '/blog/hu/',
+};
+
+// TODO single backtick code blocks: hide backticks, add bg
+// TODO fix images
+---
+
+<BaseLayout
+	alt={fixedAlt}
+	date={date}
+	description={description}
+	image={image}
+	lang={lang}
+	title={title}
+>
+	<CenteredContainer as="main">
+		<FormattedContent as="article">
+			<header>
+				<h1>{title}</h1>
+			</header>
+			<Content />
+			<footer>
+				<time datetime={date.toISOString()}>
+					{date.toLocaleDateString(lang)}
+				</time>
+			</footer>
+		</FormattedContent>
+	</CenteredContainer>
+</BaseLayout>

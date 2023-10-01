@@ -22,6 +22,10 @@ const blog = defineCollection({
 		tags: z.string(),
 	}),
 });
+export const blogTitle: Record<Lang, string> = {
+	en: 'Notes',
+	hu: 'Jegyzeteim',
+};
 
 const portfolio = defineCollection({
 	type: 'data',
@@ -35,6 +39,10 @@ const portfolio = defineCollection({
 		year: z.number().min(2012),
 	}),
 });
+export const portfolioTitle: Record<Lang, string> = {
+	en: 'Projects',
+	hu: 'Munkáim',
+};
 
 // TODO tags should be an array instead of string (both collections)
 // TODO (?) turn portfolio into content collection, move project posts

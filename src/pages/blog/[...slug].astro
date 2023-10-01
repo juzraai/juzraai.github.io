@@ -1,54 +1,19 @@
 ---
 import { type CollectionEntry, getCollection } from 'astro:content';
-import CenteredContainer from '../../components/CenteredContainer.astro';
-import type { Lang } from '../../content/config';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import FormattedContent from '../../components/FormattedContent.astro';
+import BlogPostLayout from '../../layouts/BlogPostLayout.astro';
 
 export async function getStaticPaths() {
 	const posts = await getCollection('blog');
 	return posts.map((p) => ({
 		params: { slug: p.slug },
-		props: { entry: p },
+		props: { post: p },
 	}));
 }
 
 type Props = {
-	entry: CollectionEntry<'blog'>;
+	post: CollectionEntry<'blog'>;
 };
-const { entry } = Astro.props;
-
-const { Content } = await entry.render();
-const { alt, date, description, image, lang, title } = entry.data;
-
-const fixedAlt: Record<Lang, string> = {
-	en: alt?.en ?? '/blog/en/',
-	hu: alt?.hu ?? '/blog/hu/',
-};
-
-// TODO single backtick code blocks: hide backticks, add bg
-// TODO fix images
+const { post } = Astro.props;
 ---
 
-<BaseLayout
-	alt={fixedAlt}
-	date={date}
-	description={description}
-	image={image}
-	lang={lang}
-	title={title}
->
-	<CenteredContainer as="main">
-		<FormattedContent as="article">
-			<header>
-				<h1>{title}</h1>
-			</header>
-			<Content />
-			<footer>
-				<time datetime={date.toISOString()}>
-					{date.toLocaleDateString(lang)}
-				</time>
-			</footer>
-		</FormattedContent>
-	</CenteredContainer>
-</BaseLayout>
+<BlogPostLayout post={post} />

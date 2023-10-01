@@ -1,0 +1,27 @@
+---
+import CenteredContainer from '../components/CenteredContainer.astro';
+import FormattedContent from '../components/FormattedContent.astro';
+import PostList from '../components/PostList.astro';
+import { blogTitle, type Lang } from '../content/config';
+import BaseLayout from './BaseLayout.astro';
+
+type Props = {
+	lang: Lang;
+};
+const { lang } = Astro.props;
+---
+
+<BaseLayout
+	alt={{ en: '/blog/en/', hu: '/blog/hu/' }}
+	lang={lang}
+	title={blogTitle[lang]}
+>
+	<CenteredContainer as="main">
+		<FormattedContent>
+			<header>
+				<h1>{blogTitle[lang]}</h1>
+			</header>
+			<PostList lang={lang} />
+		</FormattedContent>
+	</CenteredContainer>
+</BaseLayout>

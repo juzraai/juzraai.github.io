@@ -2,15 +2,11 @@
 import type { Lang } from '../content/config';
 
 type Props = {
+	label: string;
 	lang: Lang;
-	path: 'blog' | 'portfolio';
+	path: 'blog' | 'projects';
 };
-const { lang, path } = Astro.props;
-
-const labels: Record<typeof path, Record<Lang, string>> = {
-	blog: { en: 'Notes', hu: 'Jegyzeteim' },
-	portfolio: { en: 'Projects', hu: 'Munkáim' },
-};
+const { label, lang, path } = Astro.props;
 
 const isActive = Astro.url.pathname.includes(path);
 ---
@@ -18,5 +14,6 @@ const isActive = Astro.url.pathname.includes(path);
 <a
 	class:list={['hover:underline', isActive && 'underline']}
 	href={`/${path}/${lang}/`}
-	>{labels[path][lang]}</a
 >
+	{label}
+</a>

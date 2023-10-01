@@ -1,5 +1,5 @@
 ---
-import type { AltLinks, Lang } from '../content/config';
+import { type AltLinks, blogTitle, portfolioTitle, type Lang } from '../content/config';
 import CenteredContainer from './CenteredContainer.astro';
 import DarkModeToggle from './DarkModeToggle.astro';
 import LangSwitcher from './LangSwitcher.astro';
@@ -22,12 +22,14 @@ const { alt, lang } = Astro.props;
 		</div>
 		<div class="flex gap-4">
 			<NavLink
+				label={blogTitle[lang]}
 				lang={lang}
 				path="blog"
 			/>
 			<NavLink
+				label={portfolioTitle[lang]}
 				lang={lang}
-				path="portfolio"
+				path="projects"
 			/>
 		</div>
 	</div>
