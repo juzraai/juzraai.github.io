@@ -1,0 +1,19 @@
+---
+import { Icon } from 'astro-icon';
+import { locales, type AltLinks, type Lang } from '../content/config';
+
+type Props = {
+	alt: AltLinks;
+	current: Lang;
+};
+const { alt, current } = Astro.props;
+const nextLang: Lang = current === 'hu' ? 'en' : 'hu';
+let nextUrl = alt[nextLang];
+---
+
+<a href={nextUrl}>
+	<Icon
+		class="h-8 w-8"
+		name="carbon:language"
+	/>
+</a>

@@ -1,16 +1,14 @@
 ---
 import type { BlogPosting, WebSite, WithContext } from 'schema-dts';
+import BlogButton from '../components/BlogButton.astro';
 import DarkModeToggle from '../components/DarkModeToggle.astro';
-import type { AltLinks, Lang } from '../content/config';
+import LangSwitcher from '../components/LangSwitcher.astro';
+import { locales, type AltLinks, type Lang } from '../content/config';
 
 const SITE_TITLE = 'Zsolt Jurányi (juzraai)';
-const locales = {
-	hu: 'hu_HU',
-	en: 'en_US',
-};
 
 type Props = {
-	alt?: AltLinks;
+	alt: AltLinks;
 	date?: Date;
 	description?: string;
 	image?: string;
@@ -142,6 +140,11 @@ const schema = isPost ? blogPostSchema : websiteSchema;
 		/>
 	</head>
 	<body>
+		<BlogButton lang={lang} />
+		<LangSwitcher
+			alt={alt}
+			current={lang}
+		/>
 		<DarkModeToggle />
 		<slot />
 	</body>

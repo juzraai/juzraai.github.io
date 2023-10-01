@@ -2,6 +2,10 @@ import { defineCollection, z } from 'astro:content';
 
 const langSchema = z.enum(['en', 'hu']);
 export type Lang = z.infer<typeof langSchema>;
+export const locales: Record<Lang, string> = {
+	hu: 'hu_HU',
+	en: 'en_US',
+};
 
 const altLinksSchema = z.record(langSchema, z.string()).optional();
 export type AltLinks = z.infer<typeof altLinksSchema>;
