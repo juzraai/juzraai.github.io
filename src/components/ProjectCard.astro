@@ -1,0 +1,51 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { type Lang, portfolioPostLinkLabel } from '../content/config';
+import Icon from 'astro-icon';
+
+type Props = {
+	lang: Lang;
+	project: CollectionEntry<'portfolio'>;
+};
+const { lang, project } = Astro.props;
+const { data } = project;
+const { description, post, title, source, year, url } = data;
+---
+
+<article>
+	<header>
+		<h3 class="inline-flex items-center justify-between w-full">
+			<span>{title} ({year})</span>
+			<span class="inline-flex gap-4">
+				{
+					url && (
+						<a
+							href={url}
+							target="_blank"
+						>
+							<Icon
+								class="h-6 w-6 lg:h-8 lg:w-8"
+								name="carbon:link"
+							/>
+						</a>
+					)
+				}
+				{
+					source && (
+						<a
+							href={source}
+							target="_blank"
+						>
+							<Icon
+								class="h-6 w-6 lg:h-8 lg:w-8"
+								name="carbon:logo-github"
+							/>
+						</a>
+					)
+				}
+			</span>
+		</h3>
+		<p>{description[lang]}</p>
+		<p>{post && <a href={post}>{portfolioPostLinkLabel[lang]}</a>}</p>
+	</header>
+</article>

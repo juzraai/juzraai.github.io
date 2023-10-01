@@ -1,13 +1,12 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import FormattedContent from './FormattedContent.astro';
 
 type Props = {
 	post: CollectionEntry<'blog'>;
 };
 const { post } = Astro.props;
 const { data, slug } = post;
-const { date, description, lang, title } = data;
+const { description, title } = data;
 ---
 
 <article>

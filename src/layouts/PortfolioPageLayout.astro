@@ -1,0 +1,27 @@
+---
+import CenteredContainer from '../components/CenteredContainer.astro';
+import FormattedContent from '../components/FormattedContent.astro';
+import ProjectList from '../components/ProjectList.astro';
+import { portfolioTitle, type Lang } from '../content/config';
+import BaseLayout from './BaseLayout.astro';
+
+type Props = {
+	lang: Lang;
+};
+const { lang } = Astro.props;
+---
+
+<BaseLayout
+	alt={{ en: '/projects/en/', hu: '/projects/hu/' }}
+	lang={lang}
+	title={portfolioTitle[lang]}
+>
+	<CenteredContainer as="main">
+		<FormattedContent>
+			<header>
+				<h1>{portfolioTitle[lang]}</h1>
+			</header>
+			<ProjectList lang={lang} />
+		</FormattedContent>
+	</CenteredContainer>
+</BaseLayout>

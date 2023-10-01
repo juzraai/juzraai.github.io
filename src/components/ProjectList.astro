@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import type { Lang } from '../content/config';
+import ProjectCard from './ProjectCard.astro';
 
 type Props = {
 	lang: Lang;
@@ -8,14 +9,14 @@ type Props = {
 const { lang } = Astro.props;
 
 const projects = await getCollection('portfolio');
+projects.sort((a, b) => b.data.year - a.data.year);
 ---
 
-<ul>
-	{
-		projects.map((p) => (
-			<li>
-				({p.data.year}) {p.data.title} - {p.data.description[lang]}
-			</li>
-		))
-	}
-</ul>
+{
+	projects.map((p) => (
+		<ProjectCard
+			lang={lang}
+			project={p}
+		/>
+	))
+}

@@ -43,6 +43,10 @@ export const portfolioTitle: Record<Lang, string> = {
 	en: 'Projects',
 	hu: 'Munkáim',
 };
+export const portfolioPostLinkLabel: Record<Lang, string> = {
+	en: 'Read more',
+	hu: 'Bővebben',
+};
 
 // TODO tags should be an array instead of string (both collections)
 // TODO (?) turn portfolio into content collection, move project posts
