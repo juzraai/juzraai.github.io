@@ -1,11 +1,67 @@
 ---
+import type { BlogPosting, WebSite, WithContext } from 'schema-dts';
 import DarkModeToggle from '../components/DarkModeToggle.astro';
-import type { Lang } from '../content/config';
+import type { AltLinks, Lang } from '../content/config';
+
+const SITE_TITLE = 'Zsolt Jurányi (juzraai)';
+const locales = {
+	hu: 'hu_HU',
+	en: 'en_US',
+};
 
 type Props = {
-	lang?: Lang;
+	alt?: AltLinks;
+	date?: Date;
+	description?: string;
+	image?: string;
+	lang: Lang;
+	title?: string;
 };
-const { lang } = Astro.props;
+const { alt, date, description, image, lang, title } = Astro.props;
+
+const blogURL = new URL('/blog/', Astro.site).toString();
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
+
+const altLinks = Object.entries(alt ?? {}).map(([lang, path]) => ({
+	hreflang: lang,
+	href: new URL(path, Astro.site).toString(),
+}));
+
+const fullTitle = title ? `${title} | ${SITE_TITLE}` : SITE_TITLE;
+
+const locale = locales[lang];
+
+let fullImage = image;
+if (image && !image?.startsWith('http')) fullImage = new URL(image, Astro.site).toString();
+
+const isPost = /blog\/\d{4}/.exec(Astro.url.pathname);
+const type = isPost ? 'article' : 'website';
+
+const websiteSchema: WithContext<WebSite> = {
+	'@context': 'https://schema.org',
+	'@type': 'WebSite',
+	description,
+	image: fullImage,
+	name: fullTitle,
+	headline: title,
+	url: canonicalURL,
+};
+const blogPostSchema: WithContext<BlogPosting> = {
+	'@context': 'https://schema.org',
+	'@type': 'BlogPosting',
+	description,
+	dateCreated: date?.toISOString(),
+	datePublished: date?.toISOString(),
+	headline: title,
+	image,
+	mainEntityOfPage: {
+		'@type': 'WebSite',
+		url: blogURL,
+	},
+	name: title,
+	url: canonicalURL,
+};
+const schema = isPost ? blogPostSchema : websiteSchema;
 
 // TODO google analytics + cookie consent
 ---
@@ -30,7 +86,60 @@ const { lang } = Astro.props;
 			rel="sitemap"
 			href="/sitemap-index.xml"
 		/>
-		<slot name="head" />
+		<link
+			rel="canonical"
+			href={canonicalURL}
+		/>
+		{
+			altLinks.map(({ hreflang, href }) => (
+				<link
+					rel="alternate"
+					hreflang={hreflang}
+					href={href}
+				/>
+			))
+		}
+		<title>{fullTitle}</title>
+		<meta
+			name="description"
+			content={description}
+		/>
+		<meta
+			property="og:description"
+			content={description}
+		/>
+		{
+			image && (
+				<meta
+					property="og:image"
+					content={fullImage}
+				/>
+			)
+		}
+		<meta
+			property="og:locale"
+			content={locale}
+		/>
+		<meta
+			property="og:site_name"
+			content={SITE_TITLE}
+		/>
+		<meta
+			property="og:title"
+			content={title}
+		/>
+		<meta
+			property="og:type"
+			content={type}
+		/>
+		<meta
+			property="og:url"
+			content={canonicalURL}
+		/>
+		<script
+			type="application/ld+json"
+			set:html={JSON.stringify(schema)}
+		/>
 	</head>
 	<body>
 		<DarkModeToggle />
