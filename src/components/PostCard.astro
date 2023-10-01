@@ -1,13 +1,20 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import FormattedContent from './FormattedContent.astro';
 
 type Props = {
 	post: CollectionEntry<'blog'>;
 };
 const { post } = Astro.props;
+const { data, slug } = post;
+const { date, description, lang, title } = data;
 ---
 
-<li>
-	<a href={`/blog/${post.slug}`}>{post.data.title}</a>
-	<span>({post.data.date.toLocaleDateString(post.data.lang)})</span>
-</li>
+<article>
+	<header>
+		<h3>
+			<a href={`/blog/${slug}`}>{title}</a>
+		</h3>
+		<p>{description}</p>
+	</header>
+</article>

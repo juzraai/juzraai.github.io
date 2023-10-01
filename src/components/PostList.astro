@@ -1,7 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
 import type { Lang } from '../content/config';
+import CenteredContainer from './CenteredContainer.astro';
 import PostCard from './PostCard.astro';
+import FormattedContent from './FormattedContent.astro';
 
 type Props = {
 	lang: Lang;
@@ -11,8 +13,29 @@ const { lang } = Astro.props;
 const posts = await getCollection('blog');
 const postsOfLang = posts.filter((p) => p.data.lang === lang);
 postsOfLang.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const years = Array.from(new Set<number>(postsOfLang.map((p) => p.data.date.getFullYear())));
+const postsOfYear = (y: number) => postsOfLang.filter((p) => p.data.date.getFullYear() === y);
+
+// {postsOfYear(y).map((p) => <PostCard post={p} />)}
 ---
 
-<ul>
-	{postsOfLang.map((p) => <PostCard post={p} />)}
-</ul>
+<CenteredContainer as="main">
+	<FormattedContent>
+		<header>
+			<h1>Blog</h1>
+		</header>
+		{
+			years.map((y) => (
+				<section>
+					<header>
+						<h2>{y}</h2>
+					</header>
+					{postsOfYear(y).map((p) => (
+						<PostCard post={p} />
+					))}
+				</section>
+			))
+		}
+	</FormattedContent>
+</CenteredContainer>
