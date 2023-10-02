@@ -25,11 +25,11 @@ A few years later the program disappeared from Softpedia, maybe because without 
 
 This is a Java tool which can search in multiple publication databases (such as Google Scholar, CiteSeerX, ACM, SpringerLink). You type the author's name and PubSearch grabs the basic information of her/his publications. It can transitively crawl the "cited-by" lists, so a researcher can use this tool for calculating her/his impact factor.
 
-[![PubSearch search results]({{ '/assets/pubsearch/screenshot-3-new.jpg' | relative_url }})]({{ '/assets/pubsearch/screenshot-3-new.jpg' | relative_url }})
+[![PubSearch search results](/assets/pubsearch/screenshot-3-new.jpg)](/assets/pubsearch/screenshot-3-new.jpg)
 
 It uses a proxy list to reach those sites, to avoid banning because of the heavy network traffic. The program uses definition files to crawl the databases, you can edit these with any simple text editor or add your own definiton. You can export publication data in citation formats.
 
-[![PubSearch BibTeX]({{ '/assets/pubsearch/pubtab-bibtex.jpg' | relative_url }})]({{ '/assets/pubsearch/pubtab-bibtex.jpg' | relative_url }})
+[![PubSearch BibTeX](/assets/pubsearch/pubtab-bibtex.jpg)](/assets/pubsearch/pubtab-bibtex.jpg)
 
 JRE, MySQL and a proxy list is required to run the program.
 
@@ -63,8 +63,7 @@ JRE, MySQL and a proxy list is required to run the program.
 ## Ideas for further development
 
 -   In the beginning of 2013, I roughly planned PubSearch 2, with modularity in mind. The goal is to make it more universal. Websites of publication databases are continuously changing, and altough PubSearch 1.x can be easily actualized, some features of these websites cannot be reached by the built-in uniform algorithm of PubSearch 1.x. So modularity should be provided, through a Java interface. This way specialized crawlers can be added as JAR files, which can be loaded when the program starts. And of course, PubSearch 1.x would be still there as a built-in crawler.
-
-[![PubSearch 2 plan]({{ '/assets/pubsearch/v6-structure-logi.png' | relative_url }})]({{ '/assets/pubsearch/v6-structure-logi.png' | relative_url }})
+    [![PubSearch 2 plan](/assets/pubsearch/v6-structure-logi.png)](/assets/pubsearch/v6-structure-logi.png)
 
 -   Would be nice to add more settings, like selecting publication databases or crawlers, and managing proxy lists.
 -   HTML parsing should be much more elegant. Back then, without any better ideas, I used regular expressions, which [as we know][html-regex] is not a proper approach.

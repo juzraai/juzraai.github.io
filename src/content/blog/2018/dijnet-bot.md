@@ -35,7 +35,7 @@ Grafikus felületet nem csináltam neki, **parancssorból futtatható**. A beál
 
 Nálam gyönyörűen működik, legalábbis UPC, FVM és FCSM számlákkal nincs gondja.
 
-[![Díjnet bot futás]({{ '/assets/dijnet-bot/dijnet-bot-run.png' | relative_url }})]({{ '/assets/dijnet-bot/dijnet-bot-run.png' | relative_url }})
+[![Díjnet bot futás](/assets/dijnet-bot/dijnet-bot-run.png)](/assets/dijnet-bot/dijnet-bot-run.png)
 
 ## Nehézségek
 

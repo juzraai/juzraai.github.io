@@ -28,7 +28,7 @@ Másik megoldás, hogy amikor a _Save As..._ opcióval elmentjük PDF fájlba a 
 
 <style>.content img { width: auto; }</style>
 
-[![Inkscape PDF options]({{ '/assets/inkscape/inkscape-pdf.png' | relative_url }})]({{ '/assets/inkscape/inkscape-pdf.png' | relative_url }})
+[![Inkscape PDF options](/assets/inkscape/inkscape-pdf.png')](/assets/inkscape/inkscape-pdf.png)
 
 ## Színek
 

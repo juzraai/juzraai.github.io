@@ -43,11 +43,11 @@ Tettem egy próbát [Electron.js](https://electronjs.org/)-el is, ami noha jóva
 
 Ez nyilván fals-pozitív jelzés, és talán lehetne is jelenteni a BitDefender-nek, de akkor vajon minden verziót be kéne küldenem nekik? Illetve akkor ezt végig kéne csinálnom a többi antivírus szoftverrel is? Nem életszerű. A [VirusTotal szerint](https://www.virustotal.com/gui/file/1a6c995f23c676a58de288ae8e2e7fba2f9fa4b51d90e6da4c70776fc222ad89/detection) mondjuk csak a BitDefender problémázik:
 
-[![VirusTotal Detection]({{ '/assets/dijnet-bot/dijnet-bot-exe-vt1.png' | relative_url }})]({{ '/assets/dijnet-bot/dijnet-bot-exe-vt1.png' | relative_url }})
+[![VirusTotal Detection](/assets/dijnet-bot/dijnet-bot-exe-vt1.png)](/assets/dijnet-bot/dijnet-bot-exe-vt1.png)
 
 Tippre az a baja, hogy a `pkg` úgy generálja a kimenetet, hogy egy meglévő `.exe` fájlba (`node.exe`) injektálja a programomat (valahol érthető, hogy ez gyanús, de na):
 
-[![VirusTotal Details]({{ '/assets/dijnet-bot/dijnet-bot-exe-vt2.png' | relative_url }})]({{ '/assets/dijnet-bot/dijnet-bot-exe-vt2.png' | relative_url }})
+[![VirusTotal Details](/assets/dijnet-bot/dijnet-bot-exe-vt2.png)](/assets/dijnet-bot/dijnet-bot-exe-vt2.png)
 
 Több helyen olvastam, hogy a program aláírása megoldhatja a gondot. A tanúsítványok, amiket eddig találtam, több száz dolcsiba kerülnek, ami csak a Díjnet Bot miatt nem éri meg. A témába nem ástam bele magam mélyebben, talán később megteszem. 🤨 Itt ezt a szálat feladtam, és egy **B-tervet** valósítottam meg.
 

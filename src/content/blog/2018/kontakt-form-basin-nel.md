@@ -9,7 +9,7 @@ tags: basin captcha email form serverless
 title: Kontakt form ingyen, Basin-nel
 ---
 
-[prev]: {{ 'blog/2018/kontakt-form-ingyen' | relative_url }}
+[prev]: /blog/2018/kontakt-form-ingyen
 
 A [minap írtam][prev] arról, milyen ingyenes lehetőségek vannak arra, hogy egy statikus honlapra kontakt formot illesszünk, amely emailt küld. Kipróbáltam a [Basin][basin]-t, aminek látatlanban aranyérmet osztottam. Íme a tapasztalataim. 🙂
 
@@ -37,13 +37,13 @@ Az _Email_ fülön átállíthatjuk a cél email címet, ahová az űrlapadatoka
 
 Bekapcsoltam a captcha-t és a receipt-et, és összeraktam a formot a láthatatlan captcha-val. Zseniális, hogy **tesztelhető localhost-ról is.** Elküldtem a formot, és a megadott URL-re irányított a rendszer. A levél pár másodperc múlva megérkezett arra email címemre, amivel a [Basin][basin]-be regisztráltam. Szépen formázva mutat minden fontos információt:
 
-[![Basin submission email]({{ '/assets/basin/basin-submission-email.png' | relative_url }})]({{ '/assets/basin/basin-submission-email.png' | relative_url }})
+[![Basin submission email](/assets/basin/basin-submission-email.png)](/assets/basin/basin-submission-email.png)
 
 A reply-to is korrektül be van állítva, egy kattintással tudok válaszolni a formon megadott email címre.
 
 A formon beírt email címre is jött egy levél, ami **nyugtázza, hogy milyen adatokat küldtem és hova,** és még ezzel kapcsolatos kérelmekhez is biztosít lehetőséget:
 
-[![Basin receipt email]({{ '/assets/basin/basin-receipt-email.png' | relative_url }})]({{ '/assets/basin/basin-receipt-email.png' | relative_url }})
+[![Basin receipt email](/assets/basin/basin-receipt-email.png)](/assets/basin/basin-receipt-email.png)
 
 A _Submissions_ panelen is megjelentek ezek az információk természetesen. Tovább nézve a funkciókat, az _Export_ panelen a beküldött form adatok **letölthetőek CSV-ben, illetve JSON-ban is** egy API key segítségével. Az _Integrations_ fülön lehet [Zapier][zapier]-hez kapcsolódni, de ezt most nem teszem meg, a célt elértük.
 

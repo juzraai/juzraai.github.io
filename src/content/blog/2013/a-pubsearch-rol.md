@@ -25,11 +25,11 @@ A Softpedia-ról pár évvel később lekerült a programom, talán azért, mert
 
 Ez egy Java program, amivel több publikációs adatbázisban kereshetsz (mint például Google Scholar, CiteSeerX, ACM, SpringerLink). Beírod a szerző nevét és a PubSearch összegyűjti ezen szerző publikációinak alapvető információit. Képes letölteni tranzitívan a hivatkozó publikációk listáját is, tehát egy kutató használhatja a programot impakt faktorának kiszámításához.
 
-[![PubSearch keresési eredmények]({{ '/assets/pubsearch/screenshot-3-new.jpg' | relative_url }})]({{ '/assets/pubsearch/screenshot-3-new.jpg' | relative_url }})
+[![PubSearch keresési eredmények](/assets/pubsearch/screenshot-3-new.jpg)](/assets/pubsearch/screenshot-3-new.jpg)
 
 A program proxy listát használ a weboldalak elérésére, hogy elkerülje a sorozatos lekérdezésekből adódó esetleges tiltást. Az adatbázisok bejárási módját a program definíciós fájlokból olvassa ki, melyet egyszerű szövegszerkesztővel lehet készíteni vagy módosítani. A publikációk adatait exportálhatod könyvtári formátumokban.
 
-[![PubSearch BibTeX]({{ '/assets/pubsearch/pubtab-bibtex.jpg' | relative_url }})]({{ '/assets/pubsearch/pubtab-bibtex.jpg' | relative_url }})
+[![PubSearch BibTeX](/assets/pubsearch/pubtab-bibtex.jpg)](/assets/pubsearch/pubtab-bibtex.jpg)
 
 JRE, MySQL és egy proxy lista szükséges a futtatásához.
 
@@ -63,7 +63,7 @@ JRE, MySQL és egy proxy lista szükséges a futtatásához.
 ## Továbbfejlesztési ötletek
 
 -   Még 2013 év elején nagy vonalakban megterveztem a PubSearch 2-t, melynek lényege a modularitás. A cél az, hogy univerzálisabb legyen a program. A publikációs adatbázisok oldalai folyamatosan változnak, és habár a PubSearch 1.x definíciós fájljait könnyű aktualizálni, bizonyos adatokat, funkciókat ezeken a site-okon már nem lehet a beégetett, egységes algoritmussal elérni. Ezért lehetőséget kéne biztosítani moduláris bővítésre, egy Java interfészen keresztül. Így specializált crawlereket lehetne hozzáadni a programhoz, JAR fájlokban, amiket a program betöltene induláskor. És persze magát a PubSearch 1.x-et egy beégetett crawlerként továbbra is lehetne használni.
-    [![PubSearch 2 terv]({{ '/assets/pubsearch/v6-structure-logi.png' | relative_url }})]({{ '/assets/pubsearch/v6-structure-logi.png' | relative_url }})
+    [![PubSearch 2 terv](/assets/pubsearch/v6-structure-logi.png)](/assets/pubsearch/v6-structure-logi.png)
 -   Több beállítási lehetőség is jól jönne a programba, pl. publikációs adatbázisok kiválasztása, konfigurálható proxy kezelés.
 -   A HTML parszolást is elegánsabbá kéne tenni. Anno jobb ötlet híján reguláris kifejezésekkel parszoltam, ami [mint tudjuk][html-regex], nem egészséges.
 -   Jó lenne publikáció merge funkció is, amennyire lehet automatizáltan.

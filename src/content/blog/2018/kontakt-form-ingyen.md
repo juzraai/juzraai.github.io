@@ -8,7 +8,7 @@ tags: comparison email form serverless
 title: Kontakt form ingyen - körbenézés
 ---
 
-[next]: {{ 'blog/2018/kontakt-form-basin-nel' | relative_url }}
+[next]: /blog/2018/kontakt-form-basin-nel
 
 A bejegyzésben szereplő adatokat 2020. júliusában frissítettem.
 
@@ -48,21 +48,19 @@ Az [Un-Static][unstatic] (korábban: BriskForms) szűk **25 email/form/hó**-ná
 
 Lássuk mindezt táblázatban:
 
-Szolgáltatás | Limit | Spam | Redirect | Tárol? | Extra
-
--                                  |          |          |          |        |
-    [99inbound][99inbound] | 100/hó | filter | ? | - | Slack
-    [Basin][basin] | 100/hó | filter | van | igen | fájl, captcha, Zapier
-    [elFormo][elFormo] | 1500/hó | honeypot | van | igen | -
-    [enformed.io][enformed.io] | 100/hó | honeypot | van | - | tárgy, CC, BCC, AJAX
-    [formspree.io][formspree.io] | 50/hó | honeypot | van | igen | tárgy, CC, AJAX, captcha, Zapier
-    [G. Apps Script][g-script] | 100/nap | - | - | igen | tárgy, AJAX, ...
-    [G. Forms][g-forms] | ~ 50/nap | - | - | igen | -
-    [mailthis.to][mailthis.to] | 1000 | honeypot | van | - | tárgy, fájl, AJAX, captcha
-    [Pageclip][pageclip] | 1000/hó | - | - | igen | tárgy, AJAX, API
-    [SimpleForm][simpleform] | - | - | - | igen | fájl
-    [Un-Static][unstatic] | 25/hó | filter | van | - | captcha
-    {: .table.table-sm.table-responsive-md}
+| Szolgáltatás                 | Limit    | Spam     | Redirect | Tárol? | Extra                            |
+| ---------------------------- | -------- | -------- | -------- | ------ | -------------------------------- |
+| [99inbound][99inbound]       | 100/hó   | filter   | ?        | -      | Slack                            |
+| [Basin][basin]               | 100/hó   | filter   | van      | igen   | fájl, captcha, Zapier            |
+| [elFormo][elFormo]           | 1500/hó  | honeypot | van      | igen   | -                                |
+| [enformed.io][enformed.io]   | 100/hó   | honeypot | van      | -      | tárgy, CC, BCC, AJAX             |
+| [formspree.io][formspree.io] | 50/hó    | honeypot | van      | igen   | tárgy, CC, AJAX, captcha, Zapier |
+| [G. Apps Script][g-script]   | 100/nap  | -        | -        | igen   | tárgy, AJAX, ...                 |
+| [G. Forms][g-forms]          | ~ 50/nap | -        | -        | igen   | -                                |
+| [mailthis.to][mailthis.to]   | 1000     | honeypot | van      | -      | tárgy, fájl, AJAX, captcha       |
+| [Pageclip][pageclip]         | 1000/hó  | -        | -        | igen   | tárgy, AJAX, API                 |
+| [SimpleForm][simpleform]     | -        | -        | -        | igen   | fájl                             |
+| [Un-Static][unstatic]        | 25/hó    | filter   | van      | -      | captcha                          |
 
 ## Összegzés
 

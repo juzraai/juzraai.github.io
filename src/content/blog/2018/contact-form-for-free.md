@@ -8,7 +8,7 @@ tags: comparison email form serverless
 title: Contact form for free - looking around
 ---
 
-[next]: {{ 'blog/2018/contact-form-using-basin' | relative_url }}
+[next]: /blog/2018/contact-form-using-basin
 
 I updated data included in the post below in July, 2020.
 
@@ -48,21 +48,19 @@ This spreadsheet + email sending mechanism can also be achieved via a [Google Ap
 
 Let's see them in a nice table:
 
-Service | Limit | Spam | Redirect | Stores? | Extra
-
--                                  |            |          |          |         |
-    [99inbound][99inbound] | 100/month | filter | ? | - | Slack
-    [Basin][basin] | 100/month | filter | yes | yes | file, captcha, Zapier
-    [elFormo][elFormo] | 1500/month | honeypot | yes | yes | -
-    [enformed.io][enformed.io] | 100/month | honeypot | yes | - | subject, CC, BCC, AJAX
-    [formspree.io][formspree.io] | 50/month | honeypot | yes | yes | subject, CC, AJAX, captcha, Zapier
-    [G. Apps Script][g-script] | 100/day | - | - | yes | subject, AJAX, ...
-    [G. Forms][g-forms] | ~ 50/day | - | - | yes | -
-    [mailthis.to][mailthis.to] | 1000 | honeypot | yes | - | subject, file, AJAX, captcha
-    [Pageclip][pageclip] | 1000/month | - | - | yes | subject, AJAX, API
-    [SimpleForm][simpleform] | - | - | - | yes | file
-    [Un-Static][unstatic] | 25/month | filter | yes | - | captcha
-    {: .table.table-sm.table-responsive-md}
+| Service                      | Limit      | Spam     | Redirect | Stores? | Extra                              |
+| ---------------------------- | ---------- | -------- | -------- | ------- | ---------------------------------- |
+| [99inbound][99inbound]       | 100/month  | filter   | ?        | -       | Slack                              |
+| [Basin][basin]               | 100/month  | filter   | yes      | yes     | file, captcha, Zapier              |
+| [elFormo][elFormo]           | 1500/month | honeypot | yes      | yes     | -                                  |
+| [enformed.io][enformed.io]   | 100/month  | honeypot | yes      | -       | subject, CC, BCC, AJAX             |
+| [formspree.io][formspree.io] | 50/month   | honeypot | yes      | yes     | subject, CC, AJAX, captcha, Zapier |
+| [G. Apps Script][g-script]   | 100/day    | -        | -        | yes     | subject, AJAX, ...                 |
+| [G. Forms][g-forms]          | ~ 50/day   | -        | -        | yes     | -                                  |
+| [mailthis.to][mailthis.to]   | 1000       | honeypot | yes      | -       | subject, file, AJAX, captcha       |
+| [Pageclip][pageclip]         | 1000/month | -        | -        | yes     | subject, AJAX, API                 |
+| [SimpleForm][simpleform]     | -          | -        | -        | yes     | file                               |
+| [Un-Static][unstatic]        | 25/month   | filter   | yes      | -       | captcha                            |
 
 ## Summary
 

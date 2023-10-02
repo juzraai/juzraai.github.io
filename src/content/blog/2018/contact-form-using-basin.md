@@ -9,7 +9,7 @@ tags: basin captcha email form serverless
 title: Free contact form using Basin
 ---
 
-[prev]: {{ 'blog/2018/contact-form-for-free' | relative_url }}
+[prev]: /blog/2018/contact-form-for-free
 
 My [previous post][prev] was about free contact form solutions that can send email. I tried out [Basin][basin] which was before my gold medal winner based on its website only. Here are my experiences. 🙂
 
@@ -37,13 +37,13 @@ On the _Email_ tab, the target email address can be modified, where form data sh
 
 I turned on captcha and receipt sending and implemented the form with the invisible captcha. It's super cool that I can **test it from localhost.** I submitted the form and it correctly redirected to my URL. The email arrived a few seconds later to my address. The email is formatted nicely and contains every important detail:
 
-[![Basin submission email]({{ '/assets/basin/basin-submission-email.png' | relative_url }})]({{ '/assets/basin/basin-submission-email.png' | relative_url }})
+[![Basin submission email](/assets/basin/basin-submission-email.png)](/assets/basin/basin-submission-email.png)
 
 Reply-to is working properly too, I can answer to the email address typed in the form with a single click.
 
 An email arrived also to the address I typed in the form. It **tells what data I sent to where,** and it provides a button where a data removal request can be filed:
 
-[![Basin receipt email]({{ '/assets/basin/basin-receipt-email.png' | relative_url }})]({{ '/assets/basin/basin-receipt-email.png' | relative_url }})
+[![Basin receipt email](/assets/basin/basin-receipt-email.png)](/assets/basin/basin-receipt-email.png)
 
 Submitted information appeared also on the _Submissions_ tab as expected. Looking further, there's the _Export_ tab where I can **download form submissions in CSV or JSON** using an API key. Finally, [Zapier][zapier] connection can be set up on the _Integrations_ tab, but I didn't do this, I reached my goal.
 
