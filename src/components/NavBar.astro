@@ -2,7 +2,6 @@
 import { type AltLinks, blogTitle, portfolioTitle, type Lang } from '../content/config';
 import CenteredContainer from './CenteredContainer.astro';
 import DarkModeToggle from './DarkModeToggle.astro';
-import LangSwitcher from './LangSwitcher.astro';
 import NavLink from './NavLink.astro';
 
 type Props = {
@@ -10,34 +9,40 @@ type Props = {
 	lang: Lang;
 };
 const { alt, lang } = Astro.props;
+const nextLang: Lang = lang === 'hu' ? 'en' : 'hu';
+const nextUrl = alt ? alt[nextLang] : '/';
 ---
 
-<CenteredContainer
-	as="nav"
-	class="flex items-center justify-between py-3 text-2xl tracking-tight"
->
-	<div class="flex gap-8">
-		<div class="font-bold">
-			<a href={lang === 'hu' ? '/' : `/${lang}/`}>Zsolt</a>
+<div class="border-b border-b-gray-200 dark:border-b-gray-700">
+	<CenteredContainer
+		as="nav"
+		class="flex items-center justify-between py-3 text-lg"
+	>
+		<div class="flex gap-8">
+			<div class="text-xl font-bold">
+				<a href={lang === 'hu' ? '/' : `/${lang}/`}>Zsolt</a>
+			</div>
+			<div class="flex gap-4">
+				<NavLink
+					active={Astro.url.pathname.includes('blog')}
+					href={`/blog/${lang}`}
+				>
+					{blogTitle[lang]}
+				</NavLink>
+				<NavLink
+					active={Astro.url.pathname.includes('projects')}
+					href={`/projects/${lang}`}
+				>
+					{portfolioTitle[lang]}
+				</NavLink>
+			</div>
 		</div>
-		<div class="flex gap-4">
+		<div class="flex items-center gap-4">
 			<NavLink
-				label={blogTitle[lang]}
-				lang={lang}
-				path="blog"
+				href={nextUrl}
+				icon="carbon:language"
 			/>
-			<NavLink
-				label={portfolioTitle[lang]}
-				lang={lang}
-				path="projects"
-			/>
+			<DarkModeToggle />
 		</div>
-	</div>
-	<div class="flex items-center gap-4">
-		<LangSwitcher
-			alt={alt}
-			current={lang}
-		/>
-		<DarkModeToggle />
-	</div>
-</CenteredContainer>
+	</CenteredContainer>
+</div>

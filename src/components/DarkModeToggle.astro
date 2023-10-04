@@ -1,10 +1,12 @@
 ---
 import { ThemeSwitch } from 'astro-color-scheme';
 import { Icon } from 'astro-icon';
+import NavLink from './NavLink.astro';
 ---
 
-<label
-	class="relative block h-8 w-8 cursor-pointer text-black dark:text-white"
+<NavLink
+	as="label"
+	class="relative h-[1.5em] w-[1.5em] cursor-pointer"
 	for="darkmode"
 >
 	<ThemeSwitch
@@ -25,4 +27,4 @@ import { Icon } from 'astro-icon';
 			name="carbon:moon"
 		/>
 	</ThemeSwitch>
-</label>
+</NavLink>

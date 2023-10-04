@@ -1,19 +1,33 @@
 ---
-import type { Lang } from '../content/config';
+import type { HTMLTag } from 'astro/types';
+import Icon from 'astro-icon';
 
 type Props = {
-	label: string;
-	lang: Lang;
-	path: 'blog' | 'projects';
+	active?: boolean;
+	as?: HTMLTag;
+	class?: string;
+	href?: string;
+	icon?: string;
 };
-const { label, lang, path } = Astro.props;
-
-const isActive = Astro.url.pathname.includes(path);
+const { active, href, icon } = Astro.props;
+const Tag = Astro.props.as ?? 'a';
 ---
 
-<a
-	class:list={['hover:underline', isActive && 'underline']}
-	href={`/${path}/${lang}/`}
+<Tag
+	class:list={[
+		'hover:text-black dark:hover:text-white',
+		active ? 'text-black font-semibold dark:text-white' : 'text-gray-600 dark:text-gray-300',
+		Astro.props.class,
+	]}
+	href={href}
 >
-	{label}
-</a>
+	<slot />
+	{
+		icon && (
+			<Icon
+				class="h-[1.5em] w-[1.5em]"
+				name={icon}
+			/>
+		)
+	}
+</Tag>
