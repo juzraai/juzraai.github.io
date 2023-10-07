@@ -146,6 +146,7 @@ const schema = isPost ? blogPostSchema : websiteSchema;
 	<body class="dark:bg-gray-900">
 		<NavBar
 			alt={alt}
+			lite={Boolean(/^\/(en\/?)?$/.exec(Astro.url.pathname))}
 			lang={lang}
 		/>
 		<slot />

@@ -1,0 +1,24 @@
+---
+import { blogTitle, type Lang, portfolioTitle } from '../content/config';
+import BaseLayout from './BaseLayout.astro';
+
+type Props = {
+	lang: Lang;
+	title: string;
+};
+const { lang, title } = Astro.props;
+---
+
+<BaseLayout
+	alt={{ en: '/en/', hu: '/' }}
+	lang={lang}
+	title={title}
+>
+	<h1>greeting, name</h1>
+	<h2>introduction</h2>
+	<p>current stack</p>
+	<nav>
+		<a href={`/blog/${lang}`}>{blogTitle[lang]}</a>
+		<a href={`/projects/${lang}`}>{portfolioTitle[lang]}</a>
+	</nav>
+</BaseLayout>
