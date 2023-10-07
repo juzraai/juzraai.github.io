@@ -22,15 +22,16 @@ const { greet, name, profession, intro, lang, title } = Astro.props;
 	lang={lang}
 	title={title}
 >
-	<CenteredContainer class="font-narrow flex">
-		<div class="flex flex-col gap-4 mx-auto w-[32rem] py-8">
-			<p class="font-medium text-xl text-gray-500 dark:text-gray-400">{greet}</p>
-			<div>
-				<h1 class="mb-2 font-semibold text-4xl">{name}</h1>
-				<h1 class="font-normal text-3xl">{profession}</h1>
-			</div>
-			<p
-				class="mb-8 text-2xl text-gray-700 dark:text-gray-300"
+	<CenteredContainer class="font-narrow">
+		<div class="prose prose-lg mx-auto dark:prose-invert lg:prose-xl">
+			<p>{greet}</p>
+			<h1 class="!mb-6">
+				<span class="font-semibold">{name}</span>
+				<br />
+				<small class="font-normal">{profession}</small>
+			</h1>
+			<h2
+				class="!mt-0 font-normal text-gray-600 dark:text-gray-400"
 				set:html={intro}
 			/>
 			<div class="flex">
