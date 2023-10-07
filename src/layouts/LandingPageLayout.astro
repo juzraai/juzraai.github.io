@@ -1,4 +1,5 @@
 ---
+import Icon from 'astro-iconify';
 import CenteredContainer from '../components/CenteredContainer.astro';
 import { blogTitle, type Lang, portfolioTitle } from '../content/config';
 import BaseLayout from './BaseLayout.astro';
@@ -29,14 +30,34 @@ const { greet, name, profession, intro, lang, title } = Astro.props;
 				<h1 class="font-normal text-3xl">{profession}</h1>
 			</div>
 			<p
-				class="text-2xl text-gray-700 dark:text-gray-300"
+				class="mb-8 text-2xl text-gray-700 dark:text-gray-300"
 				set:html={intro}
 			/>
+			<div class="flex">
+				<div class="grid grid-cols-4 gap-3 text-xl text-gray-600 dark:text-gray-400">
+					{
+						[
+							'mysql',
+							'tsnode',
+							'trpc',
+							'nuxtdotjs',
+							'vuedotjs',
+							'tailwindcss',
+							'astro',
+							'apachecordova',
+						].map((n) => (
+							<Icon
+								class="h-[1.5em] w-[1.5em]"
+								name={`simple-icons:${n}`}
+							/>
+						))
+					}
+				</div>
+			</div>
 		</div>
 	</CenteredContainer>
 
-	<hr />
-	<nav>
+	<nav class="pt-16">
 		<a href={`/blog/${lang}`}>{blogTitle[lang]}</a>
 		<a href={`/projects/${lang}`}>{portfolioTitle[lang]}</a>
 	</nav>
