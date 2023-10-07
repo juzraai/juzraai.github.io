@@ -16,13 +16,13 @@ const nextUrl = alt ? alt[nextLang] : '/';
 <div class="border-b border-b-gray-200 dark:border-b-gray-700">
 	<CenteredContainer
 		as="nav"
-		class="flex items-center justify-between py-3 text-lg"
+		class="flex items-center justify-between py-1 md:py-2 md:text-lg"
 	>
-		<div class="flex gap-8">
-			<div class="text-xl font-bold">
+		<div class="flex items-center gap-2 md:gap-4">
+			<div class="font-bold md:text-xl">
 				<a href={lang === 'hu' ? '/' : `/${lang}/`}>Zsolt</a>
 			</div>
-			<div class="flex gap-4">
+			<div class="flex md:gap-2">
 				<NavLink
 					active={Astro.url.pathname.includes('blog')}
 					href={`/blog/${lang}`}
@@ -37,7 +37,7 @@ const nextUrl = alt ? alt[nextLang] : '/';
 				</NavLink>
 			</div>
 		</div>
-		<div class="flex items-center gap-4">
+		<div class="flex items-center md:gap-2">
 			<NavLink
 				href={nextUrl}
 				icon="carbon:language"

@@ -6,7 +6,7 @@ import NavLink from './NavLink.astro';
 
 <NavLink
 	as="label"
-	class="relative h-[1.5em] w-[1.5em] cursor-pointer"
+	class="cursor-pointer"
 	for="darkmode"
 >
 	<ThemeSwitch
@@ -18,13 +18,15 @@ import NavLink from './NavLink.astro';
 			id="darkmode"
 			type="checkbox"
 		/>
-		<Icon
-			class="absolute h-full w-full transition-transform dark:scale-0"
-			name="carbon:sun"
-		/>
-		<Icon
-			class="absolute h-full w-full scale-0 transition-transform dark:scale-100"
-			name="carbon:moon"
-		/>
+		<div class="relative h-[1.5em] w-[1.5em]">
+			<Icon
+				class="absolute inset-0 transition-transform dark:scale-0"
+				name="carbon:sun"
+			/>
+			<Icon
+				class="absolute inset-0 scale-0 transition-transform dark:scale-100"
+				name="carbon:moon"
+			/>
+		</div>
 	</ThemeSwitch>
 </NavLink>

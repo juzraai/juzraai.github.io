@@ -15,7 +15,7 @@ const Tag = Astro.props.as ?? 'a';
 
 <Tag
 	class:list={[
-		'hover:text-black dark:hover:text-white',
+		'p-2 hover:text-black dark:hover:text-white',
 		active ? 'text-black font-semibold dark:text-white' : 'text-gray-600 dark:text-gray-300',
 		Astro.props.class,
 	]}
