@@ -12,6 +12,7 @@ module.exports = {
 			},
 			fontFamily: {
 				sans: ['"Barlow"', ...fontFamily.sans],
+				narrow: ['"Barlow Condensed"', ...fontFamily.sans],
 			},
 			typography: ({ theme }) => ({
 				custom: {
