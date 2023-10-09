@@ -22,44 +22,41 @@ const { greet, name, profession, intro, lang, title } = Astro.props;
 	lang={lang}
 	title={title}
 >
-	<CenteredContainer class="font-narrow">
-		<div class="prose prose-lg mx-auto dark:prose-invert lg:prose-xl">
-			<p>{greet}</p>
-			<h1 class="!mb-6">
+	<CenteredContainer class="flex grow flex-col items-center justify-center">
+		<div class="prose mx-auto dark:prose-invert md:prose-lg lg:prose-xl">
+			<p class="hidden md:block">{greet}</p>
+			<h1 class="!mb-6 font-narrow">
 				<span class="font-semibold">{name}</span>
 				<br />
 				<small class="font-normal">{profession}</small>
 			</h1>
 			<h2
-				class="!mt-0 font-normal text-gray-600 dark:text-gray-400"
+				class="!mt-0 font-narrow font-normal text-gray-600 dark:text-gray-400"
 				set:html={intro}
 			/>
-			<div class="flex">
-				<div class="grid grid-cols-4 gap-3 text-xl text-gray-600 dark:text-gray-400">
-					{
-						[
-							'mysql',
-							'tsnode',
-							'trpc',
-							'nuxtdotjs',
-							'vuedotjs',
-							'tailwindcss',
-							'astro',
-							'apachecordova',
-						].map((n) => (
-							<Icon
-								class="h-[1.5em] w-[1.5em]"
-								name={`simple-icons:${n}`}
-							/>
-						))
-					}
-				</div>
+			<div class="flex gap-4">
+				<h3 class="!mt-0"><a href={`/blog/${lang}`}>{blogTitle[lang]}</a></h3>
+				<h3 class="!mt-0"><a href={`/projects/${lang}`}>{portfolioTitle[lang]}</a></h3>
 			</div>
 		</div>
 	</CenteredContainer>
-
-	<nav class="pt-16">
-		<a href={`/blog/${lang}`}>{blogTitle[lang]}</a>
-		<a href={`/projects/${lang}`}>{portfolioTitle[lang]}</a>
-	</nav>
 </BaseLayout>
+
+<!-- <p class="font-sans">Jelenleg ezekkel dolgozom:</p> -->
+<!-- <div class="flex gap-3 text-xl text-gray-600 dark:text-gray-400">
+	{
+		[
+			'mysql',
+			'nodedotjs',
+			'typescript',
+			'nuxtdotjs',
+			'vuedotjs',
+			'tailwindcss',
+		].map((n) => (
+			<Icon
+				class="h-[1.5em] w-[1.5em]"
+				name={`simple-icons:${n}`}
+			/>
+		))
+	}
+</div> -->
