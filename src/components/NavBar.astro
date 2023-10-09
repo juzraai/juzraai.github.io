@@ -27,10 +27,10 @@ const nextUrl = alt ? alt[nextLang] : '/';
 		{
 			!lite && (
 				<div class="flex items-center gap-2 md:gap-4">
-					<div class="font-bold md:text-xl">
+					<div class="text-xl font-bold">
 						<a href={lang === 'hu' ? '/' : `/${lang}/`}>Zsolt</a>
 					</div>
-					<div class="flex md:gap-2">
+					<div class="hidden gap-2 sm:flex">
 						<NavLink
 							active={Astro.url.pathname.includes('blog')}
 							href={`/blog/${lang}`}
@@ -47,10 +47,14 @@ const nextUrl = alt ? alt[nextLang] : '/';
 				</div>
 			)
 		}
-		<div class="ml-auto flex items-center md:gap-2">
+		<div class="ml-auto flex items-center gap-2">
 			<NavLink
 				href={nextUrl}
 				icon="carbon:language"
+			/>
+			<NavLink
+				href="https://github.com/juzraai"
+				icon="carbon:logo-github"
 			/>
 			<DarkModeToggle />
 		</div>
