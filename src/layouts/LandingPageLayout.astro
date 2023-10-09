@@ -22,8 +22,8 @@ const { greet, name, profession, intro, lang, title } = Astro.props;
 	lang={lang}
 	title={title}
 >
-	<CenteredContainer class="flex grow flex-col items-center justify-center">
-		<div class="prose mx-auto dark:prose-invert md:prose-lg lg:prose-xl">
+	<CenteredContainer class="flex grow">
+		<div class="prose m-auto dark:prose-invert md:prose-lg lg:prose-xl">
 			<p class="hidden md:block">{greet}</p>
 			<h1 class="!mb-6 font-narrow">
 				<span class="font-semibold">{name}</span>
