@@ -1,0 +1,19 @@
+---
+import Icon from 'astro-iconify';
+type Props = {
+	href: string;
+	label: string;
+};
+const { href, label } = Astro.props;
+---
+
+<a
+	class="inline-flex items-center gap-2 rounded bg-gray-100 px-6 py-3 text-lg font-semibold uppercase text-gray-700 transition-all hover:gap-4 hover:bg-blue-500 hover:text-white dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-blue-700 dark:hover:text-white md:text-xl"
+	href={href}
+>
+	{label}
+	<Icon
+		class="h-[1em] w-[1em]"
+		name="carbon:arrow-right"
+	/>
+</a>

@@ -3,16 +3,16 @@ import Icon from 'astro-iconify';
 import CenteredContainer from '../components/CenteredContainer.astro';
 import { blogTitle, type Lang, portfolioTitle } from '../content/config';
 import BaseLayout from './BaseLayout.astro';
+import LandingButton from '../components/LandingButton.astro';
 
 type Props = {
 	lang: Lang;
-	greet: string;
 	name: string;
 	profession: string;
 	intro: string;
 	title: string;
 };
-const { greet, name, profession, intro, lang, title } = Astro.props;
+const { name, profession, intro, lang, title } = Astro.props;
 
 // TODO add current stack
 ---
@@ -22,41 +22,33 @@ const { greet, name, profession, intro, lang, title } = Astro.props;
 	lang={lang}
 	title={title}
 >
-	<CenteredContainer class="flex grow">
-		<div class="prose m-auto dark:prose-invert md:prose-lg lg:prose-xl">
-			<p class="hidden md:block">{greet}</p>
-			<h1 class="!mb-6 font-narrow">
-				<span class="font-semibold">{name}</span>
-				<br />
-				<small class="font-normal">{profession}</small>
-			</h1>
-			<h2
-				class="!mt-0 font-narrow font-normal text-gray-600 dark:text-gray-400"
-				set:html={intro}
-			/>
-			<div class="flex gap-4">
-				<h3 class="!mt-0"><a href={`/blog/${lang}`}>{blogTitle[lang]}</a></h3>
-				<h3 class="!mt-0"><a href={`/projects/${lang}`}>{portfolioTitle[lang]}</a></h3>
+	<div class="flex grow">
+		<CenteredContainer class="m-auto grid gap-8 sm:grid-cols-2 sm:gap-0">
+			<div
+				class="prose mx-auto border-r-gray-200 px-4 dark:prose-invert md:prose-lg lg:prose-xl dark:border-r-gray-700 sm:border-r-2 sm:pr-8 sm:text-right"
+			>
+				<h1 class="!mb-6 font-narrow">
+					<span class="font-semibold">{name}</span>
+					<br />
+					<small class="font-normal">{profession}</small>
+				</h1>
+				<h2
+					class="!mt-0 font-narrow font-normal text-gray-600 dark:text-gray-400"
+					set:html={intro}
+				/>
 			</div>
-		</div>
-	</CenteredContainer>
+			<div class="mt-auto sm:pl-8">
+				<nav class="flex w-auto flex-col gap-4">
+					<LandingButton
+						href={`/blog/${lang}`}
+						label={blogTitle[lang]}
+					/>
+					<LandingButton
+						href={`/projects/${lang}`}
+						label={portfolioTitle[lang]}
+					/>
+				</nav>
+			</div>
+		</CenteredContainer>
+	</div>
 </BaseLayout>
-
-<!-- <p class="font-sans">Jelenleg ezekkel dolgozom:</p> -->
-<!-- <div class="flex gap-3 text-xl text-gray-600 dark:text-gray-400">
-	{
-		[
-			'mysql',
-			'nodedotjs',
-			'typescript',
-			'nuxtdotjs',
-			'vuedotjs',
-			'tailwindcss',
-		].map((n) => (
-			<Icon
-				class="h-[1.5em] w-[1.5em]"
-				name={`simple-icons:${n}`}
-			/>
-		))
-	}
-</div> -->
