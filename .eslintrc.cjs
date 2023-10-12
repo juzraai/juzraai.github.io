@@ -43,6 +43,14 @@ module.exports = {
 		extraFileExtensions: ['.astro'],
 		sourceType: 'module',
 	},
+	rules: {
+		'tailwindcss/no-custom-classname': [
+			true,
+			{
+				whitelist: ['lead'],
+			},
+		],
+	},
 	settings: {
 		tailwindcss: {
 			config: 'tailwind.config.cjs',

@@ -49,7 +49,6 @@ export const portfolioPostLinkLabel: Record<Lang, string> = {
 };
 
 // TODO tags should be an array instead of string (both collections)
-// TODO (?) turn portfolio into content collection, move project posts
 
 export const collections = {
 	blog,

@@ -60,8 +60,11 @@ const blogPostSchema: WithContext<BlogPosting> = {
 };
 const schema = isPost ? blogPostSchema : websiteSchema;
 
-// TODO astro view transitions?
+// TODO favicon
+// TODO default description - maybe import from landing layout
+// TODO default og:image
 // TODO google analytics + cookie consent
+// TODO (later) astro view transitions?
 ---
 
 <html lang={lang}>

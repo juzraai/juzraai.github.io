@@ -14,11 +14,15 @@ type Props = {
 };
 const { name, profession, intro, lang, title } = Astro.props;
 
-// TODO add current stack
+const description = `${name} ${profession} ${intro}`.replace(/<.*?>/, ' ');
+
+// TODO (later) add current stack... maybe just as a button -> page?
+// TODO (later) would be nice to calculate year instead (useTimeAgo with custom format?)
 ---
 
 <BaseLayout
 	alt={{ en: '/en/', hu: '/' }}
+	description={description}
 	lang={lang}
 	title={title}
 >
