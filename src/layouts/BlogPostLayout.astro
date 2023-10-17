@@ -1,5 +1,6 @@
 ---
 import { type CollectionEntry } from 'astro:content';
+import Icon from 'astro-iconify';
 import CenteredContainer from '../components/CenteredContainer.astro';
 import FormattedContent from '../components/FormattedContent.astro';
 import type { Lang } from '../content/config';
@@ -30,14 +31,18 @@ const fixedAlt: Record<Lang, string> = {
 	<CenteredContainer as="main">
 		<FormattedContent as="article">
 			<header>
+				<div class="flex items-center gap-2 pb-4">
+					<Icon
+						class="h-[1em] w-[1em]"
+						name="carbon:calendar"
+					/>
+					<time datetime={date.toISOString()}>
+						{date.toLocaleDateString(lang)}
+					</time>
+				</div>
 				<h1>{title}</h1>
 			</header>
 			<Content />
-			<footer>
-				<time datetime={date.toISOString()}>
-					{date.toLocaleDateString(lang)}
-				</time>
-			</footer>
 		</FormattedContent>
 	</CenteredContainer>
 </BaseLayout>

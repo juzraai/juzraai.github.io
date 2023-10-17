@@ -48,7 +48,7 @@ export const portfolioPostLinkLabel: Record<Lang, string> = {
 	hu: 'Bővebben',
 };
 
-// TODO tags should be an array instead of string (both collections)
+// TODO (later) tags should be an array instead of string (both collections)
 
 export const collections = {
 	blog,

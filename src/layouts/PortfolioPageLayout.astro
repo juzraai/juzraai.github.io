@@ -6,13 +6,15 @@ import { portfolioTitle, type Lang } from '../content/config';
 import BaseLayout from './BaseLayout.astro';
 
 type Props = {
+	description: string;
 	lang: Lang;
 };
-const { lang } = Astro.props;
+const { description, lang } = Astro.props;
 ---
 
 <BaseLayout
 	alt={{ en: '/projects/en/', hu: '/projects/hu/' }}
+	description={description}
 	lang={lang}
 	title={portfolioTitle[lang]}
 >
@@ -20,6 +22,9 @@ const { lang } = Astro.props;
 		<FormattedContent>
 			<header>
 				<h1>{portfolioTitle[lang]}</h1>
+				<p class="lead">
+					{description}
+				</p>
 			</header>
 			<ProjectList lang={lang} />
 		</FormattedContent>

@@ -1,6 +1,7 @@
 ---
 import { GoogleFontsOptimizer } from 'astro-google-fonts-optimizer';
 import type { BlogPosting, WebSite, WithContext } from 'schema-dts';
+import Footer from '../components/Footer.astro';
 import NavBar from '../components/NavBar.astro';
 import { locales, type AltLinks, type Lang } from '../content/config';
 
@@ -9,7 +10,7 @@ const SITE_TITLE = 'Zsolt Jurányi (juzraai)';
 type Props = {
 	alt: AltLinks;
 	date?: Date;
-	description?: string;
+	description: string;
 	image?: string;
 	lang: Lang;
 	title?: string;
@@ -60,8 +61,9 @@ const blogPostSchema: WithContext<BlogPosting> = {
 };
 const schema = isPost ? blogPostSchema : websiteSchema;
 
+const isLanding = Boolean(/^\/(en\/?)?$/.exec(Astro.url.pathname));
+
 // TODO favicon
-// TODO default description - maybe import from landing layout
 // TODO default og:image
 // TODO google analytics + cookie consent
 // TODO (later) astro view transitions?
@@ -152,9 +154,10 @@ const schema = isPost ? blogPostSchema : websiteSchema;
 	<body class="flex min-h-screen flex-col dark:bg-gray-900">
 		<NavBar
 			alt={alt}
-			lite={Boolean(/^\/(en\/?)?$/.exec(Astro.url.pathname))}
+			lite={isLanding}
 			lang={lang}
 		/>
 		<slot />
+		{!isLanding && <Footer lang={lang} />}
 	</body>
 </html>

@@ -1,0 +1,31 @@
+---
+import type { Lang } from '../content/config';
+import CenteredContainer from './CenteredContainer.astro';
+import FormattedContent from './FormattedContent.astro';
+import NavLink from './NavLink.astro';
+
+type Props = {
+	lang: Lang;
+};
+const { lang } = Astro.props;
+
+const allRights: Record<Lang, string> = {
+	en: 'All rights reserved.',
+	hu: 'Minden jog fenntartva.',
+};
+---
+
+<footer class="bg-gray-100 dark:bg-gray-950">
+	<CenteredContainer>
+		<FormattedContent class="flex items-center justify-between py-2">
+			<div class="text-gray-600 dark:text-gray-400">
+				&copy; 2013-{new Date().getFullYear()} Zsolt Jurányi. {allRights[lang]}
+			</div>
+			<NavLink
+				class="text-red-500"
+				href="#top"
+				icon="carbon:arrow-up"
+			/>
+		</FormattedContent>
+	</CenteredContainer>
+</footer>
