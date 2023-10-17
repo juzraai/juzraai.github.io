@@ -139,6 +139,14 @@ const isLanding = Boolean(/^\/(en\/?)?$/.exec(Astro.url.pathname));
 			property="og:url"
 			content={canonicalURL}
 		/>
+		{
+			date && (
+				<meta
+					property="article:published_time"
+					content={date.toISOString()}
+				/>
+			)
+		}
 		<script
 			type="application/ld+json"
 			set:html={JSON.stringify(schema)}
