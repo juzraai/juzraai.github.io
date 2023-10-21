@@ -11,20 +11,8 @@ const { lang } = Astro.props;
 const posts = await getCollection('blog');
 const postsOfLang = posts.filter((p) => p.data.lang === lang);
 postsOfLang.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
-
-const years = Array.from(new Set<number>(postsOfLang.map((p) => p.data.date.getFullYear())));
-const postsOfYear = (y: number) => postsOfLang.filter((p) => p.data.date.getFullYear() === y);
 ---
 
-{
-	years.map((y) => (
-		<section>
-			<header>
-				<h2>{y}</h2>
-			</header>
-			{postsOfYear(y).map((p) => (
-				<PostCard post={p} />
-			))}
-		</section>
-	))
-}
+<div class="grid auto-rows-fr gap-8 md:grid-cols-2 xl:grid-cols-3">
+	{postsOfLang.map((p) => <PostCard post={p} />)}
+</div>

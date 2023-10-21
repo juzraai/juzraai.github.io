@@ -8,6 +8,6 @@ type Props = {
 const Tag = Astro.props.as ?? 'div';
 ---
 
-<Tag class:list={['mx-auto max-w-[84rem] px-4 lg:px-8', Astro.props.class]}>
+<Tag class:list={['container mx-auto max-w-[84rem] px-4 lg:px-8', Astro.props.class]}>
 	<slot />
 </Tag>

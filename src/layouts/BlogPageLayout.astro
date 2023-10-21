@@ -11,7 +11,6 @@ type Props = {
 };
 const { description, lang } = Astro.props;
 
-// TODO (later) use cards with line-clamp instead of prose stuff?
 // TODO (later) show tags, add client side tag filter
 ---
 
@@ -23,13 +22,14 @@ const { description, lang } = Astro.props;
 >
 	<CenteredContainer as="main">
 		<FormattedContent>
-			<header>
+			<header class="py-16">
 				<h1>{blogTitle[lang]}</h1>
 				<p class="lead">
 					{description}
 				</p>
 			</header>
-			<PostList lang={lang} />
 		</FormattedContent>
+
+		<PostList lang={lang} />
 	</CenteredContainer>
 </BaseLayout>

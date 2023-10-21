@@ -45,7 +45,7 @@ module.exports = {
 	},
 	rules: {
 		'tailwindcss/no-custom-classname': [
-			true,
+			1,
 			{
 				whitelist: ['lead'],
 			},

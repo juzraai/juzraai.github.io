@@ -1,4 +1,5 @@
 ---
+import Icon from 'astro-iconify';
 import type { CollectionEntry } from 'astro:content';
 
 type Props = {
@@ -6,14 +7,28 @@ type Props = {
 };
 const { post } = Astro.props;
 const { data, slug } = post;
-const { description, title } = data;
+const { date, description, lang, title } = data;
+
+// TODO use article tag
 ---
 
-<article>
-	<header>
-		<h3>
-			<a href={`/blog/${slug}`}>{title}</a>
-		</h3>
-		<p>{description}</p>
-	</header>
-</article>
+<a
+	class="group flex flex-col gap-2 rounded bg-gray-100 p-4 text-gray-700 transition-colors hover:bg-blue-500 hover:text-white dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-blue-700 dark:hover:text-white"
+	href={`/blog/${slug}`}
+>
+	<div class="flex items-center gap-2">
+		<Icon
+			class="h-[1em] w-[1em]"
+			name="carbon:calendar"
+		/>
+		<time datetime={date.toISOString()}>
+			{date.toLocaleDateString(lang)}
+		</time>
+	</div>
+	<h3
+		class="text-xl font-semibold text-gray-900 transition-colors group-hover:text-white dark:text-white lg:text-2xl"
+	>
+		{title}
+	</h3>
+	<p class="lg:text-lg">{description}</p>
+</a>
