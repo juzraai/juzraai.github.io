@@ -21,13 +21,14 @@ const { description, lang } = Astro.props;
 	title={blogTitle[lang]}
 >
 	<CenteredContainer as="main">
-		<FormattedContent>
-			<header class="py-16">
-				<h1>{blogTitle[lang]}</h1>
-				<p class="lead">
-					{description}
-				</p>
-			</header>
+		<FormattedContent
+			as="header"
+			class="py-16"
+		>
+			<h1>{blogTitle[lang]}</h1>
+			<p class="lead">
+				{description}
+			</p>
 		</FormattedContent>
 
 		<PostList lang={lang} />

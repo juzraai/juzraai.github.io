@@ -31,15 +31,16 @@ const fixedAlt: Record<Lang, string> = {
 	<CenteredContainer as="main">
 		<FormattedContent as="article">
 			<header class="pt-16">
-				<div class="flex items-center gap-2 pb-4">
+				<time
+					class="flex items-center gap-2 pb-4"
+					datetime={date.toISOString()}
+				>
 					<Icon
 						class="h-[1em] w-[1em]"
 						name="carbon:calendar"
 					/>
-					<time datetime={date.toISOString()}>
-						{date.toLocaleDateString(lang)}
-					</time>
-				</div>
+					{date.toLocaleDateString(lang)}
+				</time>
 				<h1>{title}</h1>
 			</header>
 			<Content />

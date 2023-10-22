@@ -13,6 +13,6 @@ const postsOfLang = posts.filter((p) => p.data.lang === lang);
 postsOfLang.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
 
-<div class="grid auto-rows-fr gap-8 md:grid-cols-2 xl:grid-cols-3">
+<section class="grid auto-rows-fr gap-8 md:grid-cols-2 xl:grid-cols-3">
 	{postsOfLang.map((p) => <PostCard post={p} />)}
-</div>
+</section>
