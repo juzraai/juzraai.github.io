@@ -12,6 +12,11 @@ type Props = {
 const { alt, lite, lang } = Astro.props;
 const nextLang: Lang = lang === 'hu' ? 'en' : 'hu';
 const nextUrl = alt ? alt[nextLang] : '/';
+
+const nextLangLabel: Record<Lang, string> = {
+	en: 'Switch to English',
+	hu: 'Váltás magyar nyelvre',
+};
 ---
 
 <div
@@ -51,11 +56,15 @@ const nextUrl = alt ? alt[nextLang] : '/';
 			<NavLink
 				href="https://github.com/juzraai"
 				icon="carbon:logo-github"
-			/>
+			>
+				<span class="sr-only">GitHub</span>
+			</NavLink>
 			<NavLink
 				href={nextUrl}
 				icon="carbon:language"
-			/>
+			>
+				<span class="sr-only">{nextLangLabel[nextLang]}</span>
+			</NavLink>
 			<DarkModeToggle />
 		</div>
 	</CenteredContainer>
