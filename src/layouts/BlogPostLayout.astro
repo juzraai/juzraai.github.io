@@ -12,7 +12,9 @@ type Props = {
 const { post } = Astro.props;
 
 const { Content } = await post.render();
-const { alt, date, description, image, lang, title } = post.data;
+const { alt, date, description, lang, title } = post.data;
+
+const image = new URL(Astro.url.pathname + '/og.png', Astro.site).toString();
 
 const fixedAlt: Record<Lang, string> = {
 	en: alt?.en ?? '/blog/en/',

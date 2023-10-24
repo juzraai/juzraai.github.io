@@ -13,6 +13,7 @@
 		"@astrojs/sitemap": "^3.0.1",
 		"@astrojs/tailwind": "^5.0.1",
 		"@tailwindcss/typography": "^0.5.10",
+		"@vercel/og": "^0.5.20",
 		"astro": "^3.2.3",
 		"astro-color-scheme": "^1.1.2",
 		"astro-compress": "^2.0.15",

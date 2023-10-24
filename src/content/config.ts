@@ -16,7 +16,6 @@ const blog = defineCollection({
 		alt: altLinksSchema,
 		date: z.date(),
 		description: z.string(),
-		image: z.string().optional(),
 		lang: langSchema,
 		title: z.string(),
 		tags: z.string(),
