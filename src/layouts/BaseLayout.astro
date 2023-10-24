@@ -15,7 +15,8 @@ type Props = {
 	lang: Lang;
 	title?: string;
 };
-const { alt, date, description, image, lang, title } = Astro.props;
+const { alt, date, description, lang, title } = Astro.props;
+const image = Astro.props.image ?? lang === 'hu' ? 'index.png' : `${lang}.png`;
 
 const blogURL = new URL('/blog/', Astro.site).toString();
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
@@ -64,7 +65,6 @@ const schema = isPost ? blogPostSchema : websiteSchema;
 const isLanding = Boolean(/^\/(en\/?)?$/.exec(Astro.url.pathname));
 
 // TODO favicon
-// TODO default og:image
 // TODO google analytics + cookie consent
 // TODO (later) astro view transitions?
 ---
