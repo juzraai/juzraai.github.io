@@ -8,7 +8,7 @@ title: GeoJSON összeállítása megyetérképhez
 
 Adott a feladat, hogy egy weboldalon megjelenítsük **kis hazánk megyetérképét, valamilyen érték szerinti színezéssel.** Hogyan fogjunk neki?
 
-Pár éve - jobb ötlet hiányában - én erre mindig rávágtam, hogy a Wikipédián fent van [Magyarország megyetérképe SVG-ben](https://hu.wikipedia.org/wiki/F%C3%A1jl:HU_counties_colored.svg), ahol az egyes megyéknek van `id` attribútuma. Utóbbi alapján egyszerű őket CSS és JS segítségével formázni és interaktívvá tenni (pl. hover, click). Persze ezzel SVG-s megoldással macerás megoldani a zoom-ot, a dragging-et, illetve ha később kitaláljuk, hogy városokat is rá kéne dobálni, valószínűleg meg vagyunk lőve.
+Pár éve - jobb ötlet hiányában - én erre mindig rávágtam, hogy a Wikipédián fent van [Magyarország megyetérképe SVG-ben](https://hu.wikipedia.org/wiki/F%C3%A1jl:HU_counties_colored.svg), ahol az egyes megyéknek van `id` attribútuma. Utóbbi alapján egyszerű őket CSS és JS segítségével formázni és interaktívvá tenni (pl. hover, click). Persze ezzel az SVG-s megoldással macerás megoldani a zoom-ot, a dragging-et, illetve ha később kitaláljuk, hogy városokat is rá kéne dobálni, valószínűleg meg vagyunk lőve.
 
 Itt jön képbe a [Leaflet.js](https://leafletjs.com/) library, amivel piszok egyszerűen lehet **interaktív térképeket kreálni webes környezetben.** SVG-t épít ő is, de a fenti funkciókat és még csillió más dolgot megvalósít nekünk. A drag mellett többféle zoom lehetőséget és könnyen hozzáadható vezérlőket, tooltip-eket, popup-okat biztosít, illetve több réteget tud kezelni egymásra pakolva.
 

@@ -55,7 +55,7 @@ However, **Bootstrap 4 can be used without Popper.js, if we don't use tooltips, 
 
 ## ...but there's a bundle!
 
-More answers on the same topic mentions that there's a bundle version of Bootstrap 4 JS, which **includes Popper.js,** therefore there's no need to bother including Popper.js by hand.
+More answers on the same topic mention that there's a bundle version of Bootstrap 4 JS, which **includes Popper.js,** therefore there's no need to bother including Popper.js by hand.
 
 In my opinion, or at least for me, the whole point of not importing Popper.js is to reduce loading time of a webpage by **importing only what is required.** In this case, the bundle doesn't help.
 
