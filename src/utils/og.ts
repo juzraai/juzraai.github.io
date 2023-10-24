@@ -19,18 +19,18 @@ type GenerateOGImageParams = {
 export async function generateOGImage(params: GenerateOGImageParams) {
 	const { title, description, link, date, lang } = params;
 
-	const titleEl = el('div', 'mb-8 text-[64px] font-semibold text-zinc-800', title);
+	const titleEl = el('div', 'mb-8 text-[60px] font-semibold text-zinc-800', title);
 	const descEl = el('div', 'mb-12 text-zinc-600', description);
 
 	const dateEl = date ? el('div', 'text-zinc-400', date.toLocaleDateString(lang)) : undefined;
 	const linkEl = el('div', 'font-semibold text-blue-500', `${link} »`);
-	const metaEl = el('div', 'flex justify-between', [linkEl, dateEl]);
-	const contentEl = el('div', 'flex flex-col w-full', [titleEl, descEl, metaEl]);
+	const metaEl = el('div', 'flex justify-between mt-auto', [linkEl, dateEl]);
+	const contentEl = el('div', 'flex flex-col w-full h-full', [titleEl, descEl, metaEl]);
 
 	const html = {
 		type: 'div',
 		props: {
-			tw: 'w-full h-full flex items-center justify-center p-24 text-[42px] bg-white',
+			tw: 'w-full h-full flex items-center justify-center p-20 text-[40px] bg-white',
 			style: {
 				fontFamily: 'Barlow',
 			},

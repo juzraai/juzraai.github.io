@@ -17,17 +17,19 @@ const { name, profession, intro, lang, title } = Astro.props;
 const description = `${name} ${profession} ${intro}`.replace(/<.*?>/, ' ');
 
 // TODO (later) add current stack... maybe just as a button -> page?
-// TODO (later) would be nice to calculate year instead (useTimeAgo with custom format?)
+// TODO (later) calculate year instead (useTimeAgo with custom format?) (in OG images too!)
+// TODO (later) specific OG image layout
 ---
 
 <BaseLayout
 	alt={{ en: '/en/', hu: '/' }}
 	description={description}
+	image={lang === 'hu' ? 'index.png' : `${lang}.png`}
 	lang={lang}
 	title={title}
 >
 	<div class="flex grow">
-		<CenteredContainer class="m-auto grid gap-8 sm:grid-cols-2 sm:gap-0 w-auto">
+		<CenteredContainer class="m-auto grid w-auto gap-8 sm:grid-cols-2 sm:gap-0">
 			<div
 				class="prose mx-auto border-r-gray-200 px-4 dark:prose-invert md:prose-lg lg:prose-xl dark:border-r-gray-700 sm:border-r-2 sm:pr-8 sm:text-right"
 			>
