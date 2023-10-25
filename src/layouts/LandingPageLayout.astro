@@ -14,7 +14,7 @@ type Props = {
 };
 const { name, profession, intro, lang, title } = Astro.props;
 
-const description = `${name} ${profession} ${intro}`.replace(/<.*?>/, ' ');
+const description = `${name} ${profession} ${intro}`;
 
 // TODO (later) add current stack... maybe just as a button -> page?
 // TODO (later) calculate year instead (useTimeAgo with custom format?) (in OG images too!)
@@ -39,7 +39,7 @@ const description = `${name} ${profession} ${intro}`.replace(/<.*?>/, ' ');
 					<small class="font-normal">{profession}</small>
 				</h1>
 				<h2
-					class="!mt-0 font-narrow font-normal text-gray-600 dark:text-gray-400"
+					class="!mt-0 max-w-[23ch] font-narrow font-normal text-gray-600 dark:text-gray-400"
 					set:html={intro}
 				/>
 			</div>
