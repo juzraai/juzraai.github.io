@@ -31,7 +31,10 @@ const fullTitle = title ? `${title} | ${SITE_TITLE}` : SITE_TITLE;
 const locale = locales[lang];
 
 let fullImage = image;
-if (image && !image?.startsWith('http')) fullImage = new URL(image, Astro.site).toString();
+if (image && !image?.startsWith('http')) {
+	// ?t= is a cachebreaker :)
+	fullImage = new URL(`${image}?t=${Date.now()}`, Astro.site).toString();
+}
 
 const isPost = /blog\/\d{4}/.exec(Astro.url.pathname);
 const type = isPost ? 'article' : 'website';
@@ -64,7 +67,7 @@ const schema = isPost ? blogPostSchema : websiteSchema;
 
 const isLanding = Boolean(/^\/(en\/?)?$/.exec(Astro.url.pathname));
 
-// TODO favicon
+// TODO favicon - generate with vercel/og ?! :D
 // TODO google analytics + cookie consent
 // TODO (later) astro view transitions?
 ---
