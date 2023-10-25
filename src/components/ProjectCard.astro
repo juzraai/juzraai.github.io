@@ -10,42 +10,57 @@ type Props = {
 const { lang, project } = Astro.props;
 const { data } = project;
 const { description, post, title, source, year, url } = data;
+
+// TODO add language icons to top right
 ---
 
-<article>
-	<header>
-		<h3 class="inline-flex w-full items-center justify-between">
-			<span>{title} ({year})</span>
-			<span class="inline-flex gap-4">
-				{
-					url && (
-						<a
-							href={url}
-							target="_blank"
-						>
-							<Icon
-								class="h-[1.25em] w-[1.25em]"
-								name="carbon:link"
-							/>
-						</a>
-					)
-				}
-				{
-					source && (
-						<a
-							href={source}
-							target="_blank"
-						>
-							<Icon
-								class="h-[1.25em] w-[1.25em]"
-								name="carbon:logo-github"
-							/>
-						</a>
-					)
-				}
-			</span>
-		</h3>
-		<p>{description[lang]}</p>
-		<p>{post && <a href={post}>{portfolioPostLinkLabel[lang]}</a>}</p>
-	</header>
+<article
+	class="flex flex-col gap-2 rounded bg-gray-100 p-4 text-gray-700 dark:bg-gray-800 dark:text-gray-300"
+>
+	<time
+		class="flex items-center gap-2"
+		datetime={year.toString()}
+	>
+		<Icon
+			class="h-[1em] w-[1em]"
+			name="carbon:calendar"
+		/>
+		{year}
+	</time>
+	<h2 class="text-xl font-semibold text-gray-900 transition-colors dark:text-white lg:text-2xl">
+		{title}
+	</h2>
+	<p class="mb-4 lg:text-lg">{description[lang]}</p>
+	<div class="mt-auto flex items-center font-semibold lg:text-lg">
+		{
+			(post?.[lang] ?? url) && (
+				<a
+					class="inline-flex items-center gap-2 uppercase text-blue-600 transition-all hover:gap-3.5 hover:text-blue-800 dark:text-blue-400 dark:hover:text-white"
+					href={post?.[lang] ?? url}
+					target={post?.[lang] ? undefined : '_blank'}
+				>
+					{portfolioPostLinkLabel[lang]}
+					<Icon
+						class="h-[1em] w-[1em]"
+						name="carbon:arrow-right"
+					/>
+				</a>
+			)
+		}
+		{
+			source && (
+				<a
+					class="ml-auto text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-white"
+					href={source}
+					target="_blank"
+				>
+					<Icon
+						class="h-[1.25em] w-[1.25em]"
+						name="carbon:logo-github"
+					/>
+					<span class="sr-only">GitHub</span>
+				</a>
+			)
+		}
+	</div>
 </article>

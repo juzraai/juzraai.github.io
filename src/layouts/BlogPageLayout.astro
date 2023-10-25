@@ -27,9 +27,10 @@ const { description, lang } = Astro.props;
 			class="py-16"
 		>
 			<h1>{blogTitle[lang]}</h1>
-			<p class="lead">
-				{description}
-			</p>
+			<p
+				class="lead"
+				set:html={description.replace('.', '.<br>')}
+			/>
 		</FormattedContent>
 
 		<PostList lang={lang} />

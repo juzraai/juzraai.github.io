@@ -30,7 +30,7 @@ const portfolio = defineCollection({
 	type: 'data',
 	schema: z.object({
 		description: z.record(langSchema, z.string()),
-		post: z.string().optional(),
+		post: z.record(langSchema, z.string()).optional(),
 		source: z.string().url().optional(),
 		tags: z.string(),
 		title: z.string(),
