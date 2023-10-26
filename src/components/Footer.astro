@@ -16,17 +16,17 @@ const allRights: Record<Lang, string> = {
 ---
 
 <div class="mt-auto pt-16">
-	<footer class="bg-gray-100 dark:bg-gray-950">
-		<CenteredContainer>
-			<FormattedContent class="flex items-center justify-between py-2">
+	<footer class="border-t border-t-gray-200 dark:border-t-gray-700">
+		<CenteredContainer class="flex items-center justify-between py-2">
+			<FormattedContent>
 				<div class="text-gray-600 dark:text-gray-400">
 					&copy; 2013-{new Date().getFullYear()} Zsolt Jurányi. {allRights[lang]}
 				</div>
-				<NavLink
-					href="#top"
-					icon="carbon:arrow-up"
-				/>
 			</FormattedContent>
+			<NavLink
+				href="#top"
+				icon="carbon:arrow-up"
+			/>
 		</CenteredContainer>
 	</footer>
 </div>
