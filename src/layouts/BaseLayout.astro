@@ -67,8 +67,8 @@ const schema = isPost ? blogPostSchema : websiteSchema;
 
 const isLanding = Boolean(/^\/(en\/?)?$/.exec(Astro.url.pathname));
 
-// TODO favicon - generate with vercel/og ?! :D
 // TODO google analytics + cookie consent
+// TODO (later) more advanced favicon config with astro-favicon
 // TODO (later) astro view transitions?
 ---
 
@@ -86,7 +86,7 @@ const isLanding = Boolean(/^\/(en\/?)?$/.exec(Astro.url.pathname));
 		<link
 			rel="icon"
 			type="image/svg+xml"
-			href="/favicon.svg"
+			href="/favicon.png"
 		/>
 		<link
 			rel="sitemap"
