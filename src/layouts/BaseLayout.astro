@@ -1,4 +1,5 @@
 ---
+import { GoogleAnalytics } from '@astrolib/analytics';
 import { GoogleFontsOptimizer } from 'astro-google-fonts-optimizer';
 import type { BlogPosting, WebSite, WithContext } from 'schema-dts';
 import Footer from '../components/Footer.astro';
@@ -6,6 +7,7 @@ import NavBar from '../components/NavBar.astro';
 import { locales, type AltLinks, type Lang } from '../content/config';
 
 const SITE_TITLE = 'Zsolt Jurányi (juzraai)';
+const GA_ID = 'G-8N2LHTN3SQ';
 
 type Props = {
 	alt: AltLinks;
@@ -67,13 +69,14 @@ const schema = isPost ? blogPostSchema : websiteSchema;
 
 const isLanding = Boolean(/^\/(en\/?)?$/.exec(Astro.url.pathname));
 
-// TODO google analytics + cookie consent
+// TODO cookie consent + make GA work only after consent
 // TODO (later) more advanced favicon config with astro-favicon
 // TODO (later) astro view transitions?
 ---
 
 <html lang={lang}>
 	<head>
+		<GoogleAnalytics id={GA_ID} />
 		<meta charset="utf-8" />
 		<meta
 			name="viewport"
