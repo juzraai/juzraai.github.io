@@ -1,0 +1,135 @@
+---
+import { Icon } from 'astro-iconify';
+import type { Lang } from '../content/config';
+
+type Props = {
+	gaId: string;
+	lang: Lang;
+};
+const { gaId, lang } = Astro.props;
+
+const huTexts = {
+	title: 'Kérsz sütit?',
+	question:
+		'A honlapom látogatottságának mérésére Google Analytics-et használok. Hozzájárulsz, hogy a látogatásod naplózva legyen?',
+	more: 'Bővebben a Google sütikről',
+	url: 'https://policies.google.com/technologies/cookies?hl=hu-HU',
+	yes: 'Igen',
+	no: 'Nem',
+};
+
+const enTexts: typeof huTexts = {
+	title: 'Want some cookies?',
+	question:
+		"I'm using Google Analytics to measure how many views my website gets. Do you consent to allow your visits to be counted?",
+	more: 'About Google cookies',
+	url: 'https://policies.google.com/technologies/cookies?hl=en-US',
+	yes: 'Yes',
+	no: 'No',
+};
+
+const texts: Record<Lang, typeof huTexts> = {
+	hu: huTexts,
+	en: enTexts,
+};
+const t = texts[lang];
+---
+
+<div
+	id="consent-dialog"
+	class="fixed bottom-0 flex w-full p-4"
+	style="display: none"
+>
+	<div class="mx-auto flex flex-col gap-8 rounded bg-gray-200 p-6 dark:bg-gray-950 sm:flex-row">
+		<Icon
+			class="hidden h-16 w-16 shrink-0 text-gray-500 dark:text-gray-500 sm:block"
+			name="carbon:cookie"
+		/>
+		<div class="max-w-[60ch]">
+			<h6 class="mb-2 text-xl font-semibold">
+				{t.title}
+			</h6>
+			<p class="text-lg text-gray-800 dark:text-gray-400">
+				{t.question}
+				<br />
+				<a
+					class="inline-flex items-center gap-2 text-lg font-medium text-gray-950 hover:underline dark:text-white"
+					href={t.url}
+					target="_blank"
+				>
+					{t.more}
+					<Icon
+						class="h-[0.8em] w-[0.8em] shrink-0"
+						name="carbon:arrow-right"
+					/>
+				</a>
+			</p>
+		</div>
+		<div class="flex items-center justify-end gap-4 sm:flex-col">
+			<button
+				id="consent-yes"
+				class="inline-flex items-center gap-2 rounded bg-white px-6 py-3 font-semibold uppercase text-gray-700 transition-all hover:gap-4 hover:bg-blue-500 hover:text-white dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-blue-700 dark:hover:text-white sm:w-full"
+			>
+				{t.yes}
+			</button>
+			<button
+				id="consent-no"
+				class="inline-flex items-center gap-2 rounded bg-white px-6 py-3 font-semibold uppercase text-gray-700 transition-all hover:gap-4 hover:bg-blue-500 hover:text-white dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-blue-700 dark:hover:text-white sm:w-full"
+			>
+				{t.no}
+			</button>
+		</div>
+	</div>
+</div>
+
+<script define:vars={{ gaId }}>
+	const GA_CONSENT_LS_KEY = 'can_use_ga';
+	const GA_SRC = `https://www.googletagmanager.com/gtag/js?id=${gaId}`;
+
+	function addAnalytics() {
+		window.dataLayer = window.dataLayer || [];
+
+		function gtag() {
+			// eslint-disable-next-line prefer-rest-params
+			window.dataLayer.push(arguments);
+		}
+
+		gtag('js', new Date());
+		gtag('config', gaId);
+
+		const scriptTag = document.createElement('script');
+		scriptTag.async = true;
+		scriptTag.src = GA_SRC;
+
+		const head = document.head || document.getElementsByTagName('head')[0];
+		head.appendChild(scriptTag);
+	}
+
+	function canUseAnalytics() {
+		return window.localStorage.getItem(GA_CONSENT_LS_KEY) === 'yes';
+	}
+
+	function handleConsentResponse(canUseGa) {
+		window.localStorage.setItem(GA_CONSENT_LS_KEY, canUseGa ? 'yes' : 'no');
+		setConsentDialogVisibility(false);
+		if (canUseGa) addAnalytics();
+	}
+
+	function hasResponse() {
+		return window.localStorage.getItem(GA_CONSENT_LS_KEY) !== null;
+	}
+
+	function setConsentDialogVisibility(visible) {
+		document.getElementById('consent-dialog').style.display = visible ? null : 'none';
+	}
+
+	document.getElementById('consent-yes').addEventListener('click', () => {
+		handleConsentResponse(true);
+	});
+	document.getElementById('consent-no').addEventListener('click', () => {
+		handleConsentResponse(false);
+	});
+
+	if (canUseAnalytics()) addAnalytics();
+	else if (!hasResponse()) setConsentDialogVisibility(true);
+</script>
