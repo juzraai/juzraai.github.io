@@ -11,8 +11,8 @@ const { gaId, lang } = Astro.props;
 const huTexts = {
 	title: 'Kérsz sütit?',
 	question:
-		'A honlapom látogatottságának mérésére Google Analytics-et használok. Hozzájárulsz, hogy a látogatásod naplózva legyen?',
-	more: 'Bővebben a Google sütikről',
+		'A honlapom látogatottságának mérésére Google Analytics-et használok. Hozzájárulsz a Google sütik használatához és a látogatásod naplózásához?',
+	more: 'Bővebb infó',
 	url: 'https://policies.google.com/technologies/cookies?hl=hu-HU',
 	yes: 'Igen',
 	no: 'Nem',
@@ -21,8 +21,8 @@ const huTexts = {
 const enTexts: typeof huTexts = {
 	title: 'Want some cookies?',
 	question:
-		"I'm using Google Analytics to measure how many views my website gets. Do you consent to allow your visits to be counted?",
-	more: 'About Google cookies',
+		"I'm using Google Analytics to measure how many views my website gets. Do you consent to the use of Google cookies to count your visits?",
+	more: 'More info',
 	url: 'https://policies.google.com/technologies/cookies?hl=en-US',
 	yes: 'Yes',
 	no: 'No',
@@ -45,7 +45,7 @@ const t = texts[lang];
 			class="hidden h-16 w-16 shrink-0 text-gray-500 dark:text-gray-500 sm:block"
 			name="carbon:cookie"
 		/>
-		<div class="max-w-[60ch]">
+		<div class="max-w-[65ch]">
 			<h6 class="mb-2 text-xl font-semibold">
 				{t.title}
 			</h6>
