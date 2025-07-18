@@ -53,3 +53,5 @@ export const collections = {
 	blog,
 	portfolio,
 };
+
+export const referenceYear = 2012;

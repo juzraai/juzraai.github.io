@@ -1,4 +1,5 @@
 ---
+import { referenceYear } from '../content/config';
 import LandingPageLayout from '../layouts/LandingPageLayout.astro';
 ---
 
@@ -6,6 +7,6 @@ import LandingPageLayout from '../layouts/LandingPageLayout.astro';
 	lang="en"
 	name="I'm Zsolt,"
 	profession="a full-stack developer."
-	intro="I've been developing crawlers and webapps for 11+ years."
+	intro={`I've been developing crawlers and webapps for ${new Date().getFullYear() - referenceYear}+ years.`}
 	title="Hey!"
 />

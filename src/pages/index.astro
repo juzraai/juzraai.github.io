@@ -1,4 +1,5 @@
 ---
+import { referenceYear } from '../content/config';
 import LandingPageLayout from '../layouts/LandingPageLayout.astro';
 ---
 
@@ -6,6 +7,6 @@ import LandingPageLayout from '../layouts/LandingPageLayout.astro';
 	lang="hu"
 	name="Zsolt vagyok,"
 	profession="full-stack fejlesztő."
-	intro="11+ éve készítek crawlereket és webalkalmazásokat."
+	intro={`${new Date().getFullYear() - referenceYear}+ éve készítek crawlereket és webalkalmazásokat.`}
 	title="Üdv!"
 />
